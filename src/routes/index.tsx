@@ -4,6 +4,8 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 import brandMark from "../assets/fis-mark.png";
+import fisLockup from "../assets/food-investors-society-lockup.png.asset.json";
+import foodXchangeLockup from "../assets/foodxchange-lockup.png.asset.json";
 import { Button } from "../components/ui/button";
 
 export const Route = createFileRoute("/")({
@@ -34,6 +36,7 @@ function Index() {
   const [challengeActive, setChallengeActive] = useState(false);
   const [showPlatform, setShowPlatform] = useState(false);
   const [joined, setJoined] = useState(false);
+  const [showNavigation, setShowNavigation] = useState(false);
   const scrollerRef = useRef<HTMLElement>(null);
   const challengeRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
@@ -41,11 +44,16 @@ function Index() {
   useEffect(() => {
     if (reduceMotion) {
       setPhase("tagline");
+      setShowNavigation(true);
       return;
     }
 
-    const timer = window.setTimeout(() => setPhase("tagline"), 2300);
-    return () => window.clearTimeout(timer);
+    const taglineTimer = window.setTimeout(() => setPhase("tagline"), 2300);
+    const navigationTimer = window.setTimeout(() => setShowNavigation(true), 3100);
+    return () => {
+      window.clearTimeout(taglineTimer);
+      window.clearTimeout(navigationTimer);
+    };
   }, [reduceMotion]);
 
   useEffect(() => {
@@ -56,6 +64,7 @@ function Index() {
     const updateChallenge = () => {
       const panel = scroller.clientHeight;
       const progress = (scroller.scrollTop - challenge.offsetTop) / panel;
+      if (scroller.scrollTop > 8) setShowNavigation(true);
       setChallengeActive(progress >= -0.1 && progress <= 3.9);
       setChallengeProgress(Math.min(4, Math.max(0, progress + 1)));
       setChallengeStage(Math.min(3, Math.max(0, Math.round(progress))));
@@ -108,18 +117,99 @@ function Index() {
 
   return (
     <>
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-center px-5">
-        <div className="flex items-center gap-2 font-display text-xs font-bold uppercase text-foreground sm:text-sm">
-          <img src={brandMark} alt="" className="h-8 w-auto" />
-          Food Investors Society
-        </div>
-      </header>
+      <AnimatePresence>
+        {showNavigation && (
+          <motion.header
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: reduceMotion ? 0 : 0.45, ease: "easeOut" }}
+            className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md"
+          >
+            <div className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-3 px-4 py-2 sm:px-6 lg:px-8">
+              <a href="#hero" aria-label="Food Investors Society home" className="shrink-0">
+                <img
+                  src={fisLockup.url}
+                  alt="Food Investors Society"
+                  className="h-10 w-auto object-contain sm:h-12"
+                />
+              </a>
+
+              <nav
+                aria-label="Main navigation"
+                className="hidden items-center gap-6 self-stretch font-display text-sm font-bold text-foreground md:flex lg:gap-9"
+              >
+                {[
+                  ["FIS", "#hero"],
+                  ["App", "#solution"],
+                  ["Our story", "#challenge"],
+                  ["People", "#solution"],
+                  ["Support", "#solution"],
+                  ["About", "#solution"],
+                ].map(([label, href]) => (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-current={label === "FIS" ? "page" : undefined}
+                    className={`relative flex h-full items-center whitespace-nowrap transition-opacity hover:opacity-60 ${
+                      label === "FIS"
+                        ? "after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-problem"
+                        : ""
+                    }`}
+                  >
+                    {label}
+                  </a>
+                ))}
+              </nav>
+
+              <div className="flex shrink-0 items-center gap-2 rounded-full border border-foreground px-3 py-2 sm:gap-3 sm:px-5">
+                <span className="text-[0.52rem] font-extrabold uppercase leading-[0.85] text-foreground sm:text-[0.6rem]">
+                  Powered by
+                </span>
+                <span className="h-4 w-px bg-border" aria-hidden="true" />
+                <img
+                  src={foodXchangeLockup.url}
+                  alt="foodXchange"
+                  className="h-5 w-auto object-contain sm:h-6"
+                />
+              </div>
+            </div>
+
+            <nav
+              aria-label="Mobile navigation"
+              className="flex h-10 items-stretch gap-6 overflow-x-auto px-4 font-display text-xs font-bold text-foreground md:hidden"
+            >
+              {[
+                ["FIS", "#hero"],
+                ["App", "#solution"],
+                ["Our story", "#challenge"],
+                ["People", "#solution"],
+                ["Support", "#solution"],
+                ["About", "#solution"],
+              ].map(([label, href]) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-current={label === "FIS" ? "page" : undefined}
+                  className={`relative flex shrink-0 items-center whitespace-nowrap ${
+                    label === "FIS"
+                      ? "after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-problem"
+                      : ""
+                  }`}
+                >
+                  {label}
+                </a>
+              ))}
+            </nav>
+          </motion.header>
+        )}
+      </AnimatePresence>
 
       <main
         ref={scrollerRef}
         className="h-[100dvh] snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-background"
       >
-        <section className="relative flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center justify-center overflow-hidden bg-background px-5">
+        <section id="hero" className="relative flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center justify-center overflow-hidden bg-background px-5">
           <div className="relative grid h-96 w-full max-w-6xl place-items-center text-center">
             <h1 className="sr-only">Food Investors Society</h1>
             <AnimatePresence mode="wait" initial={!reduceMotion}>
@@ -153,6 +243,7 @@ function Index() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: reduceMotion ? 0 : 0.8, ease: "easeOut" }}
+                  onAnimationComplete={() => setShowNavigation(true)}
                   className="absolute w-full font-display text-[1.7rem] font-bold uppercase leading-[0.95] text-foreground sm:text-6xl lg:text-7xl"
                 >
                   <span className="whitespace-nowrap">We make good food</span>
@@ -166,6 +257,7 @@ function Index() {
         </section>
 
         <section
+          id="challenge"
           ref={challengeRef}
           className="relative h-[400dvh] w-full shrink-0 bg-problem text-problem-foreground"
         >
@@ -341,7 +433,7 @@ function Index() {
           </div>
         </section>
 
-        <section className="flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center bg-solution px-6 pt-16 text-solution-foreground">
+        <section id="solution" className="flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center bg-solution px-6 pt-16 text-solution-foreground">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
