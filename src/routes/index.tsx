@@ -248,7 +248,7 @@ function Index() {
                     opacity: challengeStage === 1 ? 1 : 0,
                   }}
                   transition={{ duration: reduceMotion ? 0 : 0.55, ease: "easeOut" }}
-                  className="grid h-[min(62vh,30rem)] w-[min(86vw,46rem)] place-items-center overflow-hidden rounded-md border-4 border-problem-foreground bg-placeholder p-6 text-center shadow-2xl"
+                  className="grid h-[62vh] w-[min(86vw,46rem)] place-items-center overflow-hidden rounded-md border-4 border-problem-foreground bg-placeholder p-6 text-center shadow-2xl"
                 >
                   <p className="text-sm font-bold text-placeholder-foreground sm:text-lg">
                     (insert GIF)
