@@ -147,7 +147,7 @@ function Index() {
               className="font-display text-3xl font-extrabold uppercase leading-[0.92] sm:text-6xl"
             >
               Our food environment is
-              <span className="mt-2 flex items-center justify-center sm:mt-4">
+              <span className="relative mt-2 flex min-h-[10rem] items-center justify-center sm:mt-4 sm:min-h-[14rem]">
                 <motion.span
                   variants={{ hidden: { x: 0 }, shown: { x: reduceMotion ? 0 : -150 } }}
                   transition={{ delay: reduceMotion ? 0 : 1.2, duration: reduceMotion ? 0 : 0.7, ease: "easeOut" }}
