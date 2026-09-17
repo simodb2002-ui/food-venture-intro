@@ -85,9 +85,10 @@ function Index() {
   const revealPlatform = () => {
     setShowPlatform(true);
     window.setTimeout(() => {
-      document.querySelector("#platform")?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
-    }, 50);
+      document.querySelector("#fx-panel")?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+    }, 150);
   };
+
 
 
   return (
@@ -250,17 +251,6 @@ function Index() {
           </motion.div>
         </section>
 
-        {showPlatform && (
-          <section id="platform" className="flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center justify-center bg-platform px-6 pt-16 text-platform-foreground">
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-5xl text-center">
-              <p className="mb-3 text-xs font-bold uppercase tracking-widest">Inside foodXchange</p>
-              <h2 className="font-display text-4xl font-extrabold uppercase sm:text-6xl">A clearer way to choose.</h2>
-              <div className="mx-auto mt-8 grid min-h-64 place-items-center border-2 border-dashed border-platform-foreground/60 p-8">
-                <p className="font-display text-xl font-bold">App interface coming here</p>
-              </div>
-            </motion.div>
-          </section>
-        )}
       </main>
     </>
   );
