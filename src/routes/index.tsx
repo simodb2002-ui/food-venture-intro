@@ -258,16 +258,16 @@ function Index() {
                 </h2>
               </motion.div>
 
-              <div className="absolute inset-x-0 top-[67%] mx-auto h-[27%] max-w-4xl sm:top-[68%] sm:h-[24%]">
+              <div className="absolute inset-0 flex items-center justify-center px-2 py-24">
                 <AnimatePresence mode="wait" initial={false}>
                   {challengeStage === 2 && (
                     <motion.p
                       key="challenge-paragraph-one"
-                      initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }}
+                      initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: reduceMotion ? 0 : -12 }}
+                      exit={{ opacity: 0, y: reduceMotion ? 0 : -16 }}
                       transition={{ duration: reduceMotion ? 0 : 0.42, ease: "easeOut" }}
-                      className="text-balance font-display text-lg font-extrabold leading-tight sm:text-2xl lg:text-3xl"
+                      className="max-w-5xl text-balance font-display text-2xl font-extrabold leading-tight sm:text-4xl lg:text-5xl"
                     >
                       Across the UK, people are surrounded by food that&apos;s quick, cheap, and
                       heavily promoted, but often not great for our health.
@@ -277,20 +277,27 @@ function Index() {
                   {challengeStage === 3 && (
                     <motion.div
                       key="challenge-paragraph-two"
-                      initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }}
+                      initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: reduceMotion ? 0 : 0.42, ease: "easeOut" }}
-                      className="mx-auto max-w-4xl"
+                      className="w-full"
                     >
-                      <p className="text-balance font-display text-base font-extrabold leading-tight sm:text-xl lg:text-2xl">
-                        Research makes it clear: the more heavily promoted industrial foods in our
-                        diets, the higher our risk of poor health, including obesity, heart disease,
-                        Type 2 diabetes and poor mental wellbeing.
+                      <p className="mx-auto max-w-2xl text-balance text-base font-medium opacity-85 sm:text-xl">
+                        Research shows heavily marketed industrial foods drive higher risks of poor
+                        health, including obesity, heart disease, and Type 2 diabetes.
                       </p>
-                      <p className="mx-auto mt-3 max-w-3xl text-balance font-display text-sm font-extrabold leading-tight sm:mt-4 sm:text-lg lg:text-xl">
-                        It&apos;s not about willpower. It&apos;s about what&apos;s available, convenient,
-                        and marketed most loudly. We&apos;re here to make good food the easier choice.
+                      <div className="mt-6 sm:mt-10">
+                        <p className="text-balance font-display text-3xl font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
+                          It&apos;s not about willpower.
+                        </p>
+                        <p className="mx-auto mt-2 max-w-4xl text-balance font-display text-2xl font-extrabold uppercase leading-tight sm:mt-3 sm:text-4xl lg:text-5xl">
+                          It&apos;s about what&apos;s available, convenient, and marketed most
+                          loudly.
+                        </p>
+                      </div>
+                      <p className="mt-6 inline-block rounded-full bg-problem-foreground px-5 py-2 font-display text-sm font-extrabold uppercase tracking-wide text-problem sm:mt-8 sm:text-base">
+                        We&apos;re here for it.
                       </p>
                     </motion.div>
                   )}
