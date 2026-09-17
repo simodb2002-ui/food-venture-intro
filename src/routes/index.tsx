@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, ArrowRight, Check, Users } from "lucide-react";
+import { ArrowDown, ArrowRight, Check, Menu, Users, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 import brandMark from "../assets/fis-mark.png";
+import brandLogoAsset from "../assets/food-investors-society-logo.png.asset.json";
 import { Button } from "../components/ui/button";
 
 export const Route = createFileRoute("/")({
@@ -34,6 +35,7 @@ function Index() {
   const [challengeActive, setChallengeActive] = useState(false);
   const [showPlatform, setShowPlatform] = useState(false);
   const [joined, setJoined] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const scrollerRef = useRef<HTMLElement>(null);
   const challengeRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
@@ -106,20 +108,108 @@ function Index() {
     }, 150);
   };
 
+  const scrollToSection = (sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "start",
+    });
+    setMenuOpen(false);
+  };
+
   return (
     <>
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-center px-5">
-        <div className="flex items-center gap-2 font-display text-xs font-bold uppercase text-foreground sm:text-sm">
-          <img src={brandMark} alt="" className="h-8 w-auto" />
-          Food Investors Society
+      <header className="fixed inset-x-0 top-0 z-50 h-20 border-b border-border bg-background px-5 sm:px-8 lg:px-12">
+        <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-6">
+          <button
+            type="button"
+            onClick={() => scrollToSection("home")}
+            className="cursor-pointer"
+            aria-label="Food Investors Society home"
+          >
+            <img
+              src={brandLogoAsset.url}
+              alt="Food Investors Society"
+              className="h-14 w-auto object-contain sm:h-16"
+            />
+          </button>
+
+          <nav className="hidden items-center gap-8 font-display text-sm font-bold lg:flex" aria-label="Main navigation">
+            <button type="button" onClick={() => scrollToSection("home")} className="cursor-pointer text-solution transition-opacity hover:opacity-65">
+              FIS
+            </button>
+            <button type="button" onClick={() => scrollToSection("solution")} className="cursor-pointer transition-opacity hover:opacity-65">
+              App
+            </button>
+            <button type="button" onClick={() => scrollToSection("challenge")} className="cursor-pointer transition-opacity hover:opacity-65">
+              Our story
+            </button>
+            <button type="button" onClick={() => scrollToSection("solution")} className="cursor-pointer transition-opacity hover:opacity-65">
+              People
+            </button>
+            <button type="button" onClick={() => scrollToSection("solution")} className="cursor-pointer transition-opacity hover:opacity-65">
+              Support
+            </button>
+            <button type="button" onClick={() => scrollToSection("solution")} className="cursor-pointer border-b-2 border-problem pb-2 transition-opacity hover:opacity-65">
+              About
+            </button>
+          </nav>
+
+          <div className="hidden h-12 min-w-48 items-center justify-center gap-5 rounded-full border border-foreground px-5 lg:flex">
+            <span className="text-[0.58rem] font-extrabold uppercase leading-[0.85]">Powered<br />by</span>
+            <span className="h-5 w-px bg-border" aria-hidden="true" />
+            <span className="font-display text-xs font-extrabold">foodXchange</span>
+          </div>
+
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            className="lg:hidden"
+          >
+            {menuOpen ? <X /> : <Menu />}
+          </Button>
         </div>
+
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.nav
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: reduceMotion ? 0 : 0.2 }}
+              className="absolute inset-x-0 top-20 grid border-b border-border bg-background px-6 py-4 font-display text-base font-bold shadow-lg lg:hidden"
+              aria-label="Mobile navigation"
+            >
+              {[
+                { label: "FIS", target: "home" },
+                { label: "App", target: "solution" },
+                { label: "Our story", target: "challenge" },
+                { label: "People", target: "solution" },
+                { label: "Support", target: "solution" },
+                { label: "About", target: "solution" },
+              ].map(({ label, target }) => (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => scrollToSection(target)}
+                  className="cursor-pointer border-b border-border py-3 text-left last:border-0"
+                >
+                  {label}
+                </button>
+              ))}
+            </motion.nav>
+          )}
+        </AnimatePresence>
       </header>
 
       <main
         ref={scrollerRef}
         className="h-[100dvh] snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-background"
       >
-        <section className="relative flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center justify-center overflow-hidden bg-background px-5">
+        <section id="home" className="relative flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center justify-center overflow-hidden bg-background px-5">
           <div className="relative grid h-96 w-full max-w-6xl place-items-center text-center">
             <h1 className="sr-only">Food Investors Society</h1>
             <AnimatePresence mode="wait" initial={!reduceMotion}>
@@ -166,6 +256,7 @@ function Index() {
         </section>
 
         <section
+          id="challenge"
           ref={challengeRef}
           className="relative h-[400dvh] w-full shrink-0 bg-problem text-problem-foreground"
         >
@@ -341,7 +432,7 @@ function Index() {
           </div>
         </section>
 
-        <section className="flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center bg-solution px-6 pt-16 text-solution-foreground">
+        <section id="solution" className="flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center bg-solution px-6 pt-20 text-solution-foreground">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
