@@ -30,6 +30,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   const [phase, setPhase] = useState<"brand" | "tagline">("brand");
   const [challengeStage, setChallengeStage] = useState(0);
+  const [challengeProgress, setChallengeProgress] = useState(0);
   const [challengeActive, setChallengeActive] = useState(false);
   const [showPlatform, setShowPlatform] = useState(false);
   const [joined, setJoined] = useState(false);
@@ -55,8 +56,9 @@ function Index() {
     const updateChallenge = () => {
       const panel = scroller.clientHeight;
       const progress = (scroller.scrollTop - challenge.offsetTop) / panel;
-      setChallengeActive(progress >= -0.1 && progress <= 2.9);
-      setChallengeStage(Math.min(2, Math.max(0, Math.round(progress))));
+      setChallengeActive(progress >= -0.1 && progress <= 3.9);
+      setChallengeProgress(Math.min(4, Math.max(0, progress + 1)));
+      setChallengeStage(Math.min(3, Math.max(0, Math.round(progress))));
     };
 
     updateChallenge();
@@ -165,7 +167,7 @@ function Index() {
 
         <section
           ref={challengeRef}
-          className="relative h-[300dvh] w-full shrink-0 bg-problem text-problem-foreground"
+          className="relative h-[400dvh] w-full shrink-0 bg-problem text-problem-foreground"
         >
           <div
             className="pointer-events-none absolute inset-x-0 top-0 h-[100dvh] snap-start snap-always"
@@ -179,8 +181,12 @@ function Index() {
             className="pointer-events-none absolute inset-x-0 top-[200dvh] h-[100dvh] snap-start snap-always"
             aria-hidden="true"
           />
+          <div
+            className="pointer-events-none absolute inset-x-0 top-[300dvh] h-[100dvh] snap-start snap-always"
+            aria-hidden="true"
+          />
 
-          <div className="sticky top-0 flex h-[100dvh] w-full items-center justify-center overflow-hidden px-5 pt-16 sm:px-8">
+          <div className="sticky top-0 h-[100dvh] w-full overflow-hidden px-5 pt-16 sm:px-8">
             <AnimatePresence>
               {challengeActive && (
                 <motion.div
@@ -190,122 +196,96 @@ function Index() {
                   className="absolute inset-x-5 top-16 z-10 sm:inset-x-10"
                 >
                   <div
-                    className="mx-auto grid max-w-5xl grid-cols-3 gap-2"
-                    aria-label={`Challenge step ${challengeStage + 1} of 3`}
+                    className="mx-auto grid max-w-5xl grid-cols-4 gap-2"
+                    role="progressbar"
+                    aria-label="Challenge sequence progress"
+                    aria-valuemin={0}
+                    aria-valuemax={4}
+                    aria-valuenow={challengeProgress}
                   >
-                    {[0, 1, 2].map((step) => (
+                    {[0, 1, 2, 3].map((step) => (
                       <div key={step} className="h-px overflow-hidden bg-problem-foreground/30">
                         <motion.div
                           className="h-full origin-left bg-problem-foreground"
-                          animate={{ scaleX: step <= challengeStage ? 1 : 0 }}
-                          transition={{ duration: reduceMotion ? 0 : 0.35, ease: "easeOut" }}
+                          animate={{ scaleX: Math.min(1, Math.max(0, challengeProgress - step)) }}
+                          transition={{ duration: reduceMotion ? 0 : 0.18, ease: "easeOut" }}
                         />
                       </div>
                     ))}
-                  </div>
-                  <div className="mx-auto mt-2 flex max-w-5xl justify-between text-[0.6rem] font-bold uppercase tracking-widest text-problem-foreground/75">
-                    <span>Step 1</span>
-                    <span>Step 2</span>
-                    <span>Step 3</span>
                   </div>
                 </motion.div>
               )}
             </AnimatePresence>
 
-            <div className="mx-auto w-full max-w-6xl text-center">
-              <p className="mb-3 text-xs font-bold uppercase tracking-widest sm:mb-5">
-                The challenge
-              </p>
-              <AnimatePresence mode="wait" initial={false}>
-                {challengeStage === 0 && (
-                  <motion.div
-                    key="challenge-one"
-                    initial={{ opacity: 0, y: reduceMotion ? 0 : 22 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: reduceMotion ? 0 : -18 }}
-                    transition={{ duration: reduceMotion ? 0 : 0.42, ease: "easeOut" }}
-                  >
-                    <h2 className="mx-auto max-w-5xl text-balance font-display text-4xl font-extrabold uppercase leading-tight sm:text-6xl lg:text-7xl">
-                      Heavily marketed food is everywhere.
-                    </h2>
-                    <p className="mx-auto mt-5 max-w-2xl text-balance text-sm font-medium leading-snug sm:mt-7 sm:text-lg">
+            <div className="relative mx-auto h-full w-full max-w-6xl text-center">
+              <div className="absolute inset-x-0 top-[13%] sm:top-[15%]">
+                <p className="text-xs font-bold uppercase tracking-widest">
+                  The challenge we&apos;re tackling
+                </p>
+              </div>
+
+              <div className="absolute inset-x-0 top-[27%] flex h-[13rem] items-center justify-center sm:top-[25%] sm:h-[18rem]">
+                <h2 className="w-full text-balance font-display text-[2rem] font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
+                  <span className="block">Heavily marketed food is</span>
+                  <span className="mt-1 flex min-h-24 items-center justify-center sm:mt-2 sm:min-h-40">
+                    <span>Every</span>
+                    <motion.span
+                      initial={false}
+                      animate={{
+                        width: challengeStage >= 1 ? "clamp(6rem, 16vw, 12rem)" : 0,
+                        marginLeft: challengeStage >= 1 ? "clamp(0.5rem, 1.4vw, 1rem)" : 0,
+                        marginRight: challengeStage >= 1 ? "clamp(0.5rem, 1.4vw, 1rem)" : 0,
+                        scale: challengeStage >= 1 ? 1 : 0,
+                        opacity: challengeStage >= 1 ? 1 : 0,
+                      }}
+                      transition={{ duration: reduceMotion ? 0 : 0.55, ease: "easeOut" }}
+                      className="grid aspect-[4/3] shrink-0 place-items-center overflow-hidden rounded-md border-4 border-problem-foreground bg-placeholder p-2 text-center text-[0.62rem] font-bold normal-case leading-tight text-placeholder-foreground shadow-2xl sm:text-sm"
+                    >
+                      <span className="whitespace-nowrap">(insert GIF)</span>
+                    </motion.span>
+                    <span>Where.</span>
+                  </span>
+                </h2>
+              </div>
+
+              <div className="absolute inset-x-0 top-[67%] mx-auto h-[27%] max-w-4xl sm:top-[68%] sm:h-[24%]">
+                <AnimatePresence mode="wait" initial={false}>
+                  {challengeStage === 2 && (
+                    <motion.p
+                      key="challenge-paragraph-one"
+                      initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: reduceMotion ? 0 : -12 }}
+                      transition={{ duration: reduceMotion ? 0 : 0.42, ease: "easeOut" }}
+                      className="text-balance font-display text-lg font-extrabold leading-tight sm:text-2xl lg:text-3xl"
+                    >
                       Across the UK, people are surrounded by food that&apos;s quick, cheap, and
                       heavily promoted, but often not great for our health.
-                    </p>
-                  </motion.div>
-                )}
+                    </motion.p>
+                  )}
 
-                {challengeStage === 1 && (
-                  <motion.div
-                    key="challenge-two"
-                    initial={{ opacity: 0, y: reduceMotion ? 0 : 22 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: reduceMotion ? 0 : -18 }}
-                    transition={{ duration: reduceMotion ? 0 : 0.42, ease: "easeOut" }}
-                  >
-                    <h2 className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-[0.24em] gap-y-2 text-balance font-display text-[2rem] font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
-                      <span>Heavily</span>
-                      <span>marketed</span>
-                      <span>food</span>
-                      <span>is</span>
-                      <span className="inline-flex items-center justify-center gap-2 sm:gap-4">
-                        <motion.span
-                          initial={{ x: reduceMotion ? 0 : 40 }}
-                          animate={{ x: 0 }}
-                          transition={{ duration: reduceMotion ? 0 : 0.5 }}
-                        >
-                          Every
-                        </motion.span>
-                        <motion.span
-                          initial={{ scale: 0, opacity: 0 }}
-                          animate={{ scale: 1, opacity: 1 }}
-                          transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeOut" }}
-                          className="grid aspect-[4/3] w-24 shrink-0 place-items-center rounded-md border-4 border-problem-foreground bg-placeholder p-2 text-center text-[0.62rem] font-bold normal-case leading-tight text-placeholder-foreground shadow-2xl sm:w-40 sm:text-sm lg:w-48"
-                        >
-                          (insert GIF)
-                        </motion.span>
-                        <motion.span
-                          initial={{ x: reduceMotion ? 0 : -40 }}
-                          animate={{ x: 0 }}
-                          transition={{ duration: reduceMotion ? 0 : 0.5 }}
-                        >
-                          Where.
-                        </motion.span>
-                      </span>
-                    </h2>
-                    <p className="mx-auto mt-4 max-w-3xl text-balance text-xs font-medium leading-snug sm:mt-6 sm:text-base lg:text-lg">
-                      Research makes it clear: the more heavily promoted industrial foods in our
-                      diets, the higher our risk of poor health, including obesity, heart disease,
-                      Type 2 diabetes and poor mental wellbeing.
-                    </p>
-                  </motion.div>
-                )}
-
-                {challengeStage === 2 && (
-                  <motion.div
-                    key="challenge-three"
-                    initial={{ opacity: 0, y: reduceMotion ? 0 : 22 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: reduceMotion ? 0 : -18 }}
-                    transition={{ duration: reduceMotion ? 0 : 0.42, ease: "easeOut" }}
-                  >
+                  {challengeStage === 3 && (
                     <motion.div
-                      initial={{ scale: reduceMotion ? 0.7 : 1, opacity: 1 }}
-                      animate={{ scale: 0.7, opacity: 0.65 }}
-                      className="mx-auto mb-3 grid aspect-[4/3] w-20 place-items-center rounded-md border-4 border-problem-foreground bg-placeholder p-2 text-[0.6rem] font-bold text-placeholder-foreground shadow-xl sm:mb-5 sm:w-28 sm:text-xs"
+                      key="challenge-paragraph-two"
+                      initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: reduceMotion ? 0 : 0.42, ease: "easeOut" }}
+                      className="mx-auto max-w-4xl"
                     >
-                      (insert GIF)
+                      <p className="text-balance font-display text-base font-extrabold leading-tight sm:text-xl lg:text-2xl">
+                        Research makes it clear: the more heavily promoted industrial foods in our
+                        diets, the higher our risk of poor health, including obesity, heart disease,
+                        Type 2 diabetes and poor mental wellbeing.
+                      </p>
+                      <p className="mx-auto mt-3 max-w-3xl text-balance font-display text-sm font-extrabold leading-tight sm:mt-4 sm:text-lg lg:text-xl">
+                        It&apos;s not about willpower. It&apos;s about what&apos;s available, convenient,
+                        and marketed most loudly. We&apos;re here to make good food the easier choice.
+                      </p>
                     </motion.div>
-                    <h2 className="mx-auto max-w-5xl text-balance font-display text-4xl font-extrabold uppercase leading-tight sm:text-6xl lg:text-7xl">
-                      It&apos;s not about willpower.
-                    </h2>
-                    <p className="mx-auto mt-5 max-w-2xl text-balance text-sm font-medium leading-snug sm:mt-7 sm:text-lg">
-                      It&apos;s about what&apos;s available, convenient, and marketed most loudly.
-                      We&apos;re here to make good food the easier choice.
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </div>
         </section>
