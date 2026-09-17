@@ -121,7 +121,7 @@ function Index() {
                 <motion.div
                   key={`${card.label}-${index}`}
                   initial={{ opacity: 0, x: index % 2 === 0 ? -180 : 180, y: -90, rotate: 0, scale: 0.82 }}
-                  whileInView={{ opacity: 1, x: card.x, y: card.y, rotate: card.rotate }}
+                  whileInView={{ opacity: 1, x: card.x, y: card.y, rotate: card.rotate, scale: 1 }}
                   viewport={{ amount: 0.5, once: true }}
                   transition={{ delay: reduceMotion ? 0 : card.delay, duration: reduceMotion ? 0 : 0.3, ease: "easeOut" }}
                   className="absolute inset-x-12 top-3 flex aspect-[4/3] items-center justify-center border-4 border-problem-foreground bg-placeholder p-6 text-center shadow-2xl sm:top-5 sm:p-8"
