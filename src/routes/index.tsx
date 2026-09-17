@@ -43,12 +43,44 @@ function Index() {
     return () => window.clearTimeout(timer);
   }, [reduceMotion]);
 
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller || reduceMotion) return;
+
+    let locked = false;
+    let unlockTimer = 0;
+
+    const onWheel = (event: WheelEvent) => {
+      if (Math.abs(event.deltaY) < 4) return;
+      event.preventDefault();
+      if (locked) return;
+
+      locked = true;
+      const panel = scroller.clientHeight;
+      const target = Math.round(scroller.scrollTop / panel) + (event.deltaY > 0 ? 1 : -1);
+      const max = Math.round((scroller.scrollHeight - panel) / panel);
+      scroller.scrollTo({ top: Math.min(Math.max(target, 0), max) * panel, behavior: "smooth" });
+
+      window.clearTimeout(unlockTimer);
+      unlockTimer = window.setTimeout(() => {
+        locked = false;
+      }, 750);
+    };
+
+    scroller.addEventListener("wheel", onWheel, { passive: false });
+    return () => {
+      scroller.removeEventListener("wheel", onWheel);
+      window.clearTimeout(unlockTimer);
+    };
+  }, [reduceMotion]);
+
   const revealPlatform = () => {
     setShowPlatform(true);
     window.setTimeout(() => {
       document.querySelector("#platform")?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
     }, 50);
   };
+
 
   return (
     <>
