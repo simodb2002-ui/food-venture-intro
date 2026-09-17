@@ -32,6 +32,14 @@ function Index() {
   const [joined, setJoined] = useState(false);
   const scrollerRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
+  const [splitShift, setSplitShift] = useState(150);
+
+  useEffect(() => {
+    const update = () => setSplitShift(window.innerWidth < 640 ? 100 : 150);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   useEffect(() => {
     if (reduceMotion) {
@@ -149,7 +157,7 @@ function Index() {
               Our food environment is
               <span className="relative mt-2 flex min-h-[10rem] items-center justify-center sm:mt-4 sm:min-h-[14rem]">
                 <motion.span
-                  variants={{ hidden: { x: 0 }, shown: { x: reduceMotion ? 0 : -150 } }}
+                  variants={{ hidden: { x: 0 }, shown: { x: reduceMotion ? 0 : -splitShift } }}
                   transition={{ delay: reduceMotion ? 0 : 1.2, duration: reduceMotion ? 0 : 0.7, ease: "easeOut" }}
                   className="relative z-10"
                 >
@@ -158,12 +166,12 @@ function Index() {
                 <motion.span
                   variants={{ hidden: { scale: 0, opacity: 0 }, shown: { scale: 1, opacity: 1 } }}
                   transition={{ delay: reduceMotion ? 0 : 1.35, duration: reduceMotion ? 0 : 0.6, ease: "easeOut" }}
-                  className="absolute grid aspect-[4/3] w-52 place-items-center rounded-2xl border-4 border-problem-foreground bg-placeholder text-center text-sm font-bold text-placeholder-foreground shadow-2xl sm:w-72"
+                  className="absolute grid aspect-[4/3] w-36 place-items-center rounded-2xl border-4 border-problem-foreground bg-placeholder text-center text-sm font-bold text-placeholder-foreground shadow-2xl sm:w-72"
                 >
                   (insert GIF)
                 </motion.span>
                 <motion.span
-                  variants={{ hidden: { x: 0 }, shown: { x: reduceMotion ? 0 : 150 } }}
+                  variants={{ hidden: { x: 0 }, shown: { x: reduceMotion ? 0 : splitShift } }}
                   transition={{ delay: reduceMotion ? 0 : 1.2, duration: reduceMotion ? 0 : 0.7, ease: "easeOut" }}
                   className="relative z-10"
                 >
