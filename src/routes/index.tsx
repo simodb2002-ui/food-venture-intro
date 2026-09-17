@@ -184,13 +184,13 @@ function Index() {
               aria-label="Mobile navigation"
             >
               {[
-                ["FIS", "home"],
-                ["App", "solution"],
-                ["Our story", "challenge"],
-                ["People", "solution"],
-                ["Support", "solution"],
-                ["About", "solution"],
-              ].map(([label, target]) => (
+                { label: "FIS", target: "home" },
+                { label: "App", target: "solution" },
+                { label: "Our story", target: "challenge" },
+                { label: "People", target: "solution" },
+                { label: "Support", target: "solution" },
+                { label: "About", target: "solution" },
+              ].map(({ label, target }) => (
                 <button
                   key={label}
                   type="button"
