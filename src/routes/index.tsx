@@ -12,7 +12,8 @@ export const Route = createFileRoute("/")({
       { title: "Food Investors Society | Better Food Choices" },
       {
         name: "description",
-        content: "Food Investors Society brings people and capital together to make good food the easier choice.",
+        content:
+          "Food Investors Society brings people and capital together to make good food the easier choice.",
       },
       { property: "og:title", content: "Food Investors Society" },
       {
@@ -97,11 +98,11 @@ function Index() {
   const revealPlatform = () => {
     setShowPlatform(true);
     window.setTimeout(() => {
-      document.querySelector("#fx-panel")?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+      document
+        .querySelector("#fx-panel")
+        ?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
     }, 150);
   };
-
-
 
   return (
     <>
@@ -112,7 +113,10 @@ function Index() {
         </div>
       </header>
 
-      <main ref={scrollerRef} className="h-[100dvh] snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-background">
+      <main
+        ref={scrollerRef}
+        className="h-[100dvh] snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-background"
+      >
         <section className="relative flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center justify-center overflow-hidden bg-background px-5">
           <div className="relative grid h-96 w-full max-w-6xl place-items-center text-center">
             <h1 className="sr-only">Food Investors Society</h1>
@@ -126,9 +130,19 @@ function Index() {
                   transition={{ duration: 0.8, ease: "easeOut" }}
                   className="absolute flex flex-col items-center gap-5 sm:flex-row sm:gap-10"
                 >
-                  <img src={brandMark} alt="" width={250} height={420} className="h-64 w-auto object-contain sm:h-80" />
+                  <img
+                    src={brandMark}
+                    alt=""
+                    width={250}
+                    height={420}
+                    className="h-64 w-auto object-contain sm:h-80"
+                  />
                   <p className="text-left font-display text-5xl font-medium leading-[0.87] text-foreground sm:text-7xl">
-                    food<br />investors<br />society
+                    food
+                    <br />
+                    investors
+                    <br />
+                    society
                   </p>
                 </motion.div>
               ) : (
@@ -139,7 +153,9 @@ function Index() {
                   transition={{ duration: reduceMotion ? 0 : 0.8, ease: "easeOut" }}
                   className="absolute w-full font-display text-[1.7rem] font-bold uppercase leading-[0.95] text-foreground sm:text-6xl lg:text-7xl"
                 >
-                  <span className="whitespace-nowrap">We make good food</span><br />the easier choice.
+                  <span className="whitespace-nowrap">We make good food</span>
+                  <br />
+                  the easier choice.
                 </motion.p>
               )}
             </AnimatePresence>
@@ -147,10 +163,22 @@ function Index() {
           <ArrowDown className="absolute bottom-6 h-5 w-5 text-foreground/55" aria-hidden="true" />
         </section>
 
-        <section ref={challengeRef} className="relative h-[300dvh] w-full shrink-0 bg-problem text-problem-foreground">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-[100dvh] snap-start snap-always" aria-hidden="true" />
-          <div className="pointer-events-none absolute inset-x-0 top-[100dvh] h-[100dvh] snap-start snap-always" aria-hidden="true" />
-          <div className="pointer-events-none absolute inset-x-0 top-[200dvh] h-[100dvh] snap-start snap-always" aria-hidden="true" />
+        <section
+          ref={challengeRef}
+          className="relative h-[300dvh] w-full shrink-0 bg-problem text-problem-foreground"
+        >
+          <div
+            className="pointer-events-none absolute inset-x-0 top-0 h-[100dvh] snap-start snap-always"
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute inset-x-0 top-[100dvh] h-[100dvh] snap-start snap-always"
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute inset-x-0 top-[200dvh] h-[100dvh] snap-start snap-always"
+            aria-hidden="true"
+          />
 
           <div className="sticky top-0 flex h-[100dvh] w-full items-center justify-center overflow-hidden px-5 pt-16 sm:px-8">
             <AnimatePresence>
@@ -161,7 +189,10 @@ function Index() {
                   exit={{ opacity: 0 }}
                   className="absolute inset-x-5 top-16 z-10 sm:inset-x-10"
                 >
-                  <div className="mx-auto grid max-w-5xl grid-cols-3 gap-2" aria-label={`Challenge step ${challengeStage + 1} of 3`}>
+                  <div
+                    className="mx-auto grid max-w-5xl grid-cols-3 gap-2"
+                    aria-label={`Challenge step ${challengeStage + 1} of 3`}
+                  >
                     {[0, 1, 2].map((step) => (
                       <div key={step} className="h-px overflow-hidden bg-problem-foreground/30">
                         <motion.div
@@ -173,14 +204,18 @@ function Index() {
                     ))}
                   </div>
                   <div className="mx-auto mt-2 flex max-w-5xl justify-between text-[0.6rem] font-bold uppercase tracking-widest text-problem-foreground/75">
-                    <span>Step 1</span><span>Step 2</span><span>Step 3</span>
+                    <span>Step 1</span>
+                    <span>Step 2</span>
+                    <span>Step 3</span>
                   </div>
                 </motion.div>
               )}
             </AnimatePresence>
 
             <div className="mx-auto w-full max-w-6xl text-center">
-              <p className="mb-3 text-xs font-bold uppercase tracking-widest sm:mb-5">The challenge</p>
+              <p className="mb-3 text-xs font-bold uppercase tracking-widest sm:mb-5">
+                The challenge
+              </p>
               <AnimatePresence mode="wait" initial={false}>
                 {challengeStage === 0 && (
                   <motion.div
@@ -194,7 +229,8 @@ function Index() {
                       Heavily marketed food is everywhere.
                     </h2>
                     <p className="mx-auto mt-5 max-w-2xl text-balance text-sm font-medium leading-snug sm:mt-7 sm:text-lg">
-                      Across the UK, people are surrounded by food that&apos;s quick, cheap, and heavily promoted, but often not great for our health.
+                      Across the UK, people are surrounded by food that&apos;s quick, cheap, and
+                      heavily promoted, but often not great for our health.
                     </p>
                   </motion.div>
                 )}
@@ -208,9 +244,18 @@ function Index() {
                     transition={{ duration: reduceMotion ? 0 : 0.42, ease: "easeOut" }}
                   >
                     <h2 className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-[0.24em] gap-y-2 text-balance font-display text-[2rem] font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
-                      <span>Heavily</span><span>marketed</span><span>food</span><span>is</span>
+                      <span>Heavily</span>
+                      <span>marketed</span>
+                      <span>food</span>
+                      <span>is</span>
                       <span className="inline-flex items-center justify-center gap-2 sm:gap-4">
-                        <motion.span initial={{ x: reduceMotion ? 0 : 40 }} animate={{ x: 0 }} transition={{ duration: reduceMotion ? 0 : 0.5 }}>Every</motion.span>
+                        <motion.span
+                          initial={{ x: reduceMotion ? 0 : 40 }}
+                          animate={{ x: 0 }}
+                          transition={{ duration: reduceMotion ? 0 : 0.5 }}
+                        >
+                          Every
+                        </motion.span>
                         <motion.span
                           initial={{ scale: 0, opacity: 0 }}
                           animate={{ scale: 1, opacity: 1 }}
@@ -219,11 +264,19 @@ function Index() {
                         >
                           (insert GIF)
                         </motion.span>
-                        <motion.span initial={{ x: reduceMotion ? 0 : -40 }} animate={{ x: 0 }} transition={{ duration: reduceMotion ? 0 : 0.5 }}>Where.</motion.span>
+                        <motion.span
+                          initial={{ x: reduceMotion ? 0 : -40 }}
+                          animate={{ x: 0 }}
+                          transition={{ duration: reduceMotion ? 0 : 0.5 }}
+                        >
+                          Where.
+                        </motion.span>
                       </span>
                     </h2>
                     <p className="mx-auto mt-4 max-w-3xl text-balance text-xs font-medium leading-snug sm:mt-6 sm:text-base lg:text-lg">
-                      Research makes it clear: the more heavily promoted industrial foods in our diets, the higher our risk of poor health, including obesity, heart disease, Type 2 diabetes and poor mental wellbeing.
+                      Research makes it clear: the more heavily promoted industrial foods in our
+                      diets, the higher our risk of poor health, including obesity, heart disease,
+                      Type 2 diabetes and poor mental wellbeing.
                     </p>
                   </motion.div>
                 )}
@@ -247,7 +300,8 @@ function Index() {
                       It&apos;s not about willpower.
                     </h2>
                     <p className="mx-auto mt-5 max-w-2xl text-balance text-sm font-medium leading-snug sm:mt-7 sm:text-lg">
-                      It&apos;s about what&apos;s available, convenient, and marketed most loudly. We&apos;re here to make good food the easier choice.
+                      It&apos;s about what&apos;s available, convenient, and marketed most loudly.
+                      We&apos;re here to make good food the easier choice.
                     </p>
                   </motion.div>
                 )}
@@ -255,7 +309,6 @@ function Index() {
             </div>
           </div>
         </section>
-
 
         <section className="flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center bg-solution px-6 pt-16 text-solution-foreground">
           <motion.div
@@ -270,28 +323,50 @@ function Index() {
               Invest in better food. Share the rewards.
             </h2>
             <p className="mx-auto mt-3 max-w-3xl text-sm font-medium leading-relaxed sm:mt-5 sm:text-lg">
-              foodXchange turns everyday eating into a people-powered investment in community health, energy, and shared wellbeing.
+              foodXchange turns everyday eating into a people-powered investment in community
+              health, energy, and shared wellbeing.
             </p>
 
             <div className="mx-auto mt-4 grid max-w-3xl gap-3 text-left sm:mt-7">
-              <Button onClick={() => setJoined(true)} className="group h-auto min-h-0 items-stretch justify-between gap-4 whitespace-normal border-2 border-solution-foreground bg-solution-foreground p-3 text-left text-solution shadow-none hover:bg-solution-foreground/90 sm:p-4">
+              <Button
+                onClick={() => setJoined(true)}
+                className="group h-auto min-h-0 items-stretch justify-between gap-4 whitespace-normal border-2 border-solution-foreground bg-solution-foreground p-3 text-left text-solution shadow-none hover:bg-solution-foreground/90 sm:p-4"
+              >
                 <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4">
-                  <span className="grid aspect-[4/3] place-items-center bg-placeholder p-2 text-center text-xs font-bold text-placeholder-foreground">(insert image: community member)</span>
+                  <span className="grid aspect-[4/3] place-items-center bg-placeholder p-2 text-center text-xs font-bold text-placeholder-foreground">
+                    (insert image: community member)
+                  </span>
                   <span>
-                    <span className="block font-display text-lg font-extrabold sm:text-xl">{joined ? "You’re part of it" : "Become a Member"}</span>
-                    <span className="mt-1 block text-xs font-medium leading-relaxed sm:mt-2 sm:text-sm">{joined ? "Thanks for raising your hand. Membership details are coming soon." : "Help shape a community-owned future for better food and take part in the Society."}</span>
+                    <span className="block font-display text-lg font-extrabold sm:text-xl">
+                      {joined ? "You’re part of it" : "Become a Member"}
+                    </span>
+                    <span className="mt-1 block text-xs font-medium leading-relaxed sm:mt-2 sm:text-sm">
+                      {joined
+                        ? "Thanks for raising your hand. Membership details are coming soon."
+                        : "Help shape a community-owned future for better food and take part in the Society."}
+                    </span>
                   </span>
                 </span>
                 {joined ? <Check className="h-5 w-5" /> : <Users className="h-5 w-5" />}
               </Button>
 
               <div className="overflow-hidden rounded-md border-2 border-solution-foreground">
-                <Button onClick={revealPlatform} className="group h-auto min-h-0 w-full items-stretch justify-between gap-4 whitespace-normal rounded-none border-0 bg-transparent p-3 text-left text-solution-foreground shadow-none hover:bg-transparent sm:p-4">
+                <Button
+                  onClick={revealPlatform}
+                  className="group h-auto min-h-0 w-full items-stretch justify-between gap-4 whitespace-normal rounded-none border-0 bg-transparent p-3 text-left text-solution-foreground shadow-none hover:bg-transparent sm:p-4"
+                >
                   <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4">
-                    <span className="grid aspect-[4/3] place-items-center bg-placeholder p-2 text-center text-xs font-bold text-placeholder-foreground">(insert image: platform preview)</span>
+                    <span className="grid aspect-[4/3] place-items-center bg-placeholder p-2 text-center text-xs font-bold text-placeholder-foreground">
+                      (insert image: platform preview)
+                    </span>
                     <span>
-                      <span className="block font-display text-lg font-extrabold sm:text-xl">Explore foodXchange</span>
-                      <span className="mt-1 block text-xs font-medium leading-relaxed sm:mt-2 sm:text-sm">See how the platform helps people make clearer, fairer, healthier food choices.</span>
+                      <span className="block font-display text-lg font-extrabold sm:text-xl">
+                        Explore foodXchange
+                      </span>
+                      <span className="mt-1 block text-xs font-medium leading-relaxed sm:mt-2 sm:text-sm">
+                        See how the platform helps people make clearer, fairer, healthier food
+                        choices.
+                      </span>
                     </span>
                   </span>
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -307,7 +382,9 @@ function Index() {
                       className="overflow-hidden"
                     >
                       <div className="grid min-h-56 place-items-center border-t-2 border-solution-foreground bg-solution-foreground/10 p-8">
-                        <p className="font-display text-lg font-bold text-solution-foreground sm:text-xl">[foodXchange app interface breakdown - left blank]</p>
+                        <p className="font-display text-lg font-bold text-solution-foreground sm:text-xl">
+                          [foodXchange app interface breakdown - left blank]
+                        </p>
                       </div>
                     </motion.div>
                   )}
@@ -316,7 +393,6 @@ function Index() {
             </div>
           </motion.div>
         </section>
-
       </main>
     </>
   );
