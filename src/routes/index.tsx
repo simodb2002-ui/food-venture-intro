@@ -95,7 +95,7 @@ function Index() {
         </section>
 
         <section className="relative flex h-screen w-full snap-start items-center overflow-hidden bg-problem px-6 pt-16 text-problem-foreground">
-          <div className="mx-auto grid w-full max-w-6xl items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="mx-auto grid w-full max-w-6xl items-center gap-4 sm:gap-8 lg:grid-cols-[1.05fr_0.95fr]">
             <motion.div
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -103,29 +103,28 @@ function Index() {
               transition={{ duration: reduceMotion ? 0 : 0.6 }}
               className="relative z-20 text-center lg:text-left"
             >
-              <p className="mb-3 text-xs font-bold uppercase tracking-widest">The problem</p>
-              <h2 className="font-display text-4xl font-extrabold uppercase leading-[0.92] sm:text-6xl">Our food environment is broken.</h2>
-              <p className="mx-auto mt-5 max-w-xl text-base font-medium leading-relaxed sm:text-lg lg:mx-0">
-                Quick, cheap, and heavily marketed industrial foods surround us—driving poor health, obesity, and diabetes.
-              </p>
-              <p className="mt-5 inline-block border-y-2 border-current py-2 text-lg font-extrabold uppercase sm:text-xl">
-                It&apos;s not willpower. It&apos;s the system.
+              <p className="mb-2 text-xs font-bold uppercase tracking-widest sm:mb-3">The challenge</p>
+              <h2 className="font-display text-3xl font-extrabold uppercase leading-[0.92] sm:text-6xl">Our food environment is broken.</h2>
+              <p className="mx-auto mt-3 max-w-xl text-sm font-medium leading-relaxed sm:mt-5 sm:text-lg lg:mx-0">
+                Cheap, ultra-processed food is everywhere. It&apos;s not a lack of willpower—it&apos;s a system stacked against us.
               </p>
             </motion.div>
 
-            <div className="relative mx-auto h-56 w-full max-w-md sm:h-72" aria-label="Image placeholders">
+            <div className="relative mx-auto h-52 w-full max-w-md sm:h-72" aria-label="Image placeholders">
               {[
-                { label: "processed food", rotate: -7, x: -48, y: 8 },
-                { label: "fast food marketing", rotate: 6, x: 48, y: 10 },
-                { label: "industrial snacks", rotate: 2, x: 0, y: -8 },
+                { label: "processed food", rotate: -7, x: -18, y: 10, delay: 0 },
+                { label: "industrial marketing", rotate: 4, x: 18, y: 7, delay: 0.2 },
+                { label: "processed food", rotate: -2, x: -10, y: 3, delay: 0.32 },
+                { label: "industrial marketing", rotate: 6, x: 12, y: 0, delay: 0.4 },
+                { label: "processed food", rotate: -3, x: 0, y: -4, delay: 0.45 },
               ].map((card, index) => (
                 <motion.div
-                  key={card.label}
-                  initial={{ opacity: 0, x: 0, y: 60, rotate: 0 }}
+                  key={`${card.label}-${index}`}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -180 : 180, y: -90, rotate: 0, scale: 0.82 }}
                   whileInView={{ opacity: 1, x: card.x, y: card.y, rotate: card.rotate }}
                   viewport={{ amount: 0.5, once: true }}
-                  transition={{ delay: reduceMotion ? 0 : index * 0.13, duration: reduceMotion ? 0 : 0.55, ease: "easeOut" }}
-                  className="absolute inset-x-12 top-5 flex aspect-[4/3] items-center justify-center border-4 border-problem-foreground bg-placeholder p-8 text-center shadow-2xl"
+                  transition={{ delay: reduceMotion ? 0 : card.delay, duration: reduceMotion ? 0 : 0.3, ease: "easeOut" }}
+                  className="absolute inset-x-12 top-3 flex aspect-[4/3] items-center justify-center border-4 border-problem-foreground bg-placeholder p-6 text-center shadow-2xl sm:top-5 sm:p-8"
                 >
                   <span className="text-sm font-bold text-placeholder-foreground">(insert image: {card.label})</span>
                 </motion.div>
@@ -142,27 +141,33 @@ function Index() {
             transition={{ duration: reduceMotion ? 0 : 0.6 }}
             className="mx-auto w-full max-w-6xl text-center"
           >
-            <p className="mb-3 text-xs font-bold uppercase tracking-widest">The movement</p>
-            <h2 className="mx-auto max-w-4xl font-display text-4xl font-extrabold uppercase leading-[0.95] sm:text-6xl">
+            <p className="mb-2 text-xs font-bold uppercase tracking-widest sm:mb-3">The solution</p>
+            <h2 className="mx-auto max-w-4xl font-display text-3xl font-extrabold uppercase leading-[0.95] sm:text-6xl">
               Invest in better food. Share the rewards.
             </h2>
-            <p className="mx-auto mt-5 max-w-3xl text-base font-medium leading-relaxed sm:text-lg">
-              foodXchange is a community-owned platform built by The Food Investors Society. We turn everyday eating into a people-powered investment in health, energy, and community.
+            <p className="mx-auto mt-3 max-w-3xl text-sm font-medium leading-relaxed sm:mt-5 sm:text-lg">
+              foodXchange turns everyday eating into a community-owned investment in health, energy, and shared wellbeing.
             </p>
 
-            <div className="mx-auto mt-7 grid max-w-4xl gap-3 text-left md:grid-cols-2">
-              <Button onClick={revealPlatform} className="group h-auto min-h-36 items-start justify-between whitespace-normal border-2 border-solution-foreground bg-transparent p-5 text-left text-solution-foreground shadow-none hover:bg-solution-foreground hover:text-solution">
-                <span>
-                  <span className="block font-display text-xl font-extrabold">Explore foodXchange</span>
-                  <span className="mt-2 block text-sm font-medium leading-relaxed">See how the platform helps people make clearer, fairer, healthier food choices.</span>
+            <div className="mx-auto mt-4 grid max-w-4xl gap-3 text-left sm:mt-7 md:grid-cols-2">
+              <Button onClick={revealPlatform} className="group h-auto min-h-0 items-stretch justify-between gap-4 whitespace-normal border-2 border-solution-foreground bg-transparent p-3 text-left text-solution-foreground shadow-none hover:bg-solution-foreground hover:text-solution sm:p-4">
+                <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4 md:grid-cols-1">
+                  <span className="grid aspect-[4/3] place-items-center bg-placeholder p-2 text-center text-xs font-bold text-placeholder-foreground md:w-full">(insert image: platform preview)</span>
+                  <span>
+                    <span className="block font-display text-lg font-extrabold sm:text-xl">Explore foodXchange</span>
+                    <span className="mt-1 block text-xs font-medium leading-relaxed sm:mt-2 sm:text-sm">See how the platform helps people make clearer, fairer, healthier choices.</span>
+                  </span>
                 </span>
                 <ArrowRight className="mt-1 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
 
-              <Button onClick={() => setJoined(true)} className="group h-auto min-h-36 items-start justify-between whitespace-normal border-2 border-solution-foreground bg-solution-foreground p-5 text-left text-solution shadow-none hover:bg-solution-foreground/90">
-                <span>
-                  <span className="block font-display text-xl font-extrabold">{joined ? "You’re part of it" : "Become a Member"}</span>
-                  <span className="mt-2 block text-sm font-medium leading-relaxed">{joined ? "Thanks for raising your hand. Membership details are coming soon." : "Help shape a community-owned future and take active part in the Society."}</span>
+              <Button onClick={() => setJoined(true)} className="group h-auto min-h-0 items-stretch justify-between gap-4 whitespace-normal border-2 border-solution-foreground bg-solution-foreground p-3 text-left text-solution shadow-none hover:bg-solution-foreground/90 sm:p-4">
+                <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4 md:grid-cols-1">
+                  <span className="grid aspect-[4/3] place-items-center bg-placeholder p-2 text-center text-xs font-bold text-placeholder-foreground md:w-full">(insert image: community member)</span>
+                  <span>
+                    <span className="block font-display text-lg font-extrabold sm:text-xl">{joined ? "You’re part of it" : "Become a Member"}</span>
+                    <span className="mt-1 block text-xs font-medium leading-relaxed sm:mt-2 sm:text-sm">{joined ? "Thanks for raising your hand. Membership details are coming soon." : "Help shape a community-owned future for better food and take part in the Society."}</span>
+                  </span>
                 </span>
                 {joined ? <Check className="mt-1 h-5 w-5" /> : <Users className="mt-1 h-5 w-5" />}
               </Button>

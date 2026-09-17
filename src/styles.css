@@ -106,8 +106,8 @@
   --sidebar-ring: oklch(0.704 0.04 256.788);
   --problem: oklch(0.62 0.26 350);
   --problem-foreground: oklch(1 0 0);
-  --solution: oklch(0.63 0.18 148);
-  --solution-foreground: oklch(0.14 0.03 150);
+  --solution: oklch(0.78 0.16 74);
+  --solution-foreground: oklch(0.18 0.03 55);
   --platform: oklch(0.78 0.16 74);
   --platform-foreground: oklch(0.18 0.03 55);
   --placeholder: oklch(0.84 0 0);
