@@ -149,7 +149,7 @@ function Index() {
                     aria-current={label === "FIS" ? "page" : undefined}
                     className={`relative flex h-full items-center whitespace-nowrap transition-opacity hover:opacity-60 ${
                       label === "FIS"
-                        ? "text-solution after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-problem"
+                        ? "after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-problem"
                         : ""
                     }`}
                   >
@@ -189,7 +189,7 @@ function Index() {
                   aria-current={label === "FIS" ? "page" : undefined}
                   className={`relative flex shrink-0 items-center whitespace-nowrap ${
                     label === "FIS"
-                      ? "text-solution after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-problem"
+                      ? "after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-problem"
                       : ""
                   }`}
                 >
@@ -429,7 +429,7 @@ function Index() {
           </div>
         </section>
 
-        <section className="flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center bg-solution px-6 pt-16 text-solution-foreground">
+        <section id="solution" className="flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center bg-solution px-6 pt-16 text-solution-foreground">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
