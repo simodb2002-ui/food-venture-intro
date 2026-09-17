@@ -32,6 +32,14 @@ function Index() {
   const [joined, setJoined] = useState(false);
   const scrollerRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
+  const [splitShift, setSplitShift] = useState(150);
+
+  useEffect(() => {
+    const update = () => setSplitShift(window.innerWidth < 640 ? 100 : 150);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   useEffect(() => {
     if (reduceMotion) {
@@ -43,12 +51,44 @@ function Index() {
     return () => window.clearTimeout(timer);
   }, [reduceMotion]);
 
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller || reduceMotion) return;
+
+    let locked = false;
+    let unlockTimer = 0;
+
+    const onWheel = (event: WheelEvent) => {
+      if (Math.abs(event.deltaY) < 4) return;
+      event.preventDefault();
+      if (locked) return;
+
+      locked = true;
+      const panel = scroller.clientHeight;
+      const target = Math.round(scroller.scrollTop / panel) + (event.deltaY > 0 ? 1 : -1);
+      const max = Math.round((scroller.scrollHeight - panel) / panel);
+      scroller.scrollTo({ top: Math.min(Math.max(target, 0), max) * panel, behavior: "smooth" });
+
+      window.clearTimeout(unlockTimer);
+      unlockTimer = window.setTimeout(() => {
+        locked = false;
+      }, 750);
+    };
+
+    scroller.addEventListener("wheel", onWheel, { passive: false });
+    return () => {
+      scroller.removeEventListener("wheel", onWheel);
+      window.clearTimeout(unlockTimer);
+    };
+  }, [reduceMotion]);
+
   const revealPlatform = () => {
     setShowPlatform(true);
     window.setTimeout(() => {
       document.querySelector("#platform")?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
     }, 50);
   };
+
 
   return (
     <>
@@ -94,44 +134,62 @@ function Index() {
           <ArrowDown className="absolute bottom-6 h-5 w-5 text-foreground/55" aria-hidden="true" />
         </section>
 
-        <section className="relative flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center overflow-hidden bg-problem px-6 pt-16 text-problem-foreground">
-          <div className="mx-auto grid w-full max-w-6xl items-center gap-4 sm:gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-            <motion.div
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ amount: 0.55, once: true }}
+        <section className="relative flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center justify-center overflow-hidden bg-problem px-6 pt-16 text-problem-foreground">
+          <motion.div
+            initial="hidden"
+            whileInView="shown"
+            viewport={{ amount: 0.5, once: true }}
+            className="mx-auto w-full max-w-5xl text-center"
+          >
+            <motion.p
+              variants={{ hidden: { opacity: 0, y: 24 }, shown: { opacity: 1, y: 0 } }}
               transition={{ duration: reduceMotion ? 0 : 0.6 }}
-              className="relative z-20 text-center lg:text-left"
+              className="mb-3 text-xs font-bold uppercase tracking-widest"
             >
-              <p className="mb-2 text-xs font-bold uppercase tracking-widest sm:mb-3">The challenge</p>
-              <h2 className="font-display text-3xl font-extrabold uppercase leading-[0.92] sm:text-6xl">Our food environment is broken.</h2>
-              <p className="mx-auto mt-3 max-w-xl text-sm font-medium leading-relaxed sm:mt-5 sm:text-lg lg:mx-0">
-                Cheap, ultra-processed food is everywhere. It&apos;s not a lack of willpower—it&apos;s a system stacked against us.
-              </p>
-            </motion.div>
+              The challenge
+            </motion.p>
 
-            <div className="relative mx-auto h-52 w-full max-w-md sm:h-72" aria-label="Image placeholders">
-              {[
-                { label: "processed food", rotate: -7, x: -18, y: 10, delay: 0 },
-                { label: "industrial marketing", rotate: 4, x: 18, y: 7, delay: 0.2 },
-                { label: "processed food", rotate: -2, x: -10, y: 3, delay: 0.32 },
-                { label: "industrial marketing", rotate: 6, x: 12, y: 0, delay: 0.4 },
-                { label: "processed food", rotate: -3, x: 0, y: -4, delay: 0.45 },
-              ].map((card, index) => (
-                <motion.div
-                  key={`${card.label}-${index}`}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -180 : 180, y: -90, rotate: 0, scale: 0.82 }}
-                  whileInView={{ opacity: 1, x: card.x, y: card.y, rotate: card.rotate, scale: 1 }}
-                  viewport={{ amount: 0.5, once: true }}
-                  transition={{ delay: reduceMotion ? 0 : card.delay, duration: reduceMotion ? 0 : 0.3, ease: "easeOut" }}
-                  className="absolute inset-x-12 top-3 flex aspect-[4/3] items-center justify-center border-4 border-problem-foreground bg-placeholder p-6 text-center shadow-2xl sm:top-5 sm:p-8"
+            <motion.h2
+              variants={{ hidden: { opacity: 0, y: 24 }, shown: { opacity: 1, y: 0 } }}
+              transition={{ duration: reduceMotion ? 0 : 0.6 }}
+              className="font-display text-3xl font-extrabold uppercase leading-[0.92] sm:text-6xl"
+            >
+              Our food environment is
+              <span className="relative mt-2 flex min-h-[10rem] items-center justify-center sm:mt-4 sm:min-h-[14rem]">
+                <motion.span
+                  variants={{ hidden: { x: 0 }, shown: { x: reduceMotion ? 0 : -splitShift } }}
+                  transition={{ delay: reduceMotion ? 0 : 1.2, duration: reduceMotion ? 0 : 0.7, ease: "easeOut" }}
+                  className="relative z-10"
                 >
-                  <span className="text-sm font-bold text-placeholder-foreground">(insert image: {card.label})</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+                  Bro
+                </motion.span>
+                <motion.span
+                  variants={{ hidden: { scale: 0, opacity: 0 }, shown: { scale: 1, opacity: 1 } }}
+                  transition={{ delay: reduceMotion ? 0 : 1.35, duration: reduceMotion ? 0 : 0.6, ease: "easeOut" }}
+                  className="absolute grid aspect-[4/3] w-36 place-items-center rounded-2xl border-4 border-problem-foreground bg-placeholder text-center text-sm font-bold text-placeholder-foreground shadow-2xl sm:w-72"
+                >
+                  (insert GIF)
+                </motion.span>
+                <motion.span
+                  variants={{ hidden: { x: 0 }, shown: { x: reduceMotion ? 0 : splitShift } }}
+                  transition={{ delay: reduceMotion ? 0 : 1.2, duration: reduceMotion ? 0 : 0.7, ease: "easeOut" }}
+                  className="relative z-10"
+                >
+                  ken.
+                </motion.span>
+              </span>
+            </motion.h2>
+
+            <motion.p
+              variants={{ hidden: { opacity: 0, y: 24 }, shown: { opacity: 1, y: 0 } }}
+              transition={{ delay: reduceMotion ? 0 : 0.3, duration: reduceMotion ? 0 : 0.6 }}
+              className="mx-auto mt-6 max-w-2xl text-sm font-medium leading-relaxed sm:mt-10 sm:text-lg"
+            >
+              Cheap, ultra-processed food is everywhere. It&apos;s not a lack of willpower—it&apos;s a system stacked against us.
+            </motion.p>
+          </motion.div>
         </section>
+
 
         <section className="flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center bg-solution px-6 pt-16 text-solution-foreground">
           <motion.div
