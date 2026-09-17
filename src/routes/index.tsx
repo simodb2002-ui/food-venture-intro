@@ -84,7 +84,7 @@ function Index() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: reduceMotion ? 0 : 0.8, ease: "easeOut" }}
-                  className="absolute font-display text-4xl font-bold uppercase leading-[0.95] text-foreground sm:text-6xl lg:text-7xl"
+                  className="absolute w-full font-display text-[1.7rem] font-bold uppercase leading-[0.95] text-foreground sm:text-6xl lg:text-7xl"
                 >
                   <span className="whitespace-nowrap">We make good food</span><br />the easier choice.
                 </motion.p>
