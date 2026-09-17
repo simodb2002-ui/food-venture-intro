@@ -59,8 +59,8 @@ function Index() {
         </div>
       </header>
 
-      <main ref={scrollerRef} className="h-screen snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-background">
-        <section className="relative flex h-screen w-full snap-start items-center justify-center overflow-hidden bg-background px-5">
+      <main ref={scrollerRef} className="h-[100dvh] snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-background">
+        <section className="relative flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center justify-center overflow-hidden bg-background px-5">
           <div className="relative grid h-96 w-full max-w-6xl place-items-center text-center">
             <h1 className="sr-only">Food Investors Society</h1>
             <AnimatePresence mode="wait" initial={!reduceMotion}>
@@ -94,7 +94,7 @@ function Index() {
           <ArrowDown className="absolute bottom-6 h-5 w-5 text-foreground/55" aria-hidden="true" />
         </section>
 
-        <section className="relative flex h-screen w-full snap-start items-center overflow-hidden bg-problem px-6 pt-16 text-problem-foreground">
+        <section className="relative flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center overflow-hidden bg-problem px-6 pt-16 text-problem-foreground">
           <div className="mx-auto grid w-full max-w-6xl items-center gap-4 sm:gap-8 lg:grid-cols-[1.05fr_0.95fr]">
             <motion.div
               initial={{ opacity: 0, y: 28 }}
@@ -133,7 +133,7 @@ function Index() {
           </div>
         </section>
 
-        <section className="flex h-screen w-full snap-start items-center bg-solution px-6 pt-16 text-solution-foreground">
+        <section className="flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center bg-solution px-6 pt-16 text-solution-foreground">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -176,7 +176,7 @@ function Index() {
         </section>
 
         {showPlatform && (
-          <section id="platform" className="flex h-screen w-full snap-start items-center justify-center bg-platform px-6 pt-16 text-platform-foreground">
+          <section id="platform" className="flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center justify-center bg-platform px-6 pt-16 text-platform-foreground">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-5xl text-center">
               <p className="mb-3 text-xs font-bold uppercase tracking-widest">Inside foodXchange</p>
               <h2 className="font-display text-4xl font-extrabold uppercase sm:text-6xl">A clearer way to choose.</h2>
