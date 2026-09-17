@@ -48,8 +48,12 @@ function Index() {
       return;
     }
 
-    const timer = window.setTimeout(() => setPhase("tagline"), 2300);
-    return () => window.clearTimeout(timer);
+    const taglineTimer = window.setTimeout(() => setPhase("tagline"), 2300);
+    const navigationTimer = window.setTimeout(() => setShowNavigation(true), 3100);
+    return () => {
+      window.clearTimeout(taglineTimer);
+      window.clearTimeout(navigationTimer);
+    };
   }, [reduceMotion]);
 
   useEffect(() => {
