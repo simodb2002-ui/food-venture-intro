@@ -218,13 +218,23 @@ function Index() {
             </AnimatePresence>
 
             <div className="relative mx-auto h-full w-full max-w-6xl text-center">
-              <div className="absolute inset-x-0 top-[13%] sm:top-[15%]">
+              <motion.div
+                initial={false}
+                animate={{ opacity: challengeStage <= 1 ? 1 : 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.4, ease: "easeOut" }}
+                className="pointer-events-none absolute inset-x-0 top-[13%] sm:top-[15%]"
+              >
                 <p className="text-xs font-bold uppercase tracking-widest">
                   The challenge we&apos;re tackling
                 </p>
-              </div>
+              </motion.div>
 
-              <div className="absolute inset-x-0 top-[27%] flex h-[13rem] items-center justify-center sm:top-[25%] sm:h-[18rem]">
+              <motion.div
+                initial={false}
+                animate={{ opacity: challengeStage <= 1 ? 1 : 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.4, ease: "easeOut" }}
+                className="pointer-events-none absolute inset-x-0 top-[27%] flex h-[13rem] items-center justify-center sm:top-[25%] sm:h-[18rem]"
+              >
                 <h2 className="w-full text-balance font-display text-[2rem] font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
                   <span className="block">Heavily marketed food is</span>
                   <span className="mt-1 flex min-h-24 items-center justify-center sm:mt-2 sm:min-h-40">
@@ -246,7 +256,7 @@ function Index() {
                     <span>Where.</span>
                   </span>
                 </h2>
-              </div>
+              </motion.div>
 
               <div className="absolute inset-x-0 top-[67%] mx-auto h-[27%] max-w-4xl sm:top-[68%] sm:h-[24%]">
                 <AnimatePresence mode="wait" initial={false}>
