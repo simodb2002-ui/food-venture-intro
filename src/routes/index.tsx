@@ -204,31 +204,48 @@ function Index() {
               Invest in better food. Share the rewards.
             </h2>
             <p className="mx-auto mt-3 max-w-3xl text-sm font-medium leading-relaxed sm:mt-5 sm:text-lg">
-              foodXchange turns everyday eating into a community-owned investment in health, energy, and shared wellbeing.
+              foodXchange turns everyday eating into a people-powered investment in community health, energy, and shared wellbeing.
             </p>
 
-            <div className="mx-auto mt-4 grid max-w-4xl gap-3 text-left sm:mt-7 md:grid-cols-2">
-              <Button onClick={revealPlatform} className="group h-auto min-h-0 items-stretch justify-between gap-4 whitespace-normal border-2 border-solution-foreground bg-transparent p-3 text-left text-solution-foreground shadow-none hover:bg-solution-foreground hover:text-solution sm:p-4">
-                <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4 md:grid-cols-1">
-                  <span className="grid aspect-[4/3] place-items-center bg-placeholder p-2 text-center text-xs font-bold text-placeholder-foreground md:w-full">(insert image: platform preview)</span>
-                  <span>
-                    <span className="block font-display text-lg font-extrabold sm:text-xl">Explore foodXchange</span>
-                    <span className="mt-1 block text-xs font-medium leading-relaxed sm:mt-2 sm:text-sm">See how the platform helps people make clearer, fairer, healthier choices.</span>
-                  </span>
-                </span>
-                <ArrowRight className="mt-1 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-
+            <div className="mx-auto mt-4 grid max-w-3xl gap-3 text-left sm:mt-7">
               <Button onClick={() => setJoined(true)} className="group h-auto min-h-0 items-stretch justify-between gap-4 whitespace-normal border-2 border-solution-foreground bg-solution-foreground p-3 text-left text-solution shadow-none hover:bg-solution-foreground/90 sm:p-4">
-                <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4 md:grid-cols-1">
-                  <span className="grid aspect-[4/3] place-items-center bg-placeholder p-2 text-center text-xs font-bold text-placeholder-foreground md:w-full">(insert image: community member)</span>
+                <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4">
+                  <span className="grid aspect-[4/3] place-items-center bg-placeholder p-2 text-center text-xs font-bold text-placeholder-foreground">(insert image: community member)</span>
                   <span>
                     <span className="block font-display text-lg font-extrabold sm:text-xl">{joined ? "You’re part of it" : "Become a Member"}</span>
                     <span className="mt-1 block text-xs font-medium leading-relaxed sm:mt-2 sm:text-sm">{joined ? "Thanks for raising your hand. Membership details are coming soon." : "Help shape a community-owned future for better food and take part in the Society."}</span>
                   </span>
                 </span>
-                {joined ? <Check className="mt-1 h-5 w-5" /> : <Users className="mt-1 h-5 w-5" />}
+                {joined ? <Check className="h-5 w-5" /> : <Users className="h-5 w-5" />}
               </Button>
+
+              <div className="overflow-hidden rounded-md border-2 border-solution-foreground">
+                <Button onClick={revealPlatform} className="group h-auto min-h-0 w-full items-stretch justify-between gap-4 whitespace-normal rounded-none border-0 bg-transparent p-3 text-left text-solution-foreground shadow-none hover:bg-transparent sm:p-4">
+                  <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4">
+                    <span className="grid aspect-[4/3] place-items-center bg-placeholder p-2 text-center text-xs font-bold text-placeholder-foreground">(insert image: platform preview)</span>
+                    <span>
+                      <span className="block font-display text-lg font-extrabold sm:text-xl">Explore foodXchange</span>
+                      <span className="mt-1 block text-xs font-medium leading-relaxed sm:mt-2 sm:text-sm">See how the platform helps people make clearer, fairer, healthier food choices.</span>
+                    </span>
+                  </span>
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+                <AnimatePresence initial={false}>
+                  {showPlatform && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="grid min-h-56 place-items-center border-t-2 border-solution-foreground bg-solution-foreground/10 p-8">
+                        <p className="font-display text-lg font-bold text-solution-foreground sm:text-xl">[foodXchange app interface breakdown - left blank]</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </motion.div>
         </section>
