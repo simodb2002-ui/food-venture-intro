@@ -237,26 +237,60 @@ function Index() {
               >
                 <h2 className="w-full text-balance font-display text-[2rem] font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
                   <span className="block">Heavily marketed food is</span>
-                  <span className="mt-1 flex min-h-24 items-center justify-center sm:mt-2 sm:min-h-40">
-                    <span>Every</span>
-                    <motion.span
-                      initial={false}
-                      animate={{
-                        width: challengeStage >= 1 ? "clamp(6rem, 16vw, 12rem)" : 0,
-                        marginLeft: challengeStage >= 1 ? "clamp(0.5rem, 1.4vw, 1rem)" : 0,
-                        marginRight: challengeStage >= 1 ? "clamp(0.5rem, 1.4vw, 1rem)" : 0,
-                        scale: challengeStage >= 1 ? 1 : 0,
-                        opacity: challengeStage >= 1 ? 1 : 0,
-                      }}
-                      transition={{ duration: reduceMotion ? 0 : 0.55, ease: "easeOut" }}
-                      className="grid aspect-[4/3] shrink-0 place-items-center overflow-hidden rounded-md border-4 border-problem-foreground bg-placeholder p-2 text-center text-[0.62rem] font-bold normal-case leading-tight text-placeholder-foreground shadow-2xl sm:text-sm"
-                    >
-                      <span className="whitespace-nowrap">(insert GIF)</span>
-                    </motion.span>
-                    <span>Where.</span>
-                  </span>
+                  <span className="block">Everywhere.</span>
                 </h2>
               </motion.div>
+
+              <AnimatePresence>
+                {challengeStage === 1 && (
+                  <motion.div
+                    key="gif-scatter"
+                    initial={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: reduceMotion ? 0 : 0.3, ease: "easeOut" }}
+                    className="pointer-events-none absolute inset-0 z-20"
+                    aria-hidden="true"
+                  >
+                    {[
+                      {
+                        label: "(insert GIF 1)",
+                        position: "left-[5%] top-[15%] rotate-[3deg]",
+                        delay: 0,
+                      },
+                      {
+                        label: "(insert GIF 2)",
+                        position: "right-[4%] top-[38%] -rotate-[6deg]",
+                        delay: 0.15,
+                      },
+                      {
+                        label: "(insert GIF 3)",
+                        position: "bottom-[13%] left-[11%] rotate-[4deg]",
+                        delay: 0.3,
+                      },
+                      {
+                        label: "(insert GIF 4)",
+                        position: "bottom-[22%] right-[22%] -rotate-[3deg]",
+                        delay: 0.45,
+                      },
+                    ].map((box) => (
+                      <motion.div
+                        key={box.label}
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0, opacity: 0 }}
+                        transition={{
+                          delay: reduceMotion ? 0 : box.delay,
+                          duration: 0.3,
+                          ease: "easeOut",
+                        }}
+                        className={`absolute grid h-24 w-32 place-items-center overflow-hidden rounded-md border-4 border-problem-foreground bg-placeholder p-2 text-center text-[0.62rem] font-bold normal-case leading-tight text-placeholder-foreground shadow-2xl sm:h-36 sm:w-52 sm:text-sm ${box.position}`}
+                      >
+                        {box.label}
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               <div className="absolute inset-0 flex items-center justify-center px-2 py-24">
                 <AnimatePresence mode="wait" initial={false}>
