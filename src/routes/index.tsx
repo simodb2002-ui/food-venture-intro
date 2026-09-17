@@ -233,30 +233,28 @@ function Index() {
                 initial={false}
                 animate={{ opacity: challengeStage <= 1 ? 1 : 0 }}
                 transition={{ duration: reduceMotion ? 0 : 0.4, ease: "easeOut" }}
-                className="pointer-events-none absolute inset-x-0 top-[27%] flex h-[13rem] items-center justify-center sm:top-[25%] sm:h-[18rem]"
+                className="pointer-events-none absolute inset-x-0 top-[27%] sm:top-[25%]"
               >
                 <h2 className="w-full text-balance font-display text-[2rem] font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
-                  <span className="block">Heavily marketed food is</span>
-                  <span className="mt-1 flex min-h-24 items-center justify-center sm:mt-2 sm:min-h-40">
-                    <span>Every</span>
-                    <motion.span
-                      initial={false}
-                      animate={{
-                        width: challengeStage >= 1 ? "clamp(6rem, 16vw, 12rem)" : 0,
-                        marginLeft: challengeStage >= 1 ? "clamp(0.5rem, 1.4vw, 1rem)" : 0,
-                        marginRight: challengeStage >= 1 ? "clamp(0.5rem, 1.4vw, 1rem)" : 0,
-                        scale: challengeStage >= 1 ? 1 : 0,
-                        opacity: challengeStage >= 1 ? 1 : 0,
-                      }}
-                      transition={{ duration: reduceMotion ? 0 : 0.55, ease: "easeOut" }}
-                      className="grid aspect-[4/3] shrink-0 place-items-center overflow-hidden rounded-md border-4 border-problem-foreground bg-placeholder p-2 text-center text-[0.62rem] font-bold normal-case leading-tight text-placeholder-foreground shadow-2xl sm:text-sm"
-                    >
-                      <span className="whitespace-nowrap">(insert GIF)</span>
-                    </motion.span>
-                    <span>Where.</span>
-                  </span>
+                  Heavily marketed food is everywhere.
                 </h2>
               </motion.div>
+
+              <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
+                <motion.div
+                  initial={false}
+                  animate={{
+                    scale: challengeStage === 1 ? 1 : 0.2,
+                    opacity: challengeStage === 1 ? 1 : 0,
+                  }}
+                  transition={{ duration: reduceMotion ? 0 : 0.55, ease: "easeOut" }}
+                  className="grid aspect-[16/10] w-[min(86vw,46rem)] place-items-center overflow-hidden rounded-md border-4 border-problem-foreground bg-placeholder p-6 text-center shadow-2xl"
+                >
+                  <p className="text-sm font-bold text-placeholder-foreground sm:text-lg">
+                    (insert GIF)
+                  </p>
+                </motion.div>
+              </div>
 
               <div className="absolute inset-0 flex items-center justify-center px-2 py-24">
                 <AnimatePresence mode="wait" initial={false}>
