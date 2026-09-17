@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 
-import heroImage from "../assets/food-table-hero.jpg";
 import brandMark from "../assets/fis-mark.png";
 
 export const Route = createFileRoute("/")({
