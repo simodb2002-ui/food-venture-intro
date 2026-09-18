@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, ArrowRight, Check, Users } from "lucide-react";
+import { ArrowDown, ArrowRight, Check, Linkedin, Play, Users } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
+import fisLogoTransparent from "../assets/fis-logo-transparent.png";
 import brandMark from "../assets/fis-mark.png";
-import fisLogoMacro from "../assets/fis-logo-macro.jpeg.asset.json";
 import fisLockup from "../assets/food-investors-society-lockup.png.asset.json";
 import foodXchangeLockup from "../assets/foodxchange-lockup.png.asset.json";
 import { Button } from "../components/ui/button";
@@ -66,9 +66,9 @@ function Index() {
       const panel = scroller.clientHeight;
       const progress = (scroller.scrollTop - challenge.offsetTop) / panel;
       if (scroller.scrollTop > 8) setShowNavigation(true);
-      setChallengeActive(progress >= -0.1 && progress <= 3.9);
-      setChallengeProgress(Math.min(4, Math.max(0, progress + 1)));
-      setChallengeStage(Math.min(3, Math.max(0, Math.round(progress))));
+      setChallengeActive(progress >= -0.1 && progress <= 5.9);
+      setChallengeProgress(Math.min(6, Math.max(0, progress + 1)));
+      setChallengeStage(Math.min(5, Math.max(0, Math.round(progress))));
     };
 
     updateChallenge();
@@ -210,7 +210,10 @@ function Index() {
         ref={scrollerRef}
         className="h-[100dvh] snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-background"
       >
-        <section id="hero" className="relative flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center justify-center overflow-hidden bg-background px-5">
+        <section
+          id="hero"
+          className="relative flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center justify-center overflow-hidden bg-background px-5"
+        >
           <div className="relative grid h-96 w-full max-w-6xl place-items-center text-center">
             <h1 className="sr-only">Food Investors Society</h1>
             <AnimatePresence mode="wait" initial={!reduceMotion}>
@@ -260,7 +263,7 @@ function Index() {
         <section
           id="challenge"
           ref={challengeRef}
-          className="relative h-[400dvh] w-full shrink-0 bg-problem text-problem-foreground"
+          className="relative h-[600dvh] w-full shrink-0 bg-problem text-problem-foreground"
         >
           <div
             className="pointer-events-none absolute inset-x-0 top-0 h-[100dvh] snap-start snap-always"
@@ -278,8 +281,23 @@ function Index() {
             className="pointer-events-none absolute inset-x-0 top-[300dvh] h-[100dvh] snap-start snap-always"
             aria-hidden="true"
           />
+          <div
+            className="pointer-events-none absolute inset-x-0 top-[400dvh] h-[100dvh] snap-start snap-always"
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute inset-x-0 top-[500dvh] h-[100dvh] snap-start snap-always"
+            aria-hidden="true"
+          />
 
           <div className="sticky top-0 h-[100dvh] w-full overflow-hidden px-5 pt-16 sm:px-8">
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-br from-transition-soft to-transition-deep"
+              initial={false}
+              animate={{ opacity: challengeStage >= 4 ? 1 : 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.7, ease: "easeInOut" }}
+              aria-hidden="true"
+            />
             <AnimatePresence>
               {challengeActive && (
                 <motion.div
@@ -293,10 +311,10 @@ function Index() {
                     role="progressbar"
                     aria-label="Challenge sequence progress"
                     aria-valuemin={0}
-                    aria-valuemax={4}
+                    aria-valuemax={6}
                     aria-valuenow={challengeProgress}
                   >
-                    {[0, 1, 2, 3].map((step) => (
+                    {[0, 1, 2, 3, 4, 5].map((step) => (
                       <div key={step} className="h-px overflow-hidden bg-problem-foreground/30">
                         <motion.div
                           className="h-full origin-left bg-problem-foreground"
@@ -428,13 +446,47 @@ function Index() {
                       </p>
                     </motion.div>
                   )}
+
+                  {challengeStage === 4 && (
+                    <motion.p
+                      key="foodxchange-part-a"
+                      initial={{ opacity: 0, y: reduceMotion ? 0 : 28 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: reduceMotion ? 0 : -28 }}
+                      transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeOut" }}
+                      className="max-w-5xl text-balance font-display text-xl font-extrabold leading-tight sm:text-3xl lg:text-4xl"
+                    >
+                      foodXchange is a community-owned platform built by The Food Investors Society.
+                      Our co-operative was created to help people navigate a food environment
+                      stacked against healthier choices, giving you the clarity and confidence you
+                      deserve. foodXchange turns everyday eating into an investment in energy,
+                      wellbeing, and our shared commonwHealth.
+                    </motion.p>
+                  )}
+
+                  {challengeStage === 5 && (
+                    <motion.p
+                      key="foodxchange-part-b"
+                      initial={{ opacity: 0, y: reduceMotion ? 0 : 28 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: reduceMotion ? 0 : -28 }}
+                      transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeOut" }}
+                      className="max-w-4xl text-balance font-display text-2xl font-extrabold leading-tight sm:text-4xl lg:text-5xl"
+                    >
+                      Together, we&apos;re growing a people-powered food system where better choices
+                      come with better returns; for you, your neighbourhood and the wider community.
+                    </motion.p>
+                  )}
                 </AnimatePresence>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="solution" className="flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center bg-solution px-6 pt-16 text-solution-foreground">
+        <section
+          id="solution"
+          className="flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center bg-solution px-6 pt-16 text-solution-foreground"
+        >
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -446,16 +498,11 @@ function Index() {
             <h2 className="mx-auto max-w-4xl font-display text-3xl font-extrabold uppercase leading-[0.95] sm:text-6xl">
               Invest in better food. Share the rewards.
             </h2>
-            <p className="mx-auto mt-3 max-w-3xl text-sm font-medium leading-relaxed sm:mt-5 sm:text-lg">
-              foodXchange turns everyday eating into a people-powered investment in community
-              health, energy, and shared wellbeing.
-            </p>
-
-            <div className="mx-auto mt-4 grid max-w-3xl gap-3 text-left sm:mt-7">
+            <div className="mx-auto mt-6 grid max-w-3xl gap-4 text-left sm:mt-10">
               <Button
                 id="membership"
                 onClick={() => setJoined(true)}
-                className="group h-auto min-h-0 items-stretch justify-between gap-4 whitespace-normal border-2 border-solution-foreground bg-solution-foreground p-3 text-left text-solution shadow-none hover:bg-solution-foreground/90 sm:p-4"
+                className="group h-auto min-h-32 items-stretch justify-between gap-4 whitespace-normal border-2 border-solution-foreground bg-solution-foreground p-5 text-left text-solution shadow-none hover:bg-solution-foreground/90 sm:min-h-40 sm:p-6"
               >
                 <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4">
                   <span className="grid aspect-[4/3] place-items-center bg-placeholder p-2 text-center text-xs font-bold text-placeholder-foreground">
@@ -478,7 +525,7 @@ function Index() {
               <div className="overflow-hidden rounded-md border-2 border-solution-foreground">
                 <Button
                   onClick={revealPlatform}
-                  className="group h-auto min-h-0 w-full items-stretch justify-between gap-4 whitespace-normal rounded-none border-0 bg-transparent p-3 text-left text-solution-foreground shadow-none hover:bg-transparent sm:p-4"
+                  className="group h-auto min-h-32 w-full items-stretch justify-between gap-4 whitespace-normal rounded-none border-0 bg-transparent p-5 text-left text-solution-foreground shadow-none hover:bg-transparent sm:min-h-40 sm:p-6"
                 >
                   <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4">
                     <span className="grid aspect-[4/3] place-items-center bg-placeholder p-2 text-center text-xs font-bold text-placeholder-foreground">
@@ -521,53 +568,156 @@ function Index() {
 
         <section
           id="join"
-          className="relative flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center justify-center overflow-hidden bg-cta px-6 pt-24 text-cta-foreground"
+          className="w-full shrink-0 snap-start snap-always bg-footer text-footer-foreground"
         >
-          <img
-            src={fisLogoMacro.url}
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none absolute -bottom-10 -left-20 z-0 w-72 max-w-none bg-transparent object-cover mix-blend-multiply sm:-bottom-16 sm:-left-12 sm:w-[450px]"
-          />
-          <img
-            src={fisLogoMacro.url}
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none absolute -right-32 -top-6 z-0 w-80 max-w-none bg-transparent object-cover opacity-80 blur-sm mix-blend-multiply sm:-right-20 sm:-top-12 sm:w-[550px]"
-          />
+          <div className="relative flex min-h-[78dvh] items-center justify-center overflow-hidden bg-cta px-6 py-28 text-cta-foreground sm:min-h-[82dvh]">
+            <img
+              src={brandMark}
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-24 -left-32 z-0 w-[650px] max-w-none bg-transparent object-contain mix-blend-multiply max-sm:-bottom-14 max-sm:-left-16 max-sm:w-[270px] sm:w-[50vw]"
+            />
+            <img
+              src={brandMark}
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-32 -top-20 z-0 w-[750px] max-w-none bg-transparent object-contain opacity-75 blur-md mix-blend-multiply max-sm:-right-20 max-sm:-top-14 max-sm:w-[300px] sm:w-[55vw]"
+            />
 
-          <motion.div
-            initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ amount: 0.45, once: true }}
-            transition={{ duration: reduceMotion ? 0 : 0.6, ease: "easeOut" }}
-            className="relative z-10 mx-auto max-w-4xl text-center"
-          >
-            <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-cta-accent text-cta-foreground">
-              <Users className="h-5 w-5" aria-hidden="true" />
-            </div>
-            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-cta-kicker">
-              Our common future
-            </p>
-            <h2 className="mx-auto mb-4 max-w-3xl text-balance font-display text-4xl font-black leading-tight text-cta-foreground md:text-6xl">
-              Join the Movement Transforming the Future of{" "}
-              <span className="border-b-4 border-cta-accent text-cta-accent">Food</span>
-            </h2>
-            <p className="mx-auto mb-8 max-w-xl text-base font-medium leading-relaxed text-cta-muted md:text-lg">
-              Be part of a growing community creating a healthier, fairer and more sustainable food
-              system.
-            </p>
-            <Button
-              asChild
-              className="h-auto rounded-full bg-cta-action px-8 py-4 font-semibold text-cta-action-foreground shadow-lg transition-transform hover:scale-105 hover:bg-cta-action-hover"
+            <motion.div
+              initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ amount: 0.45, once: true }}
+              transition={{ duration: reduceMotion ? 0 : 0.6, ease: "easeOut" }}
+              className="relative z-10 mx-auto max-w-4xl text-center"
             >
-              <a href="#membership">
-                Explore Membership Options <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </a>
-            </Button>
-          </motion.div>
+              <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-cta-accent text-cta-foreground">
+                <Users className="h-5 w-5" aria-hidden="true" />
+              </div>
+              <p className="mb-3 text-xs font-bold uppercase tracking-widest text-cta-kicker">
+                Our common future
+              </p>
+              <h2 className="mx-auto mb-4 max-w-3xl text-balance font-display text-4xl font-black leading-tight text-cta-foreground md:text-6xl">
+                Join the Movement Transforming the Future of{" "}
+                <span className="border-b-4 border-cta-accent text-cta-accent">Food</span>
+              </h2>
+              <p className="mx-auto mb-8 max-w-xl text-base font-medium leading-relaxed text-cta-muted md:text-lg">
+                Be part of a growing community creating a healthier, fairer and more sustainable
+                food system.
+              </p>
+              <Button
+                asChild
+                className="h-auto rounded-full bg-cta-action px-8 py-4 font-semibold text-cta-action-foreground shadow-lg transition-transform hover:scale-105 hover:bg-cta-action-hover"
+              >
+                <a href="#membership">
+                  Explore Membership Options <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </Button>
+            </motion.div>
+          </div>
 
-          <div className="absolute inset-x-0 bottom-0 z-20 h-2 bg-cta-accent" aria-hidden="true" />
+          <div className="h-2 w-full bg-cta-accent" aria-hidden="true" />
+
+          <footer className="bg-footer px-8 py-16 text-footer-foreground">
+            <div className="mx-auto max-w-7xl">
+              <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
+                <div>
+                  <img
+                    src={fisLogoTransparent}
+                    alt="Food Investors Society"
+                    className="h-16 w-auto bg-transparent object-contain brightness-0 invert"
+                  />
+                  <p className="mt-5 max-w-xs text-sm leading-relaxed text-footer-muted">
+                    The UK&apos;s first community-owned digital food platform.
+                  </p>
+                  <div className="mt-6 flex gap-3" aria-label="Social links">
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="icon"
+                      className="rounded-full border-footer-foreground/40 bg-transparent text-footer-foreground hover:bg-footer-foreground hover:text-footer"
+                    >
+                      <a href="#join" aria-label="Substack">
+                        <span className="font-display font-black">B</span>
+                      </a>
+                    </Button>
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="icon"
+                      className="rounded-full border-footer-foreground/40 bg-transparent text-footer-foreground hover:bg-footer-foreground hover:text-footer"
+                    >
+                      <a href="#join" aria-label="LinkedIn">
+                        <Linkedin className="h-4 w-4" />
+                      </a>
+                    </Button>
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="icon"
+                      className="rounded-full border-footer-foreground/40 bg-transparent text-footer-foreground hover:bg-footer-foreground hover:text-footer"
+                    >
+                      <a href="#join" aria-label="Video channel">
+                        <Play className="h-4 w-4" />
+                      </a>
+                    </Button>
+                  </div>
+                </div>
+
+                {[
+                  {
+                    title: "Support us",
+                    links: [
+                      ["Join", "#membership"],
+                      ["Become a Supporter", "#membership"],
+                      ["Volunteer", "#membership"],
+                      ["Donate", "#membership"],
+                    ],
+                  },
+                  {
+                    title: "Information",
+                    links: [
+                      ["Our story", "#challenge"],
+                      ["Our people", "#solution"],
+                      ["Documents & Policies", "#join"],
+                      ["Contact", "#join"],
+                    ],
+                  },
+                  {
+                    title: "Legal",
+                    links: [
+                      ["Privacy Policy", "#join"],
+                      ["Terms & Conditions", "#join"],
+                      ["Cookie Policy", "#join"],
+                    ],
+                  },
+                ].map((group) => (
+                  <nav key={group.title} aria-label={group.title}>
+                    <h3 className="text-xs font-extrabold uppercase text-cta-accent">
+                      {group.title}
+                    </h3>
+                    <ul className="mt-5 space-y-3 text-sm">
+                      {group.links.map(([label, href]) => (
+                        <li key={label}>
+                          <a
+                            className="text-footer-muted transition-colors hover:text-footer-foreground"
+                            href={href}
+                          >
+                            {label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+                ))}
+              </div>
+
+              <div className="mt-12 flex flex-col gap-3 border-t border-footer-foreground/10 pt-8 text-xs text-footer-muted sm:flex-row sm:items-center sm:justify-between">
+                <p>© 2026 The Food Investors Society — All rights reserved</p>
+                <p>Community-owned. People-powered.</p>
+              </div>
+            </div>
+          </footer>
         </section>
       </main>
     </>
