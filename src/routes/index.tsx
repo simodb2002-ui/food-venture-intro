@@ -510,8 +510,8 @@ function Index() {
 
                         <p className="text-lg font-medium leading-[1.3] md:text-xl">
                           Together, we&apos;re growing a{" "}
-                          <strong className="font-extrabold">people-powered food system</strong> where{" "}
-                          <strong className="font-extrabold">better choices</strong> come with{" "}
+                          <strong className="font-extrabold">people-powered food system</strong>{" "}
+                          where <strong className="font-extrabold">better choices</strong> come with{" "}
                           <strong className="font-extrabold">better returns</strong>; for you, your{" "}
                           <strong className="font-extrabold">neighbourhood</strong> and the{" "}
                           <strong className="font-extrabold">wider community</strong>.
