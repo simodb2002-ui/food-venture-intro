@@ -127,6 +127,8 @@ function Index() {
     }, 150);
   };
 
+  const narrativeFocus = reduceMotion ? 0 : Math.min(1, Math.max(0, challengeProgress - 4));
+
   return (
     <>
       <AnimatePresence>
@@ -466,9 +468,9 @@ function Index() {
                       transition={{ duration: reduceMotion ? 0 : 0.45, ease: "easeOut" }}
                       className="grid h-full w-full items-center gap-4 text-transition-foreground md:grid-cols-[45fr_55fr] md:gap-10 lg:gap-16"
                     >
-                      <div className="flex items-center justify-center [perspective:1000px]">
+                      <div className="flex items-center justify-center [perspective:1200px]">
                         <motion.div
-                          className="relative h-[13rem] w-[6.5rem] rounded-[1.5rem] border-[5px] border-foreground bg-foreground p-1.5 shadow-2xl [transform-style:preserve-3d] md:h-[22rem] md:w-[11rem] md:rounded-[2.25rem] md:border-[7px] md:p-2"
+                          className="relative h-[13rem] w-[6.5rem] rounded-[1.65rem] border-[5px] border-foreground bg-foreground p-1.5 shadow-2xl [transform-style:preserve-3d] md:h-[22rem] md:w-[11rem] md:rounded-[2.5rem] md:border-[7px] md:p-2"
                           animate={reduceMotion ? { rotateY: 0 } : { rotateY: 360 }}
                           transition={
                             reduceMotion
@@ -477,8 +479,16 @@ function Index() {
                           }
                           aria-label={`foodXchange phone showcase, screen ${phoneScreen + 1} of 3`}
                         >
-                          <div className="absolute left-1/2 top-2 z-10 h-3 w-12 -translate-x-1/2 rounded-full bg-foreground sm:top-3 sm:h-4 sm:w-16" />
-                          <div className="relative h-full w-full overflow-hidden rounded-[1.25rem] bg-placeholder sm:rounded-[1.65rem]">
+                          <div
+                            className="absolute inset-y-5 -left-[0.7rem] w-[0.8rem] rounded-l-lg bg-foreground shadow-lg [transform:rotateY(90deg)] md:-left-[0.9rem] md:w-[1rem]"
+                            aria-hidden="true"
+                          />
+                          <div
+                            className="absolute inset-y-5 -right-[0.7rem] w-[0.8rem] rounded-r-lg bg-foreground shadow-lg [transform:rotateY(90deg)] md:-right-[0.9rem] md:w-[1rem]"
+                            aria-hidden="true"
+                          />
+                          <div className="absolute left-1/2 top-2 z-10 h-3 w-12 -translate-x-1/2 rounded-full bg-foreground md:top-3 md:h-4 md:w-16" />
+                          <div className="relative h-full w-full overflow-hidden rounded-[1.25rem] bg-placeholder [backface-visibility:hidden] md:rounded-[1.85rem]">
                             <AnimatePresence mode="wait">
                               <motion.div
                                 key={phoneScreen}
@@ -495,8 +505,17 @@ function Index() {
                         </motion.div>
                       </div>
 
-                      <div className="space-y-8 text-left">
-                        <p className="text-lg font-medium leading-[1.3] md:text-xl">
+                       <div className="flex flex-col justify-center text-left">
+                         <motion.p
+                           animate={{
+                             opacity: 1 - narrativeFocus * 0.9,
+                             filter: `blur(${narrativeFocus * 12}px)`,
+                             scale: 1 - narrativeFocus * 0.04,
+                             y: narrativeFocus * -18,
+                           }}
+                           transition={{ duration: reduceMotion ? 0 : 0.18, ease: "easeOut" }}
+                           className="text-justify text-lg font-medium leading-[1.3] [text-justify:inter-word] md:text-xl"
+                         >
                           <strong className="font-extrabold">foodXchange</strong> is a{" "}
                           <strong className="font-extrabold">community-owned platform</strong> built
                           by <strong className="font-extrabold">The Food Investors Society</strong>.
@@ -506,16 +525,41 @@ function Index() {
                           deserve. <strong className="font-extrabold">foodXchange</strong> turns
                           everyday eating into an investment in energy, wellbeing, and our shared{" "}
                           <strong className="font-extrabold">commonwHealth</strong>.
-                        </p>
+                         </motion.p>
 
-                        <p className="text-lg font-medium leading-[1.3] md:text-xl">
+                         <motion.p
+                           animate={{
+                             opacity: 0.1 + narrativeFocus * 0.9,
+                             filter: `blur(${(1 - narrativeFocus) * 12}px)`,
+                             scale: 0.96 + narrativeFocus * 0.04,
+                             y: (1 - narrativeFocus) * 18,
+                           }}
+                           transition={{ duration: reduceMotion ? 0 : 0.18, ease: "easeOut" }}
+                           className="mt-8 text-justify text-lg font-medium leading-[1.3] [text-justify:inter-word] md:text-xl"
+                         >
                           Together, we&apos;re growing a{" "}
                           <strong className="font-extrabold">people-powered food system</strong>{" "}
                           where <strong className="font-extrabold">better choices</strong> come with{" "}
                           <strong className="font-extrabold">better returns</strong>; for you, your{" "}
                           <strong className="font-extrabold">neighbourhood</strong> and the{" "}
                           <strong className="font-extrabold">wider community</strong>.
-                        </p>
+                         </motion.p>
+
+                         <div className="mt-8 flex flex-wrap gap-3">
+                           <Button
+                             onClick={revealPlatform}
+                             className="h-11 rounded-full bg-foreground px-6 text-background hover:bg-foreground/85"
+                           >
+                             Learn about the app
+                           </Button>
+                           <Button
+                             onClick={() => setJoined(true)}
+                             aria-pressed={joined}
+                             className="h-11 rounded-full bg-solution px-6 text-solution-foreground hover:bg-solution/85"
+                           >
+                             🔔 Notify me
+                           </Button>
+                         </div>
                       </div>
                     </motion.div>
                   )}
