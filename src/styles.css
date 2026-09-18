@@ -134,9 +134,9 @@
   --cta-action: oklch(0.51 0.1 150);
   --cta-action-hover: oklch(0.42 0.08 150);
   --cta-action-foreground: oklch(1 0 0);
-  --transition-soft: oklch(0.84 0.1 127);
-  --transition-deep: oklch(0.58 0.13 155);
-  --transition-foreground: oklch(0.21 0.04 160);
+  --transition-soft: oklch(0.85552 0.10209 125.87);
+  --transition-deep: oklch(0.5849 0.10695 160.421);
+  --transition-foreground: oklch(0.26916 0.04593 159.209);
   --footer: oklch(0.12 0.01 255);
   --footer-foreground: oklch(0.98 0 0);
   --footer-muted: oklch(0.7 0.01 255);
