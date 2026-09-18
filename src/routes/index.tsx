@@ -464,11 +464,11 @@ function Index() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: reduceMotion ? 0 : 0.45, ease: "easeOut" }}
-                      className="grid h-full w-full items-center gap-7 text-transition-foreground md:grid-cols-[45fr_55fr] md:gap-10 lg:gap-16"
+                      className="grid h-full w-full items-center gap-4 text-transition-foreground md:grid-cols-[45fr_55fr] md:gap-10 lg:gap-16"
                     >
                       <div className="flex items-center justify-center [perspective:1000px]">
                         <motion.div
-                          className="relative h-[17rem] w-[8.5rem] rounded-[1.75rem] border-[5px] border-foreground bg-foreground p-1.5 shadow-2xl [transform-style:preserve-3d] sm:h-[22rem] sm:w-[11rem] sm:rounded-[2.25rem] sm:border-[7px] sm:p-2"
+                          className="relative h-[13rem] w-[6.5rem] rounded-[1.5rem] border-[5px] border-foreground bg-foreground p-1.5 shadow-2xl [transform-style:preserve-3d] md:h-[22rem] md:w-[11rem] md:rounded-[2.25rem] md:border-[7px] md:p-2"
                           animate={reduceMotion ? { rotateY: 0 } : { rotateY: 360 }}
                           transition={
                             reduceMotion
