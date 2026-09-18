@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, ArrowRight, Check, Linkedin, Play, Users } from "lucide-react";
+import { ArrowDown, ArrowRight, Bell, Check, Linkedin, Play, Users } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
@@ -38,6 +38,7 @@ function Index() {
   const [phoneScreen, setPhoneScreen] = useState(0);
   const [showPlatform, setShowPlatform] = useState(false);
   const [joined, setJoined] = useState(false);
+  const [notified, setNotified] = useState(false);
   const [showNavigation, setShowNavigation] = useState(false);
   const scrollerRef = useRef<HTMLElement>(null);
   const challengeRef = useRef<HTMLElement>(null);
@@ -464,11 +465,11 @@ function Index() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: reduceMotion ? 0 : 0.45, ease: "easeOut" }}
-                      className="grid h-full w-full items-center gap-4 text-transition-foreground md:grid-cols-[45fr_55fr] md:gap-10 lg:gap-16"
+                      className="grid h-full w-full items-center gap-3 text-transition-foreground md:grid-cols-[45fr_55fr] md:gap-10 lg:gap-16"
                     >
-                      <div className="flex items-center justify-center [perspective:1000px]">
+                      <div className="flex items-center justify-center [perspective:1200px]">
                         <motion.div
-                          className="relative h-[13rem] w-[6.5rem] rounded-[1.5rem] border-[5px] border-foreground bg-foreground p-1.5 shadow-2xl [transform-style:preserve-3d] md:h-[22rem] md:w-[11rem] md:rounded-[2.25rem] md:border-[7px] md:p-2"
+                          className="relative h-[11rem] w-[5.5rem] [transform-style:preserve-3d] md:h-[22rem] md:w-[11rem]"
                           animate={reduceMotion ? { rotateY: 0 } : { rotateY: 360 }}
                           transition={
                             reduceMotion
@@ -477,28 +478,55 @@ function Index() {
                           }
                           aria-label={`foodXchange phone showcase, screen ${phoneScreen + 1} of 3`}
                         >
-                          <div className="absolute left-1/2 top-2 z-10 h-3 w-12 -translate-x-1/2 rounded-full bg-foreground sm:top-3 sm:h-4 sm:w-16" />
-                          <div className="relative h-full w-full overflow-hidden rounded-[1.25rem] bg-placeholder sm:rounded-[1.65rem]">
-                            <AnimatePresence mode="wait">
-                              <motion.div
-                                key={phoneScreen}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: reduceMotion ? 0 : 0.25 }}
-                                className="absolute inset-0 grid place-items-center bg-placeholder px-3 text-center text-xs font-bold text-placeholder-foreground sm:text-sm"
-                              >
-                                (insert screen image {phoneScreen + 1}: grey)
-                              </motion.div>
-                            </AnimatePresence>
+                          <div className="absolute inset-0 rounded-[1.5rem] bg-foreground shadow-2xl [transform:translateZ(10px)] md:rounded-[2.25rem]">
+                            <div className="absolute inset-[5px] overflow-hidden rounded-[1.2rem] bg-placeholder md:inset-[7px] md:rounded-[1.8rem]">
+                              <AnimatePresence mode="wait">
+                                <motion.div
+                                  key={phoneScreen}
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  exit={{ opacity: 0 }}
+                                  transition={{ duration: reduceMotion ? 0 : 0.25 }}
+                                  className="absolute inset-0 grid place-items-center bg-placeholder px-3 text-center text-xs font-bold text-placeholder-foreground sm:text-sm"
+                                >
+                                  (insert screen image {phoneScreen + 1}: grey)
+                                </motion.div>
+                              </AnimatePresence>
+                            </div>
+                            <div className="absolute left-1/2 top-2 z-10 h-3 w-12 -translate-x-1/2 rounded-full bg-foreground md:top-3 md:h-4 md:w-16" />
                           </div>
+
+                          <div
+                            className="absolute inset-0 rounded-[1.5rem] border border-foreground/40 bg-foreground shadow-2xl [transform:rotateY(180deg)_translateZ(10px)] md:rounded-[2.25rem]"
+                            aria-hidden="true"
+                          >
+                            <div className="absolute left-1/2 top-[18%] h-9 w-9 -translate-x-1/2 rounded-full border-2 border-background/30 bg-footer md:h-14 md:w-14" />
+                          </div>
+                          <div
+                            className="absolute left-1/2 top-2 h-[calc(100%-1rem)] w-5 -translate-x-1/2 rounded-full border-x border-background/25 bg-footer shadow-[inset_3px_0_5px_var(--color-footer-muted),inset_-3px_0_5px_var(--color-foreground)] [transform:rotateY(90deg)] md:w-6"
+                            aria-hidden="true"
+                          />
+                          <div
+                            className="absolute left-1/2 top-1/2 h-5 w-[calc(100%-1rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-footer [transform:rotateX(90deg)] md:h-6"
+                            aria-hidden="true"
+                          />
                         </motion.div>
                       </div>
 
-                      <div className="space-y-8 text-left">
-                        <p className="text-lg font-medium leading-[1.3] md:text-xl">
+                      <div className="space-y-5 text-left md:-translate-x-4 md:space-y-8 lg:-translate-x-8">
+                        <motion.p
+                          initial={false}
+                          animate={
+                            challengeStage >= 5
+                              ? { opacity: 0.3, filter: "blur(4px)", scale: 0.95 }
+                              : { opacity: 1, filter: "blur(0px)", scale: 1 }
+                          }
+                          transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeInOut" }}
+                          className={`origin-left text-justify text-lg font-medium leading-[1.3] md:text-xl [text-justify:inter-word] ${challengeStage >= 5 ? "max-sm:max-h-24 max-sm:overflow-hidden" : ""}`}
+                        >
                           <strong className="font-extrabold">foodXchange</strong> is a{" "}
                           <strong className="font-extrabold">community-owned platform</strong> built
+                          <br />
                           by <strong className="font-extrabold">The Food Investors Society</strong>.
                           Our co-operative was created to help people navigate a food environment
                           stacked against healthier choices, giving you the{" "}
@@ -506,16 +534,46 @@ function Index() {
                           deserve. <strong className="font-extrabold">foodXchange</strong> turns
                           everyday eating into an investment in energy, wellbeing, and our shared{" "}
                           <strong className="font-extrabold">commonwHealth</strong>.
-                        </p>
+                        </motion.p>
 
-                        <p className="text-lg font-medium leading-[1.3] md:text-xl">
+                        <motion.p
+                          initial={false}
+                          animate={
+                            challengeStage >= 5
+                              ? { opacity: 1, filter: "blur(0px)", scale: 1 }
+                              : { opacity: 0.3, filter: "blur(4px)", scale: 0.95 }
+                          }
+                          transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeInOut" }}
+                          className={`origin-left text-justify text-lg font-medium leading-[1.3] md:text-xl [text-justify:inter-word] ${challengeStage < 5 ? "max-sm:max-h-16 max-sm:overflow-hidden" : ""}`}
+                        >
                           Together, we&apos;re growing a{" "}
                           <strong className="font-extrabold">people-powered food system</strong>{" "}
                           where <strong className="font-extrabold">better choices</strong> come with{" "}
                           <strong className="font-extrabold">better returns</strong>; for you, your{" "}
                           <strong className="font-extrabold">neighbourhood</strong> and the{" "}
                           <strong className="font-extrabold">wider community</strong>.
-                        </p>
+                        </motion.p>
+
+                        <div className="flex flex-wrap items-center gap-3 pt-1">
+                          <Button
+                            asChild
+                            className="h-auto rounded-full bg-footer px-6 py-3 font-semibold text-footer-foreground shadow-none transition-colors hover:bg-footer/85"
+                          >
+                            <a href="#solution">Learn about the app</a>
+                          </Button>
+                          <Button
+                            type="button"
+                            onClick={() => setNotified(true)}
+                            className="h-auto rounded-full bg-cta-accent px-6 py-3 font-bold text-cta-foreground shadow-none transition-colors hover:bg-cta-accent/85"
+                          >
+                            {notified ? (
+                              <Check className="h-4 w-4" />
+                            ) : (
+                              <Bell className="h-4 w-4" />
+                            )}
+                            {notified ? "Notifications on" : "Notify me"}
+                          </Button>
+                        </div>
                       </div>
                     </motion.div>
                   )}
