@@ -66,9 +66,9 @@ function Index() {
       const panel = scroller.clientHeight;
       const progress = (scroller.scrollTop - challenge.offsetTop) / panel;
       if (scroller.scrollTop > 8) setShowNavigation(true);
-      setChallengeActive(progress >= -0.1 && progress <= 5.9);
-      setChallengeProgress(Math.min(6, Math.max(0, progress + 1)));
-      setChallengeStage(Math.min(5, Math.max(0, Math.round(progress))));
+      setChallengeActive(progress >= -0.1 && progress <= 6.9);
+      setChallengeProgress(Math.min(7, Math.max(0, progress + 1)));
+      setChallengeStage(Math.min(6, Math.max(0, Math.round(progress))));
     };
 
     updateChallenge();
@@ -263,7 +263,7 @@ function Index() {
         <section
           id="challenge"
           ref={challengeRef}
-          className="relative h-[600dvh] w-full shrink-0 bg-problem text-problem-foreground"
+          className="relative h-[700dvh] w-full shrink-0 bg-problem text-problem-foreground"
         >
           <div
             className="pointer-events-none absolute inset-x-0 top-0 h-[100dvh] snap-start snap-always"
@@ -289,6 +289,10 @@ function Index() {
             className="pointer-events-none absolute inset-x-0 top-[500dvh] h-[100dvh] snap-start snap-always"
             aria-hidden="true"
           />
+          <div
+            className="pointer-events-none absolute inset-x-0 top-[600dvh] h-[100dvh] snap-start snap-always"
+            aria-hidden="true"
+          />
 
           <div className="sticky top-0 h-[100dvh] w-full overflow-hidden px-5 pt-16 sm:px-8">
             <motion.div
@@ -307,14 +311,14 @@ function Index() {
                   className="absolute inset-x-5 top-16 z-10 sm:inset-x-10"
                 >
                   <div
-                    className="mx-auto grid max-w-5xl grid-cols-4 gap-2"
+                    className="mx-auto grid max-w-5xl grid-cols-7 gap-2"
                     role="progressbar"
                     aria-label="Challenge sequence progress"
                     aria-valuemin={0}
-                    aria-valuemax={6}
+                    aria-valuemax={7}
                     aria-valuenow={challengeProgress}
                   >
-                    {[0, 1, 2, 3, 4, 5].map((step) => (
+                    {[0, 1, 2, 3, 4, 5, 6].map((step) => (
                       <div key={step} className="h-px overflow-hidden bg-problem-foreground/30">
                         <motion.div
                           className="h-full origin-left bg-problem-foreground"
@@ -448,34 +452,60 @@ function Index() {
                   )}
 
                   {challengeStage === 4 && (
-                    <motion.p
-                      key="foodxchange-part-a"
+                    <motion.div
+                      key="transition-part-a"
                       initial={{ opacity: 0, y: reduceMotion ? 0 : 28 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: reduceMotion ? 0 : -28 }}
                       transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeOut" }}
-                      className="max-w-5xl text-balance font-display text-xl font-extrabold leading-tight sm:text-3xl lg:text-4xl"
+                      className="max-w-2xl text-transition-foreground"
                     >
-                      foodXchange is a community-owned platform built by The Food Investors Society.
-                      Our co-operative was created to help people navigate a food environment
-                      stacked against healthier choices, giving you the clarity and confidence you
-                      deserve. foodXchange turns everyday eating into an investment in energy,
-                      wellbeing, and our shared commonwHealth.
-                    </motion.p>
+                      <h3 className="text-balance font-display text-2xl font-extrabold uppercase leading-tight sm:text-4xl lg:text-5xl">
+                        A platform built for clearer choices.
+                      </h3>
+                      <p className="mt-4 text-balance text-base font-normal leading-loose sm:mt-6 sm:text-xl">
+                        foodXchange is a community-owned co-operative created to help you navigate a
+                        food environment stacked against healthier options.
+                      </p>
+                    </motion.div>
                   )}
 
                   {challengeStage === 5 && (
-                    <motion.p
-                      key="foodxchange-part-b"
+                    <motion.div
+                      key="transition-part-b"
                       initial={{ opacity: 0, y: reduceMotion ? 0 : 28 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: reduceMotion ? 0 : -28 }}
                       transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeOut" }}
-                      className="max-w-4xl text-balance font-display text-2xl font-extrabold leading-tight sm:text-4xl lg:text-5xl"
+                      className="max-w-2xl text-transition-foreground"
                     >
-                      Together, we&apos;re growing a people-powered food system where better choices
-                      come with better returns; for you, your neighbourhood and the wider community.
-                    </motion.p>
+                      <h3 className="text-balance font-display text-2xl font-extrabold uppercase leading-tight sm:text-4xl lg:text-5xl">
+                        Invest in your wellbeing.
+                      </h3>
+                      <p className="mt-4 text-balance text-base font-normal leading-loose sm:mt-6 sm:text-xl">
+                        foodXchange turns everyday eating into an investment in energy, health, and
+                        our shared commonwHealth.
+                      </p>
+                    </motion.div>
+                  )}
+
+                  {challengeStage === 6 && (
+                    <motion.div
+                      key="transition-part-c"
+                      initial={{ opacity: 0, y: reduceMotion ? 0 : 28 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: reduceMotion ? 0 : -28 }}
+                      transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeOut" }}
+                      className="max-w-2xl text-transition-foreground"
+                    >
+                      <h3 className="text-balance font-display text-2xl font-extrabold uppercase leading-tight sm:text-4xl lg:text-5xl">
+                        Better choices. Better returns.
+                      </h3>
+                      <p className="mt-4 text-balance text-base font-normal leading-loose sm:mt-6 sm:text-xl">
+                        Together, we&apos;re growing a people-powered food system that delivers real
+                        returns for you, your neighbourhood, and the wider community.
+                      </p>
+                    </motion.div>
                   )}
                 </AnimatePresence>
               </div>
