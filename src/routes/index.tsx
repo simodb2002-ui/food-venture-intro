@@ -35,6 +35,7 @@ function Index() {
   const [challengeStage, setChallengeStage] = useState(0);
   const [challengeProgress, setChallengeProgress] = useState(0);
   const [challengeActive, setChallengeActive] = useState(false);
+  const [phoneScreen, setPhoneScreen] = useState(0);
   const [showPlatform, setShowPlatform] = useState(false);
   const [joined, setJoined] = useState(false);
   const [showNavigation, setShowNavigation] = useState(false);
@@ -105,6 +106,16 @@ function Index() {
       scroller.removeEventListener("wheel", onWheel);
       window.clearTimeout(unlockTimer);
     };
+  }, [reduceMotion]);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+
+    const screenTimer = window.setInterval(() => {
+      setPhoneScreen((current) => (current + 1) % 3);
+    }, 6000);
+
+    return () => window.clearInterval(screenTimer);
   }, [reduceMotion]);
 
   const revealPlatform = () => {
@@ -453,28 +464,59 @@ function Index() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: reduceMotion ? 0 : 0.45, ease: "easeOut" }}
-                      className="flex h-full w-full max-w-3xl flex-col items-center justify-center gap-10 text-transition-foreground sm:gap-14"
+                      className="grid h-full w-full items-center gap-7 text-transition-foreground md:grid-cols-[45fr_55fr] md:gap-10 lg:gap-16"
                     >
-                      <p className="text-balance text-base font-normal leading-loose sm:text-xl">
-                        <strong className="font-extrabold">foodXchange</strong> is a{" "}
-                        <strong className="font-extrabold">community-owned platform</strong> built
-                        by <strong className="font-extrabold">The Food Investors Society</strong>.
-                        Our co-operative was created to help people navigate a food environment
-                        stacked against healthier choices, giving you the{" "}
-                        <strong className="font-extrabold">clarity and confidence</strong> you
-                        deserve. <strong className="font-extrabold">foodXchange</strong> turns
-                        everyday eating into an investment in energy, wellbeing, and our shared{" "}
-                        <strong className="font-extrabold">commonwHealth</strong>.
-                      </p>
+                      <div className="flex items-center justify-center [perspective:1000px]">
+                        <motion.div
+                          className="relative h-[17rem] w-[8.5rem] rounded-[1.75rem] border-[5px] border-foreground bg-foreground p-1.5 shadow-2xl [transform-style:preserve-3d] sm:h-[22rem] sm:w-[11rem] sm:rounded-[2.25rem] sm:border-[7px] sm:p-2"
+                          animate={reduceMotion ? { rotateY: 0 } : { rotateY: 360 }}
+                          transition={
+                            reduceMotion
+                              ? { duration: 0 }
+                              : { duration: 6, ease: "linear", repeat: Infinity }
+                          }
+                          aria-label={`foodXchange phone showcase, screen ${phoneScreen + 1} of 3`}
+                        >
+                          <div className="absolute left-1/2 top-2 z-10 h-3 w-12 -translate-x-1/2 rounded-full bg-foreground sm:top-3 sm:h-4 sm:w-16" />
+                          <div className="relative h-full w-full overflow-hidden rounded-[1.25rem] bg-placeholder sm:rounded-[1.65rem]">
+                            <AnimatePresence mode="wait">
+                              <motion.div
+                                key={phoneScreen}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: reduceMotion ? 0 : 0.25 }}
+                                className="absolute inset-0 grid place-items-center bg-placeholder px-3 text-center text-xs font-bold text-placeholder-foreground sm:text-sm"
+                              >
+                                (insert screen image {phoneScreen + 1}: grey)
+                              </motion.div>
+                            </AnimatePresence>
+                          </div>
+                        </motion.div>
+                      </div>
 
-                      <p className="text-balance text-lg font-normal leading-loose sm:text-2xl">
-                        Together, we&apos;re growing a{" "}
-                        <strong className="font-extrabold">people-powered food system</strong> where{" "}
-                        <strong className="font-extrabold">better choices</strong> come with{" "}
-                        <strong className="font-extrabold">better returns</strong>; for you, your{" "}
-                        <strong className="font-extrabold">neighbourhood</strong> and the{" "}
-                        <strong className="font-extrabold">wider community</strong>.
-                      </p>
+                      <div className="space-y-8 text-left">
+                        <p className="text-lg font-medium leading-[1.3] md:text-xl">
+                          <strong className="font-extrabold">foodXchange</strong> is a{" "}
+                          <strong className="font-extrabold">community-owned platform</strong> built
+                          by <strong className="font-extrabold">The Food Investors Society</strong>.
+                          Our co-operative was created to help people navigate a food environment
+                          stacked against healthier choices, giving you the{" "}
+                          <strong className="font-extrabold">clarity and confidence</strong> you
+                          deserve. <strong className="font-extrabold">foodXchange</strong> turns
+                          everyday eating into an investment in energy, wellbeing, and our shared{" "}
+                          <strong className="font-extrabold">commonwHealth</strong>.
+                        </p>
+
+                        <p className="text-lg font-medium leading-[1.3] md:text-xl">
+                          Together, we&apos;re growing a{" "}
+                          <strong className="font-extrabold">people-powered food system</strong> where{" "}
+                          <strong className="font-extrabold">better choices</strong> come with{" "}
+                          <strong className="font-extrabold">better returns</strong>; for you, your{" "}
+                          <strong className="font-extrabold">neighbourhood</strong> and the{" "}
+                          <strong className="font-extrabold">wider community</strong>.
+                        </p>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
