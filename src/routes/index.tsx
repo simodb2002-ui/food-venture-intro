@@ -127,7 +127,7 @@ function Index() {
     }, 150);
   };
 
-  const narrativeFocus = Math.min(1, Math.max(0, challengeProgress - 4));
+  const narrativeFocus = Math.min(1, Math.max(0, challengeProgress - 5));
 
   return (
     <>
