@@ -464,8 +464,8 @@ function Index() {
                         A platform built for clearer choices.
                       </h3>
                       <p className="mx-auto mt-6 max-w-2xl text-balance text-base font-normal leading-relaxed text-transition-ink/90 sm:mt-8 sm:text-lg">
-                        foodXchange is a community-owned co-operative created to help you navigate
-                        a food environment stacked against healthier options.
+                        foodXchange is a community-owned co-operative created to help you navigate a
+                        food environment stacked against healthier options.
                       </p>
                     </motion.div>
                   )}
