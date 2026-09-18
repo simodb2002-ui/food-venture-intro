@@ -68,6 +68,14 @@
   --color-platform-foreground: var(--platform-foreground);
   --color-placeholder: var(--placeholder);
   --color-placeholder-foreground: var(--placeholder-foreground);
+  --color-cta: var(--cta);
+  --color-cta-foreground: var(--cta-foreground);
+  --color-cta-muted: var(--cta-muted);
+  --color-cta-kicker: var(--cta-kicker);
+  --color-cta-accent: var(--cta-accent);
+  --color-cta-action: var(--cta-action);
+  --color-cta-action-hover: var(--cta-action-hover);
+  --color-cta-action-foreground: var(--cta-action-foreground);
 }
 
 :root {
@@ -112,6 +120,14 @@
   --platform-foreground: oklch(0.18 0.03 55);
   --placeholder: oklch(0.84 0 0);
   --placeholder-foreground: oklch(0.27 0 0);
+  --cta: oklch(0.99 0.005 65);
+  --cta-foreground: oklch(0.18 0.03 255);
+  --cta-muted: oklch(0.45 0.035 255);
+  --cta-kicker: oklch(0.62 0.26 350);
+  --cta-accent: oklch(0.78 0.16 74);
+  --cta-action: oklch(0.51 0.1 150);
+  --cta-action-hover: oklch(0.42 0.08 150);
+  --cta-action-foreground: oklch(1 0 0);
 }
 
 .dark {

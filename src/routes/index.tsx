@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 import brandMark from "../assets/fis-mark.png";
+import fisLogoMacro from "../assets/fis-logo-macro.jpeg.asset.json";
 import fisLockup from "../assets/food-investors-society-lockup.png.asset.json";
 import foodXchangeLockup from "../assets/foodxchange-lockup.png.asset.json";
 import { Button } from "../components/ui/button";
@@ -131,7 +132,7 @@ function Index() {
                 <img
                   src={fisLockup.url}
                   alt="Food Investors Society"
-                  className="h-10 w-auto object-contain sm:h-12"
+                  className="h-10 w-auto bg-transparent object-contain mix-blend-multiply sm:h-12"
                 />
               </a>
 
@@ -170,7 +171,7 @@ function Index() {
                 <img
                   src={foodXchangeLockup.url}
                   alt="foodXchange"
-                  className="h-5 w-auto object-contain sm:h-6"
+                  className="h-5 w-auto bg-transparent object-contain mix-blend-multiply sm:h-6"
                 />
               </div>
             </div>
@@ -452,6 +453,7 @@ function Index() {
 
             <div className="mx-auto mt-4 grid max-w-3xl gap-3 text-left sm:mt-7">
               <Button
+                id="membership"
                 onClick={() => setJoined(true)}
                 className="group h-auto min-h-0 items-stretch justify-between gap-4 whitespace-normal border-2 border-solution-foreground bg-solution-foreground p-3 text-left text-solution shadow-none hover:bg-solution-foreground/90 sm:p-4"
               >
@@ -515,6 +517,57 @@ function Index() {
               </div>
             </div>
           </motion.div>
+        </section>
+
+        <section
+          id="join"
+          className="relative flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center justify-center overflow-hidden bg-cta px-6 pt-24 text-cta-foreground"
+        >
+          <img
+            src={fisLogoMacro.url}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-10 -left-20 z-0 w-72 max-w-none bg-transparent object-cover mix-blend-multiply sm:-bottom-16 sm:-left-12 sm:w-[450px]"
+          />
+          <img
+            src={fisLogoMacro.url}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-32 -top-6 z-0 w-80 max-w-none bg-transparent object-cover opacity-80 blur-sm mix-blend-multiply sm:-right-20 sm:-top-12 sm:w-[550px]"
+          />
+
+          <motion.div
+            initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ amount: 0.45, once: true }}
+            transition={{ duration: reduceMotion ? 0 : 0.6, ease: "easeOut" }}
+            className="relative z-10 mx-auto max-w-4xl text-center"
+          >
+            <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-cta-accent text-cta-foreground">
+              <Users className="h-5 w-5" aria-hidden="true" />
+            </div>
+            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-cta-kicker">
+              Our common future
+            </p>
+            <h2 className="mx-auto mb-4 max-w-3xl text-balance font-display text-4xl font-black leading-tight text-cta-foreground md:text-6xl">
+              Join the Movement Transforming the Future of{" "}
+              <span className="border-b-4 border-cta-accent text-cta-accent">Food</span>
+            </h2>
+            <p className="mx-auto mb-8 max-w-xl text-base font-medium leading-relaxed text-cta-muted md:text-lg">
+              Be part of a growing community creating a healthier, fairer and more sustainable food
+              system.
+            </p>
+            <Button
+              asChild
+              className="h-auto rounded-full bg-cta-action px-8 py-4 font-semibold text-cta-action-foreground shadow-lg transition-transform hover:scale-105 hover:bg-cta-action-hover"
+            >
+              <a href="#membership">
+                Explore Membership Options <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </Button>
+          </motion.div>
+
+          <div className="absolute inset-x-0 bottom-0 z-20 h-2 bg-cta-accent" aria-hidden="true" />
         </section>
       </main>
     </>
