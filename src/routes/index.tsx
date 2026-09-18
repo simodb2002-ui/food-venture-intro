@@ -498,7 +498,7 @@ function Index() {
                       </div>
 
                       <div className="flex flex-col justify-center text-left">
-                         <div className="grid min-h-[14rem] items-center md:min-h-[17rem]">
+                        <div className="grid min-h-[14rem] items-center md:min-h-[17rem]">
                           <motion.p
                             animate={{
                               opacity: 1 - narrativeFocus * 0.9,
@@ -540,7 +540,7 @@ function Index() {
                           </motion.p>
                         </div>
 
-                         <div className="mt-1 flex flex-wrap justify-center gap-3 md:mt-3">
+                        <div className="mt-1 flex flex-wrap justify-center gap-3 md:mt-3">
                           <Button
                             onClick={revealPlatform}
                             className="h-11 rounded-full bg-foreground px-6 text-background hover:bg-foreground/85"
@@ -552,8 +552,8 @@ function Index() {
                             aria-pressed={joined}
                             className="h-11 rounded-full bg-solution px-6 text-solution-foreground hover:bg-solution/85"
                           >
-                             <Bell className="text-foreground" aria-hidden="true" />
-                             Notify me
+                            <Bell className="text-foreground" aria-hidden="true" />
+                            Notify me
                           </Button>
                         </div>
                       </div>
