@@ -291,7 +291,7 @@ function Index() {
           />
           <div className="sticky top-0 h-[100dvh] w-full overflow-hidden px-5 pt-16 sm:px-8">
             <motion.div
-              className="absolute inset-0 bg-gradient-to-br from-transition-soft via-transition-soft via-75% to-transition-deep"
+              className="absolute inset-0 bg-background"
               initial={false}
               animate={{ opacity: challengeStage >= 4 ? 1 : 0 }}
               transition={{ duration: reduceMotion ? 0 : 0.7, ease: "easeInOut" }}
@@ -448,24 +448,14 @@ function Index() {
 
                   {challengeStage >= 4 && (
                     <motion.div
-                      key="transition-focus-shift"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
+                      key="transition-paragraphs"
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: reduceMotion ? 0 : 0.45, ease: "easeOut" }}
-                      className="relative h-[72dvh] w-full max-w-3xl text-transition-foreground"
+                      className="flex h-full w-full max-w-3xl flex-col items-center justify-center gap-10 text-transition-foreground sm:gap-14"
                     >
-                      <motion.p
-                        initial={false}
-                        animate={{
-                          y: challengeStage === 4 ? 0 : reduceMotion ? -108 : -128,
-                          opacity: challengeStage === 4 ? 1 : 0.3,
-                          scale: challengeStage === 4 ? 1 : 0.92,
-                          filter: challengeStage === 4 ? "blur(0px)" : "blur(4px)",
-                        }}
-                        transition={{ duration: reduceMotion ? 0 : 0.65, ease: "easeInOut" }}
-                        className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-balance text-base font-normal leading-loose sm:text-xl"
-                      >
+                      <p className="text-balance text-base font-normal leading-loose sm:text-xl">
                         <strong className="font-extrabold">foodXchange</strong> is a{" "}
                         <strong className="font-extrabold">community-owned platform</strong> built
                         by <strong className="font-extrabold">The Food Investors Society</strong>.
@@ -475,26 +465,16 @@ function Index() {
                         deserve. <strong className="font-extrabold">foodXchange</strong> turns
                         everyday eating into an investment in energy, wellbeing, and our shared{" "}
                         <strong className="font-extrabold">commonwHealth</strong>.
-                      </motion.p>
+                      </p>
 
-                      <motion.p
-                        initial={false}
-                        animate={{
-                          y: challengeStage === 4 ? (reduceMotion ? 108 : 128) : 0,
-                          opacity: challengeStage === 4 ? 0.3 : 1,
-                          scale: challengeStage === 4 ? 0.92 : 1,
-                          filter: challengeStage === 4 ? "blur(4px)" : "blur(0px)",
-                        }}
-                        transition={{ duration: reduceMotion ? 0 : 0.65, ease: "easeInOut" }}
-                        className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-balance text-lg font-normal leading-loose sm:text-2xl"
-                      >
+                      <p className="text-balance text-lg font-normal leading-loose sm:text-2xl">
                         Together, we&apos;re growing a{" "}
                         <strong className="font-extrabold">people-powered food system</strong> where{" "}
                         <strong className="font-extrabold">better choices</strong> come with{" "}
                         <strong className="font-extrabold">better returns</strong>; for you, your{" "}
                         <strong className="font-extrabold">neighbourhood</strong> and the{" "}
                         <strong className="font-extrabold">wider community</strong>.
-                      </motion.p>
+                      </p>
                     </motion.div>
                   )}
                 </AnimatePresence>
