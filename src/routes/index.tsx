@@ -566,7 +566,11 @@ function Index() {
                             onClick={() => setNotified(true)}
                             className="h-auto rounded-full bg-cta-accent px-6 py-3 font-bold text-cta-foreground shadow-none transition-colors hover:bg-cta-accent/85"
                           >
-                            {notified ? <Check className="h-4 w-4" /> : <Bell className="h-4 w-4" />}
+                            {notified ? (
+                              <Check className="h-4 w-4" />
+                            ) : (
+                              <Bell className="h-4 w-4" />
+                            )}
                             {notified ? "Notifications on" : "Notify me"}
                           </Button>
                         </div>
