@@ -3,8 +3,8 @@ import { ArrowDown, ArrowRight, Check, Linkedin, Play, Users } from "lucide-reac
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
+import fisLogoTransparent from "../assets/fis-logo-transparent.png";
 import brandMark from "../assets/fis-mark.png";
-import fisLogoMacro from "../assets/fis-logo-macro.jpeg.asset.json";
 import fisLockup from "../assets/food-investors-society-lockup.png.asset.json";
 import foodXchangeLockup from "../assets/foodxchange-lockup.png.asset.json";
 import { Button } from "../components/ui/button";
@@ -572,16 +572,16 @@ function Index() {
         >
           <div className="relative flex min-h-[78dvh] items-center justify-center overflow-hidden bg-cta px-6 py-28 text-cta-foreground sm:min-h-[82dvh]">
             <img
-              src={fisLogoMacro.url}
+              src={brandMark}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute -bottom-24 -left-32 z-0 w-[650px] max-w-none bg-transparent object-cover mix-blend-multiply max-sm:-bottom-12 max-sm:-left-32 max-sm:w-[500px] sm:w-[50vw]"
+              className="pointer-events-none absolute -bottom-24 -left-32 z-0 w-[650px] max-w-none bg-transparent object-contain mix-blend-multiply max-sm:-bottom-14 max-sm:-left-16 max-sm:w-[270px] sm:w-[50vw]"
             />
             <img
-              src={fisLogoMacro.url}
+              src={brandMark}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute -right-32 -top-20 z-0 w-[750px] max-w-none bg-transparent object-cover opacity-75 blur-md mix-blend-multiply max-sm:-right-48 max-sm:-top-20 max-sm:w-[560px] sm:w-[55vw]"
+              className="pointer-events-none absolute -right-32 -top-20 z-0 w-[750px] max-w-none bg-transparent object-contain opacity-75 blur-md mix-blend-multiply max-sm:-right-20 max-sm:-top-14 max-sm:w-[300px] sm:w-[55vw]"
             />
 
             <motion.div
@@ -623,7 +623,7 @@ function Index() {
               <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
                 <div>
                   <img
-                    src={fisLockup.url}
+                    src={fisLogoTransparent}
                     alt="Food Investors Society"
                     className="h-16 w-auto bg-transparent object-contain brightness-0 invert"
                   />
