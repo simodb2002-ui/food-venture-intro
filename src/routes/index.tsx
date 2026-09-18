@@ -522,7 +522,7 @@ function Index() {
                               : { opacity: 1, filter: "blur(0px)", scale: 1 }
                           }
                           transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeInOut" }}
-                          className="origin-left text-justify text-lg font-medium leading-[1.3] md:text-xl [text-justify:inter-word]"
+                          className={`origin-left text-justify text-lg font-medium leading-[1.3] md:text-xl [text-justify:inter-word] ${challengeStage >= 5 ? "max-sm:max-h-24 max-sm:overflow-hidden" : ""}`}
                         >
                           <strong className="font-extrabold">foodXchange</strong> is a{" "}
                           <strong className="font-extrabold">community-owned platform</strong> built
@@ -544,7 +544,7 @@ function Index() {
                               : { opacity: 0.3, filter: "blur(4px)", scale: 0.95 }
                           }
                           transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeInOut" }}
-                          className="origin-left text-justify text-lg font-medium leading-[1.3] md:text-xl [text-justify:inter-word]"
+                          className={`origin-left text-justify text-lg font-medium leading-[1.3] md:text-xl [text-justify:inter-word] ${challengeStage < 5 ? "max-sm:max-h-16 max-sm:overflow-hidden" : ""}`}
                         >
                           Together, we&apos;re growing a{" "}
                           <strong className="font-extrabold">people-powered food system</strong>{" "}
