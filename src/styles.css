@@ -78,7 +78,6 @@
   --color-cta-action-foreground: var(--cta-action-foreground);
   --color-transition-soft: var(--transition-soft);
   --color-transition-deep: var(--transition-deep);
-  --color-transition-ink: var(--transition-ink);
   --color-footer: var(--footer);
   --color-footer-foreground: var(--footer-foreground);
   --color-footer-muted: var(--footer-muted);
@@ -136,7 +135,6 @@
   --cta-action-foreground: oklch(1 0 0);
   --transition-soft: oklch(0.84 0.1 127);
   --transition-deep: oklch(0.58 0.13 155);
-  --transition-ink: oklch(0.25 0.08 165);
   --footer: oklch(0.12 0.01 255);
   --footer-foreground: oklch(0.98 0 0);
   --footer-muted: oklch(0.7 0.01 255);
