@@ -505,7 +505,8 @@ function Index() {
                         </motion.div>
                       </div>
 
-                      <div className="flex flex-col justify-center text-left">
+                       <div className="flex flex-col justify-center text-left">
+                         <div className="grid min-h-[17rem] items-center md:min-h-[21rem]">
                         <motion.p
                           animate={{
                             opacity: 1 - narrativeFocus * 0.9,
@@ -514,7 +515,7 @@ function Index() {
                             y: narrativeFocus * -18,
                           }}
                           transition={{ duration: reduceMotion ? 0 : 0.18, ease: "easeOut" }}
-                          className="text-justify text-lg font-medium leading-[1.3] [text-justify:inter-word] md:text-xl"
+                           className="col-start-1 row-start-1 text-justify text-lg font-medium leading-[1.3] [text-justify:inter-word] md:text-xl"
                         >
                           <strong className="font-extrabold">foodXchange</strong> is a{" "}
                           <strong className="font-extrabold">community-owned platform</strong> built
@@ -535,7 +536,7 @@ function Index() {
                             y: (1 - narrativeFocus) * 18,
                           }}
                           transition={{ duration: reduceMotion ? 0 : 0.18, ease: "easeOut" }}
-                          className="mt-8 text-justify text-lg font-medium leading-[1.3] [text-justify:inter-word] md:text-xl"
+                           className="col-start-1 row-start-1 text-justify text-lg font-medium leading-[1.3] [text-justify:inter-word] md:text-xl"
                         >
                           Together, we&apos;re growing a{" "}
                           <strong className="font-extrabold">people-powered food system</strong>{" "}
@@ -544,8 +545,9 @@ function Index() {
                           <strong className="font-extrabold">neighbourhood</strong> and the{" "}
                           <strong className="font-extrabold">wider community</strong>.
                         </motion.p>
+                         </div>
 
-                        <div className="mt-8 flex flex-wrap gap-3">
+                         <div className="mt-4 flex flex-wrap gap-3 md:mt-8">
                           <Button
                             onClick={revealPlatform}
                             className="h-11 rounded-full bg-foreground px-6 text-background hover:bg-foreground/85"
