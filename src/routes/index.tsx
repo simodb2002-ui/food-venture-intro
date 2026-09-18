@@ -210,7 +210,10 @@ function Index() {
         ref={scrollerRef}
         className="h-[100dvh] snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-background"
       >
-        <section id="hero" className="relative flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center justify-center overflow-hidden bg-background px-5">
+        <section
+          id="hero"
+          className="relative flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center justify-center overflow-hidden bg-background px-5"
+        >
           <div className="relative grid h-96 w-full max-w-6xl place-items-center text-center">
             <h1 className="sr-only">Food Investors Society</h1>
             <AnimatePresence mode="wait" initial={!reduceMotion}>
@@ -454,10 +457,10 @@ function Index() {
                       className="max-w-5xl text-balance font-display text-xl font-extrabold leading-tight sm:text-3xl lg:text-4xl"
                     >
                       foodXchange is a community-owned platform built by The Food Investors Society.
-                      Our co-operative was created to help people navigate a food environment stacked
-                      against healthier choices, giving you the clarity and confidence you deserve.
-                      foodXchange turns everyday eating into an investment in energy, wellbeing, and
-                      our shared commonwHealth.
+                      Our co-operative was created to help people navigate a food environment
+                      stacked against healthier choices, giving you the clarity and confidence you
+                      deserve. foodXchange turns everyday eating into an investment in energy,
+                      wellbeing, and our shared commonwHealth.
                     </motion.p>
                   )}
 
@@ -480,7 +483,10 @@ function Index() {
           </div>
         </section>
 
-        <section id="solution" className="flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center bg-solution px-6 pt-16 text-solution-foreground">
+        <section
+          id="solution"
+          className="flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center bg-solution px-6 pt-16 text-solution-foreground"
+        >
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -560,7 +566,10 @@ function Index() {
           </motion.div>
         </section>
 
-        <section id="join" className="w-full shrink-0 snap-start snap-always bg-footer text-footer-foreground">
+        <section
+          id="join"
+          className="w-full shrink-0 snap-start snap-always bg-footer text-footer-foreground"
+        >
           <div className="relative flex min-h-[78dvh] items-center justify-center overflow-hidden bg-cta px-6 py-28 text-cta-foreground sm:min-h-[82dvh]">
             <img
               src={fisLogoMacro.url}
@@ -593,8 +602,8 @@ function Index() {
                 <span className="border-b-4 border-cta-accent text-cta-accent">Food</span>
               </h2>
               <p className="mx-auto mb-8 max-w-xl text-base font-medium leading-relaxed text-cta-muted md:text-lg">
-                Be part of a growing community creating a healthier, fairer and more sustainable food
-                system.
+                Be part of a growing community creating a healthier, fairer and more sustainable
+                food system.
               </p>
               <Button
                 asChild
@@ -622,29 +631,80 @@ function Index() {
                     The UK&apos;s first community-owned digital food platform.
                   </p>
                   <div className="mt-6 flex gap-3" aria-label="Social links">
-                    <Button asChild variant="outline" size="icon" className="rounded-full border-footer-foreground/40 bg-transparent text-footer-foreground hover:bg-footer-foreground hover:text-footer">
-                      <a href="#join" aria-label="Substack"><span className="font-display font-black">B</span></a>
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="icon"
+                      className="rounded-full border-footer-foreground/40 bg-transparent text-footer-foreground hover:bg-footer-foreground hover:text-footer"
+                    >
+                      <a href="#join" aria-label="Substack">
+                        <span className="font-display font-black">B</span>
+                      </a>
                     </Button>
-                    <Button asChild variant="outline" size="icon" className="rounded-full border-footer-foreground/40 bg-transparent text-footer-foreground hover:bg-footer-foreground hover:text-footer">
-                      <a href="#join" aria-label="LinkedIn"><Linkedin className="h-4 w-4" /></a>
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="icon"
+                      className="rounded-full border-footer-foreground/40 bg-transparent text-footer-foreground hover:bg-footer-foreground hover:text-footer"
+                    >
+                      <a href="#join" aria-label="LinkedIn">
+                        <Linkedin className="h-4 w-4" />
+                      </a>
                     </Button>
-                    <Button asChild variant="outline" size="icon" className="rounded-full border-footer-foreground/40 bg-transparent text-footer-foreground hover:bg-footer-foreground hover:text-footer">
-                      <a href="#join" aria-label="Video channel"><Play className="h-4 w-4" /></a>
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="icon"
+                      className="rounded-full border-footer-foreground/40 bg-transparent text-footer-foreground hover:bg-footer-foreground hover:text-footer"
+                    >
+                      <a href="#join" aria-label="Video channel">
+                        <Play className="h-4 w-4" />
+                      </a>
                     </Button>
                   </div>
                 </div>
 
                 {[
-                  { title: "Support us", links: [["Join", "#membership"], ["Become a Supporter", "#membership"], ["Volunteer", "#membership"], ["Donate", "#membership"]] },
-                  { title: "Information", links: [["Our story", "#challenge"], ["Our people", "#solution"], ["Documents & Policies", "#join"], ["Contact", "#join"]] },
-                  { title: "Legal", links: [["Privacy Policy", "#join"], ["Terms & Conditions", "#join"], ["Cookie Policy", "#join"]] },
+                  {
+                    title: "Support us",
+                    links: [
+                      ["Join", "#membership"],
+                      ["Become a Supporter", "#membership"],
+                      ["Volunteer", "#membership"],
+                      ["Donate", "#membership"],
+                    ],
+                  },
+                  {
+                    title: "Information",
+                    links: [
+                      ["Our story", "#challenge"],
+                      ["Our people", "#solution"],
+                      ["Documents & Policies", "#join"],
+                      ["Contact", "#join"],
+                    ],
+                  },
+                  {
+                    title: "Legal",
+                    links: [
+                      ["Privacy Policy", "#join"],
+                      ["Terms & Conditions", "#join"],
+                      ["Cookie Policy", "#join"],
+                    ],
+                  },
                 ].map((group) => (
                   <nav key={group.title} aria-label={group.title}>
-                    <h3 className="text-xs font-extrabold uppercase text-cta-accent">{group.title}</h3>
+                    <h3 className="text-xs font-extrabold uppercase text-cta-accent">
+                      {group.title}
+                    </h3>
                     <ul className="mt-5 space-y-3 text-sm">
                       {group.links.map(([label, href]) => (
                         <li key={label}>
-                          <a className="text-footer-muted transition-colors hover:text-footer-foreground" href={href}>{label}</a>
+                          <a
+                            className="text-footer-muted transition-colors hover:text-footer-foreground"
+                            href={href}
+                          >
+                            {label}
+                          </a>
                         </li>
                       ))}
                     </ul>
