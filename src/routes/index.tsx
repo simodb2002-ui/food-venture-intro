@@ -505,17 +505,17 @@ function Index() {
                         </motion.div>
                       </div>
 
-                       <div className="flex flex-col justify-center text-left">
-                         <motion.p
-                           animate={{
-                             opacity: 1 - narrativeFocus * 0.9,
-                             filter: `blur(${narrativeFocus * 12}px)`,
-                             scale: 1 - narrativeFocus * 0.04,
-                             y: narrativeFocus * -18,
-                           }}
-                           transition={{ duration: reduceMotion ? 0 : 0.18, ease: "easeOut" }}
-                           className="text-justify text-lg font-medium leading-[1.3] [text-justify:inter-word] md:text-xl"
-                         >
+                      <div className="flex flex-col justify-center text-left">
+                        <motion.p
+                          animate={{
+                            opacity: 1 - narrativeFocus * 0.9,
+                            filter: `blur(${narrativeFocus * 12}px)`,
+                            scale: 1 - narrativeFocus * 0.04,
+                            y: narrativeFocus * -18,
+                          }}
+                          transition={{ duration: reduceMotion ? 0 : 0.18, ease: "easeOut" }}
+                          className="text-justify text-lg font-medium leading-[1.3] [text-justify:inter-word] md:text-xl"
+                        >
                           <strong className="font-extrabold">foodXchange</strong> is a{" "}
                           <strong className="font-extrabold">community-owned platform</strong> built
                           by <strong className="font-extrabold">The Food Investors Society</strong>.
@@ -525,41 +525,41 @@ function Index() {
                           deserve. <strong className="font-extrabold">foodXchange</strong> turns
                           everyday eating into an investment in energy, wellbeing, and our shared{" "}
                           <strong className="font-extrabold">commonwHealth</strong>.
-                         </motion.p>
+                        </motion.p>
 
-                         <motion.p
-                           animate={{
-                             opacity: 0.1 + narrativeFocus * 0.9,
-                             filter: `blur(${(1 - narrativeFocus) * 12}px)`,
-                             scale: 0.96 + narrativeFocus * 0.04,
-                             y: (1 - narrativeFocus) * 18,
-                           }}
-                           transition={{ duration: reduceMotion ? 0 : 0.18, ease: "easeOut" }}
-                           className="mt-8 text-justify text-lg font-medium leading-[1.3] [text-justify:inter-word] md:text-xl"
-                         >
+                        <motion.p
+                          animate={{
+                            opacity: 0.1 + narrativeFocus * 0.9,
+                            filter: `blur(${(1 - narrativeFocus) * 12}px)`,
+                            scale: 0.96 + narrativeFocus * 0.04,
+                            y: (1 - narrativeFocus) * 18,
+                          }}
+                          transition={{ duration: reduceMotion ? 0 : 0.18, ease: "easeOut" }}
+                          className="mt-8 text-justify text-lg font-medium leading-[1.3] [text-justify:inter-word] md:text-xl"
+                        >
                           Together, we&apos;re growing a{" "}
                           <strong className="font-extrabold">people-powered food system</strong>{" "}
                           where <strong className="font-extrabold">better choices</strong> come with{" "}
                           <strong className="font-extrabold">better returns</strong>; for you, your{" "}
                           <strong className="font-extrabold">neighbourhood</strong> and the{" "}
                           <strong className="font-extrabold">wider community</strong>.
-                         </motion.p>
+                        </motion.p>
 
-                         <div className="mt-8 flex flex-wrap gap-3">
-                           <Button
-                             onClick={revealPlatform}
-                             className="h-11 rounded-full bg-foreground px-6 text-background hover:bg-foreground/85"
-                           >
-                             Learn about the app
-                           </Button>
-                           <Button
-                             onClick={() => setJoined(true)}
-                             aria-pressed={joined}
-                             className="h-11 rounded-full bg-solution px-6 text-solution-foreground hover:bg-solution/85"
-                           >
-                             🔔 Notify me
-                           </Button>
-                         </div>
+                        <div className="mt-8 flex flex-wrap gap-3">
+                          <Button
+                            onClick={revealPlatform}
+                            className="h-11 rounded-full bg-foreground px-6 text-background hover:bg-foreground/85"
+                          >
+                            Learn about the app
+                          </Button>
+                          <Button
+                            onClick={() => setJoined(true)}
+                            aria-pressed={joined}
+                            className="h-11 rounded-full bg-solution px-6 text-solution-foreground hover:bg-solution/85"
+                          >
+                            🔔 Notify me
+                          </Button>
+                        </div>
                       </div>
                     </motion.div>
                   )}
