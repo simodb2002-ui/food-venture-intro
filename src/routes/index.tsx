@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, ArrowRight, Check, Linkedin, Play, Users } from "lucide-react";
+import { ArrowDown, ArrowRight, Bell, Check, Linkedin, Play, Users } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
@@ -470,7 +470,7 @@ function Index() {
                     >
                       <div className="flex items-center justify-center [perspective:1200px]">
                         <motion.div
-                          className="relative h-[13rem] w-[6.5rem] rounded-[1.65rem] border-[5px] border-foreground bg-foreground p-1.5 shadow-2xl [transform-style:preserve-3d] md:h-[22rem] md:w-[11rem] md:rounded-[2.5rem] md:border-[7px] md:p-2"
+                          className="relative h-[13rem] w-[6.5rem] rounded-[1.8rem] border-[8px] border-foreground bg-foreground p-1 shadow-[0_1.25rem_2.5rem_-1rem_var(--foreground)] md:h-[22rem] md:w-[11rem] md:rounded-[2.7rem] md:border-[12px] md:p-1.5"
                           animate={reduceMotion ? { rotateY: 0 } : { rotateY: 360 }}
                           transition={
                             reduceMotion
@@ -479,14 +479,6 @@ function Index() {
                           }
                           aria-label={`foodXchange phone showcase, screen ${phoneScreen + 1} of 3`}
                         >
-                          <div
-                            className="absolute inset-y-5 -left-[0.7rem] w-[0.8rem] rounded-l-lg bg-foreground shadow-lg [transform:rotateY(90deg)] md:-left-[0.9rem] md:w-[1rem]"
-                            aria-hidden="true"
-                          />
-                          <div
-                            className="absolute inset-y-5 -right-[0.7rem] w-[0.8rem] rounded-r-lg bg-foreground shadow-lg [transform:rotateY(90deg)] md:-right-[0.9rem] md:w-[1rem]"
-                            aria-hidden="true"
-                          />
                           <div className="absolute left-1/2 top-2 z-10 h-3 w-12 -translate-x-1/2 rounded-full bg-foreground md:top-3 md:h-4 md:w-16" />
                           <div className="relative h-full w-full overflow-hidden rounded-[1.25rem] bg-placeholder [backface-visibility:hidden] md:rounded-[1.85rem]">
                             <AnimatePresence mode="wait">
@@ -506,7 +498,7 @@ function Index() {
                       </div>
 
                       <div className="flex flex-col justify-center text-left">
-                        <div className="grid min-h-[17rem] items-center md:min-h-[21rem]">
+                         <div className="grid min-h-[14rem] items-center md:min-h-[17rem]">
                           <motion.p
                             animate={{
                               opacity: 1 - narrativeFocus * 0.9,
@@ -548,7 +540,7 @@ function Index() {
                           </motion.p>
                         </div>
 
-                        <div className="mt-4 flex flex-wrap gap-3 md:mt-8">
+                         <div className="mt-1 flex flex-wrap justify-center gap-3 md:mt-3">
                           <Button
                             onClick={revealPlatform}
                             className="h-11 rounded-full bg-foreground px-6 text-background hover:bg-foreground/85"
@@ -560,7 +552,8 @@ function Index() {
                             aria-pressed={joined}
                             className="h-11 rounded-full bg-solution px-6 text-solution-foreground hover:bg-solution/85"
                           >
-                            🔔 Notify me
+                             <Bell className="text-foreground" aria-hidden="true" />
+                             Notify me
                           </Button>
                         </div>
                       </div>
