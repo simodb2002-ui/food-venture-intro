@@ -669,7 +669,10 @@ function Index() {
                             const element = event.currentTarget;
                             if (!element.clientWidth) return;
                             setAppBreakdownStage(
-                              Math.min(4, Math.max(0, Math.round(element.scrollLeft / element.clientWidth))),
+                              Math.min(
+                                4,
+                                Math.max(0, Math.round(element.scrollLeft / element.clientWidth)),
+                              ),
                             );
                           }}
                           className="flex w-full snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
