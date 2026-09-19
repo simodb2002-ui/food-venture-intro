@@ -1,9 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, ArrowRight, Bell, Check, Linkedin, Play, Users } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowRight,
+  Bell,
+  Check,
+  ChevronRight,
+  Linkedin,
+  Play,
+  Users,
+} from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
-import fisLogoTransparent from "../assets/fis-logo-transparent.png";
+import fisLogoFooter from "../assets/fis-logo-footer.png";
 import brandMark from "../assets/fis-mark.png";
 import fisLockup from "../assets/food-investors-society-lockup.png.asset.json";
 import foodXchangeLockup from "../assets/foodxchange-lockup.png.asset.json";
@@ -37,6 +46,7 @@ function Index() {
   const [challengeActive, setChallengeActive] = useState(false);
   const [phoneScreen, setPhoneScreen] = useState(0);
   const [showPlatform, setShowPlatform] = useState(false);
+  const [platformSlide, setPlatformSlide] = useState(0);
   const [joined, setJoined] = useState(false);
   const [showNavigation, setShowNavigation] = useState(false);
   const [freeScroll, setFreeScroll] = useState(false);
@@ -511,7 +521,7 @@ function Index() {
 
                       <div className="flex flex-col justify-center text-left">
                         <p className="mb-4 text-center text-xs font-bold uppercase tracking-widest md:text-left">
-                          The solution
+                          Our solution
                         </p>
                         <div className="grid min-h-[14rem] items-center md:min-h-[17rem]">
                           <motion.p
@@ -650,10 +660,63 @@ function Index() {
                       transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="grid min-h-56 place-items-center border-t-2 border-solution-foreground bg-solution-foreground/10 p-8">
-                        <p className="font-display text-lg font-bold text-solution-foreground sm:text-xl">
-                          [foodXchange app interface breakdown - left blank]
-                        </p>
+                      <div className="relative overflow-hidden border-t-2 border-solution-foreground bg-solution-foreground/10">
+                        <motion.div
+                          className="flex"
+                          animate={{ x: `-${platformSlide * 100}%` }}
+                          transition={{ duration: reduceMotion ? 0 : 0.45, ease: "easeInOut" }}
+                        >
+                          {[1, 2, 3, 4, 5].map((section) => (
+                            <div
+                              key={section}
+                              className="grid min-h-64 w-full shrink-0 place-items-center px-14 py-10 sm:min-h-80 sm:px-20"
+                            >
+                              <p className="font-display text-lg font-bold text-solution-foreground sm:text-xl">
+                                [foodXchange app interface breakdown {section} - left blank]
+                              </p>
+                            </div>
+                          ))}
+                        </motion.div>
+
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon"
+                          aria-label="Show next foodXchange section"
+                          disabled={platformSlide === 4}
+                          onClick={() => setPlatformSlide((current) => Math.min(4, current + 1))}
+                          className="absolute right-3 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full border border-solution-foreground bg-solution text-solution-foreground shadow-sm hover:bg-solution/85 disabled:opacity-20 sm:right-5"
+                        >
+                          <ChevronRight className="h-5 w-5" aria-hidden="true" />
+                        </Button>
+
+                        <div
+                          className="absolute inset-x-0 bottom-5 flex justify-center gap-2"
+                          role="tablist"
+                          aria-label="foodXchange interface sections"
+                        >
+                          {[0, 1, 2, 3, 4].map((section) => (
+                            <Button
+                              key={section}
+                              type="button"
+                              variant="ghost"
+                              size="icon"
+                              role="tab"
+                              aria-label={`Show foodXchange section ${section + 1}`}
+                              aria-selected={platformSlide === section}
+                              onClick={() => setPlatformSlide(section)}
+                              className="h-5 w-5 rounded-full p-0 hover:bg-transparent"
+                            >
+                              <span
+                                className={`h-2.5 w-2.5 rounded-full border border-solution-foreground transition-colors ${
+                                  platformSlide === section
+                                    ? "bg-solution-foreground"
+                                    : "bg-transparent"
+                                }`}
+                              />
+                            </Button>
+                          ))}
+                        </div>
                       </div>
                     </motion.div>
                   )}
@@ -717,7 +780,7 @@ function Index() {
               <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
                 <div>
                   <img
-                    src={fisLogoTransparent}
+                    src={fisLogoFooter}
                     alt="Food Investors Society"
                     className="h-16 w-auto bg-transparent object-contain"
                   />
