@@ -74,7 +74,7 @@ function Index() {
       setChallengeActive(progress >= -0.1 && progress <= 5.9);
       setChallengeProgress(Math.min(6, Math.max(0, progress + 1)));
       setChallengeStage(Math.min(5, Math.max(0, Math.round(progress))));
-      const shouldFreeScroll = scroller.scrollTop >= solution.offsetTop - 2;
+      const shouldFreeScroll = scroller.scrollTop >= solution.offsetTop - panel;
       freeScrollRef.current = shouldFreeScroll;
       setFreeScroll(shouldFreeScroll);
     };
@@ -93,7 +93,9 @@ function Index() {
 
     const onWheel = (event: WheelEvent) => {
       if (Math.abs(event.deltaY) < 4) return;
-      if (freeScrollRef.current) return;
+      const solution = solutionRef.current;
+      const releasePoint = solution ? solution.offsetTop - scroller.clientHeight : Infinity;
+      if (freeScrollRef.current || scroller.scrollTop >= releasePoint - 2) return;
       event.preventDefault();
       if (locked) return;
 
