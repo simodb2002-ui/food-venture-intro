@@ -39,8 +39,11 @@ function Index() {
   const [showPlatform, setShowPlatform] = useState(false);
   const [joined, setJoined] = useState(false);
   const [showNavigation, setShowNavigation] = useState(false);
+  const [freeScroll, setFreeScroll] = useState(false);
   const scrollerRef = useRef<HTMLElement>(null);
   const challengeRef = useRef<HTMLElement>(null);
+  const solutionRef = useRef<HTMLElement>(null);
+  const freeScrollRef = useRef(false);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -61,7 +64,8 @@ function Index() {
   useEffect(() => {
     const scroller = scrollerRef.current;
     const challenge = challengeRef.current;
-    if (!scroller || !challenge) return;
+    const solution = solutionRef.current;
+    if (!scroller || !challenge || !solution) return;
 
     const updateChallenge = () => {
       const panel = scroller.clientHeight;
@@ -70,6 +74,9 @@ function Index() {
       setChallengeActive(progress >= -0.1 && progress <= 5.9);
       setChallengeProgress(Math.min(6, Math.max(0, progress + 1)));
       setChallengeStage(Math.min(5, Math.max(0, Math.round(progress))));
+      const shouldFreeScroll = scroller.scrollTop >= solution.offsetTop - 2;
+      freeScrollRef.current = shouldFreeScroll;
+      setFreeScroll(shouldFreeScroll);
     };
 
     updateChallenge();
@@ -86,6 +93,7 @@ function Index() {
 
     const onWheel = (event: WheelEvent) => {
       if (Math.abs(event.deltaY) < 4) return;
+      if (freeScrollRef.current) return;
       event.preventDefault();
       if (locked) return;
 
@@ -221,7 +229,9 @@ function Index() {
 
       <main
         ref={scrollerRef}
-        className="h-[100dvh] snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-background"
+        className={`h-[100dvh] overflow-y-scroll scroll-smooth bg-background ${
+          freeScroll ? "snap-none" : "snap-y snap-mandatory"
+        }`}
       >
         <section
           id="hero"
@@ -498,6 +508,9 @@ function Index() {
                       </div>
 
                       <div className="flex flex-col justify-center text-left">
+                        <p className="mb-4 text-center text-xs font-bold uppercase tracking-widest md:text-left">
+                          The solution
+                        </p>
                         <div className="grid min-h-[14rem] items-center md:min-h-[17rem]">
                           <motion.p
                             animate={{
@@ -567,7 +580,8 @@ function Index() {
 
         <section
           id="solution"
-          className="flex h-[100dvh] w-full shrink-0 snap-start snap-always items-center bg-solution px-6 pt-16 text-solution-foreground"
+          ref={solutionRef}
+          className="flex min-h-[100dvh] w-full shrink-0 items-center bg-solution px-6 py-20 text-solution-foreground"
         >
           <motion.div
             initial={{ opacity: 0, y: 28 }}
@@ -576,7 +590,6 @@ function Index() {
             transition={{ duration: reduceMotion ? 0 : 0.6 }}
             className="mx-auto w-full max-w-6xl text-center"
           >
-            <p className="mb-2 text-xs font-bold uppercase tracking-widest sm:mb-3">The solution</p>
             <h2 className="mx-auto max-w-4xl font-display text-3xl font-extrabold uppercase leading-[0.95] sm:text-6xl">
               Invest in better food. Share the rewards.
             </h2>
@@ -650,7 +663,7 @@ function Index() {
 
         <section
           id="join"
-          className="w-full shrink-0 snap-start snap-always bg-footer text-footer-foreground"
+          className="w-full shrink-0 bg-footer text-footer-foreground"
         >
           <div className="relative flex min-h-[78dvh] items-center justify-center overflow-hidden bg-cta px-6 py-28 text-cta-foreground sm:min-h-[82dvh]">
             <img
@@ -707,7 +720,7 @@ function Index() {
                   <img
                     src={fisLogoTransparent}
                     alt="Food Investors Society"
-                    className="h-16 w-auto bg-transparent object-contain brightness-0 invert"
+                    className="h-16 w-auto bg-transparent object-contain"
                   />
                   <p className="mt-5 max-w-xs text-sm leading-relaxed text-footer-muted">
                     The UK&apos;s first community-owned digital food platform.
