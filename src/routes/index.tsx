@@ -3,7 +3,7 @@ import { ArrowDown, ArrowRight, Bell, Check, Linkedin, Play, Users } from "lucid
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
-import fisLogoTransparent from "../assets/fis-logo-transparent.png";
+import fisLogoFooter from "../assets/fis-logo-footer.png";
 import brandMark from "../assets/fis-mark.png";
 import fisLockup from "../assets/food-investors-society-lockup.png.asset.json";
 import foodXchangeLockup from "../assets/foodxchange-lockup.png.asset.json";
@@ -37,12 +37,14 @@ function Index() {
   const [challengeActive, setChallengeActive] = useState(false);
   const [phoneScreen, setPhoneScreen] = useState(0);
   const [showPlatform, setShowPlatform] = useState(false);
+  const [appBreakdownStage, setAppBreakdownStage] = useState(0);
   const [joined, setJoined] = useState(false);
   const [showNavigation, setShowNavigation] = useState(false);
   const [freeScroll, setFreeScroll] = useState(false);
   const scrollerRef = useRef<HTMLElement>(null);
   const challengeRef = useRef<HTMLElement>(null);
   const solutionRef = useRef<HTMLElement>(null);
+  const appBreakdownRef = useRef<HTMLDivElement>(null);
   const freeScrollRef = useRef(false);
   const reduceMotion = useReducedMotion();
 
@@ -135,6 +137,16 @@ function Index() {
         .querySelector("#fx-panel")
         ?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
     }, 150);
+  };
+
+  const advanceAppBreakdown = () => {
+    const breakdown = appBreakdownRef.current;
+    if (!breakdown) return;
+    const nextStage = Math.min(appBreakdownStage + 1, 4);
+    breakdown.scrollTo({
+      left: nextStage * breakdown.clientWidth,
+      behavior: reduceMotion ? "auto" : "smooth",
+    });
   };
 
   const narrativeFocus = Math.min(1, Math.max(0, challengeProgress - 5));
@@ -511,7 +523,7 @@ function Index() {
 
                       <div className="flex flex-col justify-center text-left">
                         <p className="mb-4 text-center text-xs font-bold uppercase tracking-widest md:text-left">
-                          The solution
+                          Our solution
                         </p>
                         <div className="grid min-h-[14rem] items-center md:min-h-[17rem]">
                           <motion.p
@@ -650,10 +662,61 @@ function Index() {
                       transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="grid min-h-56 place-items-center border-t-2 border-solution-foreground bg-solution-foreground/10 p-8">
-                        <p className="font-display text-lg font-bold text-solution-foreground sm:text-xl">
-                          [foodXchange app interface breakdown - left blank]
-                        </p>
+                      <div className="relative border-t-2 border-solution-foreground bg-solution-foreground/10 py-8">
+                        <div
+                          ref={appBreakdownRef}
+                          onScroll={(event) => {
+                            const element = event.currentTarget;
+                            if (!element.clientWidth) return;
+                            setAppBreakdownStage(
+                              Math.min(
+                                4,
+                                Math.max(0, Math.round(element.scrollLeft / element.clientWidth)),
+                              ),
+                            );
+                          }}
+                          className="flex w-full snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                          aria-label="foodXchange app interface breakdown"
+                        >
+                          {Array.from({ length: 5 }, (_, index) => (
+                            <div
+                              key={index}
+                              className="grid min-h-64 w-full shrink-0 snap-start place-items-center px-14 text-center sm:min-h-72"
+                            >
+                              <p className="font-display text-lg font-bold text-solution-foreground sm:text-xl">
+                                [foodXchange app interface breakdown {index + 1} - left blank]
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+
+                        <div
+                          className="mt-5 flex items-center justify-center gap-2"
+                          aria-label={`App breakdown section ${appBreakdownStage + 1} of 5`}
+                        >
+                          {Array.from({ length: 5 }, (_, index) => (
+                            <span
+                              key={index}
+                              className={`h-2.5 w-2.5 rounded-full border border-foreground transition-colors ${
+                                index === appBreakdownStage ? "bg-foreground" : "bg-transparent"
+                              }`}
+                              aria-hidden="true"
+                            />
+                          ))}
+                        </div>
+
+                        {appBreakdownStage < 4 && (
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            onClick={advanceAppBreakdown}
+                            aria-label="View next app section"
+                            className="absolute right-2 top-1/2 rounded-full text-solution-foreground hover:bg-solution-foreground/15 sm:right-4"
+                          >
+                            <ArrowRight className="h-6 w-6" aria-hidden="true" />
+                          </Button>
+                        )}
                       </div>
                     </motion.div>
                   )}
@@ -717,7 +780,7 @@ function Index() {
               <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
                 <div>
                   <img
-                    src={fisLogoTransparent}
+                    src={fisLogoFooter}
                     alt="Food Investors Society"
                     className="h-16 w-auto bg-transparent object-contain"
                   />
