@@ -3,7 +3,6 @@ import { ArrowDown, ArrowRight, Bell, Check, Linkedin, Play, Users } from "lucid
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
-import fisLogoTransparent from "../assets/fis-logo-transparent.png";
 import fisLogoFooter from "../assets/fis-logo-footer.png";
 import brandMark from "../assets/fis-mark.png";
 import fisLockup from "../assets/food-investors-society-lockup.png.asset.json";
