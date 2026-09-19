@@ -663,10 +663,7 @@ function Index() {
           </motion.div>
         </section>
 
-        <section
-          id="join"
-          className="w-full shrink-0 bg-footer text-footer-foreground"
-        >
+        <section id="join" className="w-full shrink-0 bg-footer text-footer-foreground">
           <div className="relative flex min-h-[78dvh] items-center justify-center overflow-hidden bg-cta px-6 py-28 text-cta-foreground sm:min-h-[82dvh]">
             <img
               src={brandMark}
