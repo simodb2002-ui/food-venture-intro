@@ -683,6 +683,20 @@ function Index() {
                           type="button"
                           variant="ghost"
                           size="icon"
+                          aria-label="Show previous foodXchange section"
+                          disabled={platformSlide === 0}
+                          onClick={() => setPlatformSlide((current) => Math.max(0, current - 1))}
+                          className={`absolute left-3 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full border border-solution-foreground bg-solution text-solution-foreground shadow-sm transition-opacity hover:bg-solution/85 disabled:pointer-events-none disabled:opacity-0 sm:left-5 ${
+                            platformSlide === 0 ? "opacity-0" : "opacity-100"
+                          }`}
+                        >
+                          <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+                        </Button>
+
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon"
                           aria-label="Show next foodXchange section"
                           disabled={platformSlide === 4}
                           onClick={() => setPlatformSlide((current) => Math.min(4, current + 1))}
