@@ -4,6 +4,7 @@ import {
   ArrowRight,
   Bell,
   Check,
+  ChevronLeft,
   ChevronRight,
   Linkedin,
   Play,
