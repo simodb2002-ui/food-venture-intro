@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ChefHat, ScanLine, UsersRound } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
-import { type ReactNode } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { type ReactNode, useState } from "react";
 
 import communityImage from "@/assets/coming-soon/community.jpg";
 import cookImage from "@/assets/coming-soon/cook.jpg";
@@ -383,7 +383,6 @@ function FeatureSection({
               Coming soon
             </span>
           </div>
-          <h2 className="mt-6 text-5xl font-extrabold tracking-tight lg:text-7xl">{title}</h2>
           <p className={`mt-6 max-w-xl text-lg leading-relaxed md:text-xl ${t.muted}`}>
             <Highlight text={description} hook={hooks[index]} stroke={t.accent} />
           </p>
@@ -409,7 +408,10 @@ function FeatureSection({
           </ul>
         </div>
       </motion.div>
-    </section>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.section>
   );
 }
 
