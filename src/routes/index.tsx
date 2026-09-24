@@ -6,8 +6,6 @@ import {
   Check,
   ChevronLeft,
   ChevronRight,
-  Linkedin,
-  Play,
   Users,
 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
@@ -18,6 +16,8 @@ import brandMark from "../assets/fis-mark.png";
 import fisLockup from "../assets/food-investors-society-lockup.png.asset.json";
 import foodXchangeLockup from "../assets/foodxchange-lockup.png.asset.json";
 import { Button } from "../components/ui/button";
+import { SiteFooter } from "../components/site-footer";
+import { SiteHeader } from "../components/site-header";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -154,109 +154,15 @@ function Index() {
     <>
       <AnimatePresence>
         {showNavigation && (
-          <motion.header
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: reduceMotion ? 0 : 0.45, ease: "easeOut" }}
-            className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md"
+            className="fixed inset-x-0 top-0 z-50"
           >
-            <div className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-3 px-4 py-2 sm:px-6 lg:px-8">
-              <Link to="/" aria-label="Food Investors Society home" className="shrink-0">
-                <img
-                  src={fisLockup.url}
-                  alt="Food Investors Society"
-                  className="h-10 w-auto bg-transparent object-contain mix-blend-multiply sm:h-12"
-                />
-              </Link>
-
-              <nav
-                aria-label="Main navigation"
-                className="hidden items-center gap-6 self-stretch font-display text-sm font-bold text-foreground md:flex lg:gap-9"
-              >
-                {[
-                  ["FIS", "#hero"],
-                  ["App", "#solution"],
-                  ["Our story", "#challenge"],
-                  ["People", "#solution"],
-                  ["Support", "#solution"],
-                  ["About", "/about"],
-                ].map(([label, href]) =>
-                  href?.startsWith("/") ? (
-                    <Link
-                      key={label}
-                      to="/about"
-                      className="relative flex h-full items-center whitespace-nowrap transition-opacity hover:opacity-60"
-                    >
-                      {label}
-                    </Link>
-                  ) : (
-                    <a
-                      key={label}
-                      href={href}
-                      aria-current={label === "FIS" ? "page" : undefined}
-                      className={`relative flex h-full items-center whitespace-nowrap transition-opacity hover:opacity-60 ${
-                        label === "FIS"
-                          ? "after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-problem"
-                          : ""
-                      }`}
-                    >
-                      {label}
-                    </a>
-                  ),
-                )}
-              </nav>
-
-              <div className="flex shrink-0 items-center gap-2 rounded-full border border-foreground px-3 py-2 sm:gap-3 sm:px-5">
-                <span className="text-[0.52rem] font-extrabold uppercase leading-[0.85] text-foreground sm:text-[0.6rem]">
-                  Powered by
-                </span>
-                <span className="h-4 w-px bg-border" aria-hidden="true" />
-                <img
-                  src={foodXchangeLockup.url}
-                  alt="foodXchange"
-                  className="h-5 w-auto bg-transparent object-contain mix-blend-multiply sm:h-6"
-                />
-              </div>
-            </div>
-
-            <nav
-              aria-label="Mobile navigation"
-              className="flex h-10 items-stretch gap-6 overflow-x-auto px-4 font-display text-xs font-bold text-foreground md:hidden"
-            >
-              {[
-                ["FIS", "#hero"],
-                ["App", "#solution"],
-                ["Our story", "#challenge"],
-                ["People", "#solution"],
-                ["Support", "#solution"],
-                ["About", "/about"],
-              ].map(([label, href]) =>
-                href?.startsWith("/") ? (
-                  <Link
-                    key={label}
-                    to="/about"
-                    className="relative flex shrink-0 items-center whitespace-nowrap"
-                  >
-                    {label}
-                  </Link>
-                ) : (
-                  <a
-                    key={label}
-                    href={href}
-                    aria-current={label === "FIS" ? "page" : undefined}
-                    className={`relative flex shrink-0 items-center whitespace-nowrap ${
-                      label === "FIS"
-                        ? "after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-problem"
-                        : ""
-                    }`}
-                  >
-                    {label}
-                  </a>
-                ),
-              )}
-            </nav>
-          </motion.header>
+            <SiteHeader active="fis" />
+          </motion.div>
         )}
       </AnimatePresence>
 
@@ -808,108 +714,7 @@ function Index() {
             </motion.div>
           </div>
 
-          <div className="h-2 w-full bg-cta-accent" aria-hidden="true" />
-
-          <footer className="bg-footer px-8 py-16 text-footer-foreground">
-            <div className="mx-auto max-w-7xl">
-              <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
-                <div>
-                  <img
-                    src={fisLogoFooter}
-                    alt="Food Investors Society"
-                    className="h-16 w-auto bg-transparent object-contain"
-                  />
-                  <p className="mt-5 max-w-xs text-sm leading-relaxed text-footer-muted">
-                    The UK&apos;s first community-owned digital food platform.
-                  </p>
-                  <div className="mt-6 flex gap-3" aria-label="Social links">
-                    <Button
-                      asChild
-                      variant="outline"
-                      size="icon"
-                      className="rounded-full border-footer-foreground/40 bg-transparent text-footer-foreground hover:bg-footer-foreground hover:text-footer"
-                    >
-                      <a href="#join" aria-label="Substack">
-                        <span className="font-display font-black">B</span>
-                      </a>
-                    </Button>
-                    <Button
-                      asChild
-                      variant="outline"
-                      size="icon"
-                      className="rounded-full border-footer-foreground/40 bg-transparent text-footer-foreground hover:bg-footer-foreground hover:text-footer"
-                    >
-                      <a href="#join" aria-label="LinkedIn">
-                        <Linkedin className="h-4 w-4" />
-                      </a>
-                    </Button>
-                    <Button
-                      asChild
-                      variant="outline"
-                      size="icon"
-                      className="rounded-full border-footer-foreground/40 bg-transparent text-footer-foreground hover:bg-footer-foreground hover:text-footer"
-                    >
-                      <a href="#join" aria-label="Video channel">
-                        <Play className="h-4 w-4" />
-                      </a>
-                    </Button>
-                  </div>
-                </div>
-
-                {[
-                  {
-                    title: "Support us",
-                    links: [
-                      ["Join", "#membership"],
-                      ["Become a Supporter", "#membership"],
-                      ["Volunteer", "#membership"],
-                      ["Donate", "#membership"],
-                    ],
-                  },
-                  {
-                    title: "Information",
-                    links: [
-                      ["Our story", "#challenge"],
-                      ["Our people", "#solution"],
-                      ["Documents & Policies", "#join"],
-                      ["Contact", "#join"],
-                    ],
-                  },
-                  {
-                    title: "Legal",
-                    links: [
-                      ["Privacy Policy", "#join"],
-                      ["Terms & Conditions", "#join"],
-                      ["Cookie Policy", "#join"],
-                    ],
-                  },
-                ].map((group) => (
-                  <nav key={group.title} aria-label={group.title}>
-                    <h3 className="text-xs font-extrabold uppercase text-cta-accent">
-                      {group.title}
-                    </h3>
-                    <ul className="mt-5 space-y-3 text-sm">
-                      {group.links.map(([label, href]) => (
-                        <li key={label}>
-                          <a
-                            className="text-footer-muted transition-colors hover:text-footer-foreground"
-                            href={href}
-                          >
-                            {label}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </nav>
-                ))}
-              </div>
-
-              <div className="mt-12 flex flex-col gap-3 border-t border-footer-foreground/10 pt-8 text-xs text-footer-muted sm:flex-row sm:items-center sm:justify-between">
-                <p>© 2026 The Food Investors Society — All rights reserved</p>
-                <p>Community-owned. People-powered.</p>
-              </div>
-            </div>
-          </footer>
+          <SiteFooter />
         </section>
       </main>
     </>

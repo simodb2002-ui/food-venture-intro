@@ -51,18 +51,18 @@ export function SiteFooter() {
             </p>
             <div className="mt-6 flex gap-3" aria-label="Social links">
               {[
-                ["Instagram", Instagram],
-                ["LinkedIn", Linkedin],
-                ["Video channel", Play],
-              ].map(([label, Icon]) => (
+                { label: "Instagram", Icon: Instagram },
+                { label: "LinkedIn", Icon: Linkedin },
+                { label: "Video channel", Icon: Play },
+              ].map(({ label, Icon }) => (
                 <Button
-                  key={label as string}
+                  key={label}
                   asChild
                   variant="outline"
                   size="icon"
                   className="rounded-full border-footer-foreground/40 bg-transparent text-footer-foreground hover:bg-footer-foreground hover:text-footer"
                 >
-                  <a href="#footer" aria-label={label as string}>
+                  <a href="#footer" aria-label={label}>
                     <Icon className="h-4 w-4" />
                   </a>
                 </Button>
