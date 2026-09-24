@@ -286,7 +286,7 @@ function FeatureSection({
   onActivate: () => void;
 }) {
   const { title, Icon, image, alt, reverse, description, bullets } = feature;
-  const t = themes[index];
+  const t = themes[index]!;
   const reduce = useReducedMotion();
   return (
     <motion.section
@@ -384,7 +384,7 @@ function FeatureSection({
             </span>
           </div>
           <p className={`mt-6 max-w-xl text-lg leading-relaxed md:text-xl ${t.muted}`}>
-            <Highlight text={description} hook={hooks[index]} stroke={t.accent} />
+            <Highlight text={description} hook={hooks[index]!} stroke={t.accent} />
           </p>
           <ul className="mt-8 space-y-4">
             {bullets.map((b) => (
