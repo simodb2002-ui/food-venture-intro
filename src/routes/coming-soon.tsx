@@ -97,9 +97,7 @@ function ComingSoonPage() {
               key={title}
               className="group grid items-center gap-8 rounded-3xl border border-border/50 bg-card p-6 shadow-sm transition-shadow duration-300 hover:shadow-md md:grid-cols-2 md:gap-12 md:p-10"
             >
-              <div
-                className={`overflow-hidden rounded-xl ${reverse ? "md:order-2" : ""}`}
-              >
+              <div className={`overflow-hidden rounded-xl ${reverse ? "md:order-2" : ""}`}>
                 <img
                   src={image}
                   alt={alt}
