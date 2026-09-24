@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ChefHat, ScanLine, UsersRound } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useRef, useState, type MouseEvent, type ReactNode } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { type ReactNode } from "react";
 
 import communityImage from "@/assets/coming-soon/community.jpg";
 import cookImage from "@/assets/coming-soon/cook.jpg";
@@ -195,111 +195,106 @@ function HandArrow({ flip }: { flip?: boolean }) {
   );
 }
 
-/* ---------- feature row ---------- */
-const spring = { type: "spring", stiffness: 200, damping: 25 } as const;
+const themes = [
+  {
+    bg: "bg-problem text-problem-foreground",
+    muted: "text-problem-foreground/85",
+    accent: "stroke-solution",
+    tick: "stroke-solution",
+    pill: "bg-footer text-footer-foreground",
+    icon: "text-solution",
+  },
+  {
+    bg: "bg-cta text-cta-foreground",
+    muted: "text-cta-muted",
+    accent: "stroke-problem",
+    tick: "stroke-problem",
+    pill: "bg-problem text-problem-foreground",
+    icon: "text-problem",
+  },
+  {
+    bg: "bg-footer text-footer-foreground",
+    muted: "text-footer-muted",
+    accent: "stroke-solution",
+    tick: "stroke-solution",
+    pill: "bg-solution text-solution-foreground",
+    icon: "text-solution",
+  },
+];
 
-function FeatureStripe({
-  feature,
-  index,
-  open,
-  onOpen,
-  onToggle,
-}: {
-  feature: (typeof features)[number];
-  index: number;
-  open: boolean;
-  onOpen: () => void;
-  onToggle: () => void;
-}) {
-  const { title, Icon } = feature;
-  const reduce = useReducedMotion();
-  const panelId = `feature-panel-${index}`;
+const hooks = ["100 products", "local", "easier"];
+
+function Highlight({ text, hook, stroke }: { text: string; hook: string; stroke: string }) {
+  const i = text.indexOf(hook);
+  if (i < 0) return <>{text}</>;
   return (
-    <motion.div
-      layout={!reduce}
-      transition={spring}
-      onMouseEnter={() => {
-        if (window.matchMedia("(hover: hover)").matches) onOpen();
-      }}
-      className={`rounded-3xl transition-colors duration-500 ${open ? "bg-transparent" : "bg-problem text-problem-foreground"}`}
-    >
-      <motion.button
-        layout="position"
-        type="button"
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={onToggle}
-        className={`flex w-full items-center gap-4 rounded-3xl px-6 text-left transition-all duration-500 md:px-10 ${open ? "py-4" : "py-6 md:py-8"}`}
-      >
-        <Icon className={`size-7 shrink-0 ${open ? "text-problem" : ""}`} aria-hidden="true" />
-        <span className="flex-1 text-2xl font-bold tracking-tight md:text-4xl">{title}</span>
-        <motion.span
-          animate={{ rotate: open ? 90 : 0 }}
-          transition={spring}
-          className="text-2xl font-bold"
+    <>
+      {text.slice(0, i)}
+      <span className="relative inline-block font-semibold">
+        {hook}
+        <svg
+          viewBox="0 0 200 24"
+          fill="none"
+          preserveAspectRatio="none"
           aria-hidden="true"
+          className={`pointer-events-none absolute -bottom-2 left-0 h-3 w-full ${stroke}`}
         >
-          →
-        </motion.span>
-      </motion.button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            id={panelId}
-            key="panel"
-            initial={reduce ? false : { height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
-            transition={spring}
-            className="overflow-hidden"
-          >
-            <div className="px-2 pt-6 pb-12 md:px-6">
-              <FeatureRow feature={feature} index={index} />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+          <motion.path
+            d="M4 14c40-8 90-10 190-6"
+            strokeWidth={5}
+            strokeLinecap="round"
+            initial={{ pathLength: 0 }}
+            whileInView={{ pathLength: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.4 }}
+          />
+        </svg>
+      </span>
+      {text.slice(i + hook.length)}
+    </>
   );
 }
 
-function FeatureRow({ feature, index }: { feature: (typeof features)[number]; index: number }) {
+function FeatureSection({ feature, index }: { feature: (typeof features)[number]; index: number }) {
   const { title, Icon, image, alt, reverse, description, bullets } = feature;
-  const rowRef = useRef<HTMLDivElement>(null);
+  const t = themes[index];
   const reduce = useReducedMotion();
-
-  const onMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (reduce || !rowRef.current) return;
-    const r = rowRef.current.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5;
-    const y = (e.clientY - r.top) / r.height - 0.5;
-    rowRef.current.style.transform = `perspective(1200px) rotateY(${x * 3}deg) rotateX(${-y * 3}deg)`;
-  };
-  const onLeave = () => {
-    if (rowRef.current) rowRef.current.style.transform = "";
-  };
-
   return (
-    <article>
-      <div
-        ref={rowRef}
-        onMouseMove={onMove}
-        onMouseLeave={onLeave}
-        className="group grid items-center gap-10 transition-transform duration-300 ease-out md:grid-cols-2 md:gap-16"
+    <section className={`group relative overflow-hidden py-24 md:py-32 ${t.bg}`}>
+      <Doodle
+        kind="star"
+        tone="solution"
+        className="top-10 right-[6%] size-12 opacity-70 transition-transform duration-500 group-hover:scale-125"
+      />
+      <Doodle
+        kind={index === 2 ? "hat" : "apple"}
+        tone={index === 1 ? "problem" : "solution"}
+        className="bottom-10 left-[4%] size-16 opacity-60 transition-transform duration-500 group-hover:-rotate-12"
+        delay={1}
+      />
+      <motion.div
+        initial={reduce ? false : { opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative mx-auto grid w-[min(1240px,calc(100%-40px))] items-center gap-14 md:grid-cols-2 md:gap-20"
       >
-        {/* image */}
-        <div className={`relative mx-auto w-full max-w-lg ${reverse ? "md:order-2" : ""}`}>
+        <div className={`relative mx-auto w-full max-w-xl ${reverse ? "md:order-2" : ""}`}>
           <svg
             viewBox="0 0 400 320"
             fill="none"
             preserveAspectRatio="none"
             aria-hidden="true"
-            className="absolute -inset-4 h-[calc(100%+2rem)] w-[calc(100%+2rem)] stroke-solution transition-transform duration-500 group-hover:rotate-3"
+            className={`absolute -inset-4 h-[calc(100%+2rem)] w-[calc(100%+2rem)] ${t.accent} transition-transform duration-700 group-hover:rotate-3`}
           >
-            <path
+            <motion.path
               d="M60 20c90-22 230-18 300 20 44 30 40 170 10 230-40 60-230 50-300 20C10 260 0 150 14 90 22 50 36 28 60 20z"
               strokeWidth={3}
               strokeLinecap="round"
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.6, ease: "easeInOut" }}
             />
           </svg>
           <div className="relative overflow-hidden" style={{ borderRadius: blobs[index] }}>
@@ -309,58 +304,31 @@ function FeatureRow({ feature, index }: { feature: (typeof features)[number]; in
               loading="lazy"
               width={1200}
               height={912}
-              className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="aspect-[4/3] h-auto w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>
-          {index === 1 && (
-            <>
-              <Doodle kind="star" tone="solution" className="-top-8 -right-4 size-12" />
-              <Doodle kind="star" className="-bottom-6 left-6 size-8" delay={1.2} />
-            </>
-          )}
-          {index === 2 && (
-            <Doodle kind="hat" className="-bottom-10 -right-6 size-20" delay={0.4} />
-          )}
         </div>
-
-        {/* text */}
-        <div className="relative">
+        <div>
           <div className="flex items-center gap-4">
-            <Icon className="size-7 text-problem" aria-hidden="true" />
-            <ScribbleBadge />
-          </div>
-          <h2 className="relative mt-6 inline-block text-4xl font-bold tracking-tight md:text-5xl">
-            {title}
-            <svg
-              viewBox="0 0 300 100"
-              fill="none"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-              className="pointer-events-none absolute -inset-x-6 -inset-y-4 h-[calc(100%+2rem)] w-[calc(100%+3rem)] stroke-problem"
+            <Icon className={`size-8 ${t.icon}`} aria-hidden="true" />
+            <span
+              className={`rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest shadow-lg ${t.pill}`}
             >
-              <path
-                className="scribble-draw"
-                pathLength={1}
-                d="M40 12C120 0 250 4 285 30c20 30-40 62-150 64C50 96 6 76 12 48 18 22 90 8 170 10"
-                strokeWidth={3}
-                strokeLinecap="round"
-              />
-            </svg>
-          </h2>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-cta-muted md:text-lg">
-            {description}
-          </p>
-          <div className={`mt-4 flex ${reverse ? "justify-end" : "justify-start"}`}>
-            <HandArrow flip={Boolean(reverse)} />
+              Coming soon
+            </span>
           </div>
-          <ul className="mt-2 space-y-4">
-            {bullets.map((bullet) => (
-              <li key={bullet} className="flex gap-3 text-sm font-medium leading-relaxed md:text-base">
+          <h2 className="mt-6 text-5xl font-extrabold tracking-tight lg:text-7xl">{title}</h2>
+          <p className={`mt-6 max-w-xl text-lg leading-relaxed md:text-xl ${t.muted}`}>
+            <Highlight text={description} hook={hooks[index]} stroke={t.accent} />
+          </p>
+          <ul className="mt-8 space-y-4">
+            {bullets.map((b) => (
+              <li key={b} className="flex gap-3 text-base font-medium leading-relaxed md:text-lg">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
                   aria-hidden="true"
-                  className="mt-0.5 size-5 shrink-0 stroke-problem"
+                  className={`mt-1 size-5 shrink-0 ${t.tick}`}
                 >
                   <path
                     d="M3 13c3 2 5 5 6 7 3-7 7-12 12-16"
@@ -369,19 +337,18 @@ function FeatureRow({ feature, index }: { feature: (typeof features)[number]; in
                     strokeLinejoin="round"
                   />
                 </svg>
-                {bullet}
+                {b}
               </li>
             ))}
           </ul>
         </div>
-      </div>
-    </article>
+      </motion.div>
+    </section>
   );
 }
 
 function ComingSoonPage() {
   const reduce = useReducedMotion();
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
   return (
     <div className="coming-page relative min-h-dvh overflow-x-clip bg-cta text-cta-foreground">
       <SiteHeader active="coming-soon" className="sticky top-0" />
@@ -391,12 +358,22 @@ function ComingSoonPage() {
         <Doodle kind="apple" className="top-40 left-[6%] size-14" />
         <Doodle kind="carrot" tone="solution" className="top-72 right-[8%] size-16" delay={1} />
         <Doodle kind="spiral" className="top-[900px] left-[3%] size-12" delay={2} />
-        <Doodle kind="star" tone="solution" className="top-[1500px] right-[4%] size-10" delay={0.6} />
-        <Doodle kind="apple" tone="solution" className="top-[2100px] left-[5%] size-12" delay={1.6} />
+        <Doodle
+          kind="star"
+          tone="solution"
+          className="top-[1500px] right-[4%] size-10"
+          delay={0.6}
+        />
+        <Doodle
+          kind="apple"
+          tone="solution"
+          className="top-[2100px] left-[5%] size-12"
+          delay={1.6}
+        />
         <Doodle kind="spiral" className="top-[2500px] right-[6%] size-14" delay={2.4} />
       </div>
 
-      <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
+      <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pt-8 pb-24">
         <motion.section
           initial={reduce ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -417,26 +394,17 @@ function ComingSoonPage() {
             foodXchange app launches.
           </p>
         </motion.section>
-
-        <section className="flex flex-col gap-4" aria-label="Future foodXchange features">
-          {features.map((feature, i) => (
-            <FeatureStripe
-              key={feature.title}
-              feature={feature}
-              index={i}
-              open={openIndex === i}
-              onOpen={() => setOpenIndex(i)}
-              onToggle={() => setOpenIndex(openIndex === i ? null : i)}
-            />
-          ))}
-        </section>
-
+      </main>
+      {features.map((feature, i) => (
+        <FeatureSection key={feature.title} feature={feature} index={i} />
+      ))}
+      <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
         <motion.section
           initial={reduce ? false : { opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ type: "spring", stiffness: 100, damping: 18 }}
-          className="relative mt-32 overflow-hidden rounded-3xl bg-footer px-6 py-16 text-center text-footer-foreground md:px-12 md:py-20"
+          className="relative mt-24 overflow-hidden rounded-3xl bg-footer px-6 py-16 text-center text-footer-foreground md:px-12 md:py-20"
         >
           <div className="absolute inset-x-0 top-0 h-1.5 bg-solution" aria-hidden="true" />
           <Doodle kind="star" tone="solution" className="top-8 left-8 size-10" />
