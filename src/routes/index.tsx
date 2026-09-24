@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowDown,
   ArrowRight,
@@ -162,13 +162,13 @@ function Index() {
             className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md"
           >
             <div className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-3 px-4 py-2 sm:px-6 lg:px-8">
-              <a href="#hero" aria-label="Food Investors Society home" className="shrink-0">
+              <Link to="/" aria-label="Food Investors Society home" className="shrink-0">
                 <img
                   src={fisLockup.url}
                   alt="Food Investors Society"
                   className="h-10 w-auto bg-transparent object-contain mix-blend-multiply sm:h-12"
                 />
-              </a>
+              </Link>
 
               <nav
                 aria-label="Main navigation"
@@ -180,21 +180,31 @@ function Index() {
                   ["Our story", "#challenge"],
                   ["People", "#solution"],
                   ["Support", "#solution"],
-                  ["About", "#solution"],
-                ].map(([label, href]) => (
-                  <a
-                    key={label}
-                    href={href}
-                    aria-current={label === "FIS" ? "page" : undefined}
-                    className={`relative flex h-full items-center whitespace-nowrap transition-opacity hover:opacity-60 ${
-                      label === "FIS"
-                        ? "after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-problem"
-                        : ""
-                    }`}
-                  >
-                    {label}
-                  </a>
-                ))}
+                  ["About", "/about"],
+                ].map(([label, href]) =>
+                  href?.startsWith("/") ? (
+                    <Link
+                      key={label}
+                      to="/about"
+                      className="relative flex h-full items-center whitespace-nowrap transition-opacity hover:opacity-60"
+                    >
+                      {label}
+                    </Link>
+                  ) : (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-current={label === "FIS" ? "page" : undefined}
+                      className={`relative flex h-full items-center whitespace-nowrap transition-opacity hover:opacity-60 ${
+                        label === "FIS"
+                          ? "after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-problem"
+                          : ""
+                      }`}
+                    >
+                      {label}
+                    </a>
+                  ),
+                )}
               </nav>
 
               <div className="flex shrink-0 items-center gap-2 rounded-full border border-foreground px-3 py-2 sm:gap-3 sm:px-5">
@@ -220,21 +230,31 @@ function Index() {
                 ["Our story", "#challenge"],
                 ["People", "#solution"],
                 ["Support", "#solution"],
-                ["About", "#solution"],
-              ].map(([label, href]) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-current={label === "FIS" ? "page" : undefined}
-                  className={`relative flex shrink-0 items-center whitespace-nowrap ${
-                    label === "FIS"
-                      ? "after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-problem"
-                      : ""
-                  }`}
-                >
-                  {label}
-                </a>
-              ))}
+                ["About", "/about"],
+              ].map(([label, href]) =>
+                href?.startsWith("/") ? (
+                  <Link
+                    key={label}
+                    to="/about"
+                    className="relative flex shrink-0 items-center whitespace-nowrap"
+                  >
+                    {label}
+                  </Link>
+                ) : (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-current={label === "FIS" ? "page" : undefined}
+                    className={`relative flex shrink-0 items-center whitespace-nowrap ${
+                      label === "FIS"
+                        ? "after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-problem"
+                        : ""
+                    }`}
+                  >
+                    {label}
+                  </a>
+                ),
+              )}
             </nav>
           </motion.header>
         )}
