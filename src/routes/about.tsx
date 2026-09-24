@@ -13,6 +13,8 @@ import { CursorFollower } from "@/components/cursor-follower";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "../about.css";
+import fisLogo from "@/assets/about/fis-logo.png.asset.json";
+import foodxLogo from "@/assets/about/foodx-logo.png.asset.json";
 import communityMeal from "@/assets/about/pizza-party-hero.jpg.asset.json";
 import fiona from "@/assets/about/fiona.jpg.asset.json";
 import edwina from "@/assets/about/edwina.jpg.asset.json";

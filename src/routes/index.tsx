@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowDown,
   ArrowRight,
@@ -11,10 +11,7 @@ import {
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
-import fisLogoFooter from "../assets/fis-logo-footer.png";
 import brandMark from "../assets/fis-mark.png";
-import fisLockup from "../assets/food-investors-society-lockup.png.asset.json";
-import foodXchangeLockup from "../assets/foodxchange-lockup.png.asset.json";
 import { Button } from "../components/ui/button";
 import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
