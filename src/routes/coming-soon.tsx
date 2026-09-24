@@ -213,12 +213,12 @@ const themes = [
     icon: "text-problem",
   },
   {
-    bg: "bg-footer text-footer-foreground",
-    muted: "text-footer-muted",
-    accent: "stroke-solution",
-    tick: "stroke-solution",
-    pill: "bg-solution text-solution-foreground",
-    icon: "text-solution",
+    bg: "bg-solution text-solution-foreground",
+    muted: "text-solution-foreground/80",
+    accent: "stroke-problem",
+    tick: "stroke-problem",
+    pill: "bg-problem text-problem-foreground",
+    icon: "text-problem",
   },
 ];
 
