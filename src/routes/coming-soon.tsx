@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ChefHat, ScanLine, UsersRound } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { type ReactNode, useState } from "react";
 
 import communityImage from "@/assets/coming-soon/community.jpg";
@@ -257,161 +257,147 @@ function Highlight({ text, hook, stroke }: { text: string; hook: string; stroke:
 
 const spring = { type: "spring" as const, stiffness: 200, damping: 25 };
 
-function FeatureAccordion() {
+function FeatureShowcase() {
   const [active, setActive] = useState(0);
+  const reduce = useReducedMotion();
+  const t = themes[active]!;
   return (
-    <div className="relative border-b border-border/30">
-      {features.map((feature, i) => (
-        <FeatureSection
-          key={feature.title}
-          feature={feature}
-          index={i}
-          active={active === i}
-          onActivate={() => setActive(i)}
-        />
-      ))}
-    </div>
+    <section
+      className={`relative overflow-hidden border-y border-border/30 transition-colors duration-700 ${t.bg}`}
+    >
+      <Doodle kind="star" tone="solution" className="top-10 right-[6%] size-12 opacity-70" />
+      <Doodle
+        kind={active === 2 ? "hat" : "apple"}
+        tone={active === 1 ? "problem" : "solution"}
+        className="bottom-10 left-[4%] size-16 opacity-60"
+        delay={1}
+      />
+
+      {/* fixed title row — never moves */}
+      <div className="relative mx-auto flex w-[min(1240px,calc(100%-40px))] flex-wrap items-baseline gap-x-10 gap-y-4 pt-14 md:pt-20">
+        {features.map((feature, i) => (
+          <button
+            key={feature.title}
+            type="button"
+            aria-pressed={active === i}
+            onMouseEnter={() => setActive(i)}
+            onFocus={() => setActive(i)}
+            onClick={() => setActive(i)}
+            className={`cursor-pointer text-left text-4xl font-black tracking-tight transition-opacity duration-300 sm:text-5xl lg:text-7xl ${
+              active === i ? "opacity-100" : "opacity-30 hover:opacity-60"
+            }`}
+          >
+            {feature.title}
+          </button>
+        ))}
+      </div>
+
+      {/* fixed-height content stage — panels stack in the same grid cell, only opacity/position change */}
+      <div className="relative mx-auto grid w-[min(1240px,calc(100%-40px))] py-14 md:py-20">
+        {features.map((feature, i) => (
+          <FeaturePanel
+            key={feature.title}
+            feature={feature}
+            index={i}
+            active={active === i}
+            reduce={!!reduce}
+          />
+        ))}
+      </div>
+    </section>
   );
 }
 
-function FeatureSection({
+function FeaturePanel({
   feature,
   index,
   active,
-  onActivate,
+  reduce,
 }: {
   feature: (typeof features)[number];
   index: number;
   active: boolean;
-  onActivate: () => void;
+  reduce: boolean;
 }) {
-  const { title, Icon, image, alt, reverse, description, bullets } = feature;
+  const { Icon, image, alt, reverse, description, bullets } = feature;
   const t = themes[index]!;
-  const reduce = useReducedMotion();
   return (
-    <motion.section
-      layout={!reduce}
+    <motion.div
+      aria-hidden={!active}
+      initial={false}
+      animate={
+        reduce
+          ? { opacity: active ? 1 : 0 }
+          : { opacity: active ? 1 : 0, y: active ? 0 : 30, scale: active ? 1 : 0.98 }
+      }
       transition={spring}
-      onMouseEnter={onActivate}
-      onClick={onActivate}
-      className={`group relative cursor-pointer overflow-hidden border-t border-border/30 transition-colors duration-500 ${
-        active ? t.bg : "bg-cta text-cta-foreground"
+      className={`group col-start-1 row-start-1 grid items-center gap-14 md:grid-cols-2 md:gap-20 ${
+        active ? "" : "pointer-events-none"
       }`}
     >
-      <motion.div
-        layout="position"
-        transition={spring}
-        className="mx-auto flex w-[min(1240px,calc(100%-40px))] items-center justify-between gap-6 py-8 md:py-12"
-      >
-        <button
-          type="button"
-          aria-expanded={active}
-          onFocus={onActivate}
-          className={`text-left text-5xl font-black tracking-tight transition-opacity duration-300 sm:text-6xl lg:text-8xl ${
-            active ? "opacity-100" : "opacity-30 group-hover:opacity-60"
-          }`}
-        >
-          {title}
-        </button>
-        <Icon
-          className={`size-10 shrink-0 transition-opacity ${active ? `${t.icon} opacity-100` : "opacity-30"}`}
+      <div className={`relative mx-auto w-full max-w-xl ${reverse ? "md:order-2" : ""}`}>
+        <svg
+          viewBox="0 0 400 320"
+          fill="none"
+          preserveAspectRatio="none"
           aria-hidden="true"
-        />
-      </motion.div>
-      <AnimatePresence initial={false}>
-        {active && (
-          <motion.div
-            key="content"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={spring}
-            className="relative"
-          >
-      <Doodle
-        kind="star"
-        tone="solution"
-        className="top-10 right-[6%] size-12 opacity-70 transition-transform duration-500 group-hover:scale-125"
-      />
-      <Doodle
-        kind={index === 2 ? "hat" : "apple"}
-        tone={index === 1 ? "problem" : "solution"}
-        className="bottom-10 left-[4%] size-16 opacity-60 transition-transform duration-500 group-hover:-rotate-12"
-        delay={1}
-      />
-      <motion.div
-        initial={reduce ? false : { opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ ...spring, delay: 0.05 }}
-        className="relative mx-auto grid w-[min(1240px,calc(100%-40px))] items-center gap-14 pb-20 md:grid-cols-2 md:gap-20 md:pb-28"
-      >
-        <div className={`relative mx-auto w-full max-w-xl ${reverse ? "md:order-2" : ""}`}>
-          <svg
-            viewBox="0 0 400 320"
-            fill="none"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-            className={`absolute -inset-4 h-[calc(100%+2rem)] w-[calc(100%+2rem)] ${t.accent} transition-transform duration-700 group-hover:rotate-3`}
-          >
-            <motion.path
-              d="M60 20c90-22 230-18 300 20 44 30 40 170 10 230-40 60-230 50-300 20C10 260 0 150 14 90 22 50 36 28 60 20z"
-              strokeWidth={3}
-              strokeLinecap="round"
-              initial={{ pathLength: 0 }}
-              whileInView={{ pathLength: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.6, ease: "easeInOut" }}
-            />
-          </svg>
-          <div className="relative overflow-hidden" style={{ borderRadius: blobs[index] }}>
-            <img
-              src={image}
-              alt={alt}
-              loading="lazy"
-              width={1200}
-              height={912}
-              className="aspect-[4/3] h-auto w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-          </div>
+          className={`absolute -inset-4 h-[calc(100%+2rem)] w-[calc(100%+2rem)] ${t.accent} transition-transform duration-700 group-hover:rotate-3`}
+        >
+          <motion.path
+            d="M60 20c90-22 230-18 300 20 44 30 40 170 10 230-40 60-230 50-300 20C10 260 0 150 14 90 22 50 36 28 60 20z"
+            strokeWidth={3}
+            strokeLinecap="round"
+            initial={{ pathLength: 0 }}
+            whileInView={{ pathLength: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.6, ease: "easeInOut" }}
+          />
+        </svg>
+        <div className="relative overflow-hidden" style={{ borderRadius: blobs[index] }}>
+          <img
+            src={image}
+            alt={alt}
+            loading="lazy"
+            width={1200}
+            height={912}
+            className="aspect-[4/3] h-auto w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
         </div>
-        <div>
-          <div className="flex items-center gap-4">
-            <Icon className={`size-8 ${t.icon}`} aria-hidden="true" />
-            <span
-              className={`rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest shadow-lg ${t.pill}`}
-            >
-              Coming soon
-            </span>
-          </div>
-          <p className={`mt-6 max-w-xl text-lg leading-relaxed md:text-xl ${t.muted}`}>
-            <Highlight text={description} hook={hooks[index]!} stroke={t.accent} />
-          </p>
-          <ul className="mt-8 space-y-4">
-            {bullets.map((b) => (
-              <li key={b} className="flex gap-3 text-base font-medium leading-relaxed md:text-lg">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                  className={`mt-1 size-5 shrink-0 ${t.tick}`}
-                >
-                  <path
-                    d="M3 13c3 2 5 5 6 7 3-7 7-12 12-16"
-                    strokeWidth={3}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                {b}
-              </li>
-            ))}
-          </ul>
+      </div>
+      <div>
+        <div className="flex items-center gap-4">
+          <Icon className={`size-8 ${t.icon}`} aria-hidden="true" />
+          <span
+            className={`rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest shadow-lg ${t.pill}`}
+          >
+            Coming soon
+          </span>
         </div>
-      </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.section>
+        <p className={`mt-6 max-w-xl text-lg leading-relaxed md:text-xl ${t.muted}`}>
+          <Highlight text={description} hook={hooks[index]!} stroke={t.accent} />
+        </p>
+        <ul className="mt-8 space-y-4">
+          {bullets.map((b) => (
+            <li key={b} className="flex gap-3 text-base font-medium leading-relaxed md:text-lg">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+                className={`mt-1 size-5 shrink-0 ${t.tick}`}
+              >
+                <path
+                  d="M3 13c3 2 5 5 6 7 3-7 7-12 12-16"
+                  strokeWidth={3}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              {b}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
   );
 }
 
@@ -463,7 +449,7 @@ function ComingSoonPage() {
           </p>
         </motion.section>
       </main>
-      <FeatureAccordion />
+      <FeatureShowcase />
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
         <motion.section
           initial={reduce ? false : { opacity: 0, y: 60 }}
