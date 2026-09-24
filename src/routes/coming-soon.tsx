@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ChefHat, ScanLine, UsersRound } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { type ReactNode, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { type ReactNode } from "react";
 
 import communityImage from "@/assets/coming-soon/community.jpg";
 import cookImage from "@/assets/coming-soon/cook.jpg";
@@ -257,18 +257,11 @@ function Highlight({ text, hook, stroke }: { text: string; hook: string; stroke:
 
 const spring = { type: "spring" as const, stiffness: 200, damping: 25 };
 
-function FeatureAccordion() {
-  const [active, setActive] = useState(0);
+function FeatureShowcases() {
   return (
-    <div className="relative border-b border-border/30">
+    <div className="relative">
       {features.map((feature, i) => (
-        <FeatureSection
-          key={feature.title}
-          feature={feature}
-          index={i}
-          active={active === i}
-          onActivate={() => setActive(i)}
-        />
+        <FeatureSection key={feature.title} feature={feature} index={i} />
       ))}
     </div>
   );
@@ -277,57 +270,33 @@ function FeatureAccordion() {
 function FeatureSection({
   feature,
   index,
-  active,
-  onActivate,
 }: {
   feature: (typeof features)[number];
   index: number;
-  active: boolean;
-  onActivate: () => void;
 }) {
   const { title, Icon, image, alt, reverse, description, bullets } = feature;
   const t = themes[index]!;
   const reduce = useReducedMotion();
   return (
     <motion.section
-      layout={!reduce}
-      transition={spring}
-      onMouseEnter={onActivate}
-      onClick={onActivate}
-      className={`group relative cursor-pointer overflow-hidden border-t border-border/30 transition-colors duration-500 ${
-        active ? t.bg : "bg-cta text-cta-foreground"
-      }`}
+      initial={reduce ? false : { opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+      className={`group relative min-h-[90dvh] overflow-hidden py-24 md:py-32 ${t.bg}`}
     >
       <motion.div
-        layout="position"
+        initial={reduce ? false : { opacity: 0, y: 48 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.7 }}
         transition={spring}
-        className="mx-auto flex w-[min(1240px,calc(100%-40px))] items-center justify-between gap-6 py-8 md:py-12"
+        className="mx-auto flex w-[min(1240px,calc(100%-40px))] items-center justify-between gap-6"
       >
-        <button
-          type="button"
-          aria-expanded={active}
-          onFocus={onActivate}
-          className={`text-left text-5xl font-black tracking-tight transition-opacity duration-300 sm:text-6xl lg:text-8xl ${
-            active ? "opacity-100" : "opacity-30 group-hover:opacity-60"
-          }`}
-        >
+        <h2 className="text-left text-5xl font-black tracking-tight sm:text-6xl lg:text-8xl">
           {title}
-        </button>
-        <Icon
-          className={`size-10 shrink-0 transition-opacity ${active ? `${t.icon} opacity-100` : "opacity-30"}`}
-          aria-hidden="true"
-        />
+        </h2>
+        <Icon className={`size-10 shrink-0 ${t.icon}`} aria-hidden="true" />
       </motion.div>
-      <AnimatePresence initial={false}>
-        {active && (
-          <motion.div
-            key="content"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={spring}
-            className="relative"
-          >
       <Doodle
         kind="star"
         tone="solution"
@@ -341,9 +310,10 @@ function FeatureSection({
       />
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ ...spring, delay: 0.05 }}
-        className="relative mx-auto grid w-[min(1240px,calc(100%-40px))] items-center gap-14 pb-20 md:grid-cols-2 md:gap-20 md:pb-28"
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ ...spring, delay: 0.18 }}
+        className="relative mx-auto mt-16 grid w-[min(1240px,calc(100%-40px))] items-center gap-14 md:mt-20 md:grid-cols-2 md:gap-20"
       >
         <div className={`relative mx-auto w-full max-w-xl ${reverse ? "md:order-2" : ""}`}>
           <svg
@@ -408,9 +378,6 @@ function FeatureSection({
           </ul>
         </div>
       </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.section>
   );
 }
@@ -463,7 +430,7 @@ function ComingSoonPage() {
           </p>
         </motion.section>
       </main>
-      <FeatureAccordion />
+      <FeatureShowcases />
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
         <motion.section
           initial={reduce ? false : { opacity: 0, y: 60 }}
