@@ -196,6 +196,73 @@ function HandArrow({ flip }: { flip?: boolean }) {
 }
 
 /* ---------- feature row ---------- */
+const spring = { type: "spring", stiffness: 200, damping: 25 } as const;
+
+function FeatureStripe({
+  feature,
+  index,
+  open,
+  onOpen,
+  onToggle,
+}: {
+  feature: (typeof features)[number];
+  index: number;
+  open: boolean;
+  onOpen: () => void;
+  onToggle: () => void;
+}) {
+  const { title, Icon } = feature;
+  const reduce = useReducedMotion();
+  const panelId = `feature-panel-${index}`;
+  return (
+    <motion.div
+      layout={!reduce}
+      transition={spring}
+      onMouseEnter={() => {
+        if (window.matchMedia("(hover: hover)").matches) onOpen();
+      }}
+      className={`rounded-3xl transition-colors duration-500 ${open ? "bg-transparent" : "bg-problem text-problem-foreground"}`}
+    >
+      <motion.button
+        layout="position"
+        type="button"
+        aria-expanded={open}
+        aria-controls={panelId}
+        onClick={onToggle}
+        className={`flex w-full items-center gap-4 rounded-3xl px-6 text-left transition-all duration-500 md:px-10 ${open ? "py-4" : "py-6 md:py-8"}`}
+      >
+        <Icon className={`size-7 shrink-0 ${open ? "text-problem" : ""}`} aria-hidden="true" />
+        <span className="flex-1 text-2xl font-bold tracking-tight md:text-4xl">{title}</span>
+        <motion.span
+          animate={{ rotate: open ? 90 : 0 }}
+          transition={spring}
+          className="text-2xl font-bold"
+          aria-hidden="true"
+        >
+          →
+        </motion.span>
+      </motion.button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            id={panelId}
+            key="panel"
+            initial={reduce ? false : { height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
+            transition={spring}
+            className="overflow-hidden"
+          >
+            <div className="px-2 pt-6 pb-12 md:px-6">
+              <FeatureRow feature={feature} index={index} />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
 function FeatureRow({ feature, index }: { feature: (typeof features)[number]; index: number }) {
   const { title, Icon, image, alt, reverse, description, bullets } = feature;
   const rowRef = useRef<HTMLDivElement>(null);
@@ -213,12 +280,7 @@ function FeatureRow({ feature, index }: { feature: (typeof features)[number]; in
   };
 
   return (
-    <motion.article
-      initial={reduce ? false : { opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ type: "spring", stiffness: 100, damping: 18 }}
-    >
+    <article>
       <div
         ref={rowRef}
         onMouseMove={onMove}
