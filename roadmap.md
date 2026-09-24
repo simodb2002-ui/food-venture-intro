@@ -1,4 +1,4 @@
-- [ ] Add the `/coming-soon` page from the supplied brief and visual reference.
-- [ ] Standardize all page menus to: FIS, App, Coming Soon, Join, About.
-- [ ] Reuse the same footer across the homepage, About, and Coming Soon pages.
-- [ ] Validate desktop, mobile, navigation, and production build.
+- [x] Add the `/coming-soon` page from the supplied brief and visual reference.
+- [x] Standardize all page menus to: FIS, App, Coming Soon, Join, About.
+- [x] Reuse the same footer across the homepage, About, and Coming Soon pages.
+- [x] Validate desktop, mobile, navigation, and production build.

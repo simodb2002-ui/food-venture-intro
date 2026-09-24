@@ -1,23 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  ArrowDown,
-  ArrowRight,
-  Instagram,
-  Linkedin,
-  Mail,
-  Menu,
-  Play,
-  RotateCcw,
-  X,
-} from "lucide-react";
+import { ArrowDown, ArrowRight, Mail, RotateCcw } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { CursorFollower } from "@/components/cursor-follower";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import "../about.css";
 import fisLogo from "@/assets/about/fis-logo.png.asset.json";
-import fisFooterLogo from "@/assets/about/fis-footer.png.asset.json";
 import foodxLogo from "@/assets/about/foodx-logo.png.asset.json";
 import communityMeal from "@/assets/about/pizza-party-hero.jpg.asset.json";
 import fiona from "@/assets/about/fiona.jpg.asset.json";
@@ -293,44 +284,6 @@ function StackedBowls() {
   );
 }
 
-function Header() {
-  const [open, setOpen] = useState(false);
-  return (
-    <header className="site-header">
-      <div className="header-inner">
-        <Link to="/" className="brand-link" aria-label="The Food Investors Society home">
-          <img src={fisLogo.url} alt="The Food Investors Society" />
-        </Link>
-        <nav className={open ? "nav-links nav-open" : "nav-links"} aria-label="Main navigation">
-          <Link to="/" className="nav-fis">
-            FIS
-          </Link>
-          <a href="#platform">App</a>
-          <a href="#story">Our story</a>
-          <a href="#founders">People</a>
-          <a href="#footer">Support</a>
-          <Link className="active" to="/about">
-            About
-          </Link>
-        </nav>
-        <a href="#platform" className="platform-badge">
-          <span>Powered by</span>
-          <img src={foodxLogo.url} alt="foodXchange" />
-        </a>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="menu-button"
-          aria-label={open ? "Close menu" : "Open menu"}
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <X /> : <Menu />}
-        </Button>
-      </div>
-    </header>
-  );
-}
-
 function AboutPage() {
   const storyRef = useRef<HTMLElement>(null);
   const [activeMilestone, setActiveMilestone] = useState<number | null>(null);
@@ -359,7 +312,7 @@ function AboutPage() {
   return (
     <div id="top" className="about-page">
       <CursorFollower />
-      <Header />
+      <SiteHeader active="about" className="sticky top-0" />
       <main>
         <section
           className="hero-section"
@@ -722,49 +675,7 @@ function AboutPage() {
           </div>
         </section>
       </main>
-      <footer id="footer" className="site-footer">
-        <div className="section-inner footer-grid">
-          <div className="footer-brand">
-            <img className="footer-logo" src={fisFooterLogo.url} alt="The Food Investors Society" />
-            <p>The UK’s first community-owned digital food platform.</p>
-            <div className="socials">
-              <a href="#footer" aria-label="Instagram">
-                <Instagram />
-              </a>
-              <a href="#footer" aria-label="LinkedIn">
-                <Linkedin />
-              </a>
-              <a href="#footer" aria-label="YouTube">
-                <Play />
-              </a>
-            </div>
-          </div>
-          <div>
-            <h3>Support us</h3>
-            <a href="#platform">Join</a>
-            <a href="#footer">Become a Supporter</a>
-            <a href="#footer">Volunteer</a>
-            <a href="#footer">Donate</a>
-          </div>
-          <div>
-            <h3>Information</h3>
-            <a href="#story">Our story</a>
-            <a href="#founders">Our people</a>
-            <a href="#footer">Documents & Policies</a>
-            <a href="#footer">Contact</a>
-          </div>
-          <div>
-            <h3>Legal</h3>
-            <a href="#footer">Privacy Policy</a>
-            <a href="#footer">Terms & Conditions</a>
-            <a href="#footer">Cookie Policy</a>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <span>© 2026 The Food Investors Society</span>
-          <span>Community-owned. Purpose-led.</span>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
