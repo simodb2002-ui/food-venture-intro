@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, ChefHat, ScanLine, UsersRound } from "lucide-react";
+import { ChefHat, ScanLine, UsersRound } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
+import { useRef, type MouseEvent, type ReactNode } from "react";
 
 import communityImage from "@/assets/coming-soon/community.jpg";
 import cookImage from "@/assets/coming-soon/cook.jpg";
@@ -28,6 +30,12 @@ export const Route = createFileRoute("/coming-soon")({
   }),
   component: ComingSoonPage,
 });
+
+const blobs = [
+  "58% 42% 63% 37% / 44% 58% 42% 56%",
+  "41% 59% 38% 62% / 60% 38% 62% 40%",
+  "63% 37% 49% 51% / 38% 55% 45% 62%",
+];
 
 const features = [
   {
@@ -72,76 +80,305 @@ const features = [
   },
 ];
 
-function ComingSoonPage() {
+/* ---------- doodles ---------- */
+const doodles: Record<string, ReactNode> = {
+  apple: (
+    <>
+      <path d="M24 14c-8-6-18 0-16 12 2 12 10 18 16 14 6 4 14-2 16-14 2-12-8-18-16-12z" />
+      <path d="M24 14c0-5 2-8 6-10M24 10c-3-4-7-4-9-2" />
+    </>
+  ),
+  carrot: (
+    <>
+      <path d="M10 38 34 14l4 4-24 24z" />
+      <path d="M36 12c2-6 6-8 8-8M36 12c4-2 8-1 10 1M36 12c0-4-2-8-5-9" />
+      <path d="M18 30l3 3M24 24l3 3" />
+    </>
+  ),
+  hat: (
+    <>
+      <path d="M14 30c-6 0-9-6-6-11 3-5 9-4 10-2 1-6 11-8 14-2 3-3 10-1 10 5 0 5-4 9-8 10" />
+      <path d="M16 30h18v8H16z" />
+    </>
+  ),
+  star: <path d="M24 6l4 13 13 1-10 8 4 13-11-8-11 8 4-13-10-8 13-1z" />,
+  spiral: <path d="M24 24c0-2 2-3 4-2s3 5 0 7-8 1-9-4 3-10 9-10 11 5 10 12-7 12-14 11" />,
+};
+
+function Doodle({
+  kind,
+  className,
+  delay = 0,
+  tone = "problem",
+}: {
+  kind: keyof typeof doodles;
+  className: string;
+  delay?: number;
+  tone?: "problem" | "solution";
+}) {
+  const reduce = useReducedMotion();
   return (
-    <div className="coming-page min-h-dvh bg-cta text-cta-foreground">
+    <motion.svg
+      viewBox="0 0 48 48"
+      fill="none"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className={`pointer-events-none absolute ${tone === "problem" ? "stroke-problem" : "stroke-solution"} ${className}`}
+      animate={reduce ? undefined : { y: [0, -12, 0], rotate: [-6, 6, -6] }}
+      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay }}
+    >
+      {doodles[kind]}
+    </motion.svg>
+  );
+}
+
+/* ---------- scribbles ---------- */
+function ScribbleUnderline({ className = "" }: { className?: string }) {
+  return (
+    <motion.svg
+      viewBox="0 0 200 24"
+      fill="none"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      className={`pointer-events-none absolute left-0 w-full stroke-solution ${className}`}
+    >
+      <motion.path
+        d="M4 14c40-8 90-10 190-6M12 20c50-6 110-7 170-3"
+        strokeWidth={5}
+        strokeLinecap="round"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ duration: 1.1, delay: 0.5, ease: "easeInOut" }}
+      />
+    </motion.svg>
+  );
+}
+
+function ScribbleBadge() {
+  return (
+    <span className="relative inline-flex px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-problem">
+      <svg
+        viewBox="0 0 140 40"
+        fill="none"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full stroke-problem"
+      >
+        <path
+          d="M18 5c35-3 80-4 108 2 12 3 12 25-2 28-35 5-80 5-106 0C3 31 2 9 18 5z"
+          strokeWidth={2}
+          strokeLinecap="round"
+        />
+      </svg>
+      <span className="relative">Coming soon</span>
+    </span>
+  );
+}
+
+function HandArrow({ flip }: { flip?: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 120 60"
+      fill="none"
+      aria-hidden="true"
+      className={`hidden h-14 w-28 stroke-problem md:block ${flip ? "" : "-scale-x-100"}`}
+    >
+      <path
+        d="M112 44C80 52 40 48 14 18M14 18l2 16M14 18l15 2"
+        strokeWidth={2.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/* ---------- feature row ---------- */
+function FeatureRow({ feature, index }: { feature: (typeof features)[number]; index: number }) {
+  const { title, Icon, image, alt, reverse, description, bullets } = feature;
+  const rowRef = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+
+  const onMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (reduce || !rowRef.current) return;
+    const r = rowRef.current.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    rowRef.current.style.transform = `perspective(1200px) rotateY(${x * 3}deg) rotateX(${-y * 3}deg)`;
+  };
+  const onLeave = () => {
+    if (rowRef.current) rowRef.current.style.transform = "";
+  };
+
+  return (
+    <motion.article
+      initial={reduce ? false : { opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ type: "spring", stiffness: 100, damping: 18 }}
+    >
+      <div
+        ref={rowRef}
+        onMouseMove={onMove}
+        onMouseLeave={onLeave}
+        className="group grid items-center gap-10 transition-transform duration-300 ease-out md:grid-cols-2 md:gap-16"
+      >
+        {/* image */}
+        <div className={`relative mx-auto w-full max-w-lg ${reverse ? "md:order-2" : ""}`}>
+          <svg
+            viewBox="0 0 400 320"
+            fill="none"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+            className="absolute -inset-4 h-[calc(100%+2rem)] w-[calc(100%+2rem)] stroke-solution transition-transform duration-500 group-hover:rotate-3"
+          >
+            <path
+              d="M60 20c90-22 230-18 300 20 44 30 40 170 10 230-40 60-230 50-300 20C10 260 0 150 14 90 22 50 36 28 60 20z"
+              strokeWidth={3}
+              strokeLinecap="round"
+            />
+          </svg>
+          <div className="relative overflow-hidden" style={{ borderRadius: blobs[index] }}>
+            <img
+              src={image}
+              alt={alt}
+              loading="lazy"
+              width={1200}
+              height={912}
+              className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          </div>
+          {index === 1 && (
+            <>
+              <Doodle kind="star" tone="solution" className="-top-8 -right-4 size-12" />
+              <Doodle kind="star" className="-bottom-6 left-6 size-8" delay={1.2} />
+            </>
+          )}
+          {index === 2 && (
+            <Doodle kind="hat" className="-bottom-10 -right-6 size-20" delay={0.4} />
+          )}
+        </div>
+
+        {/* text */}
+        <div className="relative">
+          <div className="flex items-center gap-4">
+            <Icon className="size-7 text-problem" aria-hidden="true" />
+            <ScribbleBadge />
+          </div>
+          <h2 className="relative mt-6 inline-block text-4xl font-bold tracking-tight md:text-5xl">
+            {title}
+            <svg
+              viewBox="0 0 300 100"
+              fill="none"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+              className="pointer-events-none absolute -inset-x-6 -inset-y-4 h-[calc(100%+2rem)] w-[calc(100%+3rem)] stroke-problem"
+            >
+              <path
+                className="scribble-draw"
+                pathLength={1}
+                d="M40 12C120 0 250 4 285 30c20 30-40 62-150 64C50 96 6 76 12 48 18 22 90 8 170 10"
+                strokeWidth={3}
+                strokeLinecap="round"
+              />
+            </svg>
+          </h2>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-cta-muted md:text-lg">
+            {description}
+          </p>
+          <div className={`mt-4 flex ${reverse ? "justify-end" : "justify-start"}`}>
+            <HandArrow flip={reverse} />
+          </div>
+          <ul className="mt-2 space-y-4">
+            {bullets.map((bullet) => (
+              <li key={bullet} className="flex gap-3 text-sm font-medium leading-relaxed md:text-base">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  className="mt-0.5 size-5 shrink-0 stroke-problem"
+                >
+                  <path
+                    d="M3 13c3 2 5 5 6 7 3-7 7-12 12-16"
+                    strokeWidth={3}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                {bullet}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+function ComingSoonPage() {
+  const reduce = useReducedMotion();
+  return (
+    <div className="coming-page relative min-h-dvh overflow-x-clip bg-cta text-cta-foreground">
       <SiteHeader active="coming-soon" className="sticky top-0" />
-      <main className="mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
-        <section className="mx-auto max-w-3xl pt-20 pb-16 text-center md:pt-28">
-          <span className="inline-flex rounded-full bg-problem/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-problem">
-            The next chapter
-          </span>
-          <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
-            More of foodXchange is on the way
+
+      {/* floating background doodles */}
+      <div className="pointer-events-none absolute inset-0 opacity-40" aria-hidden="true">
+        <Doodle kind="apple" className="top-40 left-[6%] size-14" />
+        <Doodle kind="carrot" tone="solution" className="top-72 right-[8%] size-16" delay={1} />
+        <Doodle kind="spiral" className="top-[900px] left-[3%] size-12" delay={2} />
+        <Doodle kind="star" tone="solution" className="top-[1500px] right-[4%] size-10" delay={0.6} />
+        <Doodle kind="apple" tone="solution" className="top-[2100px] left-[5%] size-12" delay={1.6} />
+        <Doodle kind="spiral" className="top-[2500px] right-[6%] size-14" delay={2.4} />
+      </div>
+
+      <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
+        <motion.section
+          initial={reduce ? false : { opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 100, damping: 18 }}
+          className="mx-auto max-w-3xl pt-20 pb-24 text-center md:pt-28"
+        >
+          <ScribbleBadge />
+          <h1 className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
+            More of foodXchange is on the{" "}
+            <span className="relative inline-block">
+              way
+              <ScribbleUnderline className="-bottom-3 h-5" />
+            </span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-cta-muted">
+          <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-cta-muted">
             Discover what&apos;s coming next with an early preview of three future foodXchange
             features. Explore them first on the web, then continue the experience when the full
             foodXchange app launches.
           </p>
-        </section>
+        </motion.section>
 
-        <section className="flex flex-col gap-8" aria-label="Future foodXchange features">
-          {features.map(({ title, Icon, image, alt, reverse, description, bullets }) => (
-            <article
-              key={title}
-              className="group grid items-center gap-8 rounded-3xl border border-border/50 bg-card p-6 shadow-sm transition-shadow duration-300 hover:shadow-md md:grid-cols-2 md:gap-12 md:p-10"
-            >
-              <div className={`overflow-hidden rounded-xl ${reverse ? "md:order-2" : ""}`}>
-                <img
-                  src={image}
-                  alt={alt}
-                  loading="lazy"
-                  width={1200}
-                  height={912}
-                  className="aspect-[4/3] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-              <div>
-                <div className="flex items-center gap-3">
-                  <span className="grid size-11 place-items-center rounded-2xl bg-solution/15 text-solution-foreground">
-                    <Icon className="size-5" aria-hidden="true" />
-                  </span>
-                  <span className="rounded-full bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cta-muted">
-                    Coming soon
-                  </span>
-                </div>
-                <h2 className="mt-6 text-3xl font-bold tracking-tight">{title}</h2>
-                <p className="mt-4 text-base leading-relaxed text-cta-muted">{description}</p>
-                <ul className="mt-6 space-y-3">
-                  {bullets.map((bullet) => (
-                    <li key={bullet} className="flex gap-3 text-sm font-medium leading-relaxed">
-                      <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-problem text-problem-foreground">
-                        <Check className="size-3" strokeWidth={3} aria-hidden="true" />
-                      </span>
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </article>
+        <section className="flex flex-col gap-28 md:gap-36" aria-label="Future foodXchange features">
+          {features.map((feature, i) => (
+            <FeatureRow key={feature.title} feature={feature} index={i} />
           ))}
         </section>
 
-        <section className="relative mt-16 overflow-hidden rounded-3xl bg-footer px-6 py-16 text-center text-footer-foreground md:px-12 md:py-20">
+        <motion.section
+          initial={reduce ? false : { opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ type: "spring", stiffness: 100, damping: 18 }}
+          className="relative mt-32 overflow-hidden rounded-3xl bg-footer px-6 py-16 text-center text-footer-foreground md:px-12 md:py-20"
+        >
           <div className="absolute inset-x-0 top-0 h-1.5 bg-solution" aria-hidden="true" />
-          <span className="inline-flex rounded-full bg-footer-foreground/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-solution">
-            Stay close
-          </span>
-          <h2 className="mt-6 text-3xl font-bold tracking-tight md:text-5xl">
-            Want to follow the launch?
+          <Doodle kind="star" tone="solution" className="top-8 left-8 size-10" />
+          <Doodle kind="spiral" className="right-10 bottom-8 size-12" delay={1} />
+          <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
+            Want to follow the{" "}
+            <span className="relative inline-block">
+              launch?
+              <ScribbleUnderline className="-bottom-3 h-4" />
+            </span>
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-footer-muted">
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-footer-muted">
             Join the Society or sign up for news, and you&apos;ll be among the first to hear when
             these next features become available.
           </p>
@@ -162,7 +399,7 @@ function ComingSoonPage() {
               <a href="/about#newsletter">Sign up for news</a>
             </Button>
           </div>
-        </section>
+        </motion.section>
       </main>
       <SiteFooter />
     </div>
