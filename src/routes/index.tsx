@@ -182,7 +182,7 @@ function Index() {
                   ["Support", "#solution"],
                   ["About", "/about"],
                 ].map(([label, href]) => (
-                  href.startsWith("/") ? (
+                  href?.startsWith("/") ? (
                     <Link
                       key={label}
                       to="/about"
@@ -232,7 +232,7 @@ function Index() {
                 ["Support", "#solution"],
                   ["About", "/about"],
               ].map(([label, href]) => (
-                  href.startsWith("/") ? (
+                  href?.startsWith("/") ? (
                     <Link
                       key={label}
                       to="/about"
