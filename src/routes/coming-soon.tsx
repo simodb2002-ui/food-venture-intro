@@ -453,7 +453,7 @@ function ComingSoonPage() {
           </p>
         </motion.section>
       </main>
-      <FeatureAccordion />
+      <FeatureShowcase />
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
         <motion.section
           initial={reduce ? false : { opacity: 0, y: 60 }}
