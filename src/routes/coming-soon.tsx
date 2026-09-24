@@ -402,10 +402,6 @@ function FeaturePanel({
           </ul>
         </div>
       </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.section>
   );
 }
 
