@@ -255,12 +255,79 @@ function Highlight({ text, hook, stroke }: { text: string; hook: string; stroke:
   );
 }
 
-function FeatureSection({ feature, index }: { feature: (typeof features)[number]; index: number }) {
+const spring = { type: "spring" as const, stiffness: 200, damping: 25 };
+
+function FeatureAccordion() {
+  const [active, setActive] = useState(0);
+  return (
+    <div className="relative border-b border-border/30">
+      {features.map((feature, i) => (
+        <FeatureSection
+          key={feature.title}
+          feature={feature}
+          index={i}
+          active={active === i}
+          onActivate={() => setActive(i)}
+        />
+      ))}
+    </div>
+  );
+}
+
+function FeatureSection({
+  feature,
+  index,
+  active,
+  onActivate,
+}: {
+  feature: (typeof features)[number];
+  index: number;
+  active: boolean;
+  onActivate: () => void;
+}) {
   const { title, Icon, image, alt, reverse, description, bullets } = feature;
   const t = themes[index];
   const reduce = useReducedMotion();
   return (
-    <section className={`group relative overflow-hidden py-24 md:py-32 ${t.bg}`}>
+    <motion.section
+      layout={!reduce}
+      transition={spring}
+      onMouseEnter={onActivate}
+      onClick={onActivate}
+      className={`group relative cursor-pointer overflow-hidden border-t border-border/30 transition-colors duration-500 ${
+        active ? t.bg : "bg-cta text-cta-foreground"
+      }`}
+    >
+      <motion.div
+        layout="position"
+        transition={spring}
+        className="mx-auto flex w-[min(1240px,calc(100%-40px))] items-center justify-between gap-6 py-8 md:py-12"
+      >
+        <button
+          type="button"
+          aria-expanded={active}
+          onFocus={onActivate}
+          className={`text-left text-5xl font-black tracking-tight transition-opacity duration-300 sm:text-6xl lg:text-8xl ${
+            active ? "opacity-100" : "opacity-30 group-hover:opacity-60"
+          }`}
+        >
+          {title}
+        </button>
+        <Icon
+          className={`size-10 shrink-0 transition-opacity ${active ? `${t.icon} opacity-100` : "opacity-30"}`}
+          aria-hidden="true"
+        />
+      </motion.div>
+      <AnimatePresence initial={false}>
+        {active && (
+          <motion.div
+            key="content"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={spring}
+            className="relative"
+          >
       <Doodle
         kind="star"
         tone="solution"
@@ -273,11 +340,10 @@ function FeatureSection({ feature, index }: { feature: (typeof features)[number]
         delay={1}
       />
       <motion.div
-        initial={reduce ? false : { opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative mx-auto grid w-[min(1240px,calc(100%-40px))] items-center gap-14 md:grid-cols-2 md:gap-20"
+        initial={reduce ? false : { opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ ...spring, delay: 0.05 }}
+        className="relative mx-auto grid w-[min(1240px,calc(100%-40px))] items-center gap-14 pb-20 md:grid-cols-2 md:gap-20 md:pb-28"
       >
         <div className={`relative mx-auto w-full max-w-xl ${reverse ? "md:order-2" : ""}`}>
           <svg
@@ -395,9 +461,7 @@ function ComingSoonPage() {
           </p>
         </motion.section>
       </main>
-      {features.map((feature, i) => (
-        <FeatureSection key={feature.title} feature={feature} index={i} />
-      ))}
+      <FeatureAccordion />
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
         <motion.section
           initial={reduce ? false : { opacity: 0, y: 60 }}
