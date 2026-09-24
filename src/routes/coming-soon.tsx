@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ChefHat, ScanLine, UsersRound } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
-import { useRef, type MouseEvent, type ReactNode } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { useRef, useState, type MouseEvent, type ReactNode } from "react";
 
 import communityImage from "@/assets/coming-soon/community.jpg";
 import cookImage from "@/assets/coming-soon/cook.jpg";
@@ -375,12 +375,13 @@ function FeatureRow({ feature, index }: { feature: (typeof features)[number]; in
           </ul>
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }
 
 function ComingSoonPage() {
   const reduce = useReducedMotion();
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
   return (
     <div className="coming-page relative min-h-dvh overflow-x-clip bg-cta text-cta-foreground">
       <SiteHeader active="coming-soon" className="sticky top-0" />
@@ -417,9 +418,16 @@ function ComingSoonPage() {
           </p>
         </motion.section>
 
-        <section className="flex flex-col gap-28 md:gap-36" aria-label="Future foodXchange features">
+        <section className="flex flex-col gap-4" aria-label="Future foodXchange features">
           {features.map((feature, i) => (
-            <FeatureRow key={feature.title} feature={feature} index={i} />
+            <FeatureStripe
+              key={feature.title}
+              feature={feature}
+              index={i}
+              open={openIndex === i}
+              onOpen={() => setOpenIndex(i)}
+              onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+            />
           ))}
         </section>
 
