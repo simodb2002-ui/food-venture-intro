@@ -8,3 +8,19 @@ body:has(.coming-page) {
 .coming-page {
   font-family: "Montserrat", sans-serif;
 }
+
+.coming-page .scribble-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.8s ease-in-out;
+}
+
+.coming-page .group:hover .scribble-draw {
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coming-page .scribble-draw {
+    transition: none;
+  }
+}
