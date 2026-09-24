@@ -78,7 +78,9 @@ export function CursorFollower() {
       className={`cursor-follower${hovering ? " cursor-follower--hover" : ""}${exploring ? " cursor-follower--explore" : ""}`}
       aria-hidden="true"
     >
-      <span>Explore <small>our society</small></span>
+      <span>
+        Explore <small>our society</small>
+      </span>
     </div>
   );
 }

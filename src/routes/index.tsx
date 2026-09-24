@@ -181,7 +181,7 @@ function Index() {
                   ["People", "#solution"],
                   ["Support", "#solution"],
                   ["About", "/about"],
-                ].map(([label, href]) => (
+                ].map(([label, href]) =>
                   href?.startsWith("/") ? (
                     <Link
                       key={label}
@@ -203,8 +203,8 @@ function Index() {
                     >
                       {label}
                     </a>
-                  )
-                ))}
+                  ),
+                )}
               </nav>
 
               <div className="flex shrink-0 items-center gap-2 rounded-full border border-foreground px-3 py-2 sm:gap-3 sm:px-5">
@@ -230,31 +230,31 @@ function Index() {
                 ["Our story", "#challenge"],
                 ["People", "#solution"],
                 ["Support", "#solution"],
-                  ["About", "/about"],
-              ].map(([label, href]) => (
-                  href?.startsWith("/") ? (
-                    <Link
-                      key={label}
-                      to="/about"
-                      className="relative flex shrink-0 items-center whitespace-nowrap"
-                    >
-                      {label}
-                    </Link>
-                  ) : (
-                    <a
-                      key={label}
-                      href={href}
-                      aria-current={label === "FIS" ? "page" : undefined}
-                      className={`relative flex shrink-0 items-center whitespace-nowrap ${
-                        label === "FIS"
-                          ? "after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-problem"
-                          : ""
-                      }`}
-                    >
-                      {label}
-                    </a>
-                  )
-              ))}
+                ["About", "/about"],
+              ].map(([label, href]) =>
+                href?.startsWith("/") ? (
+                  <Link
+                    key={label}
+                    to="/about"
+                    className="relative flex shrink-0 items-center whitespace-nowrap"
+                  >
+                    {label}
+                  </Link>
+                ) : (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-current={label === "FIS" ? "page" : undefined}
+                    className={`relative flex shrink-0 items-center whitespace-nowrap ${
+                      label === "FIS"
+                        ? "after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-problem"
+                        : ""
+                    }`}
+                  >
+                    {label}
+                  </a>
+                ),
+              )}
             </nav>
           </motion.header>
         )}
