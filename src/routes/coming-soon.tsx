@@ -126,7 +126,7 @@ function Doodle({
       strokeLinejoin="round"
       aria-hidden="true"
       className={`pointer-events-none absolute ${tone === "problem" ? "stroke-problem" : "stroke-solution"} ${className}`}
-      animate={reduce ? undefined : { y: [0, -12, 0], rotate: [-6, 6, -6] }}
+      animate={reduce ? {} : { y: [0, -12, 0], rotate: [-6, 6, -6] }}
       transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay }}
     >
       {doodles[kind]}
@@ -289,7 +289,7 @@ function FeatureRow({ feature, index }: { feature: (typeof features)[number]; in
             {description}
           </p>
           <div className={`mt-4 flex ${reverse ? "justify-end" : "justify-start"}`}>
-            <HandArrow flip={reverse} />
+            <HandArrow flip={Boolean(reverse)} />
           </div>
           <ul className="mt-2 space-y-4">
             {bullets.map((bullet) => (
