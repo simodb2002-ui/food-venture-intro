@@ -8,10 +8,10 @@ const footerGroups = [
   {
     title: "Support us",
     links: [
-      ["Join", "/#membership"],
-      ["Become a Supporter", "/#membership"],
-      ["Volunteer", "/#membership"],
-      ["Donate", "/#membership"],
+      ["Join", "/join"],
+      ["Become a Supporter", "/join"],
+      ["Volunteer", "/join"],
+      ["Donate", "/join"],
     ],
   },
   {
