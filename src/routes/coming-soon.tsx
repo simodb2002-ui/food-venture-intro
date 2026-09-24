@@ -265,11 +265,7 @@ function FeatureShowcase() {
     <section
       className={`relative overflow-hidden border-y border-border/30 transition-colors duration-700 ${t.bg}`}
     >
-      <Doodle
-        kind="star"
-        tone="solution"
-        className="top-10 right-[6%] size-12 opacity-70"
-      />
+      <Doodle kind="star" tone="solution" className="top-10 right-[6%] size-12 opacity-70" />
       <Doodle
         kind={active === 2 ? "hat" : "apple"}
         tone={active === 1 ? "problem" : "solution"}
@@ -339,69 +335,69 @@ function FeaturePanel({
         active ? "" : "pointer-events-none"
       }`}
     >
-        <div className={`relative mx-auto w-full max-w-xl ${reverse ? "md:order-2" : ""}`}>
-          <svg
-            viewBox="0 0 400 320"
-            fill="none"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-            className={`absolute -inset-4 h-[calc(100%+2rem)] w-[calc(100%+2rem)] ${t.accent} transition-transform duration-700 group-hover:rotate-3`}
+      <div className={`relative mx-auto w-full max-w-xl ${reverse ? "md:order-2" : ""}`}>
+        <svg
+          viewBox="0 0 400 320"
+          fill="none"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          className={`absolute -inset-4 h-[calc(100%+2rem)] w-[calc(100%+2rem)] ${t.accent} transition-transform duration-700 group-hover:rotate-3`}
+        >
+          <motion.path
+            d="M60 20c90-22 230-18 300 20 44 30 40 170 10 230-40 60-230 50-300 20C10 260 0 150 14 90 22 50 36 28 60 20z"
+            strokeWidth={3}
+            strokeLinecap="round"
+            initial={{ pathLength: 0 }}
+            whileInView={{ pathLength: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.6, ease: "easeInOut" }}
+          />
+        </svg>
+        <div className="relative overflow-hidden" style={{ borderRadius: blobs[index] }}>
+          <img
+            src={image}
+            alt={alt}
+            loading="lazy"
+            width={1200}
+            height={912}
+            className="aspect-[4/3] h-auto w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        </div>
+      </div>
+      <div>
+        <div className="flex items-center gap-4">
+          <Icon className={`size-8 ${t.icon}`} aria-hidden="true" />
+          <span
+            className={`rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest shadow-lg ${t.pill}`}
           >
-            <motion.path
-              d="M60 20c90-22 230-18 300 20 44 30 40 170 10 230-40 60-230 50-300 20C10 260 0 150 14 90 22 50 36 28 60 20z"
-              strokeWidth={3}
-              strokeLinecap="round"
-              initial={{ pathLength: 0 }}
-              whileInView={{ pathLength: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.6, ease: "easeInOut" }}
-            />
-          </svg>
-          <div className="relative overflow-hidden" style={{ borderRadius: blobs[index] }}>
-            <img
-              src={image}
-              alt={alt}
-              loading="lazy"
-              width={1200}
-              height={912}
-              className="aspect-[4/3] h-auto w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-          </div>
+            Coming soon
+          </span>
         </div>
-        <div>
-          <div className="flex items-center gap-4">
-            <Icon className={`size-8 ${t.icon}`} aria-hidden="true" />
-            <span
-              className={`rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest shadow-lg ${t.pill}`}
-            >
-              Coming soon
-            </span>
-          </div>
-          <p className={`mt-6 max-w-xl text-lg leading-relaxed md:text-xl ${t.muted}`}>
-            <Highlight text={description} hook={hooks[index]!} stroke={t.accent} />
-          </p>
-          <ul className="mt-8 space-y-4">
-            {bullets.map((b) => (
-              <li key={b} className="flex gap-3 text-base font-medium leading-relaxed md:text-lg">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                  className={`mt-1 size-5 shrink-0 ${t.tick}`}
-                >
-                  <path
-                    d="M3 13c3 2 5 5 6 7 3-7 7-12 12-16"
-                    strokeWidth={3}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                {b}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </motion.div>
+        <p className={`mt-6 max-w-xl text-lg leading-relaxed md:text-xl ${t.muted}`}>
+          <Highlight text={description} hook={hooks[index]!} stroke={t.accent} />
+        </p>
+        <ul className="mt-8 space-y-4">
+          {bullets.map((b) => (
+            <li key={b} className="flex gap-3 text-base font-medium leading-relaxed md:text-lg">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+                className={`mt-1 size-5 shrink-0 ${t.tick}`}
+              >
+                <path
+                  d="M3 13c3 2 5 5 6 7 3-7 7-12 12-16"
+                  strokeWidth={3}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              {b}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
   );
 }
 
