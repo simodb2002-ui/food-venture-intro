@@ -4,7 +4,7 @@
 - Add `/coming-soon` using the supplied copy and reference layout: page introduction, three alternating feature cards, and launch call-to-action.
 - Create original supporting images for product scanning, a local produce stall, and cooking on a stove.
 - Use the established Montserrat typography, FIS colors, header, and responsive navigation.
-- Add “Coming soon” to the desktop and mobile navigation so the page is reachable throughout the site.
+- Standardize desktop and mobile navigation throughout the site to exactly: FIS, App, Coming Soon, Join, About.
 
 ## Consistent footer
 - Extract the current dark FIS footer into one shared component.
