@@ -12,9 +12,15 @@ export const Route = createFileRoute("/coming-soon")({
   head: () => ({
     meta: [
       { title: "Coming Soon | Food Investors Society" },
-      { name: "description", content: "Preview FoodX100, FoodXCommunity and Cook — three future foodXchange features." },
+      {
+        name: "description",
+        content: "Preview FoodX100, FoodXCommunity and Cook — three future foodXchange features.",
+      },
       { property: "og:title", content: "More of foodXchange is on the way" },
-      { property: "og:description", content: "Explore an early preview of three future foodXchange features." },
+      {
+        property: "og:description",
+        content: "Explore an early preview of three future foodXchange features.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -28,7 +34,8 @@ const features = [
     Icon: ScanLine,
     image: foodX100Image,
     alt: "Man scanning a grocery product with his smartphone",
-    description: "A miniature version of the foodXchange app database, designed as a simple trial so users can explore 100 products before the full experience launches.",
+    description:
+      "A miniature version of the foodXchange app database, designed as a simple trial so users can explore 100 products before the full experience launches.",
     bullets: [
       "Try a curated 100-product version of the wider app database",
       "Compare nutrition, ingredients, additives, and price",
@@ -41,7 +48,8 @@ const features = [
     image: communityImage,
     alt: "Outdoor local produce stall",
     reverse: true,
-    description: "A local directory and discovery space for independent food businesses, community food projects, and neighbourhood initiatives working towards a better food system.",
+    description:
+      "A local directory and discovery space for independent food businesses, community food projects, and neighbourhood initiatives working towards a better food system.",
     bullets: [
       "Discover local food projects and independent businesses",
       "Support community-rooted food activity in your area",
@@ -53,7 +61,8 @@ const features = [
     Icon: ChefHat,
     image: cookImage,
     alt: "Cooking a colourful meal in a pan on a stove",
-    description: "A practical space for recipes, cooking guidance, and kitchen shortcuts aimed at making everyday good food easier, faster, and more affordable.",
+    description:
+      "A practical space for recipes, cooking guidance, and kitchen shortcuts aimed at making everyday good food easier, faster, and more affordable.",
     bullets: [
       "Quick recipe ideas and meal inspiration",
       "Simple hacks to make cooking feel less overwhelming",
@@ -70,7 +79,11 @@ function ComingSoonPage() {
         <section className="coming-intro">
           <p className="coming-kicker">The next chapter</p>
           <h1>More of foodXchange is on the way</h1>
-          <p>Discover what&apos;s coming next with an early preview of three future foodXchange features. Explore them first on the web, then continue the experience when the full foodXchange app launches.</p>
+          <p>
+            Discover what&apos;s coming next with an early preview of three future foodXchange
+            features. Explore them first on the web, then continue the experience when the full
+            foodXchange app launches.
+          </p>
         </section>
 
         <section className="coming-features" aria-label="Future foodXchange features">
@@ -81,9 +94,16 @@ function ComingSoonPage() {
                 <span className="coming-badge">Coming soon</span>
               </div>
               <div className="coming-card-copy">
-                <div className="coming-title-row"><Icon aria-hidden="true" /><h2>{title}</h2></div>
+                <div className="coming-title-row">
+                  <Icon aria-hidden="true" />
+                  <h2>{title}</h2>
+                </div>
                 <p>{description}</p>
-                <ul>{bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
+                <ul>
+                  {bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
               </div>
             </article>
           ))}
@@ -92,10 +112,17 @@ function ComingSoonPage() {
         <section className="coming-cta">
           <p className="coming-kicker">Stay close</p>
           <h2>Want to follow the launch?</h2>
-          <p>Join the Society or sign up for news, and you&apos;ll be among the first to hear when these next features become available.</p>
+          <p>
+            Join the Society or sign up for news, and you&apos;ll be among the first to hear when
+            these next features become available.
+          </p>
           <div className="coming-actions">
-            <a className="coming-primary" href="/#membership">Explore membership</a>
-            <a className="coming-secondary" href="/about#newsletter">Sign up for news</a>
+            <a className="coming-primary" href="/#membership">
+              Explore membership
+            </a>
+            <a className="coming-secondary" href="/about#newsletter">
+              Sign up for news
+            </a>
           </div>
         </section>
       </main>

@@ -35,7 +35,10 @@ const footerGroups = [
 
 export function SiteFooter() {
   return (
-    <footer id="footer" className="border-t-8 border-cta-accent bg-footer px-6 py-16 font-display text-footer-foreground sm:px-8">
+    <footer
+      id="footer"
+      className="border-t-8 border-cta-accent bg-footer px-6 py-16 font-display text-footer-foreground sm:px-8"
+    >
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
           <div>
@@ -76,7 +79,10 @@ export function SiteFooter() {
               <ul className="mt-5 space-y-3 text-sm">
                 {group.links.map(([label, href]) => (
                   <li key={label}>
-                    <a className="text-footer-muted transition-colors hover:text-footer-foreground" href={href}>
+                    <a
+                      className="text-footer-muted transition-colors hover:text-footer-foreground"
+                      href={href}
+                    >
                       {label}
                     </a>
                   </li>

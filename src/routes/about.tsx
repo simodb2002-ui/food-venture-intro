@@ -1,10 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  ArrowDown,
-  ArrowRight,
-  Mail,
-  RotateCcw,
-} from "lucide-react";
+import { ArrowDown, ArrowRight, Mail, RotateCcw } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 

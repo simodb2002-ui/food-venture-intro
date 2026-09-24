@@ -1,13 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  ArrowDown,
-  ArrowRight,
-  Bell,
-  Check,
-  ChevronLeft,
-  ChevronRight,
-  Users,
-} from "lucide-react";
+import { ArrowDown, ArrowRight, Bell, Check, ChevronLeft, ChevronRight, Users } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
