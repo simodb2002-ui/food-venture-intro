@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ChefHat, ScanLine, UsersRound } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 
 import communityImage from "@/assets/coming-soon/community.jpg";
@@ -183,7 +183,6 @@ const spring = { type: "spring", stiffness: 180, damping: 24, mass: 0.8 } as con
 function FeatureCarousel() {
   const reduce = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(1);
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(1);
   const trackRef = useRef<HTMLDivElement>(null);
   const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -205,7 +204,6 @@ function FeatureCarousel() {
   const select = (nextIndex: number) => {
     const clamped = Math.max(0, Math.min(features.length - 1, nextIndex));
     setActiveIndex(clamped);
-    setExpandedIndex(clamped);
     scrollToCard(clamped);
   };
 
@@ -225,7 +223,6 @@ function FeatureCarousel() {
       }
     });
     setActiveIndex(nearest);
-    setExpandedIndex(nearest);
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLElement>) => {
@@ -252,18 +249,16 @@ function FeatureCarousel() {
           const { title, Icon, image, alt, description, bullets } = feature;
           const relative = index - activeIndex;
           const active = relative === 0;
-          const expanded = expandedIndex === index;
 
           return (
             <motion.article
               key={title}
               aria-hidden={!active}
-              className={`coming-carousel-card ${expanded ? "is-expanded" : "is-collapsed"}`}
+              className="coming-carousel-card"
               initial={false}
               animate={{
-                scale: active ? 1.1 : 0.85,
-                opacity: active ? 1 : 0.6,
-                rotateY: active ? 0 : relative < 0 ? 14 : -14,
+                scale: active ? 1.05 : 0.9,
+                opacity: active ? 1 : 0.55,
               }}
               transition={reduce ? { duration: 0 } : spring}
               style={{ zIndex: active ? 10 : 5 - Math.abs(relative) }}
@@ -271,88 +266,74 @@ function FeatureCarousel() {
               <button
                 type="button"
                 tabIndex={active ? 0 : -1}
-                aria-expanded={expanded}
                 aria-label={active ? `${title} details` : `Show ${title}`}
                 className="coming-carousel-card-button"
                 onClick={() => {
                   if (!active) select(index);
                 }}
               >
-                <AnimatePresence mode="wait" initial={false}>
-                  {!expanded ? (
-                    <motion.div
-                      key="collapsed"
-                      className="flex h-full flex-col items-center justify-center px-6 text-center text-problem-foreground"
-                      initial={reduce ? false : { opacity: 0, scale: 0.96 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
-                      transition={{ duration: 0.25 }}
+                <div className="px-5 py-6 text-left md:px-8 md:py-8">
+                  <div className="flex items-center gap-3">
+                    <Icon className="size-6 shrink-0 text-problem" aria-hidden="true" />
+                    <ScribbleBadge />
+                  </div>
+                  <h2 className="mt-4 text-3xl font-bold text-cta-foreground md:text-4xl">
+                    {title}
+                  </h2>
+                  <div className="relative mt-5">
+                    <svg
+                      viewBox="0 0 400 320"
+                      fill="none"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                      className="absolute -inset-2 h-[calc(100%+1rem)] w-[calc(100%+1rem)] stroke-solution"
                     >
-                      <Icon className="size-12 md:size-16" strokeWidth={1.8} aria-hidden="true" />
-                      <h2 className="mt-5 text-3xl font-bold md:text-5xl">{title}</h2>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="expanded"
-                      className="px-5 py-6 text-left md:px-8 md:py-8"
-                      initial={reduce ? false : { opacity: 0, scale: 0.96 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
-                      transition={{ duration: 0.32, delay: 0.08 }}
+                      <path
+                        d="M60 20c90-22 230-18 300 20 44 30 40 170 10 230-40 60-230 50-300 20C10 260 0 150 14 90 22 50 36 28 60 20z"
+                        strokeWidth={3}
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    <div
+                      className="relative overflow-hidden"
+                      style={{ borderRadius: blobs[index] }}
                     >
-                      <div className="flex items-center gap-3">
-                        <Icon className="size-6 shrink-0 text-problem" aria-hidden="true" />
-                        <ScribbleBadge />
-                      </div>
-                      <h2 className="mt-4 text-3xl font-bold text-cta-foreground md:text-4xl">{title}</h2>
-                      <div className="relative mt-5">
+                      <img
+                        src={image}
+                        alt={alt}
+                        width={1200}
+                        height={912}
+                        className="aspect-[16/7] w-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <p className="mt-5 text-sm leading-relaxed text-cta-muted md:text-base">
+                    {description}
+                  </p>
+                  <ul className="mt-4 space-y-2.5">
+                    {bullets.map((bullet) => (
+                      <li
+                        key={bullet}
+                        className="flex gap-2.5 text-xs font-medium leading-relaxed md:text-sm"
+                      >
                         <svg
-                          viewBox="0 0 400 320"
+                          viewBox="0 0 24 24"
                           fill="none"
-                          preserveAspectRatio="none"
                           aria-hidden="true"
-                          className="absolute -inset-2 h-[calc(100%+1rem)] w-[calc(100%+1rem)] stroke-solution"
+                          className="mt-0.5 size-4 shrink-0 stroke-problem"
                         >
                           <path
-                            d="M60 20c90-22 230-18 300 20 44 30 40 170 10 230-40 60-230 50-300 20C10 260 0 150 14 90 22 50 36 28 60 20z"
+                            d="M3 13c3 2 5 5 6 7 3-7 7-12 12-16"
                             strokeWidth={3}
                             strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
                         </svg>
-                        <div className="relative overflow-hidden" style={{ borderRadius: blobs[index] }}>
-                          <img
-                            src={image}
-                            alt={alt}
-                            width={1200}
-                            height={912}
-                            className="aspect-[16/7] w-full object-cover"
-                          />
-                        </div>
-                      </div>
-                      <p className="mt-5 text-sm leading-relaxed text-cta-muted md:text-base">{description}</p>
-                      <ul className="mt-4 space-y-2.5">
-                        {bullets.map((bullet) => (
-                          <li key={bullet} className="flex gap-2.5 text-xs font-medium leading-relaxed md:text-sm">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              aria-hidden="true"
-                              className="mt-0.5 size-4 shrink-0 stroke-problem"
-                            >
-                              <path
-                                d="M3 13c3 2 5 5 6 7 3-7 7-12 12-16"
-                                strokeWidth={3}
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
-                            {bullet}
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </button>
             </motion.article>
           );
@@ -388,8 +369,18 @@ function ComingSoonPage() {
         <Doodle kind="apple" className="top-40 left-[6%] size-14" />
         <Doodle kind="carrot" tone="solution" className="top-72 right-[8%] size-16" delay={1} />
         <Doodle kind="spiral" className="top-[900px] left-[3%] size-12" delay={2} />
-        <Doodle kind="star" tone="solution" className="top-[1500px] right-[4%] size-10" delay={0.6} />
-        <Doodle kind="apple" tone="solution" className="top-[2100px] left-[5%] size-12" delay={1.6} />
+        <Doodle
+          kind="star"
+          tone="solution"
+          className="top-[1500px] right-[4%] size-10"
+          delay={0.6}
+        />
+        <Doodle
+          kind="apple"
+          tone="solution"
+          className="top-[2100px] left-[5%] size-12"
+          delay={1.6}
+        />
         <Doodle kind="spiral" className="top-[2500px] right-[6%] size-14" delay={2.4} />
       </div>
 
