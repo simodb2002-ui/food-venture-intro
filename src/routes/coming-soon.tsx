@@ -303,7 +303,7 @@ function FeatureCarousel() {
                         alt={alt}
                         width={1200}
                         height={912}
-                        className="aspect-[16/7] w-full object-cover"
+                        className="aspect-[4/3] w-full object-cover"
                       />
                     </div>
                   </div>
