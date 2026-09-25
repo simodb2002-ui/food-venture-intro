@@ -257,10 +257,10 @@ function FeatureCarousel() {
       >
         <div className="relative left-1/2 -translate-x-1/2">
           <motion.span
-            className="inline-block min-w-max px-[0.25em] text-center whitespace-nowrap text-[clamp(7rem,15vw,13rem)] font-black uppercase leading-none tracking-normal text-problem/15"
+            className="inline-block min-w-max px-[0.25em] text-center whitespace-nowrap text-[clamp(6rem,13vw,11rem)] font-black uppercase leading-none tracking-normal text-problem/15"
             style={reduce ? {} : { x: marqueeX }}
           >
-            COMING SOON&nbsp; • &nbsp;COMING SOON&nbsp; • &nbsp;COMING SOON
+            COMING SOON
           </motion.span>
         </div>
       </div>
