@@ -375,7 +375,8 @@ function FeatureCarousel() {
       <p className="sr-only" aria-live="polite">
         {features[activeIndex]?.title ?? "Feature"} selected
       </p>
-    </section>
+      </section>
+    </div>
   );
 }
 
