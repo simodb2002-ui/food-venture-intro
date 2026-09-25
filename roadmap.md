@@ -3,4 +3,3 @@
 - [x] Reuse the same footer across the homepage, About, and Coming Soon pages.
 - [x] Validate desktop, mobile, navigation, and production build.
 - [x] Replace the Coming Soon feature stripes with a draggable, focal 3D reveal carousel.
-- [x] Add a drawn charcoal hero scribble and subtle scroll depth to the Coming Soon carousel.
