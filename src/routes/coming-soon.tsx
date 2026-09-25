@@ -343,7 +343,7 @@ function FeatureCarousel() {
             </motion.article>
           );
         })}
-      </div>
+      </motion.div>
 
       <div className="relative z-10 mt-8 flex items-center justify-center">
         <div className="flex gap-2" aria-label={`Feature ${activeIndex + 1} of ${features.length}`}>
@@ -359,7 +359,8 @@ function FeatureCarousel() {
       <p className="sr-only" aria-live="polite">
         {features[activeIndex]?.title ?? "Feature"} selected
       </p>
-    </section>
+      </section>
+    </div>
   );
 }
 
