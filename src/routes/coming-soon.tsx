@@ -323,9 +323,7 @@ function FeatureCarousel() {
                           </li>
                         ))}
                       </ul>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                    </div>
               </button>
             </motion.article>
           );

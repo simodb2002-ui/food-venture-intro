@@ -48,18 +48,6 @@ body:has(.coming-page) {
   scroll-snap-stop: always;
   transform-style: preserve-3d;
   backface-visibility: hidden;
-  transition: height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.coming-carousel-card.is-collapsed {
-  height: clamp(24rem, 40vw, 30rem);
-  background: var(--problem);
-  box-shadow: 0 24px 60px color-mix(in oklab, var(--problem) 24%, transparent);
-}
-
-.coming-carousel-card.is-expanded {
-  height: auto;
-  min-height: clamp(24rem, 40vw, 30rem);
   background: var(--background);
   box-shadow: 0 30px 80px color-mix(in oklab, var(--foreground) 18%, transparent);
 }
@@ -110,13 +98,5 @@ body:has(.coming-page) {
   .coming-carousel-card {
     flex-basis: 80vw;
     width: 80vw;
-  }
-
-  .coming-carousel-card.is-collapsed {
-    height: 26rem;
-  }
-
-  .coming-carousel-card.is-expanded {
-    min-height: 26rem;
   }
 }
