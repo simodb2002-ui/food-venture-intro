@@ -1110,7 +1110,7 @@ body:has(.about-page) {
 }
 .newsletter-section {
   padding: 100px 0;
-  background: transparent;
+  background: var(--orange);
 }
 .newsletter-inner {
   display: grid;
