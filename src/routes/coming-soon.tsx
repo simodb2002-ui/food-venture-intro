@@ -225,13 +225,13 @@ function FeatureCarousel() {
   };
 
   return (
-    <section
-      ref={sectionRef}
-      aria-label="Future foodXchange features"
-      aria-roledescription="carousel"
-      className="coming-carousel relative"
-      onKeyDown={onKeyDown}
-    >
+    <div ref={wrapperRef} className="relative h-[280vh]">
+      <section
+        aria-label="Future foodXchange features"
+        aria-roledescription="carousel"
+        className="coming-carousel sticky top-0 flex min-h-dvh flex-col justify-center"
+        onKeyDown={onKeyDown}
+      >
       {/* giant pink parallax background type */}
       <div
         aria-hidden="true"
@@ -246,10 +246,9 @@ function FeatureCarousel() {
             .join("\u00A0\u00A0\u00A0")}
         </motion.span>
       </div>
-      <div
-        ref={trackRef}
+      <motion.div
         className="coming-carousel-stage relative z-10"
-        onScroll={() => updateActiveFromScroll()}
+        style={{ x }}
       >
         {features.map((feature, index) => {
           const { title, Icon, image, alt, description, bullets } = feature;
@@ -275,7 +274,7 @@ function FeatureCarousel() {
                 aria-label={active ? `${title} details` : `Show ${title}`}
                 className="coming-carousel-card-button"
                 onClick={() => {
-                  if (!active) select(index);
+                  if (!active) scrollToFeature(index);
                 }}
               >
                 <div className="px-5 py-6 text-left md:px-8 md:py-8">
