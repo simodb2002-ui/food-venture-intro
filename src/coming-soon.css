@@ -36,8 +36,6 @@ body:has(.coming-page) {
   width: min(30rem, 58vw);
   overflow: hidden;
   border-radius: 1.5rem;
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
   transform-style: preserve-3d;
   backface-visibility: hidden;
   background: var(--background);
@@ -82,8 +80,8 @@ body:has(.coming-page) {
   }
 
   .coming-carousel-stage {
+    --card-step: calc(74vw + 1rem);
     gap: 1rem;
-    padding-inline: 10vw;
   }
 
   .coming-carousel-card {
