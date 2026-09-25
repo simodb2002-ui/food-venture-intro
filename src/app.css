@@ -1,0 +1,104 @@
+/* /app page — foodXchange app showcase */
+
+/* The /app page scrolls normally, overriding the global hidden overflow
+   used by the homepage snap story. */
+html:has(.app-page),
+html:has(.app-page) body {
+  overflow: auto;
+  height: auto;
+}
+
+.app-page {
+  font-family: "Montserrat", sans-serif;
+}
+
+/* ---------- infinite marquee ---------- */
+.app-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
+.app-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: app-marquee 28s linear infinite;
+}
+
+.app-marquee:hover .app-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes app-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.app-marquee-tab {
+  transform: skewX(-8deg);
+}
+
+.app-marquee-tab > span {
+  display: inline-block;
+  transform: skewX(8deg);
+}
+
+/* ---------- problem/solution hover cards ---------- */
+.app-flip-card {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease;
+}
+
+.app-flip-card:hover,
+.app-flip-card:focus-visible,
+.app-flip-card[data-flipped="true"] {
+  transform: translateY(-6px);
+}
+
+.app-flip-face {
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  backface-visibility: hidden;
+}
+
+/* ---------- 3D phone mockup ---------- */
+.app-phone-float {
+  animation: app-phone-float 5s ease-in-out infinite;
+}
+
+@keyframes app-phone-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(-4deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-marquee-track,
+  .app-phone-float {
+    animation: none;
+  }
+}

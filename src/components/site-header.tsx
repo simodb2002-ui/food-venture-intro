@@ -8,13 +8,13 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 type SiteHeaderProps = {
-  active: "fis" | "coming-soon" | "join" | "about";
+  active: "fis" | "app" | "coming-soon" | "join" | "about";
   className?: string;
 };
 
 const navItems = [
   { label: "FIS", href: "/", key: "fis" },
-  { label: "App", href: "/#solution", key: "app" },
+  { label: "App", href: "/app", key: "app" },
   { label: "Coming Soon", href: "/coming-soon", key: "coming-soon" },
   { label: "Join", href: "/join", key: "join" },
   { label: "About", href: "/about", key: "about" },
