@@ -178,7 +178,7 @@ function ScribbleBadge() {
 }
 
 /* ---------- interactive feature carousel ---------- */
-const spring = { type: "spring", stiffness: 180, damping: 24, mass: 0.8 } as const;
+const spring = { type: "spring", stiffness: 500, damping: 38, mass: 0.5 } as const;
 
 function FeatureCarousel() {
   const reduce = useReducedMotion();
@@ -240,10 +240,7 @@ function FeatureCarousel() {
       <div
         ref={trackRef}
         className="coming-carousel-stage"
-        onScroll={() => {
-          if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
-          scrollTimerRef.current = setTimeout(updateActiveFromScroll, 80);
-        }}
+        onScroll={() => updateActiveFromScroll()}
       >
         {features.map((feature, index) => {
           const { title, Icon, image, alt, description, bullets } = feature;
