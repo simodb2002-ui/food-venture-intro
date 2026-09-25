@@ -275,10 +275,10 @@ function FeatureCarousel() {
               >
                 <div className="px-5 py-6 text-left md:px-8 md:py-8">
                   <div className="flex items-center gap-3">
-                    <Icon className="size-6 shrink-0 text-problem" aria-hidden="true" />
-                    <ScribbleBadge />
+                    <Icon className="size-6 shrink-0 text-problem-foreground" aria-hidden="true" />
+                    <ScribbleBadge tone="onProblem" />
                   </div>
-                  <h2 className="mt-4 text-2xl font-bold text-cta-foreground sm:text-3xl md:text-4xl">
+                  <h2 className="mt-4 text-2xl font-bold text-problem-foreground sm:text-3xl md:text-4xl">
                     {title}
                   </h2>
                   <div className="relative mt-5">
@@ -287,7 +287,7 @@ function FeatureCarousel() {
                       fill="none"
                       preserveAspectRatio="none"
                       aria-hidden="true"
-                      className="absolute -inset-2 h-[calc(100%+1rem)] w-[calc(100%+1rem)] stroke-solution"
+                      className="absolute -inset-2 h-[calc(100%+1rem)] w-[calc(100%+1rem)] stroke-problem-foreground"
                     >
                       <path
                         d="M60 20c90-22 230-18 300 20 44 30 40 170 10 230-40 60-230 50-300 20C10 260 0 150 14 90 22 50 36 28 60 20z"
@@ -308,7 +308,7 @@ function FeatureCarousel() {
                       />
                     </div>
                   </div>
-                  <p className="mt-5 text-sm leading-relaxed text-cta-muted md:text-base">
+                  <p className="mt-5 text-sm leading-relaxed text-problem-foreground/85 md:text-base">
                     {description}
                   </p>
                   <ul className="mt-4 space-y-2.5">
@@ -321,7 +321,7 @@ function FeatureCarousel() {
                           viewBox="0 0 24 24"
                           fill="none"
                           aria-hidden="true"
-                          className="mt-0.5 size-4 shrink-0 stroke-problem"
+                          className="mt-0.5 size-4 shrink-0 stroke-problem-foreground"
                         >
                           <path
                             d="M3 13c3 2 5 5 6 7 3-7 7-12 12-16"
