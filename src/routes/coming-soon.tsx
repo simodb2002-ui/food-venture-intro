@@ -196,7 +196,7 @@ function FeatureCarousel() {
     target: sectionRef,
     offset: ["start end", "end start"],
   });
-  const marqueeX = useTransform(scrollYProgress, [0, 1], ["-3.5%", "3.5%"]);
+  const marqueeX = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
 
   const scrollToCard = (index: number, behavior: ScrollBehavior = "smooth") => {
     const track = trackRef.current;
@@ -256,10 +256,12 @@ function FeatureCarousel() {
         className="pointer-events-none absolute inset-x-0 -top-6 z-0 flex items-start justify-center overflow-hidden select-none"
       >
         <motion.span
-          className="inline-block min-w-max px-8 text-center whitespace-nowrap text-[clamp(3rem,11vw,12rem)] font-black uppercase leading-none tracking-normal text-problem/15"
+          className="inline-block min-w-max px-8 text-center whitespace-nowrap text-[clamp(4rem,13vw,12rem)] font-black uppercase leading-none tracking-normal text-problem/15"
           style={reduce ? {} : { x: marqueeX }}
         >
-          COMING&nbsp;SOON
+          {Array.from({ length: 6 })
+            .map(() => "COMING\u00A0SOON")
+            .join("\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0")}
         </motion.span>
       </div>
       <div
