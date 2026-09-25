@@ -835,12 +835,6 @@ body:has(.about-page) {
   width: 28px;
   transform: translateX(-50%);
   pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in oklab, var(--ink) 9%, transparent),
-    transparent
-  );
 }
 .book-spine::after {
   content: "";
@@ -859,11 +853,7 @@ body:has(.about-page) {
 .recipe-page {
   min-width: 0;
   padding: 44px 50px;
-  background: linear-gradient(
-    90deg,
-    var(--card),
-    color-mix(in oklab, var(--paper) 58%, var(--card))
-  );
+  background: var(--card);
 }
 .recipe-page-left {
   position: relative;
@@ -875,11 +865,7 @@ body:has(.about-page) {
   position: relative;
   border-left: 1px solid color-mix(in oklab, var(--ink) 16%, transparent);
   border-radius: 0;
-  background: linear-gradient(
-    90deg,
-    color-mix(in oklab, var(--paper) 65%, var(--card)),
-    var(--card) 15%
-  );
+  background: var(--card);
 }
 .story-intro .eyebrow {
   color: var(--pink);
