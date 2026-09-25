@@ -416,7 +416,7 @@ function FeatureShowcase() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const reduce = useReducedMotion();
-  const slide = slides[index];
+  const slide = slides[index]!;
 
   const go = useCallback(
     (next: number) => {
