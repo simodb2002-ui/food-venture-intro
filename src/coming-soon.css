@@ -48,9 +48,8 @@ body:has(.coming-page) {
   scroll-snap-stop: always;
   transform-style: preserve-3d;
   backface-visibility: hidden;
-  background: var(--problem);
-  color: var(--problem-foreground);
-  box-shadow: 0 30px 80px color-mix(in oklab, var(--problem) 35%, transparent);
+  background: var(--background);
+  box-shadow: 0 30px 80px color-mix(in oklab, var(--foreground) 18%, transparent);
 }
 
 .coming-carousel-card-button {
