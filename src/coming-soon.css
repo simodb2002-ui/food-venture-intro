@@ -25,7 +25,7 @@ body:has(.coming-page) {
   overflow-x: auto;
   overflow-y: visible;
   padding-block: 2.5rem;
-  padding-inline: calc((100vw - min(42rem, 72vw)) / 2);
+  padding-inline: calc((100vw - min(30rem, 58vw)) / 2);
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
@@ -40,8 +40,8 @@ body:has(.coming-page) {
 
 .coming-carousel-card {
   position: relative;
-  flex: 0 0 min(42rem, 72vw);
-  width: min(42rem, 72vw);
+  flex: 0 0 min(30rem, 58vw);
+  width: min(30rem, 58vw);
   overflow: hidden;
   border-radius: 1.5rem;
   scroll-snap-align: center;
@@ -95,7 +95,7 @@ body:has(.coming-page) {
   }
 
   .coming-carousel-card {
-    flex-basis: 80vw;
-    width: 80vw;
+    flex-basis: 74vw;
+    width: 74vw;
   }
 }

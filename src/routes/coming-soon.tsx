@@ -277,7 +277,7 @@ function FeatureCarousel() {
                     <Icon className="size-6 shrink-0 text-problem" aria-hidden="true" />
                     <ScribbleBadge />
                   </div>
-                  <h2 className="mt-4 text-3xl font-bold text-cta-foreground md:text-4xl">
+                  <h2 className="mt-4 text-2xl font-bold text-cta-foreground sm:text-3xl md:text-4xl">
                     {title}
                   </h2>
                   <div className="relative mt-5">
@@ -303,7 +303,7 @@ function FeatureCarousel() {
                         alt={alt}
                         width={1200}
                         height={912}
-                        className="aspect-[16/7] w-full object-cover"
+                        className="aspect-[4/3] w-full object-cover"
                       />
                     </div>
                   </div>
