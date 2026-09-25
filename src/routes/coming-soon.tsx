@@ -415,8 +415,7 @@ function ComingSoonPage() {
           transition={{ type: "spring", stiffness: 100, damping: 18 }}
           className="mx-auto max-w-3xl pt-20 pb-24 text-center md:pt-28"
         >
-          <ScribbleBadge />
-          <h1 className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
+          <h1 className="text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
             More of foodXchange is on the{" "}
             <span className="relative inline-block">
               way
