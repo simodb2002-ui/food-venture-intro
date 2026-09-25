@@ -436,7 +436,7 @@ function ComingSoonPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ type: "spring", stiffness: 100, damping: 18 }}
-          className="relative mt-32 overflow-hidden rounded-3xl bg-footer px-6 py-20 text-center text-footer-foreground md:px-16 md:py-28"
+          className="relative mt-16 overflow-hidden rounded-3xl bg-footer px-6 py-20 text-center text-footer-foreground md:px-16 md:py-28"
         >
           <div className="absolute inset-x-0 top-0 h-1.5 bg-solution" aria-hidden="true" />
           <Doodle kind="star" tone="solution" className="top-10 left-10 size-14" />
