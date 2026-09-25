@@ -19,11 +19,12 @@ body:has(.coming-page) {
 
 .coming-carousel-stage {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: clamp(1rem, 4vw, 3rem);
-  height: clamp(31rem, 57vw, 43rem);
+  min-height: clamp(34rem, 60vw, 46rem);
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: visible;
+  padding-block: 2.5rem;
   padding-inline: calc((100vw - min(42rem, 72vw)) / 2);
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
@@ -41,21 +42,24 @@ body:has(.coming-page) {
   position: relative;
   flex: 0 0 min(42rem, 72vw);
   width: min(42rem, 72vw);
-  height: clamp(29rem, 52vw, 40rem);
   overflow: hidden;
   border-radius: 1.5rem;
   scroll-snap-align: center;
   scroll-snap-stop: always;
   transform-style: preserve-3d;
   backface-visibility: hidden;
+  transition: height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .coming-carousel-card.is-collapsed {
+  height: clamp(24rem, 40vw, 30rem);
   background: var(--problem);
   box-shadow: 0 24px 60px color-mix(in oklab, var(--problem) 24%, transparent);
 }
 
 .coming-carousel-card.is-expanded {
+  height: auto;
+  min-height: clamp(24rem, 40vw, 30rem);
   background: var(--background);
   box-shadow: 0 30px 80px color-mix(in oklab, var(--foreground) 18%, transparent);
 }
@@ -98,7 +102,7 @@ body:has(.coming-page) {
   }
 
   .coming-carousel-stage {
-    height: 38rem;
+    min-height: 0;
     gap: 1rem;
     padding-inline: 10vw;
   }
@@ -106,6 +110,13 @@ body:has(.coming-page) {
   .coming-carousel-card {
     flex-basis: 80vw;
     width: 80vw;
-    height: 36rem;
+  }
+
+  .coming-carousel-card.is-collapsed {
+    height: 26rem;
+  }
+
+  .coming-carousel-card.is-expanded {
+    min-height: 26rem;
   }
 }

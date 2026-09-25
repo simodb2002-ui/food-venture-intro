@@ -294,7 +294,7 @@ function FeatureCarousel() {
                   ) : (
                     <motion.div
                       key="expanded"
-                      className="h-full overflow-y-auto px-5 py-6 text-left md:px-8 md:py-8"
+                      className="px-5 py-6 text-left md:px-8 md:py-8"
                       initial={reduce ? false : { opacity: 0, scale: 0.96 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
