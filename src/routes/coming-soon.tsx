@@ -243,24 +243,23 @@ function FeatureCarousel() {
   };
 
   return (
-    <div className="relative">
-      {/* giant pink parallax background type — anchored above the card tops */}
+    <section
+      ref={sectionRef}
+      aria-label="Future foodXchange features"
+      aria-roledescription="carousel"
+      className="coming-carousel relative"
+      onKeyDown={onKeyDown}
+    >
+      {/* giant pink parallax background type */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-[calc(100%-3rem)] left-[calc(50%-50vw)] right-[calc(50%-50vw)] z-0 flex justify-center overflow-hidden select-none max-md:bottom-[calc(100%-1.5rem)]"
+        className="pointer-events-none absolute inset-x-0 top-0 z-0 flex items-start overflow-hidden pt-4 select-none"
         style={reduce ? {} : { x: marqueeX }}
       >
-        <span className="shrink-0 whitespace-nowrap text-[clamp(7rem,24vw,17rem)] font-black uppercase leading-none tracking-tight text-problem/15">
+        <span className="w-full text-center whitespace-nowrap text-[clamp(7rem,24vw,17rem)] font-black uppercase leading-none tracking-tight text-problem/15">
           COMING SOON • COMING SOON • COMING SOON
         </span>
       </motion.div>
-      <section
-        ref={sectionRef}
-        aria-label="Future foodXchange features"
-        aria-roledescription="carousel"
-        className="coming-carousel relative"
-        onKeyDown={onKeyDown}
-      >
       <div
         ref={trackRef}
         className="coming-carousel-stage relative z-10"
@@ -375,8 +374,7 @@ function FeatureCarousel() {
       <p className="sr-only" aria-live="polite">
         {features[activeIndex]?.title ?? "Feature"} selected
       </p>
-      </section>
-    </div>
+    </section>
   );
 }
 
