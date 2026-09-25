@@ -249,18 +249,16 @@ function FeatureCarousel() {
           const { title, Icon, image, alt, description, bullets } = feature;
           const relative = index - activeIndex;
           const active = relative === 0;
-          const expanded = expandedIndex === index;
 
           return (
             <motion.article
               key={title}
               aria-hidden={!active}
-              className={`coming-carousel-card ${expanded ? "is-expanded" : "is-collapsed"}`}
+              className="coming-carousel-card"
               initial={false}
               animate={{
-                scale: active ? 1.1 : 0.85,
-                opacity: active ? 1 : 0.6,
-                rotateY: active ? 0 : relative < 0 ? 14 : -14,
+                scale: active ? 1.05 : 0.9,
+                opacity: active ? 1 : 0.55,
               }}
               transition={reduce ? { duration: 0 } : spring}
               style={{ zIndex: active ? 10 : 5 - Math.abs(relative) }}
@@ -268,35 +266,13 @@ function FeatureCarousel() {
               <button
                 type="button"
                 tabIndex={active ? 0 : -1}
-                aria-expanded={expanded}
                 aria-label={active ? `${title} details` : `Show ${title}`}
                 className="coming-carousel-card-button"
                 onClick={() => {
                   if (!active) select(index);
                 }}
               >
-                <AnimatePresence mode="wait" initial={false}>
-                  {!expanded ? (
-                    <motion.div
-                      key="collapsed"
-                      className="flex h-full flex-col items-center justify-center px-6 text-center text-problem-foreground"
-                      initial={reduce ? false : { opacity: 0, scale: 0.96 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
-                      transition={{ duration: 0.25 }}
-                    >
-                      <Icon className="size-12 md:size-16" strokeWidth={1.8} aria-hidden="true" />
-                      <h2 className="mt-5 text-3xl font-bold md:text-5xl">{title}</h2>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="expanded"
-                      className="px-5 py-6 text-left md:px-8 md:py-8"
-                      initial={reduce ? false : { opacity: 0, scale: 0.96 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
-                      transition={{ duration: 0.32, delay: 0.08 }}
-                    >
+                    <div className="px-5 py-6 text-left md:px-8 md:py-8">
                       <div className="flex items-center gap-3">
                         <Icon className="size-6 shrink-0 text-problem" aria-hidden="true" />
                         <ScribbleBadge />
