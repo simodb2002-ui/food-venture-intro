@@ -511,8 +511,6 @@ function AboutPage() {
         <section id="story" ref={storyRef} className="story-section">
           <div className="section-inner recipe-book-stage">
             <div className="recipe-book-pages" aria-label="Our Story — The Recipe">
-              <span className="book-page-layer book-page-layer-one" aria-hidden="true" />
-              <span className="book-page-layer book-page-layer-two" aria-hidden="true" />
               <span className="book-spine" aria-hidden="true" />
               <div className="story-intro recipe-page recipe-page-left" data-reveal>
                 <p className="eyebrow">Our Story — The Recipe</p>

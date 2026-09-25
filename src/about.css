@@ -824,35 +824,7 @@ body:has(.about-page) {
   display: grid;
   grid-template-columns: 1fr 1fr;
   background: var(--card);
-  border: 2px solid var(--ink);
-  border-radius: 0;
-  box-shadow:
-    0 9px 0 var(--orange),
-    0 13px 0 var(--card),
-    0 15px 0 var(--ink),
-    0 30px 60px color-mix(in oklab, var(--ink) 18%, transparent);
   isolation: isolate;
-}
-.book-page-layer {
-  position: absolute;
-  z-index: -1;
-  left: 16px;
-  right: 12px;
-  height: 100%;
-  background: var(--card);
-  border: 1.5px solid var(--ink);
-  border-radius: 0;
-  pointer-events: none;
-}
-.book-page-layer-one {
-  top: 7px;
-  transform: rotate(0.35deg);
-}
-.book-page-layer-two {
-  top: 13px;
-  left: 25px;
-  right: 20px;
-  transform: rotate(-0.25deg);
 }
 .book-spine {
   position: absolute;
@@ -2019,20 +1991,6 @@ body:has(.about-page) {
 }
 
 @media (max-width: 900px) {
-  .hero-photo-reveal {
-    -webkit-mask-image: radial-gradient(
-      circle 220px at var(--reveal-x) var(--reveal-y),
-      var(--ink) 20%,
-      color-mix(in oklab, var(--ink) 88%, transparent) 42%,
-      transparent 80%
-    );
-    mask-image: radial-gradient(
-      circle 220px at var(--reveal-x) var(--reveal-y),
-      var(--ink) 20%,
-      color-mix(in oklab, var(--ink) 88%, transparent) 42%,
-      transparent 80%
-    );
-  }
   .beliefs-section > .section-inner {
     padding: 24px 0;
   }
@@ -2064,23 +2022,7 @@ body:has(.about-page) {
   }
 }
 
-/* Vertical hero dissolve and interactive stacked bowls */
-.hero-photo {
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    var(--ink) 0%,
-    var(--ink) 72%,
-    color-mix(in oklab, var(--ink) 76%, transparent) 84%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    var(--ink) 0%,
-    var(--ink) 72%,
-    color-mix(in oklab, var(--ink) 76%, transparent) 84%,
-    transparent 100%
-  );
-}
+/* Interactive stacked bowls */
 .hero-section::after {
   content: "";
   position: absolute;
@@ -2371,10 +2313,6 @@ body:has(.about-page) {
 }
 
 @media (max-width: 600px) {
-  .hero-photo {
-    -webkit-mask-image: linear-gradient(to bottom, var(--ink) 0%, var(--ink) 68%, transparent 100%);
-    mask-image: linear-gradient(to bottom, var(--ink) 0%, var(--ink) 68%, transparent 100%);
-  }
   .bowl-experience {
     min-height: 500px;
   }
@@ -2430,7 +2368,6 @@ body:has(.about-page) {
   .recipe-book-pages {
     min-height: 0;
     grid-template-columns: 1fr;
-    border-radius: 0;
   }
   .book-spine {
     display: none;
