@@ -333,7 +333,8 @@ function FeatureCarousel() {
 
   const scrollToCard = (index: number, behavior: ScrollBehavior = "smooth") => {
     const track = trackRef.current;
-    const card = track?.children.item(index);
+    if (!track) return;
+    const card = track.children.item(index);
     if (!(card instanceof HTMLElement)) return;
     const left = card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2;
     track.scrollTo({ left, behavior });
