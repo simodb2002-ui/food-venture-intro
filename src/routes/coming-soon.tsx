@@ -251,15 +251,17 @@ function FeatureCarousel() {
       onKeyDown={onKeyDown}
     >
       {/* giant pink parallax background type */}
-      <motion.div
+      <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 -top-4 z-0 flex items-start overflow-hidden select-none"
-        style={reduce ? {} : { x: marqueeX }}
       >
-        <span className="inline-block min-w-max px-8 text-center whitespace-nowrap text-[clamp(7rem,24vw,17rem)] font-black uppercase leading-none tracking-normal text-problem/15">
-          COMING SOON&nbsp; • &nbsp;COMING SOON&nbsp; • &nbsp;COMING SOON
-        </span>
-      </motion.div>
+        <motion.span
+          className="inline-block min-w-max px-[0.25em] text-center whitespace-nowrap text-[clamp(7rem,24vw,17rem)] font-black uppercase leading-none tracking-normal text-problem/15"
+          style={reduce ? {} : { x: marqueeX }}
+        >
+          COMING SOON&nbsp; • &nbsp;COMING SOON&nbsp; • &nbsp;COMING SOON&nbsp; • &nbsp;
+        </motion.span>
+      </div>
       <div
         ref={trackRef}
         className="coming-carousel-stage relative z-10"
