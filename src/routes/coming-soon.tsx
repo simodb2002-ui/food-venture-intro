@@ -416,7 +416,8 @@ function ComingSoonPage() {
           className="mx-auto max-w-3xl pt-20 pb-24 text-center md:pt-28"
         >
           <h1 className="text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
-            More of foodXchange is on the{" "}
+            More of foodXchange{"\u00a0"}
+            <br />
             <span className="relative inline-block">
               way
               <ScribbleUnderline className="-bottom-3 h-5" />
@@ -424,7 +425,9 @@ function ComingSoonPage() {
           </h1>
           <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-cta-muted">
             Discover what&apos;s coming next with an early preview of three future foodXchange
-            features. Explore them first on the web, then continue the experience when the full
+            features. Explore them first on the web, then continue{"\u00a0"}
+            <br />
+            the experience when the full
             foodXchange app launches.
           </p>
         </motion.section>
