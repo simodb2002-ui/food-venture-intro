@@ -314,31 +314,7 @@ function AboutPage() {
       <CursorFollower />
       <SiteHeader active="about" className="sticky top-0" />
       <main>
-        <section
-          className="hero-section"
-          onPointerMove={(event) => {
-            const bounds = event.currentTarget.getBoundingClientRect();
-            event.currentTarget.style.setProperty("--reveal-x", `${event.clientX - bounds.left}px`);
-            event.currentTarget.style.setProperty("--reveal-y", `${event.clientY - bounds.top}px`);
-          }}
-        >
-          <div className="hero-photo" aria-hidden="true">
-            <img
-              className="hero-photo-muted"
-              src={communityMeal.url}
-              alt=""
-              width={1920}
-              height={1080}
-            />
-            <img
-              className="hero-photo-reveal"
-              src={communityMeal.url}
-              alt=""
-              width={1920}
-              height={1080}
-            />
-            <div className="hero-photo-wash" />
-          </div>
+        <section className="hero-section">
           <div className="hero-inner">
             <div className="tagline">
               <span className="tag-dot" />A community united for a healthier food future.
@@ -535,8 +511,6 @@ function AboutPage() {
         <section id="story" ref={storyRef} className="story-section">
           <div className="section-inner recipe-book-stage">
             <div className="recipe-book-pages" aria-label="Our Story — The Recipe">
-              <span className="book-page-layer book-page-layer-one" aria-hidden="true" />
-              <span className="book-page-layer book-page-layer-two" aria-hidden="true" />
               <span className="book-spine" aria-hidden="true" />
               <div className="story-intro recipe-page recipe-page-left" data-reveal>
                 <p className="eyebrow">Our Story — The Recipe</p>

@@ -824,35 +824,7 @@ body:has(.about-page) {
   display: grid;
   grid-template-columns: 1fr 1fr;
   background: var(--card);
-  border: 2px solid var(--ink);
-  border-radius: 0;
-  box-shadow:
-    0 9px 0 var(--orange),
-    0 13px 0 var(--card),
-    0 15px 0 var(--ink),
-    0 30px 60px color-mix(in oklab, var(--ink) 18%, transparent);
   isolation: isolate;
-}
-.book-page-layer {
-  position: absolute;
-  z-index: -1;
-  left: 16px;
-  right: 12px;
-  height: 100%;
-  background: var(--card);
-  border: 1.5px solid var(--ink);
-  border-radius: 0;
-  pointer-events: none;
-}
-.book-page-layer-one {
-  top: 7px;
-  transform: rotate(0.35deg);
-}
-.book-page-layer-two {
-  top: 13px;
-  left: 25px;
-  right: 20px;
-  transform: rotate(-0.25deg);
 }
 .book-spine {
   position: absolute;
@@ -1902,14 +1874,14 @@ body:has(.about-page) {
   }
 }
 
-/* Full-bleed opening image and white-to-green scroll canvas */
+/* White-to-warm-yellow scroll canvas */
 .about-page {
   background: linear-gradient(
     180deg,
     oklch(1 0 0) 0%,
     oklch(1 0 0) 48%,
-    color-mix(in oklab, var(--green) 16%, oklch(1 0 0)) 64%,
-    color-mix(in oklab, var(--green) 58%, oklch(0.35 0 0)) 78%,
+    color-mix(in oklab, var(--orange) 16%, oklch(1 0 0)) 64%,
+    color-mix(in oklab, var(--orange) 58%, oklch(0.35 0 0)) 78%,
     var(--ink) 96%,
     var(--ink) 100%
   );
@@ -1920,56 +1892,10 @@ body:has(.about-page) {
 }
 
 .hero-section {
-  --reveal-x: 72%;
-  --reveal-y: 48%;
   position: relative;
   isolation: isolate;
   overflow: hidden;
   background: var(--card);
-}
-
-.hero-photo {
-  position: absolute;
-  inset: -1px 0 0;
-  z-index: -1;
-  overflow: hidden;
-}
-.hero-photo img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center top;
-}
-.hero-photo-muted {
-  opacity: 0.24;
-  filter: saturate(0.72) contrast(0.9);
-}
-.hero-photo-reveal {
-  opacity: 1;
-  -webkit-mask-image: radial-gradient(
-    circle 240px at var(--reveal-x) var(--reveal-y),
-    #000 0 68%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    circle 240px at var(--reveal-x) var(--reveal-y),
-    #000 0 68%,
-    transparent 100%
-  );
-}
-.hero-photo-wash {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    color-mix(in oklab, var(--card) 94%, transparent) 0%,
-    color-mix(in oklab, var(--card) 78%, transparent) 40%,
-    color-mix(in oklab, var(--card) 12%, transparent) 76%,
-    transparent 100%
-  );
-  pointer-events: none;
 }
 
 .hero-visual {
@@ -1988,82 +1914,7 @@ body:has(.about-page) {
   stroke: var(--card);
 }
 
-@media (max-width: 900px) {
-  .hero-photo-reveal {
-    -webkit-mask-image: radial-gradient(
-      circle 320px at var(--reveal-x) var(--reveal-y),
-      var(--ink) 0%,
-      color-mix(in oklab, var(--ink) 82%, transparent) 30%,
-      color-mix(in oklab, var(--ink) 45%, transparent) 62%,
-      transparent 100%
-    );
-    mask-image: radial-gradient(
-      circle 320px at var(--reveal-x) var(--reveal-y),
-      var(--ink) 0%,
-      color-mix(in oklab, var(--ink) 82%, transparent) 30%,
-      color-mix(in oklab, var(--ink) 45%, transparent) 62%,
-      transparent 100%
-    );
-  }
-  .hero-photo-wash {
-    background: linear-gradient(
-      90deg,
-      color-mix(in oklab, var(--card) 78%, transparent),
-      color-mix(in oklab, var(--card) 48%, transparent)
-    );
-  }
-}
 
-@media (max-width: 600px) {
-  .hero-photo-muted {
-    opacity: 0.44;
-  }
-  .hero-photo-reveal {
-    display: none;
-  }
-  .hero-photo-wash {
-    background: color-mix(in oklab, var(--card) 55%, transparent);
-  }
-}
-
-/* Feathered full-bleed hero spotlight */
-.hero-photo-muted {
-  opacity: 0.48;
-  filter: saturate(0.85) contrast(0.95) brightness(0.85);
-}
-.hero-photo-reveal {
-  opacity: 0;
-  filter: saturate(1.08) contrast(1.02);
-  transition: opacity 0.28s ease;
-  -webkit-mask-image: radial-gradient(
-    circle 440px at var(--reveal-x) var(--reveal-y),
-    var(--ink) 0%,
-    color-mix(in oklab, var(--ink) 82%, transparent) 30%,
-    color-mix(in oklab, var(--ink) 45%, transparent) 62%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    circle 440px at var(--reveal-x) var(--reveal-y),
-    var(--ink) 0%,
-    color-mix(in oklab, var(--ink) 82%, transparent) 30%,
-    color-mix(in oklab, var(--ink) 45%, transparent) 62%,
-    transparent 100%
-  );
-}
-.hero-section:hover .hero-photo-reveal {
-  opacity: 1;
-}
-.hero-photo-wash {
-  background:
-    linear-gradient(
-      90deg,
-      color-mix(in oklab, var(--card) 78%, transparent) 0%,
-      color-mix(in oklab, var(--card) 48%, transparent) 39%,
-      color-mix(in oklab, var(--card) 10%, transparent) 67%,
-      transparent 100%
-    ),
-    color-mix(in oklab, var(--ink) 5%, transparent);
-}
 .hero-inner {
   position: relative;
   z-index: 2;
@@ -2140,20 +1991,6 @@ body:has(.about-page) {
 }
 
 @media (max-width: 900px) {
-  .hero-photo-reveal {
-    -webkit-mask-image: radial-gradient(
-      circle 220px at var(--reveal-x) var(--reveal-y),
-      var(--ink) 20%,
-      color-mix(in oklab, var(--ink) 88%, transparent) 42%,
-      transparent 80%
-    );
-    mask-image: radial-gradient(
-      circle 220px at var(--reveal-x) var(--reveal-y),
-      var(--ink) 20%,
-      color-mix(in oklab, var(--ink) 88%, transparent) 42%,
-      transparent 80%
-    );
-  }
   .beliefs-section > .section-inner {
     padding: 24px 0;
   }
@@ -2185,23 +2022,7 @@ body:has(.about-page) {
   }
 }
 
-/* Vertical hero dissolve and interactive stacked bowls */
-.hero-photo {
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    var(--ink) 0%,
-    var(--ink) 72%,
-    color-mix(in oklab, var(--ink) 76%, transparent) 84%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    var(--ink) 0%,
-    var(--ink) 72%,
-    color-mix(in oklab, var(--ink) 76%, transparent) 84%,
-    transparent 100%
-  );
-}
+/* Interactive stacked bowls */
 .hero-section::after {
   content: "";
   position: absolute;
@@ -2492,10 +2313,6 @@ body:has(.about-page) {
 }
 
 @media (max-width: 600px) {
-  .hero-photo {
-    -webkit-mask-image: linear-gradient(to bottom, var(--ink) 0%, var(--ink) 68%, transparent 100%);
-    mask-image: linear-gradient(to bottom, var(--ink) 0%, var(--ink) 68%, transparent 100%);
-  }
   .bowl-experience {
     min-height: 500px;
   }
@@ -2551,7 +2368,6 @@ body:has(.about-page) {
   .recipe-book-pages {
     min-height: 0;
     grid-template-columns: 1fr;
-    border-radius: 0;
   }
   .book-spine {
     display: none;
