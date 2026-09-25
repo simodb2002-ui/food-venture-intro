@@ -196,7 +196,7 @@ function FeatureCarousel() {
     target: sectionRef,
     offset: ["start end", "end start"],
   });
-  const marqueeX = useTransform(scrollYProgress, [0, 1], ["-1vw", "1vw"]);
+  const marqueeX = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
 
   const scrollToCard = (index: number, behavior: ScrollBehavior = "smooth") => {
     const track = trackRef.current;
@@ -251,19 +251,15 @@ function FeatureCarousel() {
       onKeyDown={onKeyDown}
     >
       {/* giant pink parallax background type */}
-      <div
+      <motion.div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 -top-4 z-0 flex items-start overflow-hidden select-none"
+        style={reduce ? {} : { x: marqueeX }}
       >
-        <div className="relative left-1/2 -translate-x-1/2">
-          <motion.span
-            className="inline-block min-w-max px-[0.25em] text-center whitespace-nowrap text-[clamp(5rem,11vw,9rem)] font-black uppercase leading-none tracking-normal text-problem/15"
-            style={reduce ? {} : { x: marqueeX }}
-          >
-            COMING SOON
-          </motion.span>
-        </div>
-      </div>
+        <span className="inline-block min-w-max px-8 text-center whitespace-nowrap text-[clamp(7rem,24vw,17rem)] font-black uppercase leading-none tracking-normal text-problem/15">
+          COMING SOON&nbsp; • &nbsp;COMING SOON&nbsp; • &nbsp;COMING SOON
+        </span>
+      </motion.div>
       <div
         ref={trackRef}
         className="coming-carousel-stage relative z-10"
