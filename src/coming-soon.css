@@ -1,8 +1,12 @@
-html:has(.coming-page),
-body:has(.coming-page) {
+html:has(.coming-page) {
   height: auto;
   overflow: auto;
   scroll-behavior: smooth;
+}
+
+body:has(.coming-page) {
+  height: auto;
+  overflow: visible;
 }
 
 .coming-page {
