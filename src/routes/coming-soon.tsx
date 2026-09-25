@@ -201,7 +201,7 @@ function FeatureCarousel() {
     offset: ["start start", "end end"],
   });
   const position = useTransform(pinProgress, [0, 1], [0, features.length - 1]);
-  const x = useTransform(position, (f) => `calc(${(-f).toFixed(4)} * var(--card-step))`);
+  const x = useTransform(position, (f) => `calc(${(1 - f).toFixed(4)} * var(--card-step))`);
 
   useEffect(
     () => position.on("change", (value) => setActiveIndex(Math.round(value))),
