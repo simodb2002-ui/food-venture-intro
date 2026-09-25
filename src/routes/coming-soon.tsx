@@ -436,27 +436,27 @@ function ComingSoonPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ type: "spring", stiffness: 100, damping: 18 }}
-          className="relative mt-32 overflow-hidden rounded-3xl bg-footer px-6 py-16 text-center text-footer-foreground md:px-12 md:py-20"
+          className="relative mt-32 overflow-hidden rounded-3xl bg-footer px-6 py-20 text-center text-footer-foreground md:px-16 md:py-28"
         >
           <div className="absolute inset-x-0 top-0 h-1.5 bg-solution" aria-hidden="true" />
-          <Doodle kind="star" tone="solution" className="top-8 left-8 size-10" />
-          <Doodle kind="spiral" className="right-10 bottom-8 size-12" delay={1} />
-          <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
+          <Doodle kind="star" tone="solution" className="top-10 left-10 size-14" />
+          <Doodle kind="spiral" className="right-12 bottom-10 size-16" delay={1} />
+          <h2 className="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
             Want to follow the{" "}
             <span className="relative inline-block">
               launch?
-              <ScribbleUnderline className="-bottom-3 h-4" />
+              <ScribbleUnderline className="-bottom-3 h-5 md:h-6" />
             </span>
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-footer-muted">
+          <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-footer-muted md:text-xl">
             Join the Society or sign up for news, and you&apos;ll be among the first to hear when
             these next features become available.
           </p>
-          <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+          <div className="mt-12 flex flex-col justify-center gap-4 sm:flex-row">
             <Button
               asChild
               size="lg"
-              className="rounded-full bg-solution px-8 font-semibold text-solution-foreground hover:bg-solution/90"
+              className="rounded-full bg-solution px-10 text-base font-semibold text-solution-foreground hover:bg-solution/90 md:px-12 md:text-lg"
             >
               <a href="/#membership">Explore membership</a>
             </Button>
@@ -464,7 +464,7 @@ function ComingSoonPage() {
               asChild
               size="lg"
               variant="outline"
-              className="rounded-full border-footer-foreground/30 bg-transparent px-8 font-semibold text-footer-foreground hover:bg-footer-foreground/10 hover:text-footer-foreground"
+              className="rounded-full border-footer-foreground/30 bg-transparent px-10 text-base font-semibold text-footer-foreground hover:bg-footer-foreground/10 hover:text-footer-foreground md:px-12 md:text-lg"
             >
               <a href="/about#newsletter">Sign up for news</a>
             </Button>
