@@ -335,7 +335,8 @@ function FeatureCarousel() {
     const track = trackRef.current;
     const card = track?.children.item(index);
     if (!(card instanceof HTMLElement)) return;
-    card.scrollIntoView({ behavior, block: "nearest", inline: "center" });
+    const left = card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2;
+    track.scrollTo({ left, behavior });
   };
 
   useEffect(() => {
