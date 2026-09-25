@@ -997,7 +997,14 @@ body:has(.about-page) {
 }
 .founders-section {
   padding: 120px 0;
-  background: transparent;
+  background: linear-gradient(
+    180deg,
+    oklch(1 0 0) 0%,
+    oklch(1 0 0) 60%,
+    color-mix(in oklab, var(--orange) 16%, oklch(1 0 0)) 70%,
+    var(--orange) 84%,
+    var(--orange) 100%
+  );
 }
 .founders-heading > p {
   max-width: 430px;
@@ -1874,16 +1881,9 @@ body:has(.about-page) {
   }
 }
 
-/* White-to-warm-yellow scroll canvas */
+/* White canvas; yellow fades in from half height of the founder portraits */
 .about-page {
-  background: linear-gradient(
-    180deg,
-    oklch(1 0 0) 0%,
-    oklch(1 0 0) 48%,
-    color-mix(in oklab, var(--orange) 16%, oklch(1 0 0)) 58%,
-    var(--orange) 70%,
-    var(--orange) 100%
-  );
+  background: oklch(1 0 0);
 }
 .about-page::before,
 .about-page::after {
@@ -1905,9 +1905,17 @@ body:has(.about-page) {
 .newsletter-section {
   color: var(--ink);
 }
-.founders-section .eyebrow,
-.newsletter-section .eyebrow {
-  color: var(--pink);
+@media (max-width: 900px) {
+  .founders-section {
+    background: linear-gradient(
+      180deg,
+      oklch(1 0 0) 0%,
+      oklch(1 0 0) 34%,
+      color-mix(in oklab, var(--orange) 16%, oklch(1 0 0)) 44%,
+      var(--orange) 58%,
+      var(--orange) 100%
+    );
+  }
 }
 
 
