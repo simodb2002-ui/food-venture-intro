@@ -253,13 +253,13 @@ function FeatureCarousel() {
       {/* giant pink parallax background type */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 -top-4 z-0 flex items-start overflow-hidden select-none"
+        className="pointer-events-none absolute inset-x-0 -top-6 z-0 flex items-start justify-center overflow-hidden select-none"
       >
         <motion.span
           className="inline-block min-w-max px-8 text-center whitespace-nowrap text-[clamp(7rem,24vw,17rem)] font-black uppercase leading-none tracking-normal text-problem/15"
           style={reduce ? {} : { x: marqueeX }}
         >
-          COMING&nbsp;SOON&nbsp; • &nbsp;COMING&nbsp;SOON&nbsp; • &nbsp;COMING&nbsp;SOON&nbsp; • &nbsp;COMING&nbsp;SOON&nbsp;
+          COMING&nbsp;SOON
         </motion.span>
       </div>
       <div
