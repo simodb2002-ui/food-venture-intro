@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, ChefHat, ScanLine, Sparkles, UsersRound } from "lucide-react";
+import { ChefHat, ScanLine, Sparkles, UsersRound } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useState, type KeyboardEvent, type ReactNode } from "react";
 
@@ -338,41 +338,16 @@ function FeatureCarousel() {
         })}
       </motion.div>
 
-      <div className="mt-8 flex items-center justify-center gap-5">
-        <Button
-          type="button"
-          size="icon"
-          variant="outline"
-          disabled={activeIndex === 0}
-          onClick={() => select(activeIndex - 1)}
-          aria-label="Previous feature"
-          className="size-12 rounded-full border-problem text-problem hover:bg-problem hover:text-problem-foreground disabled:opacity-30"
-        >
-          <ArrowLeft className="size-5" aria-hidden="true" />
-        </Button>
+      <div className="mt-8 flex items-center justify-center">
         <div className="flex gap-2" aria-label={`Feature ${activeIndex + 1} of ${features.length}`}>
           {features.map((feature, index) => (
-            <button
+            <span
               key={feature.title}
-              type="button"
               className={`h-2.5 rounded-full transition-[width,background-color] duration-300 ${index === activeIndex ? "w-8 bg-problem" : "w-2.5 bg-cta-muted/30"}`}
-              onClick={() => select(index)}
-              aria-label={`Show ${feature.title}`}
-              aria-current={index === activeIndex ? "true" : undefined}
+              aria-hidden="true"
             />
           ))}
         </div>
-        <Button
-          type="button"
-          size="icon"
-          variant="outline"
-          disabled={activeIndex === features.length - 1}
-          onClick={() => select(activeIndex + 1)}
-          aria-label="Next feature"
-          className="size-12 rounded-full border-problem text-problem hover:bg-problem hover:text-problem-foreground disabled:opacity-30"
-        >
-          <ArrowRight className="size-5" aria-hidden="true" />
-        </Button>
       </div>
       <p className="sr-only" aria-live="polite">
         {features[activeIndex]?.title ?? "Feature"} selected
