@@ -322,7 +322,6 @@ function FeatureCard({
 }
 
 function FeatureCarousel() {
-  const reduce = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(1);
   const carouselRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
