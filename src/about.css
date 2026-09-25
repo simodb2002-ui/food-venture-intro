@@ -1905,6 +1905,10 @@ body:has(.about-page) {
 .newsletter-section {
   color: var(--ink);
 }
+.founders-section .eyebrow,
+.newsletter-section .eyebrow {
+  color: var(--pink);
+}
 @media (max-width: 900px) {
   .founders-section {
     background: linear-gradient(
