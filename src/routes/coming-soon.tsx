@@ -247,10 +247,10 @@ function FeatureCarousel() {
       {/* giant pink parallax background type — anchored above the card tops */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-[calc(100%-3rem)] z-0 flex items-end overflow-hidden select-none max-md:bottom-[calc(100%-1.5rem)]"
+        className="pointer-events-none absolute bottom-[calc(100%-3rem)] left-[calc(50%-50vw)] right-[calc(50%-50vw)] z-0 flex justify-center overflow-hidden select-none max-md:bottom-[calc(100%-1.5rem)]"
         style={reduce ? {} : { x: marqueeX }}
       >
-        <span className="w-full text-center whitespace-nowrap text-[clamp(7rem,24vw,17rem)] font-black uppercase leading-none tracking-tight text-problem/15">
+        <span className="shrink-0 whitespace-nowrap text-[clamp(7rem,24vw,17rem)] font-black uppercase leading-none tracking-tight text-problem/15">
           COMING SOON • COMING SOON • COMING SOON
         </span>
       </motion.div>
