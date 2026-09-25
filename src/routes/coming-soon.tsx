@@ -196,7 +196,7 @@ function FeatureCarousel() {
     target: sectionRef,
     offset: ["start end", "end start"],
   });
-  const marqueeX = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
+  const marqueeX = useTransform(scrollYProgress, [0, 1], ["-16%", "16%"]);
 
   const scrollToCard = (index: number, behavior: ScrollBehavior = "smooth") => {
     const track = trackRef.current;
@@ -261,7 +261,7 @@ function FeatureCarousel() {
         >
           {Array.from({ length: 6 })
             .map(() => "COMING\u00A0SOON")
-            .join("\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0")}
+            .join("\u00A0\u00A0\u00A0\u2022\u00A0\u00A0\u00A0")}
         </motion.span>
       </div>
       <div
