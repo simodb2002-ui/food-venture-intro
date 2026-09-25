@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ChefHat, ScanLine, UsersRound } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChefHat, ScanLine, Sparkles, UsersRound } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useRef, useState, type MouseEvent, type ReactNode } from "react";
+import { useState, type KeyboardEvent, type ReactNode } from "react";
 
 import communityImage from "@/assets/coming-soon/community.jpg";
 import cookImage from "@/assets/coming-soon/cook.jpg";
@@ -177,211 +177,212 @@ function ScribbleBadge() {
   );
 }
 
-function HandArrow({ flip }: { flip?: boolean }) {
-  return (
-    <svg
-      viewBox="0 0 120 60"
-      fill="none"
-      aria-hidden="true"
-      className={`hidden h-14 w-28 stroke-problem md:block ${flip ? "" : "-scale-x-100"}`}
-    >
-      <path
-        d="M112 44C80 52 40 48 14 18M14 18l2 16M14 18l15 2"
-        strokeWidth={2.5}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+/* ---------- interactive feature carousel ---------- */
+const spring = { type: "spring", stiffness: 180, damping: 24, mass: 0.8 } as const;
 
-/* ---------- feature row ---------- */
-const spring = { type: "spring", stiffness: 200, damping: 25 } as const;
-
-function FeatureStripe({
-  feature,
-  index,
-  open,
-  onOpen,
-  onToggle,
-}: {
-  feature: (typeof features)[number];
-  index: number;
-  open: boolean;
-  onOpen: () => void;
-  onToggle: () => void;
-}) {
-  const { title, Icon } = feature;
+function FeatureCarousel() {
   const reduce = useReducedMotion();
-  const panelId = `feature-panel-${index}`;
-  return (
-    <motion.div
-      layout={!reduce}
-      transition={spring}
-      onMouseEnter={() => {
-        if (window.matchMedia("(hover: hover)").matches) onOpen();
-      }}
-      className={`rounded-3xl transition-colors duration-500 ${open ? "bg-transparent" : "bg-problem text-problem-foreground"}`}
-    >
-      <motion.button
-        layout="position"
-        type="button"
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={onToggle}
-        className={`flex w-full items-center gap-4 rounded-3xl px-6 text-left transition-all duration-500 md:px-10 ${open ? "py-4" : "py-6 md:py-8"}`}
-      >
-        <Icon className={`size-7 shrink-0 ${open ? "text-problem" : ""}`} aria-hidden="true" />
-        <span className="flex-1 text-2xl font-bold tracking-tight md:text-4xl">{title}</span>
-        <motion.span
-          animate={{ rotate: open ? 90 : 0 }}
-          transition={spring}
-          className="text-2xl font-bold"
-          aria-hidden="true"
-        >
-          →
-        </motion.span>
-      </motion.button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            id={panelId}
-            key="panel"
-            initial={reduce ? false : { height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
-            transition={spring}
-            className="overflow-hidden"
-          >
-            <div className="px-2 pt-6 pb-12 md:px-6">
-              <FeatureRow feature={feature} index={index} />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
+  const [activeIndex, setActiveIndex] = useState(1);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
-function FeatureRow({ feature, index }: { feature: (typeof features)[number]; index: number }) {
-  const { title, Icon, image, alt, reverse, description, bullets } = feature;
-  const rowRef = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-
-  const onMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (reduce || !rowRef.current) return;
-    const r = rowRef.current.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5;
-    const y = (e.clientY - r.top) / r.height - 0.5;
-    rowRef.current.style.transform = `perspective(1200px) rotateY(${x * 3}deg) rotateX(${-y * 3}deg)`;
+  const select = (nextIndex: number) => {
+    const clamped = Math.max(0, Math.min(features.length - 1, nextIndex));
+    setExpandedIndex(null);
+    setActiveIndex(clamped);
   };
-  const onLeave = () => {
-    if (rowRef.current) rowRef.current.style.transform = "";
+
+  const onKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.key === "ArrowLeft") select(activeIndex - 1);
+    if (event.key === "ArrowRight") select(activeIndex + 1);
   };
 
   return (
-    <article>
-      <div
-        ref={rowRef}
-        onMouseMove={onMove}
-        onMouseLeave={onLeave}
-        className="group grid items-center gap-10 transition-transform duration-300 ease-out md:grid-cols-2 md:gap-16"
+    <section
+      aria-label="Future foodXchange features"
+      aria-roledescription="carousel"
+      className="coming-carousel"
+      onKeyDown={onKeyDown}
+    >
+      <motion.div
+        className="coming-carousel-stage"
+        drag={reduce ? false : "x"}
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.12}
+        onDragEnd={(_, info) => {
+          if (info.offset.x < -45 || info.velocity.x < -450) select(activeIndex + 1);
+          if (info.offset.x > 45 || info.velocity.x > 450) select(activeIndex - 1);
+        }}
       >
-        {/* image */}
-        <div className={`relative mx-auto w-full max-w-lg ${reverse ? "md:order-2" : ""}`}>
-          <svg
-            viewBox="0 0 400 320"
-            fill="none"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-            className="absolute -inset-4 h-[calc(100%+2rem)] w-[calc(100%+2rem)] stroke-solution transition-transform duration-500 group-hover:rotate-3"
-          >
-            <path
-              d="M60 20c90-22 230-18 300 20 44 30 40 170 10 230-40 60-230 50-300 20C10 260 0 150 14 90 22 50 36 28 60 20z"
-              strokeWidth={3}
-              strokeLinecap="round"
-            />
-          </svg>
-          <div className="relative overflow-hidden" style={{ borderRadius: blobs[index] }}>
-            <img
-              src={image}
-              alt={alt}
-              loading="lazy"
-              width={1200}
-              height={912}
-              className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-          </div>
-          {index === 1 && (
-            <>
-              <Doodle kind="star" tone="solution" className="-top-8 -right-4 size-12" />
-              <Doodle kind="star" className="-bottom-6 left-6 size-8" delay={1.2} />
-            </>
-          )}
-          {index === 2 && (
-            <Doodle kind="hat" className="-bottom-10 -right-6 size-20" delay={0.4} />
-          )}
-        </div>
+        {features.map((feature, index) => {
+          const { title, Icon, image, alt, description, bullets } = feature;
+          const relative = index - activeIndex;
+          const active = relative === 0;
+          const expanded = expandedIndex === index;
 
-        {/* text */}
-        <div className="relative">
-          <div className="flex items-center gap-4">
-            <Icon className="size-7 text-problem" aria-hidden="true" />
-            <ScribbleBadge />
-          </div>
-          <h2 className="relative mt-6 inline-block text-4xl font-bold tracking-tight md:text-5xl">
-            {title}
-            <svg
-              viewBox="0 0 300 100"
-              fill="none"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-              className="pointer-events-none absolute -inset-x-6 -inset-y-4 h-[calc(100%+2rem)] w-[calc(100%+3rem)] stroke-problem"
+          return (
+            <motion.article
+              key={title}
+              aria-hidden={!active}
+              className={`coming-carousel-card ${expanded ? "is-expanded" : "is-collapsed"}`}
+              initial={false}
+              animate={{
+                x: `${relative * 82}%`,
+                scale: active ? 1.1 : 0.85,
+                opacity: Math.abs(relative) > 1 ? 0 : active ? 1 : 0.6,
+                rotateY: active ? 0 : relative < 0 ? 14 : -14,
+              }}
+              transition={reduce ? { duration: 0 } : spring}
+              style={{ zIndex: active ? 10 : 5 - Math.abs(relative) }}
             >
-              <path
-                className="scribble-draw"
-                pathLength={1}
-                d="M40 12C120 0 250 4 285 30c20 30-40 62-150 64C50 96 6 76 12 48 18 22 90 8 170 10"
-                strokeWidth={3}
-                strokeLinecap="round"
-              />
-            </svg>
-          </h2>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-cta-muted md:text-lg">
-            {description}
-          </p>
-          <div className={`mt-4 flex ${reverse ? "justify-end" : "justify-start"}`}>
-            <HandArrow flip={Boolean(reverse)} />
-          </div>
-          <ul className="mt-2 space-y-4">
-            {bullets.map((bullet) => (
-              <li key={bullet} className="flex gap-3 text-sm font-medium leading-relaxed md:text-base">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                  className="mt-0.5 size-5 shrink-0 stroke-problem"
-                >
-                  <path
-                    d="M3 13c3 2 5 5 6 7 3-7 7-12 12-16"
-                    strokeWidth={3}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                {bullet}
-              </li>
-            ))}
-          </ul>
+              <button
+                type="button"
+                tabIndex={active ? 0 : -1}
+                aria-expanded={expanded}
+                aria-label={active ? `${expanded ? "Hide" : "Reveal"} ${title}` : `Show ${title}`}
+                className="coming-carousel-card-button"
+                onClick={() => {
+                  if (!active) {
+                    select(index);
+                    return;
+                  }
+                  setExpandedIndex(expanded ? null : index);
+                }}
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  {!expanded ? (
+                    <motion.div
+                      key="collapsed"
+                      className="flex h-full flex-col items-center justify-center px-6 text-center text-problem-foreground"
+                      initial={reduce ? false : { opacity: 0, scale: 0.96 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
+                      transition={{ duration: 0.25 }}
+                    >
+                      <Icon className="size-12 md:size-16" strokeWidth={1.8} aria-hidden="true" />
+                      <h2 className="mt-5 text-3xl font-bold md:text-5xl">{title}</h2>
+                      {active && (
+                        <motion.span
+                          className="mt-10 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider"
+                          animate={reduce ? {} : { y: [0, -5, 0] }}
+                          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        >
+                          Click to reveal <Sparkles className="size-4" aria-hidden="true" />
+                        </motion.span>
+                      )}
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="expanded"
+                      className="h-full overflow-y-auto px-5 py-6 text-left md:px-8 md:py-8"
+                      initial={reduce ? false : { opacity: 0, scale: 0.96 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
+                      transition={{ duration: 0.32, delay: 0.08 }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Icon className="size-6 shrink-0 text-problem" aria-hidden="true" />
+                        <ScribbleBadge />
+                      </div>
+                      <h2 className="mt-4 text-3xl font-bold text-cta-foreground md:text-4xl">{title}</h2>
+                      <div className="relative mt-5">
+                        <svg
+                          viewBox="0 0 400 320"
+                          fill="none"
+                          preserveAspectRatio="none"
+                          aria-hidden="true"
+                          className="absolute -inset-2 h-[calc(100%+1rem)] w-[calc(100%+1rem)] stroke-solution"
+                        >
+                          <path
+                            d="M60 20c90-22 230-18 300 20 44 30 40 170 10 230-40 60-230 50-300 20C10 260 0 150 14 90 22 50 36 28 60 20z"
+                            strokeWidth={3}
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                        <div className="relative overflow-hidden" style={{ borderRadius: blobs[index] }}>
+                          <img
+                            src={image}
+                            alt={alt}
+                            width={1200}
+                            height={912}
+                            className="aspect-[16/7] w-full object-cover"
+                          />
+                        </div>
+                      </div>
+                      <p className="mt-5 text-sm leading-relaxed text-cta-muted md:text-base">{description}</p>
+                      <ul className="mt-4 space-y-2.5">
+                        {bullets.map((bullet) => (
+                          <li key={bullet} className="flex gap-2.5 text-xs font-medium leading-relaxed md:text-sm">
+                            <svg
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              aria-hidden="true"
+                              className="mt-0.5 size-4 shrink-0 stroke-problem"
+                            >
+                              <path
+                                d="M3 13c3 2 5 5 6 7 3-7 7-12 12-16"
+                                strokeWidth={3}
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                            {bullet}
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </button>
+            </motion.article>
+          );
+        })}
+      </motion.div>
+
+      <div className="mt-8 flex items-center justify-center gap-5">
+        <Button
+          type="button"
+          size="icon"
+          variant="outline"
+          disabled={activeIndex === 0}
+          onClick={() => select(activeIndex - 1)}
+          aria-label="Previous feature"
+          className="size-12 rounded-full border-problem text-problem hover:bg-problem hover:text-problem-foreground disabled:opacity-30"
+        >
+          <ArrowLeft className="size-5" aria-hidden="true" />
+        </Button>
+        <div className="flex gap-2" aria-label={`Feature ${activeIndex + 1} of ${features.length}`}>
+          {features.map((feature, index) => (
+            <button
+              key={feature.title}
+              type="button"
+              className={`h-2.5 rounded-full transition-[width,background-color] duration-300 ${index === activeIndex ? "w-8 bg-problem" : "w-2.5 bg-cta-muted/30"}`}
+              onClick={() => select(index)}
+              aria-label={`Show ${feature.title}`}
+              aria-current={index === activeIndex ? "true" : undefined}
+            />
+          ))}
         </div>
+        <Button
+          type="button"
+          size="icon"
+          variant="outline"
+          disabled={activeIndex === features.length - 1}
+          onClick={() => select(activeIndex + 1)}
+          aria-label="Next feature"
+          className="size-12 rounded-full border-problem text-problem hover:bg-problem hover:text-problem-foreground disabled:opacity-30"
+        >
+          <ArrowRight className="size-5" aria-hidden="true" />
+        </Button>
       </div>
-    </article>
+      <p className="sr-only" aria-live="polite">
+        {features[activeIndex].title} selected
+      </p>
+    </section>
   );
 }
 
 function ComingSoonPage() {
   const reduce = useReducedMotion();
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
   return (
     <div className="coming-page relative min-h-dvh overflow-x-clip bg-cta text-cta-foreground">
       <SiteHeader active="coming-soon" className="sticky top-0" />
@@ -418,18 +419,7 @@ function ComingSoonPage() {
           </p>
         </motion.section>
 
-        <section className="flex flex-col gap-4" aria-label="Future foodXchange features">
-          {features.map((feature, i) => (
-            <FeatureStripe
-              key={feature.title}
-              feature={feature}
-              index={i}
-              open={openIndex === i}
-              onOpen={() => setOpenIndex(i)}
-              onToggle={() => setOpenIndex(openIndex === i ? null : i)}
-            />
-          ))}
-        </section>
+        <FeatureCarousel />
 
         <motion.section
           initial={reduce ? false : { opacity: 0, y: 60 }}

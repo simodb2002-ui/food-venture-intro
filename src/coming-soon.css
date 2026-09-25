@@ -9,6 +9,65 @@ body:has(.coming-page) {
   font-family: "Montserrat", sans-serif;
 }
 
+.coming-carousel {
+  position: relative;
+  margin-inline: calc(50% - 50vw);
+  overflow: hidden;
+  padding-block: 3rem 2rem;
+  perspective: 1400px;
+}
+
+.coming-carousel-stage {
+  position: relative;
+  height: clamp(31rem, 57vw, 43rem);
+  cursor: grab;
+  touch-action: pan-y;
+  transform-style: preserve-3d;
+}
+
+.coming-carousel-stage:active {
+  cursor: grabbing;
+}
+
+.coming-carousel-card {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(42rem, 72vw);
+  height: clamp(29rem, 52vw, 40rem);
+  margin-left: min(-21rem, -36vw);
+  overflow: hidden;
+  border-radius: 1.5rem;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.coming-carousel-card.is-collapsed {
+  background: var(--problem);
+  box-shadow: 0 24px 60px color-mix(in oklab, var(--problem) 24%, transparent);
+}
+
+.coming-carousel-card.is-expanded {
+  background: var(--background);
+  box-shadow: 0 30px 80px color-mix(in oklab, var(--foreground) 18%, transparent);
+}
+
+.coming-carousel-card-button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: inherit;
+}
+
+.coming-carousel-card-button:focus-visible {
+  outline: 3px solid var(--solution);
+  outline-offset: -6px;
+}
+
 .coming-page .scribble-draw {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
@@ -22,5 +81,21 @@ body:has(.coming-page) {
 @media (prefers-reduced-motion: reduce) {
   .coming-page .scribble-draw {
     transition: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .coming-carousel {
+    padding-block: 1.5rem 1rem;
+  }
+
+  .coming-carousel-stage {
+    height: 38rem;
+  }
+
+  .coming-carousel-card {
+    width: 80vw;
+    height: 36rem;
+    margin-left: -40vw;
   }
 }
