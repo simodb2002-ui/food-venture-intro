@@ -156,7 +156,8 @@ function ScribbleUnderline({ className = "" }: { className?: string }) {
   );
 }
 
-function ScribbleBadge() {
+function ScribbleBadge({ tone = "problem" }: { tone?: "problem" | "onProblem" }) {
+  const color = tone === "problem" ? "problem" : "problem-foreground";
   return (
     <span className="relative inline-flex px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-problem">
       <svg
@@ -164,7 +165,7 @@ function ScribbleBadge() {
         fill="none"
         preserveAspectRatio="none"
         aria-hidden="true"
-        className="absolute inset-0 h-full w-full stroke-problem"
+        className={`absolute inset-0 h-full w-full stroke-${color}`}
       >
         <path
           d="M18 5c35-3 80-4 108 2 12 3 12 25-2 28-35 5-80 5-106 0C3 31 2 9 18 5z"
