@@ -997,14 +997,7 @@ body:has(.about-page) {
 }
 .founders-section {
   padding: 120px 0;
-  background: linear-gradient(
-    180deg,
-    oklch(1 0 0) 0%,
-    oklch(1 0 0) 60%,
-    color-mix(in oklab, var(--orange) 16%, oklch(1 0 0)) 70%,
-    var(--orange) 84%,
-    var(--orange) 100%
-  );
+  background: transparent;
 }
 .founders-heading > p {
   max-width: 430px;
@@ -1110,7 +1103,7 @@ body:has(.about-page) {
 }
 .newsletter-section {
   padding: 100px 0;
-  background: var(--orange);
+  background: transparent;
 }
 .newsletter-inner {
   display: grid;
@@ -1881,9 +1874,16 @@ body:has(.about-page) {
   }
 }
 
-/* White canvas; yellow fades in from half height of the founder portraits */
+/* White-to-warm-yellow scroll canvas */
 .about-page {
-  background: oklch(1 0 0);
+  background: linear-gradient(
+    180deg,
+    oklch(1 0 0) 0%,
+    oklch(1 0 0) 48%,
+    color-mix(in oklab, var(--orange) 16%, oklch(1 0 0)) 58%,
+    var(--orange) 70%,
+    var(--orange) 100%
+  );
 }
 .about-page::before,
 .about-page::after {
@@ -1908,18 +1908,6 @@ body:has(.about-page) {
 .founders-section .eyebrow,
 .newsletter-section .eyebrow {
   color: var(--pink);
-}
-@media (max-width: 900px) {
-  .founders-section {
-    background: linear-gradient(
-      180deg,
-      oklch(1 0 0) 0%,
-      oklch(1 0 0) 34%,
-      color-mix(in oklab, var(--orange) 16%, oklch(1 0 0)) 44%,
-      var(--orange) 58%,
-      var(--orange) 100%
-    );
-  }
 }
 
 
