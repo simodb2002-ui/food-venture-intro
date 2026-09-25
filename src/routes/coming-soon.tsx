@@ -187,59 +187,41 @@ const spring = { type: "spring", stiffness: 500, damping: 38, mass: 0.5 } as con
 
 function FeatureCarousel() {
   const reduce = useReducedMotion();
-  const [activeIndex, setActiveIndex] = useState(1);
-  const sectionRef = useRef<HTMLElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
+  const { scrollYProgress: marqueeProgress } = useScroll({
+    target: wrapperRef,
     offset: ["start end", "end start"],
   });
-  const marqueeX = useTransform(scrollYProgress, [0, 1], ["-16%", "16%"]);
+  const marqueeX = useTransform(marqueeProgress, [0, 1], ["-16%", "16%"]);
 
-  const scrollToCard = (index: number, behavior: ScrollBehavior = "smooth") => {
-    const track = trackRef.current;
-    const card = track?.children.item(index);
-    if (!(card instanceof HTMLElement)) return;
-    card.scrollIntoView({ behavior, block: "nearest", inline: "center" });
-  };
+  const { scrollYProgress: pinProgress } = useScroll({
+    target: wrapperRef,
+    offset: ["start start", "end end"],
+  });
+  const position = useTransform(pinProgress, [0, 1], [0, features.length - 1]);
+  const x = useTransform(position, (f) => `calc(${(-f).toFixed(4)} * var(--card-step))`);
 
-  useEffect(() => {
-    const frame = requestAnimationFrame(() => scrollToCard(1, "instant"));
-    return () => {
-      cancelAnimationFrame(frame);
-      if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
-    };
-  }, []);
+  useEffect(
+    () => position.on("change", (value) => setActiveIndex(Math.round(value))),
+    [position],
+  );
 
-  const select = (nextIndex: number) => {
-    const clamped = Math.max(0, Math.min(features.length - 1, nextIndex));
-    setActiveIndex(clamped);
-    scrollToCard(clamped);
-  };
-
-  const updateActiveFromScroll = () => {
-    const track = trackRef.current;
-    if (!track) return;
-    const center = track.scrollLeft + track.clientWidth / 2;
-    let nearest = 0;
-    let nearestDistance = Number.POSITIVE_INFINITY;
-    Array.from(track.children).forEach((child, index) => {
-      if (!(child instanceof HTMLElement)) return;
-      const childCenter = child.offsetLeft + child.offsetWidth / 2;
-      const distance = Math.abs(center - childCenter);
-      if (distance < nearestDistance) {
-        nearest = index;
-        nearestDistance = distance;
-      }
-    });
-    setActiveIndex(nearest);
+  const scrollToFeature = (index: number) => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+    const clamped = Math.max(0, Math.min(features.length - 1, index));
+    const rect = wrapper.getBoundingClientRect();
+    const travel = Math.max(0, rect.height - window.innerHeight);
+    const top =
+      window.scrollY + rect.top + (clamped / (features.length - 1)) * travel;
+    window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLElement>) => {
-    if (event.key === "ArrowLeft") select(activeIndex - 1);
-    if (event.key === "ArrowRight") select(activeIndex + 1);
+    if (event.key === "ArrowLeft") scrollToFeature(activeIndex - 1);
+    if (event.key === "ArrowRight") scrollToFeature(activeIndex + 1);
   };
 
   return (
