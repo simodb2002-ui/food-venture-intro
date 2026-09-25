@@ -1920,56 +1920,10 @@ body:has(.about-page) {
 }
 
 .hero-section {
-  --reveal-x: 72%;
-  --reveal-y: 48%;
   position: relative;
   isolation: isolate;
   overflow: hidden;
   background: var(--card);
-}
-
-.hero-photo {
-  position: absolute;
-  inset: -1px 0 0;
-  z-index: -1;
-  overflow: hidden;
-}
-.hero-photo img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center top;
-}
-.hero-photo-muted {
-  opacity: 0.24;
-  filter: saturate(0.72) contrast(0.9);
-}
-.hero-photo-reveal {
-  opacity: 1;
-  -webkit-mask-image: radial-gradient(
-    circle 240px at var(--reveal-x) var(--reveal-y),
-    #000 0 68%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    circle 240px at var(--reveal-x) var(--reveal-y),
-    #000 0 68%,
-    transparent 100%
-  );
-}
-.hero-photo-wash {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    color-mix(in oklab, var(--card) 94%, transparent) 0%,
-    color-mix(in oklab, var(--card) 78%, transparent) 40%,
-    color-mix(in oklab, var(--card) 12%, transparent) 76%,
-    transparent 100%
-  );
-  pointer-events: none;
 }
 
 .hero-visual {
@@ -1988,82 +1942,7 @@ body:has(.about-page) {
   stroke: var(--card);
 }
 
-@media (max-width: 900px) {
-  .hero-photo-reveal {
-    -webkit-mask-image: radial-gradient(
-      circle 320px at var(--reveal-x) var(--reveal-y),
-      var(--ink) 0%,
-      color-mix(in oklab, var(--ink) 82%, transparent) 30%,
-      color-mix(in oklab, var(--ink) 45%, transparent) 62%,
-      transparent 100%
-    );
-    mask-image: radial-gradient(
-      circle 320px at var(--reveal-x) var(--reveal-y),
-      var(--ink) 0%,
-      color-mix(in oklab, var(--ink) 82%, transparent) 30%,
-      color-mix(in oklab, var(--ink) 45%, transparent) 62%,
-      transparent 100%
-    );
-  }
-  .hero-photo-wash {
-    background: linear-gradient(
-      90deg,
-      color-mix(in oklab, var(--card) 78%, transparent),
-      color-mix(in oklab, var(--card) 48%, transparent)
-    );
-  }
-}
 
-@media (max-width: 600px) {
-  .hero-photo-muted {
-    opacity: 0.44;
-  }
-  .hero-photo-reveal {
-    display: none;
-  }
-  .hero-photo-wash {
-    background: color-mix(in oklab, var(--card) 55%, transparent);
-  }
-}
-
-/* Feathered full-bleed hero spotlight */
-.hero-photo-muted {
-  opacity: 0.48;
-  filter: saturate(0.85) contrast(0.95) brightness(0.85);
-}
-.hero-photo-reveal {
-  opacity: 0;
-  filter: saturate(1.08) contrast(1.02);
-  transition: opacity 0.28s ease;
-  -webkit-mask-image: radial-gradient(
-    circle 440px at var(--reveal-x) var(--reveal-y),
-    var(--ink) 0%,
-    color-mix(in oklab, var(--ink) 82%, transparent) 30%,
-    color-mix(in oklab, var(--ink) 45%, transparent) 62%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    circle 440px at var(--reveal-x) var(--reveal-y),
-    var(--ink) 0%,
-    color-mix(in oklab, var(--ink) 82%, transparent) 30%,
-    color-mix(in oklab, var(--ink) 45%, transparent) 62%,
-    transparent 100%
-  );
-}
-.hero-section:hover .hero-photo-reveal {
-  opacity: 1;
-}
-.hero-photo-wash {
-  background:
-    linear-gradient(
-      90deg,
-      color-mix(in oklab, var(--card) 78%, transparent) 0%,
-      color-mix(in oklab, var(--card) 48%, transparent) 39%,
-      color-mix(in oklab, var(--card) 10%, transparent) 67%,
-      transparent 100%
-    ),
-    color-mix(in oklab, var(--ink) 5%, transparent);
-}
 .hero-inner {
   position: relative;
   z-index: 2;
