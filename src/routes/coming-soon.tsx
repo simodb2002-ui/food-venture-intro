@@ -187,51 +187,69 @@ const spring = { type: "spring", stiffness: 500, damping: 38, mass: 0.5 } as con
 
 function FeatureCarousel() {
   const reduce = useReducedMotion();
-  const [activeIndex, setActiveIndex] = useState(0);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(1);
+  const sectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const { scrollYProgress: marqueeProgress } = useScroll({
-    target: wrapperRef,
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
     offset: ["start end", "end start"],
   });
-  const marqueeX = useTransform(marqueeProgress, [0, 1], ["-16%", "16%"]);
+  const marqueeX = useTransform(scrollYProgress, [0, 1], ["-16%", "16%"]);
 
-  const { scrollYProgress: pinProgress } = useScroll({
-    target: wrapperRef,
-    offset: ["start start", "end end"],
-  });
-  const position = useTransform(pinProgress, [0, 1], [0, features.length - 1]);
-  const x = useTransform(position, (f) => `calc(${(1 - f).toFixed(4)} * var(--card-step))`);
+  const scrollToCard = (index: number, behavior: ScrollBehavior = "smooth") => {
+    const track = trackRef.current;
+    const card = track?.children.item(index);
+    if (!(card instanceof HTMLElement)) return;
+    card.scrollIntoView({ behavior, block: "nearest", inline: "center" });
+  };
 
-  useEffect(
-    () => position.on("change", (value) => setActiveIndex(Math.round(value))),
-    [position],
-  );
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => scrollToCard(1, "instant"));
+    return () => {
+      cancelAnimationFrame(frame);
+      if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
+    };
+  }, []);
 
-  const scrollToFeature = (index: number) => {
-    const wrapper = wrapperRef.current;
-    if (!wrapper) return;
-    const clamped = Math.max(0, Math.min(features.length - 1, index));
-    const rect = wrapper.getBoundingClientRect();
-    const travel = Math.max(0, rect.height - window.innerHeight);
-    const top =
-      window.scrollY + rect.top + (clamped / (features.length - 1)) * travel;
-    window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
+  const select = (nextIndex: number) => {
+    const clamped = Math.max(0, Math.min(features.length - 1, nextIndex));
+    setActiveIndex(clamped);
+    scrollToCard(clamped);
+  };
+
+  const updateActiveFromScroll = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    const center = track.scrollLeft + track.clientWidth / 2;
+    let nearest = 0;
+    let nearestDistance = Number.POSITIVE_INFINITY;
+    Array.from(track.children).forEach((child, index) => {
+      if (!(child instanceof HTMLElement)) return;
+      const childCenter = child.offsetLeft + child.offsetWidth / 2;
+      const distance = Math.abs(center - childCenter);
+      if (distance < nearestDistance) {
+        nearest = index;
+        nearestDistance = distance;
+      }
+    });
+    setActiveIndex(nearest);
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLElement>) => {
-    if (event.key === "ArrowLeft") scrollToFeature(activeIndex - 1);
-    if (event.key === "ArrowRight") scrollToFeature(activeIndex + 1);
+    if (event.key === "ArrowLeft") select(activeIndex - 1);
+    if (event.key === "ArrowRight") select(activeIndex + 1);
   };
 
   return (
-    <div ref={wrapperRef} className="relative h-[280vh]">
-      <section
-        aria-label="Future foodXchange features"
-        aria-roledescription="carousel"
-        className="coming-carousel sticky top-0 flex min-h-dvh flex-col justify-center"
-        onKeyDown={onKeyDown}
-      >
+    <section
+      ref={sectionRef}
+      aria-label="Future foodXchange features"
+      aria-roledescription="carousel"
+      className="coming-carousel relative"
+      onKeyDown={onKeyDown}
+    >
       {/* giant pink parallax background type */}
       <div
         aria-hidden="true"
@@ -246,9 +264,10 @@ function FeatureCarousel() {
             .join("\u00A0\u00A0\u00A0")}
         </motion.span>
       </div>
-      <motion.div
+      <div
+        ref={trackRef}
         className="coming-carousel-stage relative z-10"
-        style={{ x }}
+        onScroll={() => updateActiveFromScroll()}
       >
         {features.map((feature, index) => {
           const { title, Icon, image, alt, description, bullets } = feature;
@@ -274,7 +293,7 @@ function FeatureCarousel() {
                 aria-label={active ? `${title} details` : `Show ${title}`}
                 className="coming-carousel-card-button"
                 onClick={() => {
-                  if (!active) scrollToFeature(index);
+                  if (!active) select(index);
                 }}
               >
                 <div className="px-5 py-6 text-left md:px-8 md:py-8">
@@ -343,7 +362,7 @@ function FeatureCarousel() {
             </motion.article>
           );
         })}
-      </motion.div>
+      </div>
 
       <div className="relative z-10 mt-8 flex items-center justify-center">
         <div className="flex gap-2" aria-label={`Feature ${activeIndex + 1} of ${features.length}`}>
@@ -359,8 +378,7 @@ function FeatureCarousel() {
       <p className="sr-only" aria-live="polite">
         {features[activeIndex]?.title ?? "Feature"} selected
       </p>
-      </section>
-    </div>
+    </section>
   );
 }
 

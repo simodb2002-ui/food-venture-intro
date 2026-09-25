@@ -1,12 +1,8 @@
-html:has(.coming-page) {
+html:has(.coming-page),
+body:has(.coming-page) {
   height: auto;
   overflow: auto;
   scroll-behavior: smooth;
-}
-
-body:has(.coming-page) {
-  height: auto;
-  overflow: visible;
 }
 
 .coming-page {
@@ -14,6 +10,7 @@ body:has(.coming-page) {
 }
 
 .coming-carousel {
+  position: relative;
   margin-inline: calc(50% - 50vw);
   overflow: hidden;
   padding-block: 3rem 2rem;
@@ -21,16 +18,24 @@ body:has(.coming-page) {
 }
 
 .coming-carousel-stage {
-  --card-step: calc(min(30rem, 58vw) + clamp(1rem, 4vw, 3rem));
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: clamp(1rem, 4vw, 3rem);
   min-height: 0;
+  overflow-x: auto;
   overflow-y: visible;
   padding-block: 2.5rem;
+  padding-inline: calc((100vw - min(30rem, 58vw)) / 2);
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
   transform-style: preserve-3d;
-  will-change: transform;
+}
+
+.coming-carousel-stage::-webkit-scrollbar {
+  display: none;
 }
 
 .coming-carousel-card {
@@ -39,6 +44,8 @@ body:has(.coming-page) {
   width: min(30rem, 58vw);
   overflow: hidden;
   border-radius: 1.5rem;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
   transform-style: preserve-3d;
   backface-visibility: hidden;
   background: var(--background);
@@ -83,8 +90,8 @@ body:has(.coming-page) {
   }
 
   .coming-carousel-stage {
-    --card-step: calc(74vw + 1rem);
     gap: 1rem;
+    padding-inline: 10vw;
   }
 
   .coming-carousel-card {
