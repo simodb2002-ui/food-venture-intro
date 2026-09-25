@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ChefHat, ScanLine, Sparkles, UsersRound } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useState, type KeyboardEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 
 import communityImage from "@/assets/coming-soon/community.jpg";
 import cookImage from "@/assets/coming-soon/cook.jpg";
@@ -184,11 +184,45 @@ function FeatureCarousel() {
   const reduce = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(1);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const scrollToCard = (index: number, behavior: ScrollBehavior = "smooth") => {
+    const track = trackRef.current;
+    const card = track?.children.item(index);
+    if (!(card instanceof HTMLElement)) return;
+    card.scrollIntoView({ behavior, block: "nearest", inline: "center" });
+  };
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => scrollToCard(1, "instant"));
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   const select = (nextIndex: number) => {
     const clamped = Math.max(0, Math.min(features.length - 1, nextIndex));
     setExpandedIndex(null);
     setActiveIndex(clamped);
+    scrollToCard(clamped);
+  };
+
+  const updateActiveFromScroll = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    const center = track.scrollLeft + track.clientWidth / 2;
+    let nearest = 0;
+    let nearestDistance = Number.POSITIVE_INFINITY;
+    Array.from(track.children).forEach((child, index) => {
+      if (!(child instanceof HTMLElement)) return;
+      const childCenter = child.offsetLeft + child.offsetWidth / 2;
+      const distance = Math.abs(center - childCenter);
+      if (distance < nearestDistance) {
+        nearest = index;
+        nearestDistance = distance;
+      }
+    });
+    setActiveIndex(nearest);
+    setExpandedIndex(null);
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLElement>) => {
@@ -203,14 +237,12 @@ function FeatureCarousel() {
       className="coming-carousel"
       onKeyDown={onKeyDown}
     >
-      <motion.div
+      <div
+        ref={trackRef}
         className="coming-carousel-stage"
-        drag={reduce ? false : "x"}
-        dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={0.12}
-        onDragEnd={(_, info) => {
-          if (info.offset.x < -45 || info.velocity.x < -450) select(activeIndex + 1);
-          if (info.offset.x > 45 || info.velocity.x > 450) select(activeIndex - 1);
+        onScroll={() => {
+          if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
+          scrollTimerRef.current = setTimeout(updateActiveFromScroll, 80);
         }}
       >
         {features.map((feature, index) => {
@@ -226,9 +258,8 @@ function FeatureCarousel() {
               className={`coming-carousel-card ${expanded ? "is-expanded" : "is-collapsed"}`}
               initial={false}
               animate={{
-                x: `${relative * 82}%`,
                 scale: active ? 1.1 : 0.85,
-                opacity: Math.abs(relative) > 1 ? 0 : active ? 1 : 0.6,
+                opacity: active ? 1 : 0.6,
                 rotateY: active ? 0 : relative < 0 ? 14 : -14,
               }}
               transition={reduce ? { duration: 0 } : spring}
@@ -336,7 +367,7 @@ function FeatureCarousel() {
             </motion.article>
           );
         })}
-      </motion.div>
+      </div>
 
       <div className="mt-8 flex items-center justify-center">
         <div className="flex gap-2" aria-label={`Feature ${activeIndex + 1} of ${features.length}`}>

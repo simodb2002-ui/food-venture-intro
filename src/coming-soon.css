@@ -18,26 +18,34 @@ body:has(.coming-page) {
 }
 
 .coming-carousel-stage {
-  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1rem, 4vw, 3rem);
   height: clamp(31rem, 57vw, 43rem);
-  cursor: grab;
-  touch-action: pan-y;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-inline: calc((100vw - min(42rem, 72vw)) / 2);
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
   transform-style: preserve-3d;
 }
 
-.coming-carousel-stage:active {
-  cursor: grabbing;
+.coming-carousel-stage::-webkit-scrollbar {
+  display: none;
 }
 
 .coming-carousel-card {
-  position: absolute;
-  top: 0;
-  left: 50%;
+  position: relative;
+  flex: 0 0 min(42rem, 72vw);
   width: min(42rem, 72vw);
   height: clamp(29rem, 52vw, 40rem);
-  margin-left: min(-21rem, -36vw);
   overflow: hidden;
   border-radius: 1.5rem;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
   transform-style: preserve-3d;
   backface-visibility: hidden;
 }
@@ -91,11 +99,13 @@ body:has(.coming-page) {
 
   .coming-carousel-stage {
     height: 38rem;
+    gap: 1rem;
+    padding-inline: 10vw;
   }
 
   .coming-carousel-card {
+    flex-basis: 80vw;
     width: 80vw;
     height: 36rem;
-    margin-left: -40vw;
   }
 }
