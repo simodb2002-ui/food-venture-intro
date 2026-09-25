@@ -2,7 +2,6 @@ html:has(.coming-page),
 body:has(.coming-page) {
   height: auto;
   overflow: auto;
-  scroll-behavior: smooth;
 }
 
 .coming-page {
@@ -27,9 +26,8 @@ body:has(.coming-page) {
   padding-block: 2.5rem;
   padding-inline: calc((100vw - min(30rem, 58vw)) / 2);
   scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
   scrollbar-width: none;
-  overscroll-behavior-x: contain;
   touch-action: pan-x pan-y;
   transform-style: preserve-3d;
 }
@@ -45,7 +43,6 @@ body:has(.coming-page) {
   overflow: hidden;
   border-radius: 1.5rem;
   scroll-snap-align: center;
-  scroll-snap-stop: always;
   transform-style: preserve-3d;
   backface-visibility: hidden;
   background: var(--background);
