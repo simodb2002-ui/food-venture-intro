@@ -183,7 +183,6 @@ const spring = { type: "spring", stiffness: 180, damping: 24, mass: 0.8 } as con
 function FeatureCarousel() {
   const reduce = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(1);
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(1);
   const trackRef = useRef<HTMLDivElement>(null);
   const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -205,7 +204,6 @@ function FeatureCarousel() {
   const select = (nextIndex: number) => {
     const clamped = Math.max(0, Math.min(features.length - 1, nextIndex));
     setActiveIndex(clamped);
-    setExpandedIndex(clamped);
     scrollToCard(clamped);
   };
 
@@ -225,7 +223,6 @@ function FeatureCarousel() {
       }
     });
     setActiveIndex(nearest);
-    setExpandedIndex(nearest);
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLElement>) => {
