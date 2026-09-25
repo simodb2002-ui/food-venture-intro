@@ -1,6 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ChefHat, ScanLine, UsersRound } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "motion/react";
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 
 import communityImage from "@/assets/coming-soon/community.jpg";
@@ -156,6 +162,41 @@ function ScribbleUnderline({ className = "" }: { className?: string }) {
   );
 }
 
+function HeroScribble({ y }: { y: MotionValue<number> }) {
+  const reduce = useReducedMotion();
+
+  return (
+    <motion.svg
+      viewBox="0 0 300 96"
+      fill="none"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      className="pointer-events-none absolute -bottom-8 left-1/2 z-0 h-20 w-[145%] -translate-x-1/2 overflow-visible text-cta-foreground md:-bottom-10 md:h-24 md:w-[155%]"
+      style={{ y: reduce ? 0 : y }}
+    >
+      <motion.path
+        d="M12 55C58 25 112 77 164 45C205 20 242 30 288 52C245 76 188 69 145 62C96 54 55 69 18 75"
+        stroke="currentColor"
+        strokeWidth={11}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={reduce ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{ pathLength: { duration: 1.25, delay: 0.45, ease: "easeOut" }, opacity: { duration: 0.2, delay: 0.45 } }}
+      />
+      <motion.path
+        d="M24 76C72 55 117 82 165 66C211 51 250 60 280 70"
+        stroke="currentColor"
+        strokeWidth={7}
+        strokeLinecap="round"
+        initial={reduce ? { pathLength: 1, opacity: 0.72 } : { pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 0.72 }}
+        transition={{ pathLength: { duration: 1.05, delay: 0.7, ease: "easeOut" }, opacity: { duration: 0.2, delay: 0.7 } }}
+      />
+    </motion.svg>
+  );
+}
+
 function ScribbleBadge() {
   return (
     <span className="relative inline-flex px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-problem">
@@ -180,11 +221,116 @@ function ScribbleBadge() {
 /* ---------- interactive feature carousel ---------- */
 const spring = { type: "spring", stiffness: 500, damping: 38, mass: 0.5 } as const;
 
+function FeatureCard({
+  feature,
+  index,
+  activeIndex,
+  carouselProgress,
+  onSelect,
+}: {
+  feature: (typeof features)[number];
+  index: number;
+  activeIndex: number;
+  carouselProgress: MotionValue<number>;
+  onSelect: (index: number) => void;
+}) {
+  const reduce = useReducedMotion();
+  const relative = index - activeIndex;
+  const active = relative === 0;
+  const parallaxY = useTransform(
+    carouselProgress,
+    [0, 1],
+    reduce || active ? [0, 0] : [relative * -14, relative * 22],
+  );
+  const { title, Icon, image, alt, description, bullets } = feature;
+
+  return (
+    <motion.article
+      aria-hidden={!active}
+      className="coming-carousel-card"
+      initial={false}
+      animate={{ scale: active ? 1.05 : 0.9, opacity: active ? 1 : 0.55 }}
+      transition={reduce ? { duration: 0 } : spring}
+      style={{ y: parallaxY, zIndex: active ? 10 : 5 - Math.abs(relative) }}
+    >
+      <button
+        type="button"
+        tabIndex={active ? 0 : -1}
+        aria-label={active ? `${title} details` : `Show ${title}`}
+        className="coming-carousel-card-button"
+        onClick={() => {
+          if (!active) onSelect(index);
+        }}
+      >
+        <div className="px-5 py-6 text-left md:px-8 md:py-8">
+          <div className="flex items-center gap-3">
+            <Icon className="size-6 shrink-0 text-problem" aria-hidden="true" />
+            <ScribbleBadge />
+          </div>
+          <h2 className="mt-4 text-2xl font-bold text-cta-foreground sm:text-3xl md:text-4xl">
+            {title}
+          </h2>
+          <div className="relative mt-5">
+            <svg
+              viewBox="0 0 400 320"
+              fill="none"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+              className="absolute -inset-2 h-[calc(100%+1rem)] w-[calc(100%+1rem)] stroke-solution"
+            >
+              <path
+                d="M60 20c90-22 230-18 300 20 44 30 40 170 10 230-40 60-230 50-300 20C10 260 0 150 14 90 22 50 36 28 60 20z"
+                strokeWidth={3}
+                strokeLinecap="round"
+              />
+            </svg>
+            <div className="relative overflow-hidden" style={{ borderRadius: blobs[index] }}>
+              <img
+                src={image}
+                alt={alt}
+                width={1200}
+                height={912}
+                className="aspect-[4/3] w-full object-cover"
+              />
+            </div>
+          </div>
+          <p className="mt-5 text-sm leading-relaxed text-cta-muted md:text-base">{description}</p>
+          <ul className="mt-4 space-y-2.5">
+            {bullets.map((bullet) => (
+              <li key={bullet} className="flex gap-2.5 text-xs font-medium leading-relaxed md:text-sm">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  className="mt-0.5 size-4 shrink-0 stroke-problem"
+                >
+                  <path
+                    d="M3 13c3 2 5 5 6 7 3-7 7-12 12-16"
+                    strokeWidth={3}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                {bullet}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </button>
+    </motion.article>
+  );
+}
+
 function FeatureCarousel() {
   const reduce = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(1);
+  const carouselRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { scrollYProgress: carouselProgress } = useScroll({
+    target: carouselRef,
+    offset: ["start end", "end start"],
+  });
 
   const scrollToCard = (index: number, behavior: ScrollBehavior = "smooth") => {
     const track = trackRef.current;
@@ -232,6 +378,7 @@ function FeatureCarousel() {
 
   return (
     <section
+      ref={carouselRef}
       aria-label="Future foodXchange features"
       aria-roledescription="carousel"
       className="coming-carousel"
@@ -243,96 +390,15 @@ function FeatureCarousel() {
         onScroll={() => updateActiveFromScroll()}
       >
         {features.map((feature, index) => {
-          const { title, Icon, image, alt, description, bullets } = feature;
-          const relative = index - activeIndex;
-          const active = relative === 0;
-
           return (
-            <motion.article
-              key={title}
-              aria-hidden={!active}
-              className="coming-carousel-card"
-              initial={false}
-              animate={{
-                scale: active ? 1.05 : 0.9,
-                opacity: active ? 1 : 0.55,
-              }}
-              transition={reduce ? { duration: 0 } : spring}
-              style={{ zIndex: active ? 10 : 5 - Math.abs(relative) }}
-            >
-              <button
-                type="button"
-                tabIndex={active ? 0 : -1}
-                aria-label={active ? `${title} details` : `Show ${title}`}
-                className="coming-carousel-card-button"
-                onClick={() => {
-                  if (!active) select(index);
-                }}
-              >
-                <div className="px-5 py-6 text-left md:px-8 md:py-8">
-                  <div className="flex items-center gap-3">
-                    <Icon className="size-6 shrink-0 text-problem" aria-hidden="true" />
-                    <ScribbleBadge />
-                  </div>
-                  <h2 className="mt-4 text-2xl font-bold text-cta-foreground sm:text-3xl md:text-4xl">
-                    {title}
-                  </h2>
-                  <div className="relative mt-5">
-                    <svg
-                      viewBox="0 0 400 320"
-                      fill="none"
-                      preserveAspectRatio="none"
-                      aria-hidden="true"
-                      className="absolute -inset-2 h-[calc(100%+1rem)] w-[calc(100%+1rem)] stroke-solution"
-                    >
-                      <path
-                        d="M60 20c90-22 230-18 300 20 44 30 40 170 10 230-40 60-230 50-300 20C10 260 0 150 14 90 22 50 36 28 60 20z"
-                        strokeWidth={3}
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                    <div
-                      className="relative overflow-hidden"
-                      style={{ borderRadius: blobs[index] }}
-                    >
-                      <img
-                        src={image}
-                        alt={alt}
-                        width={1200}
-                        height={912}
-                        className="aspect-[4/3] w-full object-cover"
-                      />
-                    </div>
-                  </div>
-                  <p className="mt-5 text-sm leading-relaxed text-cta-muted md:text-base">
-                    {description}
-                  </p>
-                  <ul className="mt-4 space-y-2.5">
-                    {bullets.map((bullet) => (
-                      <li
-                        key={bullet}
-                        className="flex gap-2.5 text-xs font-medium leading-relaxed md:text-sm"
-                      >
-                        <svg
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          aria-hidden="true"
-                          className="mt-0.5 size-4 shrink-0 stroke-problem"
-                        >
-                          <path
-                            d="M3 13c3 2 5 5 6 7 3-7 7-12 12-16"
-                            strokeWidth={3}
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                        {bullet}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </button>
-            </motion.article>
+            <FeatureCard
+              key={feature.title}
+              feature={feature}
+              index={index}
+              activeIndex={activeIndex}
+              carouselProgress={carouselProgress}
+              onSelect={select}
+            />
           );
         })}
       </div>
@@ -357,6 +423,12 @@ function FeatureCarousel() {
 
 function ComingSoonPage() {
   const reduce = useReducedMotion();
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const scribbleY = useTransform(heroProgress, [0, 1], [0, -40]);
   return (
     <div className="coming-page relative min-h-dvh overflow-x-clip bg-cta text-cta-foreground">
       <SiteHeader active="coming-soon" className="sticky top-0" />
@@ -383,6 +455,7 @@ function ComingSoonPage() {
 
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
         <motion.section
+          ref={heroRef}
           initial={reduce ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 100, damping: 18 }}
@@ -391,9 +464,9 @@ function ComingSoonPage() {
           <ScribbleBadge />
           <h1 className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
             More of foodXchange is on the{" "}
-            <span className="relative inline-block">
-              way
-              <ScribbleUnderline className="-bottom-3 h-5" />
+            <span className="relative isolate inline-block px-1">
+              <span className="relative z-10">way</span>
+              <HeroScribble y={scribbleY} />
             </span>
           </h1>
           <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-cta-muted">
