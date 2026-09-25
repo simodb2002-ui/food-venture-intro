@@ -1880,10 +1880,9 @@ body:has(.about-page) {
     180deg,
     oklch(1 0 0) 0%,
     oklch(1 0 0) 48%,
-    color-mix(in oklab, var(--orange) 16%, oklch(1 0 0)) 64%,
-    color-mix(in oklab, var(--orange) 58%, oklch(0.35 0 0)) 78%,
-    var(--ink) 96%,
-    var(--ink) 100%
+    color-mix(in oklab, var(--orange) 16%, oklch(1 0 0)) 58%,
+    var(--orange) 70%,
+    var(--orange) 100%
   );
 }
 .about-page::before,
@@ -1904,14 +1903,11 @@ body:has(.about-page) {
 }
 .founders-section,
 .newsletter-section {
-  color: var(--card);
+  color: var(--ink);
 }
 .founders-section .eyebrow,
 .newsletter-section .eyebrow {
-  color: var(--orange);
-}
-.founders-section .founder-doodle {
-  stroke: var(--card);
+  color: var(--pink);
 }
 
 
