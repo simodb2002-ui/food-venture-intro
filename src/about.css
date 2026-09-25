@@ -823,7 +823,7 @@ body:has(.about-page) {
   min-height: 640px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background: var(--card);
+  background: transparent;
   isolation: isolate;
 }
 .book-spine {
@@ -853,7 +853,7 @@ body:has(.about-page) {
 .recipe-page {
   min-width: 0;
   padding: 44px 50px;
-  background: var(--card);
+  background: transparent;
 }
 .recipe-page-left {
   position: relative;
@@ -865,7 +865,7 @@ body:has(.about-page) {
   position: relative;
   border-left: 1px solid color-mix(in oklab, var(--ink) 16%, transparent);
   border-radius: 0;
-  background: var(--card);
+  background: transparent;
 }
 .story-intro .eyebrow {
   color: var(--pink);
