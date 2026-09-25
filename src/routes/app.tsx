@@ -440,7 +440,7 @@ function FeatureShowcase() {
                 key={slide.title}
                 initial={reduce ? false : { opacity: 0, x: 40 * direction }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={reduce ? undefined : { opacity: 0, x: -40 * direction }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, x: -40 * direction }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
               >
                 <PhoneMockup Icon={slide.Icon} label={slide.title} />
@@ -454,7 +454,7 @@ function FeatureShowcase() {
                 key={slide.title}
                 initial={reduce ? false : { opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={reduce ? undefined : { opacity: 0, y: -16 }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -16 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
               >
                 <span className="inline-flex items-center gap-2 rounded-full bg-solution/20 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-solution">
