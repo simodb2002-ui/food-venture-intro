@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ChefHat, ScanLine, Sparkles, UsersRound } from "lucide-react";
+import { ChefHat, ScanLine, UsersRound } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 
@@ -183,7 +183,7 @@ const spring = { type: "spring", stiffness: 180, damping: 24, mass: 0.8 } as con
 function FeatureCarousel() {
   const reduce = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(1);
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(1);
   const trackRef = useRef<HTMLDivElement>(null);
   const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -196,13 +196,16 @@ function FeatureCarousel() {
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => scrollToCard(1, "instant"));
-    return () => cancelAnimationFrame(frame);
+    return () => {
+      cancelAnimationFrame(frame);
+      if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
+    };
   }, []);
 
   const select = (nextIndex: number) => {
     const clamped = Math.max(0, Math.min(features.length - 1, nextIndex));
-    setExpandedIndex(null);
     setActiveIndex(clamped);
+    setExpandedIndex(clamped);
     scrollToCard(clamped);
   };
 
@@ -222,7 +225,7 @@ function FeatureCarousel() {
       }
     });
     setActiveIndex(nearest);
-    setExpandedIndex(null);
+    setExpandedIndex(nearest);
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLElement>) => {
@@ -269,14 +272,10 @@ function FeatureCarousel() {
                 type="button"
                 tabIndex={active ? 0 : -1}
                 aria-expanded={expanded}
-                aria-label={active ? `${expanded ? "Hide" : "Reveal"} ${title}` : `Show ${title}`}
+                aria-label={active ? `${title} details` : `Show ${title}`}
                 className="coming-carousel-card-button"
                 onClick={() => {
-                  if (!active) {
-                    select(index);
-                    return;
-                  }
-                  setExpandedIndex(expanded ? null : index);
+                  if (!active) select(index);
                 }}
               >
                 <AnimatePresence mode="wait" initial={false}>
@@ -291,15 +290,6 @@ function FeatureCarousel() {
                     >
                       <Icon className="size-12 md:size-16" strokeWidth={1.8} aria-hidden="true" />
                       <h2 className="mt-5 text-3xl font-bold md:text-5xl">{title}</h2>
-                      {active && (
-                        <motion.span
-                          className="mt-10 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider"
-                          animate={reduce ? {} : { y: [0, -5, 0] }}
-                          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                        >
-                          Click to reveal <Sparkles className="size-4" aria-hidden="true" />
-                        </motion.span>
-                      )}
                     </motion.div>
                   ) : (
                     <motion.div
