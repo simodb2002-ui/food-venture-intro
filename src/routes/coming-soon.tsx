@@ -272,58 +272,68 @@ function FeatureCarousel() {
                   if (!active) select(index);
                 }}
               >
-                    <div className="px-5 py-6 text-left md:px-8 md:py-8">
-                      <div className="flex items-center gap-3">
-                        <Icon className="size-6 shrink-0 text-problem" aria-hidden="true" />
-                        <ScribbleBadge />
-                      </div>
-                      <h2 className="mt-4 text-3xl font-bold text-cta-foreground md:text-4xl">{title}</h2>
-                      <div className="relative mt-5">
+                <div className="px-5 py-6 text-left md:px-8 md:py-8">
+                  <div className="flex items-center gap-3">
+                    <Icon className="size-6 shrink-0 text-problem" aria-hidden="true" />
+                    <ScribbleBadge />
+                  </div>
+                  <h2 className="mt-4 text-3xl font-bold text-cta-foreground md:text-4xl">
+                    {title}
+                  </h2>
+                  <div className="relative mt-5">
+                    <svg
+                      viewBox="0 0 400 320"
+                      fill="none"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                      className="absolute -inset-2 h-[calc(100%+1rem)] w-[calc(100%+1rem)] stroke-solution"
+                    >
+                      <path
+                        d="M60 20c90-22 230-18 300 20 44 30 40 170 10 230-40 60-230 50-300 20C10 260 0 150 14 90 22 50 36 28 60 20z"
+                        strokeWidth={3}
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    <div
+                      className="relative overflow-hidden"
+                      style={{ borderRadius: blobs[index] }}
+                    >
+                      <img
+                        src={image}
+                        alt={alt}
+                        width={1200}
+                        height={912}
+                        className="aspect-[16/7] w-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <p className="mt-5 text-sm leading-relaxed text-cta-muted md:text-base">
+                    {description}
+                  </p>
+                  <ul className="mt-4 space-y-2.5">
+                    {bullets.map((bullet) => (
+                      <li
+                        key={bullet}
+                        className="flex gap-2.5 text-xs font-medium leading-relaxed md:text-sm"
+                      >
                         <svg
-                          viewBox="0 0 400 320"
+                          viewBox="0 0 24 24"
                           fill="none"
-                          preserveAspectRatio="none"
                           aria-hidden="true"
-                          className="absolute -inset-2 h-[calc(100%+1rem)] w-[calc(100%+1rem)] stroke-solution"
+                          className="mt-0.5 size-4 shrink-0 stroke-problem"
                         >
                           <path
-                            d="M60 20c90-22 230-18 300 20 44 30 40 170 10 230-40 60-230 50-300 20C10 260 0 150 14 90 22 50 36 28 60 20z"
+                            d="M3 13c3 2 5 5 6 7 3-7 7-12 12-16"
                             strokeWidth={3}
                             strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
                         </svg>
-                        <div className="relative overflow-hidden" style={{ borderRadius: blobs[index] }}>
-                          <img
-                            src={image}
-                            alt={alt}
-                            width={1200}
-                            height={912}
-                            className="aspect-[16/7] w-full object-cover"
-                          />
-                        </div>
-                      </div>
-                      <p className="mt-5 text-sm leading-relaxed text-cta-muted md:text-base">{description}</p>
-                      <ul className="mt-4 space-y-2.5">
-                        {bullets.map((bullet) => (
-                          <li key={bullet} className="flex gap-2.5 text-xs font-medium leading-relaxed md:text-sm">
-                            <svg
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              aria-hidden="true"
-                              className="mt-0.5 size-4 shrink-0 stroke-problem"
-                            >
-                              <path
-                                d="M3 13c3 2 5 5 6 7 3-7 7-12 12-16"
-                                strokeWidth={3}
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
-                            {bullet}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </button>
             </motion.article>
           );
@@ -359,8 +369,18 @@ function ComingSoonPage() {
         <Doodle kind="apple" className="top-40 left-[6%] size-14" />
         <Doodle kind="carrot" tone="solution" className="top-72 right-[8%] size-16" delay={1} />
         <Doodle kind="spiral" className="top-[900px] left-[3%] size-12" delay={2} />
-        <Doodle kind="star" tone="solution" className="top-[1500px] right-[4%] size-10" delay={0.6} />
-        <Doodle kind="apple" tone="solution" className="top-[2100px] left-[5%] size-12" delay={1.6} />
+        <Doodle
+          kind="star"
+          tone="solution"
+          className="top-[1500px] right-[4%] size-10"
+          delay={0.6}
+        />
+        <Doodle
+          kind="apple"
+          tone="solution"
+          className="top-[2100px] left-[5%] size-12"
+          delay={1.6}
+        />
         <Doodle kind="spiral" className="top-[2500px] right-[6%] size-14" delay={2.4} />
       </div>
 
