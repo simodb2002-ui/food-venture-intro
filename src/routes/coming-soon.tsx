@@ -416,8 +416,9 @@ function ComingSoonPage() {
           className="mx-auto max-w-3xl pt-20 pb-24 text-center md:pt-28"
         >
           <h1 className="text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
-            More of foodXchange{"\u00a0"}
+            More of foodXchange
             <br />
+            is on the{" "}
             <span className="relative inline-block">
               way
               <ScribbleUnderline className="-bottom-3 h-5" />
