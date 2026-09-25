@@ -10,7 +10,6 @@ body:has(.coming-page) {
 }
 
 .coming-carousel {
-  position: relative;
   margin-inline: calc(50% - 50vw);
   overflow: hidden;
   padding-block: 3rem 2rem;
