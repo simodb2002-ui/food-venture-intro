@@ -254,7 +254,7 @@ function FeatureCarousel() {
       <motion.div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0 flex items-center overflow-hidden select-none"
-        style={reduce ? undefined : { x: marqueeX }}
+        style={reduce ? {} : { x: marqueeX }}
       >
         <span className="w-full text-center whitespace-nowrap text-[clamp(7rem,24vw,17rem)] font-black uppercase leading-none tracking-tight text-problem/15">
           COMING SOON • COMING SOON • COMING SOON
