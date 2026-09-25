@@ -441,7 +441,7 @@ function ComingSoonPage() {
           <div className="absolute inset-x-0 top-0 h-1.5 bg-solution" aria-hidden="true" />
           <Doodle kind="star" tone="solution" className="top-8 left-8 size-10" />
           <Doodle kind="spiral" className="right-10 bottom-8 size-12" delay={1} />
-          <h2 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+          <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
             Want to follow the{" "}
             <span className="relative inline-block">
               launch?
