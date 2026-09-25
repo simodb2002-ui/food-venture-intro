@@ -1,6 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ChefHat, ScanLine, UsersRound } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "motion/react";
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 
 import communityImage from "@/assets/coming-soon/community.jpg";
@@ -183,8 +188,15 @@ const spring = { type: "spring", stiffness: 500, damping: 38, mass: 0.5 } as con
 function FeatureCarousel() {
   const reduce = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(1);
+  const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const marqueeX = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
 
   const scrollToCard = (index: number, behavior: ScrollBehavior = "smooth") => {
     const track = trackRef.current;
@@ -232,14 +244,25 @@ function FeatureCarousel() {
 
   return (
     <section
+      ref={sectionRef}
       aria-label="Future foodXchange features"
       aria-roledescription="carousel"
-      className="coming-carousel"
+      className="coming-carousel relative"
       onKeyDown={onKeyDown}
     >
+      {/* giant pink parallax background type */}
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 flex items-center overflow-hidden select-none"
+        style={reduce ? {} : { x: marqueeX }}
+      >
+        <span className="w-full text-center whitespace-nowrap text-[clamp(7rem,24vw,17rem)] font-black uppercase leading-none tracking-tight text-problem/15">
+          COMING SOON • COMING SOON • COMING SOON
+        </span>
+      </motion.div>
       <div
         ref={trackRef}
-        className="coming-carousel-stage"
+        className="coming-carousel-stage relative z-10"
         onScroll={() => updateActiveFromScroll()}
       >
         {features.map((feature, index) => {
@@ -337,7 +360,7 @@ function FeatureCarousel() {
         })}
       </div>
 
-      <div className="mt-8 flex items-center justify-center">
+      <div className="relative z-10 mt-8 flex items-center justify-center">
         <div className="flex gap-2" aria-label={`Feature ${activeIndex + 1} of ${features.length}`}>
           {features.map((feature, index) => (
             <span
