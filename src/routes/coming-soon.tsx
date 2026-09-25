@@ -261,7 +261,7 @@ function FeatureCarousel() {
         >
           {Array.from({ length: 6 })
             .map(() => "COMING\u00A0SOON")
-            .join("\u00A0\u00A0\u00A0\u2022\u00A0\u00A0\u00A0")}
+            .join("\u00A0\u00A0\u00A0")}
         </motion.span>
       </div>
       <div
