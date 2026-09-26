@@ -254,12 +254,14 @@ function JoinPage() {
                       card: "bg-solution text-solution-foreground",
                       accent: "text-solution-foreground",
                       stroke: "stroke-solution-foreground",
+                      frame: "stroke-solution-foreground",
                       muted: "text-solution-foreground/70",
                     }
                   : {
                       card: "bg-problem text-problem-foreground",
                       accent: "text-problem-foreground",
                       stroke: "stroke-problem-foreground",
+                      frame: "stroke-solution",
                       muted: "text-problem-foreground/70",
                     };
               return (
@@ -268,7 +270,7 @@ function JoinPage() {
                   variants={item}
                   className={`group relative flex h-full min-h-[26rem] flex-col rounded-3xl p-8 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${toneClasses.card}`}
                 >
-                  <HoverFrame className={toneClasses.stroke} />
+                  <HoverFrame className={toneClasses.frame} />
                   {popular && (
                     <span className="absolute -top-3 right-6 rounded-full bg-solution px-3 py-1 text-xs font-bold uppercase tracking-wider text-solution-foreground">
                       Most popular
