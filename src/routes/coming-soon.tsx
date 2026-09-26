@@ -202,7 +202,7 @@ function FeatureCarousel() {
         className="pointer-events-none absolute inset-x-0 -top-6 z-0 flex items-start justify-center overflow-hidden select-none"
       >
         <motion.span
-          className="inline-block min-w-max px-8 text-center whitespace-nowrap text-[clamp(4rem,13vw,12rem)] font-black uppercase leading-none tracking-normal text-problem/60"
+          className="inline-block min-w-max px-8 text-center whitespace-nowrap text-[clamp(4rem,13vw,12rem)] font-black uppercase leading-none tracking-normal text-problem/40"
           style={reduce ? {} : { x: marqueeX }}
         >
           {Array.from({ length: 6 })
@@ -331,7 +331,7 @@ function FeatureCarousel() {
 function ComingSoonPage() {
   const reduce = useReducedMotion();
   return (
-    <div className="coming-page relative min-h-dvh overflow-x-clip bg-background text-cta-foreground">
+    <div className="coming-page relative min-h-dvh overflow-x-clip bg-[oklch(0.99_0.004_70)] text-cta-foreground">
       <SiteHeader active="coming-soon" className="sticky top-0" />
 
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
