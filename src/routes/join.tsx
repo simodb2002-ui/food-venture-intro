@@ -104,7 +104,7 @@ function HoverFrame({ className = "stroke-problem" }: { className?: string }) {
       <path
         className="scribble-draw"
         pathLength={1}
-        d="M100 8C220 -4 320 0 362 22C392 38 394 70 390 100C384 190 386 290 384 330C382 366 356 390 316 392C230 400 130 398 70 386C34 378 10 354 14 316C20 240 16 130 22 68C26 32 55 12 100 8Z"
+        d="M76 6 L324 6 C362.7 6 394 37.3 394 76 L394 324 C394 362.7 362.7 394 324 394 L76 394 C37.3 394 6 362.7 6 324 L6 76 C6 37.3 37.3 6 76 6 Z"
         strokeWidth={2.5}
         strokeLinecap="round"
         strokeLinejoin="round"
