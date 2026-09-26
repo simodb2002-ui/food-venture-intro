@@ -2354,7 +2354,6 @@ body:has(.about-page) {
   min-height: 500px;
   transform-origin: left center;
   transform-style: preserve-3d;
-  transform: rotate(-15deg);
 }
 .recipe-book-cover {
   position: relative;
@@ -2367,7 +2366,7 @@ body:has(.about-page) {
   overflow: hidden;
   border: 3px solid var(--ink);
   border-radius: 8px 24px 24px 8px;
-  background: var(--ink) !important;
+  background: var(--pink) !important;
   color: var(--card) !important;
   padding: 48px 46px 42px;
   text-align: left;
@@ -2408,6 +2407,15 @@ body:has(.about-page) {
   font-size: clamp(44px, 5vw, 68px);
   font-weight: 800;
   line-height: 0.98;
+}
+.recipe-cover-mark {
+  position: absolute;
+  right: 38px;
+  bottom: 92px;
+  color: var(--orange);
+  font-size: 72px;
+  line-height: 1;
+  transform: rotate(12deg);
 }
 .recipe-cover-action {
   display: inline-flex;
@@ -2486,6 +2494,11 @@ body:has(.about-page) {
   }
   .recipe-cover-title {
     font-size: 44px;
+  }
+  .recipe-cover-mark {
+    right: 25px;
+    bottom: 82px;
+    font-size: 56px;
   }
   .recipe-page {
     padding: 30px 22px;
