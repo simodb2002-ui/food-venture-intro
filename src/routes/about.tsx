@@ -535,7 +535,6 @@ function AboutPage() {
                   >
                     <span className="recipe-cover-kicker">The Food Investors Society</span>
                     <span className="recipe-cover-title">Our Story:<br />The Recipe</span>
-                    <span className="recipe-cover-mark" aria-hidden="true">✦</span>
                     <span className="recipe-cover-action">Open book <ArrowRight /></span>
                   </Button>
                 </motion.div>
