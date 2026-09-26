@@ -266,7 +266,7 @@ function JoinPage() {
                 <motion.article
                   key={title}
                   variants={item}
-                  className={`group relative rounded-3xl p-8 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${toneClasses.card}`}
+                  className={`group relative flex h-full min-h-[26rem] flex-col rounded-3xl p-8 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${toneClasses.card}`}
                 >
                   <HoverFrame className={toneClasses.stroke} />
                   {popular && (
