@@ -52,13 +52,108 @@ export function CursorFollower() {
     let currentY = -100;
     let hasPointer = false;
 
+    /** Colour of a simple linear-gradient at the pointer, or null. */
+    const gradientColorAt = (
+      image: string,
+      rect: DOMRect,
+      x: number,
+      y: number,
+    ): [number, number, number, number] | null => {
+      const start = image.indexOf("linear-gradient(");
+      if (start === -1) return null;
+      // Extract the gradient body, respecting nested parentheses.
+      let depth = 0;
+      let body = "";
+      for (let i = start + "linear-gradient(".length; i < image.length; i++) {
+        const ch = image[i]!;
+        if (ch === "(") depth++;
+        if (ch === ")") {
+          if (depth === 0) break;
+          depth--;
+        }
+        body += ch;
+      }
+      const parts: string[] = [];
+      depth = 0;
+      let buf = "";
+      for (const ch of body) {
+        if (ch === "(") depth++;
+        if (ch === ")") depth--;
+        if (ch === "," && depth === 0) {
+          parts.push(buf.trim());
+          buf = "";
+        } else buf += ch;
+      }
+      if (buf.trim()) parts.push(buf.trim());
+
+      let axis: "y" | "x" = "y";
+      let reverse = false;
+      const first = parts[0] ?? "";
+      if (/^(to |\d|-?\d*\.?\d+deg|in )/.test(first)) {
+        parts.shift();
+        if (/to top|0deg|360deg/.test(first)) reverse = true;
+        else if (/to right|90deg/.test(first)) axis = "x";
+        else if (/to left|270deg/.test(first)) {
+          axis = "x";
+          reverse = true;
+        } else if (/deg/.test(first) && !/180deg/.test(first)) return null;
+      }
+
+      const stops: { color: [number, number, number, number]; pos: number | null }[] = [];
+      for (const part of parts) {
+        const m = part.match(/^(.*?)(?:\s+(-?\d*\.?\d+)%)?(?:\s+(-?\d*\.?\d+)%)?$/);
+        if (!m) continue;
+        const color = resolve(m[1]!.trim());
+        stops.push({ color, pos: m[2] !== undefined ? Number(m[2]) : null });
+        if (m[3] !== undefined) stops.push({ color, pos: Number(m[3]) });
+      }
+      if (stops.length < 2) return null;
+      if (stops[0]!.pos === null) stops[0]!.pos = 0;
+      if (stops[stops.length - 1]!.pos === null) stops[stops.length - 1]!.pos = 100;
+      for (let i = 1; i < stops.length - 1; i++) {
+        if (stops[i]!.pos !== null) continue;
+        let j = i;
+        while (stops[j]!.pos === null) j++;
+        const a = stops[i - 1]!.pos!;
+        const bPos = stops[j]!.pos!;
+        for (let k = i; k < j; k++) {
+          stops[k]!.pos = a + ((bPos - a) * (k - i + 1)) / (j - i + 1);
+        }
+      }
+
+      const size = axis === "y" ? rect.height : rect.width;
+      if (size <= 0) return null;
+      let pct = ((axis === "y" ? y - rect.top : x - rect.left) / size) * 100;
+      if (reverse) pct = 100 - pct;
+
+      if (pct <= stops[0]!.pos!) return stops[0]!.color;
+      for (let i = 1; i < stops.length; i++) {
+        const a = stops[i - 1]!;
+        const b = stops[i]!;
+        if (pct <= b.pos!) {
+          const t = b.pos! === a.pos! ? 1 : (pct - a.pos!) / (b.pos! - a.pos!);
+          return [
+            lerp(a.color[0], b.color[0], t),
+            lerp(a.color[1], b.color[1], t),
+            lerp(a.color[2], b.color[2], t),
+            lerp(a.color[3], b.color[3], t),
+          ];
+        }
+      }
+      return stops[stops.length - 1]!.color;
+    };
+
     const isDarkAt = (x: number, y: number) => {
       let el = document.elementFromPoint(x, y) as HTMLElement | null;
       if (el?.closest("[data-cursor-dark]")) return true;
       while (el) {
-        const bg = getComputedStyle(el).backgroundColor;
-        const [r, g, b, a] = resolve(bg);
+        const style = getComputedStyle(el);
+        const [r, g, b, a] = resolve(style.backgroundColor);
         if (a >= 0.5) return luminance(r, g, b) < 0.4;
+        if (style.backgroundImage && style.backgroundImage !== "none") {
+          const c = gradientColorAt(style.backgroundImage, el.getBoundingClientRect(), x, y);
+          if (c && c[3] >= 0.5) return luminance(c[0], c[1], c[2]) < 0.4;
+        }
         el = el.parentElement;
       }
       return false;
