@@ -2355,6 +2355,9 @@ body:has(.about-page) {
   transform-origin: left center;
   transform-style: preserve-3d;
 }
+.recipe-book-tilt {
+  transform: rotate(-25deg);
+}
 .recipe-book-cover {
   position: relative;
   display: flex;
@@ -2372,7 +2375,7 @@ body:has(.about-page) {
   text-align: left;
   white-space: normal;
   box-shadow: 14px 16px 0 color-mix(in oklab, var(--ink) 18%, transparent) !important;
-  transform: rotate(-25deg) !important;
+  transform: none !important;
 }
 .recipe-book-cover::before {
   content: "";

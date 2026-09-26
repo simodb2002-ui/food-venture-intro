@@ -525,18 +525,20 @@ function AboutPage() {
                   exit={reduceMotion ? { opacity: 0 } : { opacity: 0, rotateY: -72, x: -80 }}
                   transition={{ duration: reduceMotion ? 0.15 : 0.55, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    className="recipe-book-cover"
-                    aria-expanded="false"
-                    aria-controls="story-book-pages"
-                    onClick={() => setIsBookOpen(true)}
-                  >
-                    <span className="recipe-cover-kicker">The Food Investors Society</span>
-                    <span className="recipe-cover-title">Our Story:<br />The Recipe</span>
-                    <span className="recipe-cover-action">Open book <ArrowRight /></span>
-                  </Button>
+                  <div className="recipe-book-tilt">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      className="recipe-book-cover"
+                      aria-expanded="false"
+                      aria-controls="story-book-pages"
+                      onClick={() => setIsBookOpen(true)}
+                    >
+                      <span className="recipe-cover-kicker">The Food Investors Society</span>
+                      <span className="recipe-cover-title">Our Story:<br />The Recipe</span>
+                      <span className="recipe-cover-action">Open book <ArrowRight /></span>
+                    </Button>
+                  </div>
                 </motion.div>
               ) : (
                 <motion.div
