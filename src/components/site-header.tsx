@@ -3,7 +3,6 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
 import fisLockup from "@/assets/food-investors-society-lockup.png.asset.json";
-import foodXchangeLockup from "@/assets/foodxchange-lockup.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -59,16 +58,9 @@ export function SiteHeader({ active, className }: SiteHeaderProps) {
           ))}
         </nav>
 
-        <div className="hidden shrink-0 items-center gap-2 rounded-full border border-foreground px-3 py-2 sm:flex sm:gap-3 sm:px-5">
-          <span className="text-[0.52rem] font-extrabold uppercase leading-[0.85] text-foreground sm:text-[0.6rem]">
-            Powered by
-          </span>
-          <span className="h-4 w-px bg-border" aria-hidden="true" />
-          <img
-            src={foodXchangeLockup.url}
-            alt="foodXchange"
-            className="h-5 w-auto bg-transparent object-contain mix-blend-multiply sm:h-6"
-          />
+        <div className="hidden shrink-0 flex-col items-end justify-center rounded-full border border-foreground px-4 py-2 text-right leading-tight text-foreground sm:flex sm:px-5">
+          <span className="text-[0.62rem] font-extrabold uppercase sm:text-xs">Invest in food</span>
+          <span className="text-[0.62rem] font-extrabold uppercase sm:text-xs">Reap the wHealth</span>
         </div>
 
         <Button
