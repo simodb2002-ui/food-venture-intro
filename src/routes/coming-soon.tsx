@@ -202,7 +202,7 @@ function FeatureCarousel() {
         className="pointer-events-none absolute inset-x-0 -top-6 z-0 flex items-start justify-center overflow-hidden select-none"
       >
         <motion.span
-          className="inline-block min-w-max px-8 text-center whitespace-nowrap text-[clamp(4rem,13vw,12rem)] font-black uppercase leading-none tracking-normal text-problem/30"
+          className="inline-block min-w-max px-8 text-center whitespace-nowrap text-[clamp(4rem,13vw,12rem)] font-black uppercase leading-none tracking-normal text-problem/40"
           style={reduce ? {} : { x: marqueeX }}
         >
           {Array.from({ length: 6 })
