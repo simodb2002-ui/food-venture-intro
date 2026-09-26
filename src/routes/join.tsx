@@ -236,7 +236,7 @@ function JoinPage() {
                       muted: "text-solution-foreground/70",
                     }
                   : {
-                      card: "bg-problem/20 hover:bg-problem/45 text-problem-foreground",
+                      card: "bg-problem/45 hover:bg-problem text-problem-foreground",
                       accent: "text-problem-foreground",
                       stroke: "stroke-problem-foreground",
                       muted: "text-problem-foreground/70",
