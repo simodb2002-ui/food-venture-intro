@@ -99,14 +99,15 @@ function HoverFrame({ className = "stroke-problem" }: { className?: string }) {
       fill="none"
       preserveAspectRatio="none"
       aria-hidden="true"
-      className={`pointer-events-none absolute -inset-2 h-[calc(100%+1rem)] w-[calc(100%+1rem)] ${className}`}
+      className={`pointer-events-none absolute -inset-4 h-[calc(100%+2rem)] w-[calc(100%+2rem)] ${className}`}
     >
       <path
         className="scribble-draw"
         pathLength={1}
-        d="M40 6C150 0 330 2 380 20c20 60 18 300 0 360-80 20-280 18-350 2C6 320 4 90 12 30 16 12 60 6 120 6"
+        d="M100 8C220 -4 320 0 362 22C392 38 394 70 390 100C384 190 386 290 384 330C382 366 356 390 316 392C230 400 130 398 70 386C34 378 10 354 14 316C20 240 16 130 22 68C26 32 55 12 100 8Z"
         strokeWidth={2.5}
         strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
