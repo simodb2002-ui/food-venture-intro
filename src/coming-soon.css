@@ -22,8 +22,8 @@ body:has(.coming-page) {
   min-height: 0;
   overflow-x: auto;
   overflow-y: hidden;
-  padding-block: 6rem;
-  margin-block: -3rem;
+  padding-block: 8rem;
+  margin-block: -4rem;
   padding-inline: calc((100vw - min(30rem, 58vw)) / 2);
   scroll-behavior: smooth;
   scroll-snap-type: x proximity;
@@ -46,7 +46,10 @@ body:has(.coming-page) {
   transform-style: preserve-3d;
   backface-visibility: hidden;
   background: var(--background);
-  box-shadow: 0 30px 80px color-mix(in oklab, var(--foreground) 18%, transparent);
+  box-shadow:
+    0 24px 60px color-mix(in oklab, var(--solution) 30%, transparent),
+    0 30px 80px color-mix(in oklab, var(--foreground) 18%, transparent),
+    0 90px 140px color-mix(in oklab, var(--foreground) 6%, transparent);
 }
 
 .coming-carousel-card-button {
