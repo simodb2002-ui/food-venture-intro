@@ -541,7 +541,7 @@ function BottomCta() {
         </p>
         <Button
           asChild
-          className="app-tab-green mt-8 rounded-full px-8 py-6 text-sm font-extrabold uppercase tracking-wide hover:brightness-95"
+          className="app-cta-green mt-8 rounded-full px-8 py-6 text-sm font-extrabold uppercase tracking-wide"
         >
           <Link to="/join">Get early access</Link>
         </Button>
