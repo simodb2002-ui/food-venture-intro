@@ -272,7 +272,7 @@ function JoinPage() {
                 >
                   {tone === "problem" && <HoverFrame className={toneClasses.frame} />}
                   {popular && (
-                    <span className="absolute -top-3 right-6 rounded-full bg-solution px-3 py-1 text-xs font-bold uppercase tracking-wider text-solution-foreground">
+                    <span className="absolute -top-2.5 right-6 rounded-full bg-solution px-3 py-1 text-xs font-bold uppercase tracking-wider text-solution-foreground">
                       Most popular
                     </span>
                   )}
