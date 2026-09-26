@@ -21,8 +21,8 @@ html:has(.app-page) body {
     var(--cta) 34%,
     var(--cta) 42%,
     var(--problem) 58%,
-    var(--problem) 76%,
-    var(--cta) 94%,
+    var(--problem) 68%,
+    var(--cta) 82%,
     var(--cta) 100%
   );
 }
