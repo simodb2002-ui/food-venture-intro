@@ -307,7 +307,7 @@ function FeatureCarousel() {
 function ComingSoonPage() {
   const reduce = useReducedMotion();
   return (
-    <div className="coming-page relative min-h-dvh overflow-x-clip bg-[oklch(0.99_0.004_70)] text-cta-foreground">
+    <div className="coming-page relative min-h-dvh overflow-x-clip bg-white text-cta-foreground">
       <SiteHeader active="coming-soon" className="sticky top-0" />
 
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
