@@ -245,7 +245,7 @@ function JoinPage() {
             initial={init}
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="mx-auto mt-16 grid max-w-4xl gap-10 md:grid-cols-2"
+            className="mx-auto mt-16 grid max-w-3xl gap-10 md:grid-cols-2"
           >
             {tiers.map(({ title, Icon, price, prefix, period, subtitle, features, popular, tone }) => {
               const toneClasses =
