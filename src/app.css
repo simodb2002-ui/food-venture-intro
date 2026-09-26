@@ -12,6 +12,12 @@ html:has(.app-page) body {
   font-family: "Montserrat", sans-serif;
 }
 
+/* ---------- "Everything you need in one place" band (Deep Green) ---------- */
+.app-marquee-band {
+  background-color: #358f66;
+  color: oklch(1 0 0);
+}
+
 /* ---------- infinite marquee ---------- */
 .app-marquee {
   overflow: hidden;
