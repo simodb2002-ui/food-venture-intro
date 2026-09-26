@@ -63,6 +63,12 @@ html:has(.app-page) body {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
+/* deep green used by the closing CTA button */
+.app-tab-green {
+  background-color: #358f66;
+  color: oklch(1 0 0);
+}
+
 /* ---------- problem/solution hover cards ---------- */
 .app-flip-card {
   transition:
