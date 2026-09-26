@@ -10,6 +10,10 @@ html:has(.app-page) body {
 
 .app-page {
   font-family: "Montserrat", sans-serif;
+
+  /* shared mid-points so gradients continue across section boundaries */
+  --app-yellow-mid: color-mix(in oklab, var(--solution) 45%, var(--cta));
+  --app-pink-mid: color-mix(in oklab, var(--problem) 45%, var(--cta));
 }
 
 .app-marquee {
@@ -66,23 +70,43 @@ html:has(.app-page) body {
 
 /* ---------- seamless white fades between sections ---------- */
 
-/* the yellow hero + marquee block melts into the light section below */
+/* the yellow hero + marquee block starts melting into the light section below */
 .app-yellow-fade {
   background-image: linear-gradient(
     to bottom,
     var(--solution) 0%,
     var(--solution) 50%,
+    var(--app-yellow-mid) 100%
+  );
+}
+
+/* ...and continues fading out behind the problem/solution cards */
+.app-yellow-continue {
+  background-image: linear-gradient(
+    to bottom,
+    var(--app-yellow-mid) 0%,
+    var(--cta) 55%,
     var(--cta) 100%
   );
 }
 
-/* the pink showcase brightens to near-white at its top and bottom edges */
+/* the pink showcase brightens at its top edge and starts its bottom fade */
 .app-pink-fade {
   background-image: linear-gradient(
     to bottom,
     var(--cta) 0px,
     var(--problem) 140px,
     var(--problem) calc(100% - 140px),
+    var(--app-pink-mid) 100%
+  );
+}
+
+/* ...and continues fading out behind the closing CTA card */
+.app-pink-continue {
+  background-image: linear-gradient(
+    to bottom,
+    var(--app-pink-mid) 0%,
+    var(--cta) 55%,
     var(--cta) 100%
   );
 }

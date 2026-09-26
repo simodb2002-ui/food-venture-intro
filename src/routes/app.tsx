@@ -342,7 +342,7 @@ function Marquee() {
 function ProblemSolutionCards() {
   const [flipped, setFlipped] = useState<number | null>(null);
   return (
-    <section className="bg-cta px-6 py-20 text-cta-foreground sm:px-8">
+    <section className="app-yellow-continue px-6 py-20 text-cta-foreground sm:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-base font-medium leading-relaxed sm:text-lg">
@@ -517,7 +517,7 @@ function FeatureShowcase() {
 
 function BottomCta() {
   return (
-    <section className="bg-cta px-6 py-20 text-cta-foreground sm:px-8">
+    <section className="app-pink-continue px-6 py-20 text-cta-foreground sm:px-8">
       <div className="mx-auto max-w-4xl rounded-[2.5rem] border-2 border-cta-foreground/10 bg-card p-8 text-center shadow-xl sm:p-14">
         <h2 className="text-3xl font-black uppercase tracking-tight sm:text-4xl">
           Built by a co-operative. Owned by you.
