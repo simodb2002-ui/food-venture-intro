@@ -53,7 +53,13 @@ function Underline({ className = "" }: { className?: string }) {
   );
 }
 
-function Circle({ children }: { children: ReactNode }) {
+function Circle({
+  children,
+  strokeClassName = "stroke-problem",
+}: {
+  children: ReactNode;
+  strokeClassName?: string;
+}) {
   return (
     <span className="relative inline-block px-2">
       {children}
@@ -62,7 +68,7 @@ function Circle({ children }: { children: ReactNode }) {
         fill="none"
         preserveAspectRatio="none"
         aria-hidden="true"
-        className="pointer-events-none absolute -inset-x-2 -inset-y-2 h-[calc(100%+1rem)] w-[calc(100%+1rem)] stroke-problem"
+        className={`pointer-events-none absolute -inset-x-2 -inset-y-2 h-[calc(100%+1rem)] w-[calc(100%+1rem)] ${strokeClassName}`}
       >
         <motion.path
           d="M20 8c30-6 80-6 92 12 8 18-20 34-60 34S4 44 8 26C12 12 40 6 70 8"
@@ -78,22 +84,22 @@ function Circle({ children }: { children: ReactNode }) {
   );
 }
 
-function Tick() {
+function Tick({ className = "stroke-problem" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="mt-0.5 size-5 shrink-0 stroke-problem">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={`mt-0.5 size-5 shrink-0 ${className}`}>
       <path d="M3 13c3 2 5 5 6 7 3-7 7-12 12-16" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
-function HoverFrame() {
+function HoverFrame({ className = "stroke-problem" }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 400 400"
       fill="none"
       preserveAspectRatio="none"
       aria-hidden="true"
-      className="pointer-events-none absolute -inset-2 h-[calc(100%+1rem)] w-[calc(100%+1rem)] stroke-problem"
+      className={`pointer-events-none absolute -inset-2 h-[calc(100%+1rem)] w-[calc(100%+1rem)] ${className}`}
     >
       <path
         className="scribble-draw"
@@ -114,6 +120,7 @@ const tiers = [
     prefix: "From ",
     period: " / year",
     subtitle: "Annual Community Membership",
+    tone: "solution" as const,
     features: [
       "News, updates & early insights on foodXchange",
       "Invitations to polls, consultations & community events",
@@ -127,6 +134,7 @@ const tiers = [
     prefix: "",
     period: " / lifetime",
     subtitle: "Lifetime Community Membership",
+    tone: "problem" as const,
     popular: true,
     features: [
       "Founders List recognition",
@@ -238,40 +246,56 @@ function JoinPage() {
             viewport={{ once: true, amount: 0.2 }}
             className="mx-auto mt-16 grid max-w-4xl gap-10 md:grid-cols-2"
           >
-            {tiers.map(({ title, Icon, price, prefix, period, subtitle, features, popular }) => (
-              <motion.article
-                key={title}
-                variants={item}
-                className={`group relative rounded-3xl border bg-background/60 p-8 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
-                  popular ? "border-solution shadow-solution/20" : "border-border"
-                }`}
-              >
-                <HoverFrame />
-                {popular && (
-                  <span className="absolute -top-3 right-6 rounded-full bg-solution px-3 py-1 text-xs font-bold uppercase tracking-wider text-solution-foreground">
-                    Most popular
-                  </span>
-                )}
-                <Icon className="size-8 text-problem" aria-hidden="true" />
-                <h3 className="mt-4 text-2xl font-bold">{title}</h3>
-                <p className="mt-4 text-lg">
-                  {prefix}
-                  <span className="text-3xl font-extrabold text-problem">
-                    <Circle>{price}</Circle>
-                  </span>
-                  <span className="text-cta-muted">{period}</span>
-                </p>
-                <p className="mt-3 text-sm font-semibold uppercase tracking-wide text-cta-muted">{subtitle}</p>
-                <ul className="mt-6 space-y-3">
-                  {features.map((f) => (
-                    <li key={f} className="flex gap-3 text-sm font-medium md:text-base">
-                      <Tick />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </motion.article>
-            ))}
+            {tiers.map(({ title, Icon, price, prefix, period, subtitle, features, popular, tone }) => {
+              const toneClasses =
+                tone === "solution"
+                  ? {
+                      card: "bg-solution text-solution-foreground",
+                      accent: "text-solution-foreground",
+                      stroke: "stroke-solution-foreground",
+                      muted: "text-solution-foreground/70",
+                    }
+                  : {
+                      card: "bg-problem text-problem-foreground",
+                      accent: "text-problem-foreground",
+                      stroke: "stroke-problem-foreground",
+                      muted: "text-problem-foreground/70",
+                    };
+              return (
+                <motion.article
+                  key={title}
+                  variants={item}
+                  className={`group relative rounded-3xl p-8 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${toneClasses.card}`}
+                >
+                  <HoverFrame className={toneClasses.stroke} />
+                  {popular && (
+                    <span className="absolute -top-3 right-6 rounded-full bg-solution px-3 py-1 text-xs font-bold uppercase tracking-wider text-solution-foreground">
+                      Most popular
+                    </span>
+                  )}
+                  <Icon className={`size-8 ${toneClasses.accent}`} aria-hidden="true" />
+                  <h3 className="mt-4 text-2xl font-bold">{title}</h3>
+                  <p className="mt-4 text-lg">
+                    {prefix}
+                    <span className={`text-3xl font-extrabold ${toneClasses.accent}`}>
+                      <Circle strokeClassName={toneClasses.stroke}>{price}</Circle>
+                    </span>
+                    <span className={toneClasses.muted}>{period}</span>
+                  </p>
+                  <p className={`mt-3 text-sm font-semibold uppercase tracking-wide ${toneClasses.muted}`}>
+                    {subtitle}
+                  </p>
+                  <ul className="mt-6 space-y-3">
+                    {features.map((f) => (
+                      <li key={f} className="flex gap-3 text-sm font-medium md:text-base">
+                        <Tick className={toneClasses.stroke} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.article>
+              );
+            })}
           </motion.div>
         </section>
 
