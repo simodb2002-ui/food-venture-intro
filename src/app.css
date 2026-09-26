@@ -58,9 +58,9 @@ html:has(.app-page) body {
   transform: skewX(8deg);
 }
 
-/* deep green used for the alternating marquee tabs + closing CTA button */
+/* tabs sit slightly whiter than the yellow band behind them */
 .app-tab-green {
-  background-color: #358f66;
+  background-color: rgba(255, 255, 255, 0.3);
   color: oklch(1 0 0);
 }
 
