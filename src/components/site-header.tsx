@@ -58,25 +58,21 @@ function IconBadge({
 
 const pageHeaders: Record<
   SiteHeaderProps["active"],
-  { title: string; tagline: [string, string]; Icon: () => ReactNode } | null
+  { tagline: [string, string]; Icon: () => ReactNode } | null
 > = {
   fis: {
-    title: "Our CommonwHealth",
     tagline: ["Invest in food", "Reap the wHealth"],
     Icon: () => <IconBadge Base={Heart} Badge={Plus} badgePosition="center" />,
   },
   app: {
-    title: "foodXchange",
     tagline: ["Build wHealth", "one bite at a time"],
     Icon: () => <Apple className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden="true" />,
   },
   "coming-soon": {
-    title: "What’s Coming Next",
     tagline: ["Building a better", "food future"],
     Icon: () => <IconBadge Base={Hand} Badge={Sprout} badgePosition="corner" />,
   },
   join: {
-    title: "Become a Member",
     tagline: ["Invest together", "Grow our shared commonwHealth"],
     Icon: () => <IconBadge Base={BarChart3} Badge={ArrowUpRight} badgePosition="corner" />,
   },
@@ -118,6 +114,16 @@ export function SiteHeader({ active, className }: SiteHeaderProps) {
           ))}
         </nav>
 
+        {header && (
+          <div className="hidden shrink-0 items-center gap-2 sm:flex sm:gap-3">
+            <div className="text-right font-montserrat text-xs font-semibold leading-tight text-foreground sm:text-sm">
+              <p>{header.tagline[0]}</p>
+              <p>{header.tagline[1]}</p>
+            </div>
+            <header.Icon />
+          </div>
+        )}
+
         <Button
           variant="ghost"
           size="icon"
@@ -148,23 +154,6 @@ export function SiteHeader({ active, className }: SiteHeaderProps) {
             </a>
           ))}
         </nav>
-      )}
-
-      {header && (
-        <div className="px-4 py-3 sm:px-6 lg:px-8">
-          <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-            <h2 className="font-montserrat text-lg font-bold text-foreground sm:text-2xl">
-              {header.title}
-            </h2>
-            <div className="flex items-center gap-3">
-              <div className="text-right font-montserrat text-[0.62rem] font-extrabold uppercase leading-tight text-foreground sm:text-xs">
-                <p>{header.tagline[0]}</p>
-                <p>{header.tagline[1]}</p>
-              </div>
-              <header.Icon />
-            </div>
-          </div>
-        </div>
       )}
     </header>
   );
