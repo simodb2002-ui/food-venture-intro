@@ -99,12 +99,12 @@ function HoverFrame({ className = "stroke-problem" }: { className?: string }) {
       fill="none"
       preserveAspectRatio="none"
       aria-hidden="true"
-      className={`pointer-events-none absolute -inset-4 h-[calc(100%+2rem)] w-[calc(100%+2rem)] ${className}`}
+      className={`pointer-events-none absolute -inset-3 h-[calc(100%+1.5rem)] w-[calc(100%+1.5rem)] ${className}`}
     >
       <path
         className="scribble-draw"
         pathLength={1}
-        d="M100 8C220 -4 320 0 362 22C392 38 394 70 390 100C384 190 386 290 384 330C382 366 356 390 316 392C230 400 130 398 70 386C34 378 10 354 14 316C20 240 16 130 22 68C26 32 55 12 100 8Z"
+        d="M58 12C170 2 290 0 354 18C362 100 360 220 356 300C354 340 350 368 340 384C240 396 130 394 50 382C42 330 40 210 44 120C46 70 50 35 58 12C62 6 60 2 66 4"
         strokeWidth={2.5}
         strokeLinecap="round"
         strokeLinejoin="round"
