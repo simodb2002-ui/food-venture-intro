@@ -21,9 +21,10 @@ body:has(.coming-page) {
   gap: clamp(1rem, 4vw, 3rem);
   min-height: 0;
   overflow-x: auto;
-  overflow-y: hidden;
-  padding-block: 6rem;
-  margin-block: -3rem;
+  padding-top: 6rem;
+  padding-bottom: 9rem;
+  margin-top: -3rem;
+  margin-bottom: -6rem;
   padding-inline: calc((100vw - min(30rem, 58vw)) / 2);
   scroll-behavior: smooth;
   scroll-snap-type: x proximity;
