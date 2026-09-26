@@ -58,7 +58,12 @@ html:has(.app-page) body {
   transform: skewX(8deg);
 }
 
-/* deep green used for the alternating marquee tabs + closing CTA button */
+/* frosted tabs: slightly whiter than the yellow background (white @ 30%) */
+.app-tab-frost {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* deep green used by the closing CTA button */
 .app-tab-green {
   background-color: #358f66;
   color: oklch(1 0 0);
