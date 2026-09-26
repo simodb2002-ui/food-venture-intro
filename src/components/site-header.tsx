@@ -102,7 +102,7 @@ export function SiteHeader({ active, className }: SiteHeaderProps) {
 
         <nav
           aria-label="Main navigation"
-          className="hidden items-center gap-6 self-stretch font-montserrat text-sm font-bold text-foreground md:flex lg:gap-9"
+          className="hidden items-center justify-center gap-6 self-stretch font-montserrat text-sm font-bold text-foreground md:flex md:flex-1 lg:gap-9"
         >
           {navItems.map((item) => (
             <a
@@ -120,14 +120,14 @@ export function SiteHeader({ active, className }: SiteHeaderProps) {
           ))}
         </nav>
 
-        {/* ml-auto pins this to the right edge without shifting the nav above,
-            regardless of whether a tab has tagline/icon content. */}
-        <div className="ml-auto flex shrink-0 items-center gap-3">
+        {/* Fixed width (not content-based) so the nav's centered position never
+            shifts between tabs, even when this tab has no tagline/icon (About). */}
+        <div className="flex shrink-0 items-center justify-end gap-3 sm:w-80">
           {header && (
             <div className="hidden items-center gap-2 sm:flex sm:gap-3">
               <div className="text-right font-montserrat text-xs font-semibold leading-tight text-foreground sm:text-sm">
-                <p>{header.tagline[0]}</p>
-                <p>{header.tagline[1]}</p>
+                <p className="whitespace-nowrap">{header.tagline[0]}</p>
+                <p className="whitespace-nowrap">{header.tagline[1]}</p>
               </div>
               <header.Icon />
             </div>
