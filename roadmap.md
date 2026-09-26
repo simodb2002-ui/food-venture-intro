@@ -5,3 +5,4 @@
 - [x] Replace the Coming Soon feature stripes with a draggable, focal 3D reveal carousel.
 - [x] Standardize site-wide buttons, tabs, and CTAs as rounded pills and finish the About page with green.
 - [x] Replace the About story layout with an interactive opening book and restore the page background to white.
+- [x] Standardize the custom cursor across every page with pink-on-light and white-on-black contrast.
