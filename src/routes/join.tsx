@@ -99,7 +99,7 @@ function HoverFrame({ className = "stroke-problem" }: { className?: string }) {
       fill="none"
       preserveAspectRatio="none"
       aria-hidden="true"
-      className={`pointer-events-none absolute -inset-4 h-[calc(100%+2rem)] w-[calc(100%+2rem)] ${className}`}
+      className={`pointer-events-none absolute inset-0 h-full w-full ${className}`}
     >
       <path
         className="scribble-draw"
