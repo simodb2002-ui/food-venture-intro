@@ -47,7 +47,7 @@ body:has(.coming-page) {
   transform-style: preserve-3d;
   backface-visibility: hidden;
   background: var(--background);
-  box-shadow: 0 30px 80px color-mix(in oklab, var(--foreground) 18%, transparent);
+  box-shadow: 0 30px 80px color-mix(in oklab, oklch(0.2 0.015 70) 18%, transparent);
 }
 
 .coming-carousel-card-button {
