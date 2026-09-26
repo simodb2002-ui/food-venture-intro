@@ -366,10 +366,8 @@ function ComingSoonPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ type: "spring", stiffness: 100, damping: 18 }}
-          data-cursor-dark
-          className="relative mt-16 overflow-hidden rounded-3xl bg-footer px-6 py-20 text-center text-footer-foreground md:px-16 md:py-28"
+          className="relative mt-16 px-6 py-20 text-center text-black md:px-16 md:py-28"
         >
-          <div className="absolute inset-x-0 top-0 h-1.5 bg-solution" aria-hidden="true" />
           <h2 className="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
             Want to follow the{" "}
             <span className="relative inline-block">
@@ -377,7 +375,7 @@ function ComingSoonPage() {
               <ScribbleUnderline className="-bottom-3 h-5 md:h-6" />
             </span>
           </h2>
-          <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-footer-muted md:text-xl">
+          <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-black/70 md:text-xl">
             Join the Society or sign up for news, and you&apos;ll be among the first to hear when
             these next features become available.
           </p>
@@ -392,8 +390,7 @@ function ComingSoonPage() {
             <Button
               asChild
               size="lg"
-              variant="outline"
-              className="rounded-full border-footer-foreground/30 bg-transparent px-10 text-base font-semibold text-footer-foreground hover:bg-footer-foreground/10 hover:text-footer-foreground md:px-12 md:text-lg"
+              className="rounded-full bg-problem px-10 text-base font-semibold text-white hover:bg-problem/90 md:px-12 md:text-lg"
             >
               <a href="/about#newsletter">Sign up for news</a>
             </Button>
