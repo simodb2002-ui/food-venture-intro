@@ -254,7 +254,7 @@ function JoinPage() {
                       card: "bg-solution text-solution-foreground",
                       accent: "text-solution-foreground",
                       stroke: "stroke-solution-foreground",
-                      frame: "stroke-problem",
+                      frame: "stroke-black/20",
                       muted: "text-solution-foreground/70",
                     }
                   : {
@@ -320,7 +320,7 @@ function JoinPage() {
                 variants={item}
                 className="group relative flex flex-col rounded-3xl border border-border bg-background/60 p-8 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
               >
-                <HoverFrame />
+                <HoverFrame className="stroke-black/20" />
                 <h3 className="text-xl font-bold">{title}</h3>
                 <p className="mt-3 text-sm text-cta-muted">{description}</p>
                 {bullets && (
