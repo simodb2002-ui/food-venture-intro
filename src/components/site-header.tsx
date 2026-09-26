@@ -46,10 +46,10 @@ function IconBadge({
       <Badge
         aria-hidden="true"
         className={cn(
-          "absolute text-background",
+          "absolute",
           badgePosition === "corner"
-            ? "-right-0.5 -top-0.5 h-3 w-3 rounded-full bg-foreground sm:h-3.5 sm:w-3.5"
-            : "h-2.5 w-2.5 sm:h-3 sm:w-3",
+            ? "-right-0.5 -top-0.5 h-3 w-3 rounded-full bg-foreground text-background sm:h-3.5 sm:w-3.5"
+            : "h-2.5 w-2.5 text-black sm:h-3 sm:w-3",
         )}
       />
     </span>
@@ -84,8 +84,14 @@ export function SiteHeader({ active, className }: SiteHeaderProps) {
   const header = pageHeaders[active];
 
   return (
-    <header className={cn("z-50 bg-background/90 backdrop-blur-md", className)}>
-      <div className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-3 border-b border-border px-4 py-2 sm:px-6 lg:px-8">
+    <header
+      className={cn(
+        "z-50 backdrop-blur-md",
+        active === "about" ? "bg-white" : "bg-background/90",
+        className,
+      )}
+    >
+      <div className="mx-auto flex min-h-16 max-w-7xl items-center gap-3 border-b border-border px-4 py-2 sm:px-6 lg:px-8">
         <Link to="/" aria-label="Food Investors Society home" className="shrink-0">
           <img
             src={fisLockup.url}
@@ -114,25 +120,29 @@ export function SiteHeader({ active, className }: SiteHeaderProps) {
           ))}
         </nav>
 
-        {header && (
-          <div className="hidden shrink-0 items-center gap-2 sm:flex sm:gap-3">
-            <div className="text-right font-montserrat text-xs font-semibold leading-tight text-foreground sm:text-sm">
-              <p>{header.tagline[0]}</p>
-              <p>{header.tagline[1]}</p>
+        {/* ml-auto pins this to the right edge without shifting the nav above,
+            regardless of whether a tab has tagline/icon content. */}
+        <div className="ml-auto flex shrink-0 items-center gap-3">
+          {header && (
+            <div className="hidden items-center gap-2 sm:flex sm:gap-3">
+              <div className="text-right font-montserrat text-xs font-semibold leading-tight text-foreground sm:text-sm">
+                <p>{header.tagline[0]}</p>
+                <p>{header.tagline[1]}</p>
+              </div>
+              <header.Icon />
             </div>
-            <header.Icon />
-          </div>
-        )}
+          )}
 
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          onClick={() => setOpen((value) => !value)}
-        >
-          {open ? <X /> : <Menu />}
-        </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            aria-label={open ? "Close menu" : "Open menu"}
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? <X /> : <Menu />}
+          </Button>
+        </div>
       </div>
 
       {open && (
