@@ -291,13 +291,11 @@ function JoinPage() {
               <motion.article
                 key={title}
                 variants={item}
-                data-cursor-dark
-                className="group relative flex flex-col rounded-3xl bg-problem p-8 text-white transition-transform duration-300 hover:-translate-y-2"
+                className="group relative flex flex-col rounded-3xl border border-border bg-background/60 p-8 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
               >
                 <HoverFrame />
-                <div className="absolute inset-x-8 top-0 h-1 rounded-b bg-solution" aria-hidden="true" />
                 <h3 className="text-xl font-bold">{title}</h3>
-                <p className="mt-3 text-sm text-white/80">{description}</p>
+                <p className="mt-3 text-sm text-cta-muted">{description}</p>
                 {bullets && (
                   <ul className="mt-6 space-y-3">
                     {bullets.map((b) => (
