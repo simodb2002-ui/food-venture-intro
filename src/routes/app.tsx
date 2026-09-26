@@ -427,7 +427,7 @@ function FeatureShowcase() {
   );
 
   return (
-    <section className="bg-footer px-6 py-20 text-footer-foreground sm:px-8">
+    <section className="bg-problem px-6 py-20 text-problem-foreground sm:px-8">
       <div className="mx-auto max-w-7xl">
         <h2 className="text-center text-3xl font-black uppercase tracking-tight sm:text-4xl">
           Explore the app&apos;s features
@@ -457,7 +457,7 @@ function FeatureShowcase() {
                 exit={reduce ? { opacity: 0 } : { opacity: 0, y: -16 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
               >
-                <span className="inline-flex items-center gap-2 rounded-full bg-solution/20 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-solution">
+                <span className="inline-flex items-center gap-2 rounded-full bg-problem-foreground/15 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-problem-foreground">
                   <slide.Icon className="h-4 w-4" /> {slide.title}
                 </span>
                 <h3 className="mt-5 text-2xl font-black leading-tight sm:text-3xl">
@@ -465,7 +465,7 @@ function FeatureShowcase() {
                 </h3>
                 <ul className="mt-6 space-y-3">
                   {slide.bullets.map((bullet) => (
-                    <li key={bullet} className="flex items-start gap-3 text-sm font-medium text-footer-muted sm:text-base">
+                    <li key={bullet} className="flex items-start gap-3 text-sm font-medium text-problem-foreground/85 sm:text-base">
                       <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-cta-action text-[0.65rem] font-black text-cta-action-foreground">
                         ✓
                       </span>
@@ -482,7 +482,7 @@ function FeatureShowcase() {
                 size="icon"
                 aria-label="Previous feature"
                 onClick={() => go(index - 1)}
-                className="rounded-full border-footer-foreground/40 bg-transparent text-footer-foreground hover:bg-footer-foreground hover:text-footer"
+                className="rounded-full border-problem-foreground/40 bg-transparent text-problem-foreground hover:bg-problem-foreground hover:text-problem"
               >
                 <ChevronLeft className="h-5 w-5" />
               </Button>
@@ -491,7 +491,7 @@ function FeatureShowcase() {
                 size="icon"
                 aria-label="Next feature"
                 onClick={() => go(index + 1)}
-                className="rounded-full border-footer-foreground/40 bg-transparent text-footer-foreground hover:bg-footer-foreground hover:text-footer"
+                className="rounded-full border-problem-foreground/40 bg-transparent text-problem-foreground hover:bg-problem-foreground hover:text-problem"
               >
                 <ChevronRight className="h-5 w-5" />
               </Button>
@@ -506,8 +506,8 @@ function FeatureShowcase() {
                     className={cn(
                       "h-2.5 rounded-full transition-all",
                       dotIndex === index
-                        ? "w-7 bg-solution"
-                        : "w-2.5 bg-footer-foreground/30 hover:bg-footer-foreground/60",
+                        ? "w-7 bg-problem-foreground"
+                        : "w-2.5 bg-problem-foreground/30 hover:bg-problem-foreground/60",
                     )}
                   />
                 ))}
