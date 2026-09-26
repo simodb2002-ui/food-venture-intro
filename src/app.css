@@ -14,6 +14,7 @@ html:has(.app-page) body {
   /* shared mid-points so gradients continue across section boundaries */
   --app-yellow-mid: color-mix(in oklab, var(--solution) 45%, var(--cta));
   --app-pink-mid: color-mix(in oklab, var(--problem) 45%, var(--cta));
+  --app-pink-start: color-mix(in oklab, var(--problem) 20%, var(--cta));
 }
 
 .app-marquee {
@@ -80,21 +81,23 @@ html:has(.app-page) body {
   );
 }
 
-/* ...and continues fading out behind the problem/solution cards */
+/* ...continues fading out behind the problem/solution cards,
+   then the pink starts rising behind them too */
 .app-yellow-continue {
   background-image: linear-gradient(
     to bottom,
     var(--app-yellow-mid) 0%,
-    var(--cta) 55%,
-    var(--cta) 100%
+    var(--cta) 50%,
+    var(--cta) 72%,
+    var(--app-pink-start) 100%
   );
 }
 
-/* the pink showcase brightens at its top edge and starts its bottom fade */
+/* the pink showcase keeps rising from where the cards left off */
 .app-pink-fade {
   background-image: linear-gradient(
     to bottom,
-    var(--cta) 0px,
+    var(--app-pink-start) 0px,
     var(--problem) 140px,
     var(--problem) calc(100% - 140px),
     var(--app-pink-mid) 100%
