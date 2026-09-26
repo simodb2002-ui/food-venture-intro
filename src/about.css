@@ -2345,14 +2345,16 @@ body:has(.about-page) {
 .recipe-book-stage {
   display: grid;
   min-height: 690px;
-  place-items: center;
+  align-items: center;
+  justify-items: start;
+  padding-left: clamp(10px, 7vw, 110px);
   perspective: 1800px;
 }
 .recipe-book-closed {
   width: min(460px, 86vw);
   height: min(590px, 72vw);
   min-height: 500px;
-  transform-origin: left center;
+  transform-origin: center center;
   transform-style: preserve-3d;
 }
 .recipe-book-cover {
@@ -2364,10 +2366,10 @@ body:has(.about-page) {
   align-items: flex-start;
   justify-content: space-between;
   overflow: hidden;
-  border: 3px solid var(--ink);
+  border: 0;
   border-radius: 8px 24px 24px 8px;
-  background: var(--pink) !important;
-  color: var(--card) !important;
+  background: var(--solution) !important;
+  color: var(--solution-foreground) !important;
   padding: 48px 46px 42px;
   text-align: left;
   white-space: normal;
@@ -2379,16 +2381,7 @@ body:has(.about-page) {
   position: absolute;
   inset: 0 auto 0 22px;
   width: 2px;
-  background: color-mix(in oklab, var(--card) 35%, transparent);
-}
-.recipe-book-cover::after {
-  content: "";
-  position: absolute;
-  inset: 12px -9px -10px 12px;
-  z-index: -1;
-  border: 2px solid var(--ink);
-  border-radius: 6px 24px 24px 6px;
-  background: var(--card);
+  background: color-mix(in oklab, var(--card) 45%, transparent);
 }
 .recipe-cover-kicker,
 .recipe-cover-action {
@@ -2407,15 +2400,6 @@ body:has(.about-page) {
   font-size: clamp(44px, 5vw, 68px);
   font-weight: 800;
   line-height: 0.98;
-}
-.recipe-cover-mark {
-  position: absolute;
-  right: 38px;
-  bottom: 92px;
-  color: var(--orange);
-  font-size: 72px;
-  line-height: 1;
-  transform: rotate(12deg);
 }
 .recipe-cover-action {
   display: inline-flex;
@@ -2494,11 +2478,6 @@ body:has(.about-page) {
   }
   .recipe-cover-title {
     font-size: 44px;
-  }
-  .recipe-cover-mark {
-    right: 25px;
-    bottom: 82px;
-    font-size: 56px;
   }
   .recipe-page {
     padding: 30px 22px;
