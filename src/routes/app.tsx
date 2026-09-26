@@ -347,7 +347,7 @@ function Marquee() {
 function ProblemSolutionCards() {
   const [flipped, setFlipped] = useState<number | null>(null);
   return (
-    <section className="bg-muted px-6 py-20 text-cta-foreground sm:px-8">
+    <section className="bg-cta px-6 py-20 text-cta-foreground sm:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-base font-medium leading-relaxed sm:text-lg">
