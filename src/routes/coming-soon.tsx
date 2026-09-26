@@ -385,7 +385,7 @@ function FeatureCarousel() {
 function ComingSoonPage() {
   const reduce = useReducedMotion();
   return (
-    <div className="coming-page relative min-h-dvh overflow-x-clip bg-cta text-cta-foreground">
+    <div className="coming-page relative min-h-dvh overflow-x-clip bg-background text-cta-foreground">
       <SiteHeader active="coming-soon" className="sticky top-0" />
 
       {/* floating background doodles */}
