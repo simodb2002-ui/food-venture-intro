@@ -319,8 +319,8 @@ function Hero() {
 function Marquee() {
   const items = [...marqueeItems, ...marqueeItems];
   return (
-    <section className="border-y border-border bg-background py-14 text-cta-foreground">
-      <h2 className="px-6 text-center text-2xl font-black uppercase tracking-tight text-foreground sm:text-3xl">
+    <section className="bg-footer py-14 text-footer-foreground">
+      <h2 className="px-6 text-center text-2xl font-black uppercase tracking-tight sm:text-3xl">
         Everything you need in one place
       </h2>
       <div className="app-marquee mt-8">
