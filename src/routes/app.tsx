@@ -328,12 +328,7 @@ function Marquee() {
           {items.map((item, index) => (
             <span
               key={`${item}-${index}`}
-              className={cn(
-                "app-marquee-tab rounded-lg px-6 py-3 text-sm font-extrabold uppercase tracking-wide",
-                index % 2 === 0
-                  ? "app-tab-green"
-                  : "bg-problem text-problem-foreground",
-              )}
+              className="app-marquee-tab rounded-lg bg-problem px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-problem-foreground"
             >
               <span>{item}</span>
             </span>
