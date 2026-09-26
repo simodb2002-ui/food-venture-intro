@@ -8,6 +8,13 @@ const INTERACTIVE_SELECTORS = [
   "select",
   "[role='button']",
   "[role='link']",
+  ".belief-card",
+  ".founder-card",
+  ".platform-badge",
+  ".menu-button",
+  ".scroll-cue",
+  ".reveal-prompt",
+  ".socials a",
 ].join(", ");
 
 function lerp(a: number, b: number, t: number) {
@@ -16,9 +23,8 @@ function lerp(a: number, b: number, t: number) {
 
 export function CursorFollower() {
   const [mounted, setMounted] = useState(false);
-  const [visible, setVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
-  const [onDark, setOnDark] = useState(false);
+  const [exploring, setExploring] = useState(false);
   const dotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -43,22 +49,21 @@ export function CursorFollower() {
       targetX = event.clientX;
       targetY = event.clientY;
       const target = event.target as HTMLElement | null;
-      setVisible(true);
       setHovering(Boolean(target?.closest(INTERACTIVE_SELECTORS)));
-      setOnDark(Boolean(target?.closest('[data-cursor="dark"]')));
+      setExploring(Boolean(target?.closest(".hero-section")));
       if (rafId === null) {
         rafId = requestAnimationFrame(animate);
       }
     };
 
-    const onLeave = () => setVisible(false);
+    const onScroll = () => setExploring(false);
 
     window.addEventListener("mousemove", onMove, { passive: true });
-    document.documentElement.addEventListener("mouseleave", onLeave);
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", onMove);
-      document.documentElement.removeEventListener("mouseleave", onLeave);
+      window.removeEventListener("scroll", onScroll);
       if (rafId !== null) {
         cancelAnimationFrame(rafId);
       }
@@ -70,8 +75,12 @@ export function CursorFollower() {
   return (
     <div
       ref={dotRef}
-      className={`cursor-follower${visible ? " cursor-follower--visible" : ""}${hovering ? " cursor-follower--hover" : ""}${onDark ? " cursor-follower--dark" : ""}`}
+      className={`cursor-follower${hovering ? " cursor-follower--hover" : ""}${exploring ? " cursor-follower--explore" : ""}`}
       aria-hidden="true"
-    />
+    >
+      <span>
+        Explore <small>our society</small>
+      </span>
+    </div>
   );
 }

@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { CursorFollower } from "@/components/cursor-follower";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "../about.css";
@@ -315,6 +316,7 @@ function AboutPage() {
 
   return (
     <div id="top" className="about-page">
+      <CursorFollower />
       <SiteHeader active="about" className="sticky top-0" />
       <main>
         <section className="hero-section">

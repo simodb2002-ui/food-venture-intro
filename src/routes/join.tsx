@@ -275,7 +275,6 @@ function JoinPage() {
             {tiers.map(({ title, Icon, price, prefix, period, subtitle, features, popular }) => (
               <motion.article
                 key={title}
-                data-cursor="dark"
                 variants={item}
                 className={`group relative rounded-3xl border bg-background/60 p-8 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
                   popular ? "border-solution shadow-solution/20" : "border-border"
