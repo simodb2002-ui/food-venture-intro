@@ -3,7 +3,6 @@ import {
   Apple,
   ArrowUpRight,
   BarChart3,
-  Hand,
   Heart,
   Menu,
   Plus,
@@ -70,7 +69,7 @@ const pageHeaders: Record<
   },
   "coming-soon": {
     tagline: ["Building a better", "food future"],
-    Icon: () => <IconBadge Base={Hand} Badge={Sprout} badgePosition="corner" />,
+    Icon: () => <Sprout className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden="true" />,
   },
   join: {
     tagline: ["Invest together", "Grow our shared commonwHealth"],
