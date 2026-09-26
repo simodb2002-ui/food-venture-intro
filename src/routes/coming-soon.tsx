@@ -210,7 +210,7 @@ function FeatureCarousel() {
         onScroll={() => updateActiveFromScroll()}
       >
         {features.map((feature, index) => {
-          const { title, Icon, alt, description, bullets } = feature;
+          const { title, Icon, image, alt, description, bullets } = feature;
           const relative = index - activeIndex;
           const active = relative === 0;
 
@@ -245,13 +245,13 @@ function FeatureCarousel() {
                     {title}
                   </h2>
                   <div className="relative -mx-5 mt-5 md:-mx-8">
-                    <div
-                      role="img"
-                      aria-label={alt}
-                      className="flex aspect-[4/3] w-full items-center justify-center bg-muted text-sm font-medium uppercase tracking-wide text-muted-foreground"
-                    >
-                      [image]
-                    </div>
+                    <img
+                      src={image}
+                      alt={alt}
+                      width={1200}
+                      height={900}
+                      className="aspect-[4/3] w-full object-cover"
+                    />
                   </div>
                   <p className="mt-5 text-sm leading-relaxed text-cta-muted md:text-base">
                     {description}
