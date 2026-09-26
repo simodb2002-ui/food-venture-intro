@@ -254,7 +254,7 @@ function JoinPage() {
                       card: "bg-solution text-solution-foreground",
                       accent: "text-solution-foreground",
                       stroke: "stroke-solution-foreground",
-                      frame: "stroke-solution-foreground",
+                      frame: "stroke-problem",
                       muted: "text-solution-foreground/70",
                     }
                   : {
