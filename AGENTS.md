@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Use the shared fully rounded, shadow-free Button variants for site CTAs and controls so interaction styling stays consistent across routes.
+- Present the About story as an interactive closed book titled “Our Story: The Recipe” that opens to the existing two-page content.
