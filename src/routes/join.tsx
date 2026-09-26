@@ -224,7 +224,7 @@ function JoinPage() {
             initial={init}
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="mx-auto mt-16 grid max-w-[60rem] gap-10 md:grid-cols-2"
+            className="mx-auto mt-16 flex flex-wrap justify-center gap-10"
           >
             {tiers.map(({ title, Icon, price, prefix, period, subtitle, features, popular, tone }) => {
               const toneClasses =
@@ -245,7 +245,7 @@ function JoinPage() {
                 <motion.article
                   key={title}
                   variants={item}
-                  className={`group relative flex h-full min-h-[26rem] flex-col rounded-3xl p-8 shadow-md transition-all duration-300 hover:-translate-y-4 hover:shadow-xl ${toneClasses.card}`}
+                  className={`group relative flex w-80 min-h-[28rem] flex-col rounded-3xl p-8 shadow-md transition-all duration-300 hover:-translate-y-4 hover:shadow-xl ${toneClasses.card}`}
                 >
                   {popular && (
                     <span className="absolute -top-2.5 right-6 rounded-full bg-solution px-3 py-1 text-xs font-bold uppercase tracking-wider text-solution-foreground">
@@ -288,13 +288,13 @@ function JoinPage() {
             initial={init}
             whileInView="show"
             viewport={{ once: true, amount: 0.15 }}
-            className="mt-16 grid gap-8 md:grid-cols-3"
+            className="mt-16 flex flex-wrap justify-center gap-8"
           >
             {support.map(({ title, description, bullets, body, cta }) => (
               <motion.article
                 key={title}
                 variants={item}
-                className="group relative flex flex-col rounded-3xl border border-border bg-background/60 p-8 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-4 hover:shadow-xl"
+                className="group relative flex w-80 min-h-[28rem] flex-col rounded-3xl border border-border bg-background/60 p-8 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-4 hover:shadow-xl"
               >
                 <h3 className="text-xl font-bold">{title}</h3>
                 <p className="mt-3 text-sm text-cta-muted">{description}</p>
