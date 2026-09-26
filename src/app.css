@@ -64,6 +64,29 @@ html:has(.app-page) body {
   color: oklch(1 0 0);
 }
 
+/* ---------- seamless white fades between sections ---------- */
+
+/* the yellow hero + marquee block melts into the light section below */
+.app-yellow-fade {
+  background-image: linear-gradient(
+    to bottom,
+    var(--solution) 0%,
+    var(--solution) 50%,
+    var(--cta) 100%
+  );
+}
+
+/* the pink showcase brightens to near-white at its top and bottom edges */
+.app-pink-fade {
+  background-image: linear-gradient(
+    to bottom,
+    var(--cta) 0px,
+    var(--problem) 140px,
+    var(--problem) calc(100% - 140px),
+    var(--cta) 100%
+  );
+}
+
 /* ---------- problem/solution hover cards ---------- */
 .app-flip-card {
   transition:
