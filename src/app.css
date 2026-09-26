@@ -58,6 +58,12 @@ html:has(.app-page) body {
   transform: skewX(8deg);
 }
 
+/* deep green used for the alternating marquee tabs + closing CTA button */
+.app-tab-green {
+  background-color: #358f66;
+  color: oklch(1 0 0);
+}
+
 /* ---------- problem/solution hover cards ---------- */
 .app-flip-card {
   transition:

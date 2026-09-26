@@ -331,7 +331,7 @@ function Marquee() {
               className={cn(
                 "app-marquee-tab rounded-lg px-6 py-3 text-sm font-extrabold uppercase tracking-wide",
                 index % 2 === 0
-                  ? "bg-footer text-footer-foreground"
+                  ? "app-tab-green"
                   : "bg-problem text-problem-foreground",
               )}
             >
@@ -541,7 +541,7 @@ function BottomCta() {
         </p>
         <Button
           asChild
-          className="mt-8 rounded-full bg-footer px-8 py-6 text-sm font-extrabold uppercase tracking-wide text-footer-foreground hover:bg-footer/90"
+          className="app-tab-green mt-8 rounded-full px-8 py-6 text-sm font-extrabold uppercase tracking-wide hover:brightness-95"
         >
           <Link to="/join">Get early access</Link>
         </Button>
