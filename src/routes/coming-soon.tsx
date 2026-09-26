@@ -436,6 +436,7 @@ function ComingSoonPage() {
         <FeatureCarousel />
 
         <motion.section
+          data-cursor="dark"
           initial={reduce ? false : { opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
