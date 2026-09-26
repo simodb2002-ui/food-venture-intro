@@ -319,7 +319,7 @@ function Hero() {
 function Marquee() {
   const items = [...marqueeItems, ...marqueeItems];
   return (
-    <section className="bg-cta-action py-14 text-cta-action-foreground">
+    <section className="bg-footer py-14 text-footer-foreground">
       <h2 className="px-6 text-center text-2xl font-black uppercase tracking-tight sm:text-3xl">
         Everything you need in one place
       </h2>
@@ -350,6 +350,7 @@ function ProblemSolutionCards() {
     <section className="bg-cta px-6 py-20 text-cta-foreground sm:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
+          <p className="text-base font-medium leading-relaxed sm:text-lg">
             foodXchange is the community-owned app built by The Food Investors
             Society to help people cut through today&apos;s profit-driven food
             landscape.
