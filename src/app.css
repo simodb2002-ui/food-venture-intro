@@ -13,7 +13,8 @@ html:has(.app-page) body {
 }
 
 /* ---------- "Everything you need in one place" band (Deep Green) ---------- */
-.app-marquee-band {
+.app-marquee-band,
+.app-features-band {
   background-color: #358f66;
   color: oklch(1 0 0);
 }
