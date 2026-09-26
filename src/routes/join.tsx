@@ -92,27 +92,6 @@ function Tick({ className = "stroke-problem" }: { className?: string }) {
   );
 }
 
-function HoverFrame({ className = "stroke-problem" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 400 400"
-      fill="none"
-      preserveAspectRatio="none"
-      aria-hidden="true"
-      className={`pointer-events-none absolute inset-0 h-full w-full ${className}`}
-    >
-      <path
-        className="scribble-draw"
-        pathLength={1}
-        d="M30 6 L370 6 C383.3 6 394 16.7 394 30 L394 370 C394 383.3 383.3 394 370 394 L30 394 C16.7 394 6 383.3 6 370 L6 30 C6 16.7 16.7 6 30 6 Z"
-        strokeWidth={2.5}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
 const tiers = [
   {
     title: "Community Member",
@@ -254,23 +233,20 @@ function JoinPage() {
                       card: "bg-solution/20 hover:bg-solution text-solution-foreground",
                       accent: "text-solution-foreground",
                       stroke: "stroke-solution-foreground",
-                      frame: "stroke-black/20",
                       muted: "text-solution-foreground/70",
                     }
                   : {
                       card: "bg-problem/20 hover:bg-problem text-problem-foreground",
                       accent: "text-problem-foreground",
                       stroke: "stroke-problem-foreground",
-                      frame: "stroke-solution",
                       muted: "text-problem-foreground/70",
                     };
               return (
                 <motion.article
                   key={title}
                   variants={item}
-                  className={`group relative flex h-full min-h-[26rem] flex-col rounded-3xl p-8 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${toneClasses.card}`}
+                  className={`group relative flex h-full min-h-[26rem] flex-col rounded-3xl p-8 shadow-md transition-all duration-300 hover:-translate-y-4 hover:shadow-xl ${toneClasses.card}`}
                 >
-                  {tone === "problem" && <HoverFrame className={toneClasses.frame} />}
                   {popular && (
                     <span className="absolute -top-2.5 right-6 rounded-full bg-solution px-3 py-1 text-xs font-bold uppercase tracking-wider text-solution-foreground">
                       Most popular
@@ -318,7 +294,7 @@ function JoinPage() {
               <motion.article
                 key={title}
                 variants={item}
-                className="group relative flex flex-col rounded-3xl border border-border bg-background/60 p-8 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+                className="group relative flex flex-col rounded-3xl border border-border bg-background/60 p-8 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-4 hover:shadow-xl"
               >
                 <h3 className="text-xl font-bold">{title}</h3>
                 <p className="mt-3 text-sm text-cta-muted">{description}</p>
