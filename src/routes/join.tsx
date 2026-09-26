@@ -251,14 +251,14 @@ function JoinPage() {
               const toneClasses =
                 tone === "solution"
                   ? {
-                      card: "bg-solution/60 text-solution-foreground",
+                      card: "bg-solution/20 hover:bg-solution text-solution-foreground",
                       accent: "text-solution-foreground",
                       stroke: "stroke-solution-foreground",
                       frame: "stroke-black/20",
                       muted: "text-solution-foreground/70",
                     }
                   : {
-                      card: "bg-problem/60 text-problem-foreground",
+                      card: "bg-problem/20 hover:bg-problem text-problem-foreground",
                       accent: "text-problem-foreground",
                       stroke: "stroke-problem-foreground",
                       frame: "stroke-solution",
