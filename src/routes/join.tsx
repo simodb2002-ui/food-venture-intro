@@ -106,32 +106,6 @@ function HoverFrame() {
   );
 }
 
-const doodles: Record<string, ReactNode> = {
-  seed: <path d="M24 40c-10-6-12-20-2-30 10 10 8 24 2 30zM24 40V18" />,
-  plant: <path d="M24 44V20M24 28c-8 0-14-6-14-14 8 0 14 6 14 14zM24 22c0-8 6-14 14-14 0 8-6 14-14 14z" />,
-  coin: <path d="M24 8a16 16 0 1 0 0 32 16 16 0 1 0 0-32zM20 18c2-3 10-3 10 2s-10 3-10 8 8 5 10 2M25 14v20" />,
-  arrow: <path d="M6 40l12-12 8 8 16-18M32 18h10v10" />,
-};
-
-function Doodle({ kind, className, delay = 0 }: { kind: string; className: string; delay?: number }) {
-  const reduce = useReducedMotion();
-  return (
-    <motion.svg
-      viewBox="0 0 48 48"
-      fill="none"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      className={`pointer-events-none absolute ${className}`}
-      animate={reduce ? {} : { y: [0, -12, 0], rotate: [-6, 6, -6] }}
-      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay }}
-    >
-      {doodles[kind]}
-    </motion.svg>
-  );
-}
-
 const tiers = [
   {
     title: "Community Member",
@@ -203,14 +177,6 @@ function JoinPage() {
   return (
     <div className="coming-page relative min-h-dvh overflow-x-clip bg-cta text-cta-foreground">
       <SiteHeader active="join" className="sticky top-0" />
-
-      <div className="pointer-events-none absolute inset-0 opacity-40" aria-hidden="true">
-        <Doodle kind="seed" className="top-40 left-[6%] size-14 stroke-problem" />
-        <Doodle kind="plant" className="top-80 right-[7%] size-16 stroke-solution" delay={1} />
-        <Doodle kind="coin" className="top-[620px] left-[4%] size-12 stroke-solution" delay={2} />
-        <Doodle kind="arrow" className="top-[720px] right-[5%] size-14 stroke-problem" delay={0.6} />
-        <Doodle kind="plant" className="top-[1500px] left-[3%] size-12 stroke-problem" delay={1.4} />
-      </div>
 
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
         {/* Intro */}

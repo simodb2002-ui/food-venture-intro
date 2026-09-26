@@ -6,7 +6,7 @@ import {
   useScroll,
   useTransform,
 } from "motion/react";
-import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 
 import communityImage from "@/assets/coming-soon/community.jpg";
 import cookImage from "@/assets/coming-soon/cook.jpg";
@@ -84,60 +84,6 @@ const features = [
     ],
   },
 ];
-
-/* ---------- doodles ---------- */
-const doodles: Record<string, ReactNode> = {
-  apple: (
-    <>
-      <path d="M24 14c-8-6-18 0-16 12 2 12 10 18 16 14 6 4 14-2 16-14 2-12-8-18-16-12z" />
-      <path d="M24 14c0-5 2-8 6-10M24 10c-3-4-7-4-9-2" />
-    </>
-  ),
-  carrot: (
-    <>
-      <path d="M10 38 34 14l4 4-24 24z" />
-      <path d="M36 12c2-6 6-8 8-8M36 12c4-2 8-1 10 1M36 12c0-4-2-8-5-9" />
-      <path d="M18 30l3 3M24 24l3 3" />
-    </>
-  ),
-  hat: (
-    <>
-      <path d="M14 30c-6 0-9-6-6-11 3-5 9-4 10-2 1-6 11-8 14-2 3-3 10-1 10 5 0 5-4 9-8 10" />
-      <path d="M16 30h18v8H16z" />
-    </>
-  ),
-  star: <path d="M24 6l4 13 13 1-10 8 4 13-11-8-11 8 4-13-10-8 13-1z" />,
-  spiral: <path d="M24 24c0-2 2-3 4-2s3 5 0 7-8 1-9-4 3-10 9-10 11 5 10 12-7 12-14 11" />,
-};
-
-function Doodle({
-  kind,
-  className,
-  delay = 0,
-  tone = "problem",
-}: {
-  kind: keyof typeof doodles;
-  className: string;
-  delay?: number;
-  tone?: "problem" | "solution";
-}) {
-  const reduce = useReducedMotion();
-  return (
-    <motion.svg
-      viewBox="0 0 48 48"
-      fill="none"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      className={`pointer-events-none absolute ${tone === "problem" ? "stroke-problem" : "stroke-solution"} ${className}`}
-      animate={reduce ? {} : { y: [0, -12, 0], rotate: [-6, 6, -6] }}
-      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay }}
-    >
-      {doodles[kind]}
-    </motion.svg>
-  );
-}
 
 /* ---------- scribbles ---------- */
 function ScribbleUnderline({ className = "" }: { className?: string }) {
@@ -388,26 +334,6 @@ function ComingSoonPage() {
     <div className="coming-page relative min-h-dvh overflow-x-clip bg-background text-cta-foreground">
       <SiteHeader active="coming-soon" className="sticky top-0" />
 
-      {/* floating background doodles */}
-      <div className="pointer-events-none absolute inset-0 opacity-40" aria-hidden="true">
-        <Doodle kind="apple" className="top-40 left-[6%] size-14" />
-        <Doodle kind="carrot" tone="solution" className="top-72 right-[8%] size-16" delay={1} />
-        <Doodle kind="spiral" className="top-[900px] left-[3%] size-12" delay={2} />
-        <Doodle
-          kind="star"
-          tone="solution"
-          className="top-[1500px] right-[4%] size-10"
-          delay={0.6}
-        />
-        <Doodle
-          kind="apple"
-          tone="solution"
-          className="top-[2100px] left-[5%] size-12"
-          delay={1.6}
-        />
-        <Doodle kind="spiral" className="top-[2500px] right-[6%] size-14" delay={2.4} />
-      </div>
-
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
         <motion.section
           initial={reduce ? false : { opacity: 0, y: 40 }}
@@ -444,8 +370,6 @@ function ComingSoonPage() {
           className="relative mt-16 overflow-hidden rounded-3xl bg-footer px-6 py-20 text-center text-footer-foreground md:px-16 md:py-28"
         >
           <div className="absolute inset-x-0 top-0 h-1.5 bg-solution" aria-hidden="true" />
-          <Doodle kind="star" tone="solution" className="top-10 left-10 size-14" />
-          <Doodle kind="spiral" className="right-12 bottom-10 size-16" delay={1} />
           <h2 className="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
             Want to follow the{" "}
             <span className="relative inline-block">
