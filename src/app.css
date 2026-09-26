@@ -61,7 +61,7 @@ html:has(.app-page) body {
 /* tabs sit slightly whiter than the yellow band behind them */
 .app-tab-green {
   background-color: rgba(255, 255, 255, 0.3);
-  color: oklch(1 0 0);
+  color: #358f66;
 }
 
 /* ---------- problem/solution hover cards ---------- */
