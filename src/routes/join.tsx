@@ -270,7 +270,7 @@ function JoinPage() {
                   variants={item}
                   className={`group relative flex h-full min-h-[26rem] flex-col rounded-3xl p-8 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${toneClasses.card}`}
                 >
-                  <HoverFrame className={toneClasses.frame} />
+                  {tone === "problem" && <HoverFrame className={toneClasses.frame} />}
                   {popular && (
                     <span className="absolute -top-3 right-6 rounded-full bg-solution px-3 py-1 text-xs font-bold uppercase tracking-wider text-solution-foreground">
                       Most popular
@@ -320,7 +320,6 @@ function JoinPage() {
                 variants={item}
                 className="group relative flex flex-col rounded-3xl border border-border bg-background/60 p-8 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
               >
-                <HoverFrame className="stroke-black/20" />
                 <h3 className="text-xl font-bold">{title}</h3>
                 <p className="mt-3 text-sm text-cta-muted">{description}</p>
                 {bullets && (
