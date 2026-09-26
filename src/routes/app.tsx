@@ -237,7 +237,7 @@ function PlatformBadges({ dark = false }: { dark?: boolean }) {
 function PhoneMockup({ Icon, label }: { Icon: LucideIcon; label: string }) {
   return (
     <div className="app-phone-float relative mx-auto w-56 sm:w-64">
-      <div className="rounded-[2.6rem] border-[10px] border-footer bg-footer shadow-[0_35px_60px_-15px_rgba(0,0,0,0.45)]">
+      <div className="rounded-[2.6rem] border-[10px] border-footer bg-footer shadow-[0_50px_100px_-20px_rgba(0,0,0,0.4)]">
         <div className="relative aspect-[9/19] overflow-hidden rounded-[1.9rem] bg-card">
           <div className="absolute left-1/2 top-2 h-5 w-20 -translate-x-1/2 rounded-full bg-footer" />
           <div className="flex h-full flex-col items-center justify-center gap-4 px-6">
@@ -268,7 +268,7 @@ function PhoneMockup({ Icon, label }: { Icon: LucideIcon; label: string }) {
 function Hero() {
   const reduce = useReducedMotion();
   return (
-    <section className="relative overflow-hidden bg-solution text-solution-foreground">
+    <section className="relative bg-solution text-solution-foreground">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 pt-20 pb-10 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:pt-28 lg:pb-14">
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 24 }}
