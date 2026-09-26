@@ -545,10 +545,10 @@ function Index() {
                 {joined ? <Check className="h-5 w-5" /> : <Users className="h-5 w-5" />}
               </Button>
 
-              <div className="overflow-hidden rounded-md border-2 border-solution-foreground">
+              <div className="overflow-hidden rounded-[2rem] border-2 border-solution-foreground">
                 <Button
                   onClick={revealPlatform}
-                  className="group h-auto min-h-32 w-full items-stretch justify-between gap-4 whitespace-normal rounded-none border-0 bg-transparent p-5 text-left text-solution-foreground shadow-none hover:bg-transparent sm:min-h-40 sm:p-6"
+                  className="group h-auto min-h-32 w-full items-stretch justify-between gap-4 whitespace-normal rounded-[1.85rem] border-0 bg-transparent p-5 text-left text-solution-foreground shadow-none hover:bg-solution-foreground/10 sm:min-h-40 sm:p-6"
                 >
                   <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4">
                     <span className="grid aspect-[4/3] place-items-center bg-placeholder p-2 text-center text-xs font-bold text-placeholder-foreground">
@@ -615,7 +615,7 @@ function Index() {
                           aria-label="Show next foodXchange section"
                           disabled={platformSlide === 4}
                           onClick={() => setPlatformSlide((current) => Math.min(4, current + 1))}
-                          className="absolute right-3 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full border border-solution-foreground bg-solution text-solution-foreground shadow-sm hover:bg-solution/85 disabled:opacity-20 sm:right-5"
+                            className="absolute right-3 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full border border-solution-foreground bg-solution text-solution-foreground shadow-none hover:bg-solution/85 disabled:opacity-20 sm:right-5"
                         >
                           <ChevronRight className="h-5 w-5" aria-hidden="true" />
                         </Button>
@@ -694,7 +694,7 @@ function Index() {
               </p>
               <Button
                 asChild
-                className="h-auto rounded-full bg-cta-action px-8 py-4 font-semibold text-cta-action-foreground shadow-lg transition-transform hover:scale-105 hover:bg-cta-action-hover"
+                className="h-auto rounded-full bg-cta-action px-8 py-4 font-semibold text-cta-action-foreground shadow-none hover:bg-cta-action-hover"
               >
                 <a href="#membership">
                   Explore Membership Options <ArrowRight className="h-4 w-4" aria-hidden="true" />

@@ -328,7 +328,7 @@ function Marquee() {
           {items.map((item, index) => (
             <span
               key={`${item}-${index}`}
-              className="app-marquee-tab rounded-lg bg-problem px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-problem-foreground"
+              className="app-marquee-tab rounded-full bg-problem px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-problem-foreground"
             >
               <span>{item}</span>
             </span>

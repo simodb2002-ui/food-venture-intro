@@ -35,8 +35,6 @@ body:has(.about-page) {
   --headline-black: #000000;
   --paper: oklch(0.985 0.006 88);
   --tint: oklch(0.965 0.018 92);
-  --shadow-button: 4px 4px 0 var(--ink);
-  --shadow-button-hover: 2px 2px 0 var(--pink);
   margin: 0;
   color: var(--foreground);
   font-family: "Montserrat", sans-serif;
@@ -282,23 +280,25 @@ body:has(.about-page) {
 }
 .scroll-cue {
   height: 46px;
-  border: 2px solid var(--ink);
-  border-radius: 0;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
   background: transparent;
-  box-shadow: 3px 3px 0 var(--ink);
+  box-shadow: none;
+  padding-inline: 24px;
   font-size: 12px;
   font-weight: 900;
   text-transform: uppercase;
   transition:
     background 0.25s,
     transform 0.25s,
-    box-shadow 0.25s;
+    border-color 0.25s;
 }
 .scroll-cue:hover {
   background: var(--orange);
   color: var(--ink);
   transform: translateY(-2px);
-  box-shadow: 5px 5px 0 var(--pink);
+  border-color: var(--orange);
+  box-shadow: none;
 }
 .scroll-cue svg {
   width: 18px;
@@ -930,7 +930,7 @@ body:has(.about-page) {
   justify-content: flex-start;
   align-items: center;
   white-space: normal;
-  border-radius: 0;
+  border-radius: 999px;
   background: transparent !important;
   color: var(--ink) !important;
   text-align: left;
@@ -1110,10 +1110,11 @@ body:has(.about-page) {
   display: flex;
   align-items: center;
   background: var(--card);
-  border: 2px solid var(--ink);
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
   padding: 8px 8px 8px 16px;
   position: relative;
-  box-shadow: 0 14px 36px color-mix(in oklab, var(--ink) 9%, transparent);
+  box-shadow: none;
 }
 .email-control::after {
   content: "";
@@ -1144,12 +1145,14 @@ body:has(.about-page) {
 .newsletter-submit {
   background: var(--pink) !important;
   color: var(--card) !important;
-  box-shadow: 4px 4px 0 var(--ink) !important;
+  border-radius: 999px !important;
+  padding-inline: 24px !important;
+  box-shadow: none !important;
 }
 .newsletter-submit:hover {
   background: var(--orange) !important;
   color: var(--ink) !important;
-  box-shadow: 5px 5px 0 var(--pink) !important;
+  box-shadow: none !important;
 }
 .newsletter-inner small {
   display: block;
@@ -1860,15 +1863,15 @@ body:has(.about-page) {
   }
 }
 
-/* White-to-warm-yellow scroll canvas */
+/* White-to-green scroll canvas */
 .about-page {
   background: linear-gradient(
     180deg,
     oklch(1 0 0) 0%,
     oklch(1 0 0) 48%,
-    color-mix(in oklab, var(--orange) 16%, oklch(1 0 0)) 58%,
-    var(--orange) 70%,
-    var(--orange) 100%
+    color-mix(in oklab, var(--green) 16%, oklch(1 0 0)) 58%,
+    var(--green) 76%,
+    var(--green) 100%
   );
 }
 .about-page::before,
