@@ -520,9 +520,9 @@ function AboutPage() {
                 <motion.div
                   key="cover"
                   className="recipe-book-closed"
-                  initial={reduceMotion ? { opacity: 0 } : { opacity: 0, rotateY: -8, scale: 0.96 }}
-                  animate={{ opacity: 1, rotateY: 0, scale: 1 }}
-                  exit={reduceMotion ? { opacity: 0 } : { opacity: 0, rotateY: -72, x: -80 }}
+                  initial={reduceMotion ? { opacity: 0, rotate: -15 } : { opacity: 0, rotateY: -8, rotate: -15, scale: 0.96 }}
+                  animate={{ opacity: 1, rotateY: 0, rotate: -15, scale: 1 }}
+                  exit={reduceMotion ? { opacity: 0, rotate: -15 } : { opacity: 0, rotateY: -72, rotate: -15, x: -80 }}
                   transition={{ duration: reduceMotion ? 0.15 : 0.55, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <Button
@@ -535,7 +535,6 @@ function AboutPage() {
                   >
                     <span className="recipe-cover-kicker">The Food Investors Society</span>
                     <span className="recipe-cover-title">Our Story:<br />The Recipe</span>
-                    <span className="recipe-cover-mark" aria-hidden="true">✦</span>
                     <span className="recipe-cover-action">Open book <ArrowRight /></span>
                   </Button>
                 </motion.div>
