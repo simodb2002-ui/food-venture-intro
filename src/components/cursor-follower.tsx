@@ -1,30 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
-const INTERACTIVE_SELECTORS = [
-  "a",
-  "button",
-  "input",
-  "textarea",
-  "select",
-  "[role='button']",
-  "[role='link']",
-  ".belief-card",
-  ".founder-card",
-  ".platform-badge",
-  ".menu-button",
-  ".scroll-cue",
-  ".reveal-prompt",
-  ".socials a",
-].join(", ");
-
 function lerp(a: number, b: number, t: number) {
   return a + (b - a) * t;
 }
 
 export function CursorFollower() {
   const [mounted, setMounted] = useState(false);
-  const [hovering, setHovering] = useState(false);
-  const [exploring, setExploring] = useState(false);
+  const [onDark, setOnDark] = useState(false);
   const dotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -49,21 +31,16 @@ export function CursorFollower() {
       targetX = event.clientX;
       targetY = event.clientY;
       const target = event.target as HTMLElement | null;
-      setHovering(Boolean(target?.closest(INTERACTIVE_SELECTORS)));
-      setExploring(Boolean(target?.closest(".hero-section")));
+      setOnDark(Boolean(target?.closest("[data-cursor-dark]")));
       if (rafId === null) {
         rafId = requestAnimationFrame(animate);
       }
     };
 
-    const onScroll = () => setExploring(false);
-
     window.addEventListener("mousemove", onMove, { passive: true });
-    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("scroll", onScroll);
       if (rafId !== null) {
         cancelAnimationFrame(rafId);
       }
@@ -75,12 +52,8 @@ export function CursorFollower() {
   return (
     <div
       ref={dotRef}
-      className={`cursor-follower${hovering ? " cursor-follower--hover" : ""}${exploring ? " cursor-follower--explore" : ""}`}
+      className={`cursor-follower${onDark ? " cursor-follower--dark" : ""}`}
       aria-hidden="true"
-    >
-      <span>
-        Explore <small>our society</small>
-      </span>
-    </div>
+    />
   );
 }

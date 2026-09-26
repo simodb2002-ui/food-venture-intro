@@ -325,6 +325,7 @@ function JoinPage() {
               <motion.article
                 key={title}
                 variants={item}
+                data-cursor-dark
                 className="group relative flex flex-col rounded-3xl bg-footer p-8 text-footer-foreground transition-transform duration-300 hover:-translate-y-2"
               >
                 <HoverFrame />
