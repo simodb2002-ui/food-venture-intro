@@ -319,7 +319,7 @@ function Hero() {
 function Marquee() {
   const items = [...marqueeItems, ...marqueeItems];
   return (
-    <section className="bg-solution text-solution-foreground pt-4 pb-14">
+    <section className="app-yellow-fade text-solution-foreground pt-4 pb-14">
       <h2 className="px-6 text-center text-2xl font-black uppercase tracking-tight sm:text-3xl">
         Everything you need in one place
       </h2>
@@ -422,7 +422,7 @@ function FeatureShowcase() {
   );
 
   return (
-    <section className="bg-problem px-6 py-20 text-problem-foreground sm:px-8">
+    <section className="app-pink-fade px-6 pt-40 pb-40 text-problem-foreground sm:px-8">
       <div className="mx-auto max-w-7xl">
         <h2 className="text-center text-3xl font-black uppercase tracking-tight sm:text-4xl">
           Explore the app&apos;s features
