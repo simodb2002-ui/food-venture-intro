@@ -64,6 +64,16 @@ html:has(.app-page) body {
   color: #358f66;
 }
 
+/* closing CTA button: solid deep green */
+.app-cta-green {
+  background-color: #358f66;
+  color: oklch(1 0 0);
+}
+
+.app-cta-green:hover {
+  background-color: color-mix(in oklab, #358f66 90%, black);
+}
+
 /* ---------- problem/solution hover cards ---------- */
 .app-flip-card {
   transition:
