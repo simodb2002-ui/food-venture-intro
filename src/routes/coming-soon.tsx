@@ -41,7 +41,7 @@ const features = [
     title: "FoodX100",
     Icon: ScanLine,
     image: foodX100Image,
-    alt: "Man scanning a grocery product with his smartphone",
+    alt: "Woman checking her phone while picking fresh produce",
     description:
       "A miniature version of the foodXchange app database, designed as a simple trial so users can explore 100 products before the full experience launches.",
     bullets: [
