@@ -1139,7 +1139,7 @@ body:has(.about-page) {
   padding: 12px;
 }
 .newsletter-submit {
-  background: var(--pink) !important;
+  background: var(--ink) !important;
   color: var(--card) !important;
   border-radius: 999px !important;
   padding-inline: 24px !important;
