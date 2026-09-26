@@ -11,10 +11,20 @@ html:has(.app-page) body {
 .app-page {
   font-family: "Montserrat", sans-serif;
 
-  /* shared mid-points so gradients continue across section boundaries */
-  --app-yellow-mid: color-mix(in oklab, var(--solution) 45%, var(--cta));
-  --app-pink-mid: color-mix(in oklab, var(--problem) 45%, var(--cta));
-  --app-pink-start: color-mix(in oklab, var(--problem) 20%, var(--cta));
+  /* One continuous vertical gradient over the whole page:
+     yellow -> white -> pink -> white, interpolated in oklab so there is
+     no banding and no visible seam between sections. */
+  background-image: linear-gradient(
+    to bottom in oklab,
+    var(--solution) 0%,
+    var(--solution) 16%,
+    var(--cta) 34%,
+    var(--cta) 42%,
+    var(--problem) 58%,
+    var(--problem) 76%,
+    var(--cta) 94%,
+    var(--cta) 100%
+  );
 }
 
 .app-marquee {
@@ -69,50 +79,8 @@ html:has(.app-page) body {
   color: oklch(1 0 0);
 }
 
-/* ---------- seamless white fades between sections ---------- */
-
-/* the yellow hero + marquee block starts melting into the light section below */
-.app-yellow-fade {
-  background-image: linear-gradient(
-    to bottom,
-    var(--solution) 0%,
-    var(--solution) 50%,
-    var(--app-yellow-mid) 100%
-  );
-}
-
-/* ...continues fading out behind the problem/solution cards,
-   then the pink starts rising behind them too */
-.app-yellow-continue {
-  background-image: linear-gradient(
-    to bottom,
-    var(--app-yellow-mid) 0%,
-    var(--cta) 50%,
-    var(--cta) 72%,
-    var(--app-pink-start) 100%
-  );
-}
-
-/* the pink showcase keeps rising from where the cards left off */
-.app-pink-fade {
-  background-image: linear-gradient(
-    to bottom,
-    var(--app-pink-start) 0px,
-    var(--problem) 140px,
-    var(--problem) calc(100% - 140px),
-    var(--app-pink-mid) 100%
-  );
-}
-
-/* ...and continues fading out behind the closing CTA card */
-.app-pink-continue {
-  background-image: linear-gradient(
-    to bottom,
-    var(--app-pink-mid) 0%,
-    var(--cta) 55%,
-    var(--cta) 100%
-  );
-}
+/* Sections are transparent — the page-level gradient above flows
+   uninterrupted behind every section, so there are no colour jumps. */
 
 /* ---------- problem/solution hover cards ---------- */
 .app-flip-card {

@@ -268,7 +268,7 @@ function PhoneMockup({ Icon, label }: { Icon: LucideIcon; label: string }) {
 function Hero() {
   const reduce = useReducedMotion();
   return (
-    <section className="relative bg-solution text-solution-foreground">
+    <section className="relative text-solution-foreground">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 pt-20 pb-10 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:pt-28 lg:pb-14">
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 24 }}
@@ -319,7 +319,7 @@ function Hero() {
 function Marquee() {
   const items = [...marqueeItems, ...marqueeItems];
   return (
-    <section className="app-yellow-fade text-solution-foreground pt-4 pb-14">
+    <section className="text-solution-foreground pt-4 pb-14">
       <h2 className="px-6 text-center text-2xl font-black uppercase tracking-tight sm:text-3xl">
         Everything you need in one place
       </h2>
@@ -342,7 +342,7 @@ function Marquee() {
 function ProblemSolutionCards() {
   const [flipped, setFlipped] = useState<number | null>(null);
   return (
-    <section className="app-yellow-continue px-6 py-20 text-cta-foreground sm:px-8">
+    <section className="px-6 py-20 text-cta-foreground sm:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-base font-medium leading-relaxed sm:text-lg">
@@ -422,7 +422,7 @@ function FeatureShowcase() {
   );
 
   return (
-    <section className="app-pink-fade px-6 pt-40 pb-40 text-problem-foreground sm:px-8">
+    <section className="px-6 pt-40 pb-40 text-problem-foreground sm:px-8">
       <div className="mx-auto max-w-7xl">
         <h2 className="text-center text-3xl font-black uppercase tracking-tight sm:text-4xl">
           Explore the app&apos;s features
@@ -517,7 +517,7 @@ function FeatureShowcase() {
 
 function BottomCta() {
   return (
-    <section className="app-pink-continue px-6 py-20 text-cta-foreground sm:px-8">
+    <section className="px-6 py-20 text-cta-foreground sm:px-8">
       <div className="mx-auto max-w-4xl rounded-[2.5rem] border-2 border-cta-foreground/10 bg-card p-8 text-center shadow-xl sm:p-14">
         <h2 className="text-3xl font-black uppercase tracking-tight sm:text-4xl">
           Built by a co-operative. Owned by you.
@@ -552,7 +552,7 @@ function BottomCta() {
 
 function AppPage() {
   return (
-    <div className="app-page min-h-screen bg-background">
+    <div className="app-page min-h-screen">
       <SiteHeader active="app" className="sticky top-0" />
       <main>
         <Hero />
