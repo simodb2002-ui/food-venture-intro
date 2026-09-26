@@ -319,7 +319,7 @@ function Hero() {
 function Marquee() {
   const items = [...marqueeItems, ...marqueeItems];
   return (
-    <section className="app-marquee-band py-14">
+    <section className="bg-solution text-solution-foreground py-14">
       <h2 className="px-6 text-center text-2xl font-black uppercase tracking-tight sm:text-3xl">
         Everything you need in one place
       </h2>
@@ -331,7 +331,7 @@ function Marquee() {
               className={cn(
                 "app-marquee-tab rounded-lg px-6 py-3 text-sm font-extrabold uppercase tracking-wide",
                 index % 2 === 0
-                  ? "bg-solution text-solution-foreground"
+                  ? "bg-footer text-footer-foreground"
                   : "bg-problem text-problem-foreground",
               )}
             >
@@ -375,16 +375,16 @@ function ProblemSolutionCards() {
                 onClick={() => setFlipped(isFlipped ? null : index)}
                 className={cn(
                   "app-flip-card group relative min-h-64 overflow-hidden rounded-3xl p-6 text-left",
-                  "bg-footer text-footer-foreground",
-                  "hover:bg-solution hover:text-solution-foreground focus-visible:bg-solution focus-visible:text-solution-foreground",
-                  isFlipped && "bg-solution text-solution-foreground",
+                  "border border-border bg-background text-cta-foreground shadow-sm",
+                  "hover:bg-solution hover:text-solution-foreground hover:border-transparent focus-visible:bg-solution focus-visible:text-solution-foreground focus-visible:border-transparent",
+                  isFlipped && "bg-solution text-solution-foreground border-transparent",
                 )}
               >
                 <div className="app-flip-face flex h-full flex-col group-hover:opacity-0 group-focus-visible:opacity-0 group-hover:-translate-y-2"
                   style={isFlipped ? { opacity: 0, transform: "translateY(-8px)" } : undefined}
                 >
-                  <Icon className="h-8 w-8 text-solution" />
-                  <span className="mt-4 text-[0.65rem] font-extrabold uppercase tracking-widest text-footer-muted">
+                  <Icon className="h-8 w-8 text-foreground" />
+                  <span className="mt-4 text-[0.65rem] font-extrabold uppercase tracking-widest text-cta-muted">
                     Problem
                   </span>
                   <p className="mt-2 text-base font-bold leading-snug">
