@@ -37,6 +37,7 @@ export function SiteFooter() {
   return (
     <footer
       id="footer"
+      data-cursor-dark
       className="border-t-8 border-cta-accent bg-footer px-6 py-16 font-display text-footer-foreground sm:px-8"
     >
       <div className="mx-auto max-w-7xl">

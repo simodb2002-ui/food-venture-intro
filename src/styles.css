@@ -194,3 +194,46 @@
     overflow: hidden;
   }
 }
+
+/* One consistent, solid custom cursor across every public page. */
+.cursor-follower {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body,
+  body * {
+    cursor: none !important;
+  }
+
+  .cursor-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: block;
+    width: 14px;
+    height: 14px;
+    margin: -7px 0 0 -7px;
+    border-radius: 999px;
+    background-color: var(--problem);
+    pointer-events: none;
+    transition: background-color 120ms ease;
+    will-change: transform;
+  }
+
+  .cursor-follower--dark {
+    background-color: var(--solution);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-follower {
+    display: none !important;
+  }
+
+  body,
+  body * {
+    cursor: auto !important;
+  }
+}
