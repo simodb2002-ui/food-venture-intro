@@ -331,8 +331,8 @@ function Marquee() {
               className={cn(
                 "app-marquee-tab rounded-lg px-6 py-3 text-sm font-extrabold uppercase tracking-wide",
                 index % 2 === 0
-                  ? "bg-solution text-problem"
-                  : "bg-card text-problem",
+                  ? "bg-background text-problem"
+                  : "bg-problem text-solution",
               )}
             >
               <span>{item}</span>
