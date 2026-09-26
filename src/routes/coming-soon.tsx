@@ -36,12 +36,6 @@ export const Route = createFileRoute("/coming-soon")({
   component: ComingSoonPage,
 });
 
-const blobs = [
-  "58% 42% 63% 37% / 44% 58% 42% 56%",
-  "41% 59% 38% 62% / 60% 38% 62% 40%",
-  "63% 37% 49% 51% / 38% 55% 45% 62%",
-];
-
 const features = [
   {
     title: "FoodX100",
@@ -250,32 +244,14 @@ function FeatureCarousel() {
                   <h2 className="mt-4 text-2xl font-bold text-cta-foreground sm:text-3xl md:text-4xl">
                     {title}
                   </h2>
-                  <div className="relative mt-5">
-                    <svg
-                      viewBox="0 0 400 320"
-                      fill="none"
-                      preserveAspectRatio="none"
-                      aria-hidden="true"
-                      className="absolute -inset-2 h-[calc(100%+1rem)] w-[calc(100%+1rem)] stroke-solution"
-                    >
-                      <path
-                        d="M60 20c90-22 230-18 300 20 44 30 40 170 10 230-40 60-230 50-300 20C10 260 0 150 14 90 22 50 36 28 60 20z"
-                        strokeWidth={3}
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                    <div
-                      className="relative overflow-hidden"
-                      style={{ borderRadius: blobs[index] }}
-                    >
-                      <img
-                        src={image}
-                        alt={alt}
-                        width={1200}
-                        height={912}
-                        className="aspect-[4/3] w-full object-cover"
-                      />
-                    </div>
+                  <div className="relative -mx-5 mt-5 md:-mx-8">
+                    <img
+                      src={image}
+                      alt={alt}
+                      width={1200}
+                      height={912}
+                      className="aspect-[4/3] w-full object-cover"
+                    />
                   </div>
                   <p className="mt-5 text-sm leading-relaxed text-cta-muted md:text-base">
                     {description}
