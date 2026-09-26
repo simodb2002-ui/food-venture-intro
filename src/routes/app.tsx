@@ -319,7 +319,7 @@ function Hero() {
 function Marquee() {
   const items = [...marqueeItems, ...marqueeItems];
   return (
-    <section className="bg-problem py-14 text-problem-foreground">
+    <section className="bg-footer py-14 text-footer-foreground">
       <h2 className="px-6 text-center text-2xl font-black uppercase tracking-tight sm:text-3xl">
         Everything you need in one place
       </h2>
@@ -332,7 +332,7 @@ function Marquee() {
                 "app-marquee-tab rounded-lg px-6 py-3 text-sm font-extrabold uppercase tracking-wide",
                 index % 2 === 0
                   ? "bg-solution text-solution-foreground"
-                  : "bg-footer text-footer-foreground",
+                  : "bg-problem text-problem-foreground",
               )}
             >
               <span>{item}</span>
