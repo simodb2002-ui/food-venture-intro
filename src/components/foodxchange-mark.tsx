@@ -35,7 +35,7 @@ export function FoodXchangeMark({
   // duration/pause) rather than the animation's completion callback, since
   // that callback can also fire for the very first, motionless render.
   const [rotation, setRotation] = useState(0);
-  const spinMs = 7500;
+  const spinMs = 4000;
   const pauseMs = 2000;
 
   useEffect(() => {
