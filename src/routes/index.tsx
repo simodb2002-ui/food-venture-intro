@@ -404,15 +404,11 @@ function Index() {
                       transition={{ duration: reduceMotion ? 0 : 0.45, ease: "easeOut" }}
                       className="grid h-full w-full items-center gap-4 text-transition-foreground md:grid-cols-[45fr_55fr] md:gap-10 lg:gap-16"
                     >
-                      <div className="flex items-center justify-center [perspective:1200px]">
+                      <div className="flex items-center justify-center">
                         <motion.div
-                          className="relative h-40 w-40 rounded-[2.25rem] bg-gradient-to-br from-solution to-problem shadow-[0_2rem_4rem_-1rem_rgba(0,0,0,0.35)] md:h-56 md:w-56 md:rounded-[3rem]"
-                          initial={{ rotateX: 12, rotateY: -18, y: 0 }}
-                          animate={{
-                            rotateX: 12,
-                            rotateY: -18,
-                            y: reduceMotion ? 0 : [0, -14, 0],
-                          }}
+                          className="relative h-40 w-40 rounded-[2.25rem] bg-gradient-to-br from-solution to-problem shadow-[0_1.5rem_3rem_-0.75rem_rgba(0,0,0,0.35),inset_0_2px_0_rgba(255,255,255,0.5),inset_0_-3px_6px_rgba(0,0,0,0.15)] md:h-56 md:w-56 md:rounded-[3rem]"
+                          initial={{ y: 0 }}
+                          animate={{ y: reduceMotion ? 0 : [0, -14, 0] }}
                           transition={
                             reduceMotion
                               ? { duration: 0 }
@@ -424,7 +420,7 @@ function Index() {
                             className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-br from-white/45 via-white/5 to-transparent"
                             aria-hidden="true"
                           />
-                          <div className="absolute inset-[16%] flex items-center justify-center rounded-[1.5rem] bg-white shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)] md:rounded-[2rem]">
+                          <div className="absolute inset-[16%] flex items-center justify-center rounded-[1.5rem] bg-white shadow-[0_4px_10px_rgba(0,0,0,0.15)] md:rounded-[2rem]">
                             <img
                               src={foodXchangeLockup.url}
                               alt="foodXchange"
