@@ -142,7 +142,7 @@ const slides: {
   {
     title: "Meal Plans",
     Icon: UtensilsCrossed,
-    headline: "Build your health portfolio through simple, homemade cooking",
+    headline: "Build your health portfolio\u00a0\nthrough simple, homemade cooking",
     bullets: [
       "Adopt a preset meal plan or create your own",
       "Plan meals weeks ahead with ease",
