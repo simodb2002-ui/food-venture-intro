@@ -30,12 +30,13 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// One balloon shape (a rounded dome tapering to a point), traced from the
-// foodXchange mark: local origin is the tip, the rounded end sits at
-// (0, -189). Reused for all 4 petals — they're the same shape, just rotated
-// and recolored — so each rotate/gradient stays correct automatically.
+// One balloon shape (a rounded dome tapering to a point), matched to the
+// foodXchange mark: local origin is the tip, a smooth cubic taper leads up
+// to a true circular arc (radius 67.5) for the dome, so the rounded end is
+// a perfect curve rather than an approximated trace. Reused for all 4
+// petals — they're the same shape, just rotated and recolored.
 const FX_PETAL_PATH =
-  "M 0 0 C 1.6 -1.6 6.2 -6.3 9.5 -9.5 C 12.8 -12.6 16.4 -15.8 19.5 -18.9 C 22.6 -22.1 25.1 -25.2 28.0 -28.3 C 30.9 -31.5 34.1 -34.6 37.0 -37.8 C 39.9 -40.9 42.5 -44.1 45.5 -47.2 C 48.5 -50.4 52.0 -53.6 55.0 -56.7 C 58.0 -59.9 61.4 -63.0 63.5 -66.1 C 65.6 -69.3 66.8 -72.5 67.5 -75.6 C 68.2 -78.8 67.6 -80.3 67.5 -85.0 C 67.4 -89.8 67.0 -97.7 67.0 -104.0 C 67.0 -110.2 67.6 -118.1 67.5 -122.9 C 67.4 -127.6 67.0 -129.2 66.5 -132.3 C 66.0 -135.5 65.5 -138.6 64.5 -141.8 C 63.5 -144.9 62.2 -148.0 60.5 -151.2 C 58.8 -154.3 56.8 -157.5 54.5 -160.7 C 52.2 -163.8 50.0 -166.9 46.5 -170.1 C 43.0 -173.2 41.2 -176.4 33.5 -179.6 C 25.8 -182.7 5.6 -187.4 0.0 -189.0 C -5.6 -187.4 -25.8 -182.7 -33.5 -179.6 C -41.2 -176.4 -43.0 -173.2 -46.5 -170.1 C -50.0 -166.9 -52.2 -163.8 -54.5 -160.7 C -56.8 -157.5 -58.8 -154.3 -60.5 -151.2 C -62.2 -148.0 -63.5 -144.9 -64.5 -141.8 C -65.5 -138.6 -66.0 -135.5 -66.5 -132.3 C -67.0 -129.2 -67.4 -127.6 -67.5 -122.9 C -67.6 -118.1 -67.0 -110.2 -67.0 -104.0 C -67.0 -97.7 -67.4 -89.8 -67.5 -85.0 C -67.6 -80.3 -68.2 -78.8 -67.5 -75.6 C -66.8 -72.5 -65.6 -69.3 -63.5 -66.1 C -61.4 -63.0 -58.0 -59.9 -55.0 -56.7 C -52.0 -53.6 -48.5 -50.4 -45.5 -47.2 C -42.5 -44.1 -39.9 -40.9 -37.0 -37.8 C -34.1 -34.6 -30.9 -31.5 -28.0 -28.3 C -25.1 -25.2 -22.6 -22.1 -19.5 -18.9 C -16.4 -15.8 -12.8 -12.6 -9.5 -9.5 C -6.2 -6.3 -1.6 -1.6 -0.0 0.0 Z";
+  "M 0 0 C 21.6 -24.3 67.5 -46 67.5 -76 L 67.5 -123 A 67.5 67.5 0 1 0 -67.5 -123 L -67.5 -76 C -67.5 -46 -21.6 -24.3 0 0 Z";
 
 const FX_PETALS = [
   { angle: 0, gradient: "fx-pink" },
@@ -61,7 +62,17 @@ function FoodXchangeMark({ reduce, className }: { reduce: boolean; className?: s
       <motion.g
         style={{ transformOrigin: "0px 0px" }}
         animate={{ rotate: reduce ? 0 : 360 }}
-        transition={reduce ? { duration: 0 } : { duration: 6, ease: "linear", repeat: Infinity }}
+        transition={
+          reduce
+            ? { duration: 0 }
+            : {
+                duration: 6,
+                ease: "linear",
+                repeat: Infinity,
+                delay: 10,
+                repeatDelay: 10,
+              }
+        }
       >
         {FX_PETALS.map(({ angle, gradient }, i) => (
           <g key={i} transform={`rotate(${angle}) translate(0, -30)`}>
