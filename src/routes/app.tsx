@@ -247,7 +247,7 @@ function PhoneMockup({
     <div
       className={cn(
         "relative mx-auto w-56 sm:w-64",
-        flat ? "app-phone-float-flat scale-110" : "app-phone-float",
+        flat ? "app-phone-float-flat" : "app-phone-float",
       )}
     >
       <div className="rounded-[2.6rem] border-[10px] border-footer bg-footer shadow-[0_50px_100px_-20px_rgba(0,0,0,0.4)]">
@@ -446,7 +446,7 @@ function FeatureShowcase() {
 
         <div className="mt-14 grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <motion.div
-            className="relative"
+            className="relative mt-8"
             initial={reduce ? false : { opacity: 0, scale: 0.82 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.4 }}
