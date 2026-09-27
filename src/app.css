@@ -112,10 +112,10 @@ html:has(.app-page) body {
 @keyframes app-phone-float {
   0%,
   100% {
-    transform: translateY(0) rotate(-8deg);
+    transform: translateY(0) rotate(-18deg);
   }
   50% {
-    transform: translateY(-14px) rotate(-8deg);
+    transform: translateY(-14px) rotate(-18deg);
   }
 }
 

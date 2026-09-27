@@ -322,7 +322,7 @@ function Hero() {
 
         <motion.div
           initial={reduce ? false : { opacity: 0, x: 80 }}
-          animate={{ opacity: 1, x: 0 }}
+          animate={{ opacity: 1, x: -12 }}
           transition={{ duration: 1.3, delay: 0.3, ease: "easeOut" }}
         >
           <PhoneMockup Icon={ScanLine} label="foodXchange" />
