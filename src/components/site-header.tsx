@@ -85,7 +85,7 @@ export function SiteHeader({ active, className }: SiteHeaderProps) {
   return (
     <header
       className={cn(
-        "z-50 backdrop-blur-md",
+        "z-50 isolate backdrop-blur-md",
         active === "about" ? "bg-white" : "bg-background/90",
         className,
       )}
