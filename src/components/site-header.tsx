@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import {
-  Apple,
   ArrowUpRight,
   BarChart3,
   Heart,
@@ -57,7 +56,7 @@ function IconBadge({
 
 const pageHeaders: Record<
   SiteHeaderProps["active"],
-  { tagline: [string, string]; Icon: () => ReactNode } | null
+  { tagline: [string, string]; Icon?: () => ReactNode } | null
 > = {
   fis: {
     tagline: ["Invest in food", "Reap the wHealth"],
@@ -65,7 +64,6 @@ const pageHeaders: Record<
   },
   app: {
     tagline: ["Build wHealth", "one bite at a time"],
-    Icon: () => <Apple className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden="true" />,
   },
   "coming-soon": {
     tagline: ["Building a better", "food future"],
@@ -132,7 +130,7 @@ export function SiteHeader({ active, className }: SiteHeaderProps) {
                 <p className="whitespace-nowrap">{header.tagline[0]}</p>
                 <p className="whitespace-nowrap">{header.tagline[1]}</p>
               </div>
-              <header.Icon />
+              {header.Icon && <header.Icon />}
             </div>
           )}
 
