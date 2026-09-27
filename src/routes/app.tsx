@@ -361,7 +361,7 @@ function Hero() {
                   className="absolute inset-0"
                   style={{
                     backgroundImage:
-                      "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.957) 4%, rgba(255,255,255,0.844) 8%, rgba(255,255,255,0.684) 12%, rgba(255,255,255,0.5) 16%, rgba(255,255,255,0.316) 20%, rgba(255,255,255,0.156) 24%, rgba(255,255,255,0.043) 28%, rgba(255,255,255,0) 32%)",
+                      "linear-gradient(to bottom, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.766) 4%, rgba(255,255,255,0.675) 8%, rgba(255,255,255,0.547) 12%, rgba(255,255,255,0.4) 16%, rgba(255,255,255,0.253) 20%, rgba(255,255,255,0.125) 24%, rgba(255,255,255,0.034) 28%, rgba(255,255,255,0) 32%)",
                   }}
                 />
                 <div className="relative flex h-full flex-col items-center justify-center gap-3 px-8 text-center">
