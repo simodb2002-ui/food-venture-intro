@@ -4,7 +4,6 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import brandMark from "../assets/fis-mark.png";
-import foodXchangeLockup from "../assets/foodxchange-lockup.png.asset.json";
 import { Button } from "../components/ui/button";
 import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
@@ -30,6 +29,60 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
+
+// One balloon shape (a rounded dome tapering to a point), traced from the
+// foodXchange mark: local origin is the tip, the rounded end sits at
+// (0, -189). Reused for all 4 petals — they're the same shape, just rotated
+// and recolored — so each rotate/gradient stays correct automatically.
+const FX_PETAL_PATH =
+  "M 0 0 C 1.6 -1.6 6.2 -6.3 9.5 -9.5 C 12.8 -12.6 16.4 -15.8 19.5 -18.9 C 22.6 -22.1 25.1 -25.2 28.0 -28.3 C 30.9 -31.5 34.1 -34.6 37.0 -37.8 C 39.9 -40.9 42.5 -44.1 45.5 -47.2 C 48.5 -50.4 52.0 -53.6 55.0 -56.7 C 58.0 -59.9 61.4 -63.0 63.5 -66.1 C 65.6 -69.3 66.8 -72.5 67.5 -75.6 C 68.2 -78.8 67.6 -80.3 67.5 -85.0 C 67.4 -89.8 67.0 -97.7 67.0 -104.0 C 67.0 -110.2 67.6 -118.1 67.5 -122.9 C 67.4 -127.6 67.0 -129.2 66.5 -132.3 C 66.0 -135.5 65.5 -138.6 64.5 -141.8 C 63.5 -144.9 62.2 -148.0 60.5 -151.2 C 58.8 -154.3 56.8 -157.5 54.5 -160.7 C 52.2 -163.8 50.0 -166.9 46.5 -170.1 C 43.0 -173.2 41.2 -176.4 33.5 -179.6 C 25.8 -182.7 5.6 -187.4 0.0 -189.0 C -5.6 -187.4 -25.8 -182.7 -33.5 -179.6 C -41.2 -176.4 -43.0 -173.2 -46.5 -170.1 C -50.0 -166.9 -52.2 -163.8 -54.5 -160.7 C -56.8 -157.5 -58.8 -154.3 -60.5 -151.2 C -62.2 -148.0 -63.5 -144.9 -64.5 -141.8 C -65.5 -138.6 -66.0 -135.5 -66.5 -132.3 C -67.0 -129.2 -67.4 -127.6 -67.5 -122.9 C -67.6 -118.1 -67.0 -110.2 -67.0 -104.0 C -67.0 -97.7 -67.4 -89.8 -67.5 -85.0 C -67.6 -80.3 -68.2 -78.8 -67.5 -75.6 C -66.8 -72.5 -65.6 -69.3 -63.5 -66.1 C -61.4 -63.0 -58.0 -59.9 -55.0 -56.7 C -52.0 -53.6 -48.5 -50.4 -45.5 -47.2 C -42.5 -44.1 -39.9 -40.9 -37.0 -37.8 C -34.1 -34.6 -30.9 -31.5 -28.0 -28.3 C -25.1 -25.2 -22.6 -22.1 -19.5 -18.9 C -16.4 -15.8 -12.8 -12.6 -9.5 -9.5 C -6.2 -6.3 -1.6 -1.6 -0.0 0.0 Z";
+
+const FX_PETALS = [
+  { angle: 0, gradient: "fx-pink" },
+  { angle: 90, gradient: "fx-orange" },
+  { angle: 180, gradient: "fx-pink" },
+  { angle: 270, gradient: "fx-orange" },
+] as const;
+
+function FoodXchangeMark({ reduce, className }: { reduce: boolean; className?: string }) {
+  return (
+    <svg viewBox="-230 -230 460 530" className={className} role="img" aria-label="foodXchange logo">
+      <defs>
+        <linearGradient id="fx-pink" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stopColor="#E443A0" />
+          <stop offset="100%" stopColor="#EB71AC" />
+        </linearGradient>
+        <linearGradient id="fx-orange" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stopColor="#F2B066" />
+          <stop offset="100%" stopColor="#F9DA87" />
+        </linearGradient>
+      </defs>
+
+      {FX_PETALS.map(({ angle, gradient }, i) => (
+        <g key={i} transform={`rotate(${angle}) translate(0, -30)`}>
+          <motion.path
+            d={FX_PETAL_PATH}
+            fill={`url(#${gradient})`}
+            style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
+            animate={{ rotate: reduce ? 0 : 360 }}
+            transition={
+              reduce ? { duration: 0 } : { duration: 6, ease: "linear", repeat: Infinity }
+            }
+          />
+        </g>
+      ))}
+
+      <path
+        d="M -193 103 L 176 105 L 129 282 L -159 272 Z"
+        fill="none"
+        stroke="#0a0a0a"
+        strokeWidth={16}
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
 
 function Index() {
   const [phase, setPhase] = useState<"brand" | "tagline">("brand");
@@ -405,29 +458,7 @@ function Index() {
                       className="grid h-full w-full items-center gap-4 text-transition-foreground md:grid-cols-[45fr_55fr] md:gap-10 lg:gap-16"
                     >
                       <div className="flex items-center justify-center">
-                        <motion.div
-                          className="relative h-40 w-40 rounded-[2.25rem] bg-gradient-to-br from-solution to-problem shadow-[0_1.5rem_3rem_-0.75rem_rgba(0,0,0,0.35),inset_0_2px_0_rgba(255,255,255,0.5),inset_0_-3px_6px_rgba(0,0,0,0.15)] md:h-56 md:w-56 md:rounded-[3rem]"
-                          initial={{ y: 0 }}
-                          animate={{ y: reduceMotion ? 0 : [0, -14, 0] }}
-                          transition={
-                            reduceMotion
-                              ? { duration: 0 }
-                              : { duration: 4.5, ease: "easeInOut", repeat: Infinity }
-                          }
-                          aria-label="foodXchange app icon"
-                        >
-                          <div
-                            className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-br from-white/45 via-white/5 to-transparent"
-                            aria-hidden="true"
-                          />
-                          <div className="absolute inset-[16%] flex items-center justify-center rounded-[1.5rem] bg-white shadow-[0_4px_10px_rgba(0,0,0,0.15)] md:rounded-[2rem]">
-                            <img
-                              src={foodXchangeLockup.url}
-                              alt="foodXchange"
-                              className="h-2/3 w-2/3 object-contain"
-                            />
-                          </div>
-                        </motion.div>
+                        <FoodXchangeMark reduce={!!reduceMotion} className="h-56 w-auto md:h-72" />
                       </div>
 
                       <div className="flex flex-col justify-center text-left">
