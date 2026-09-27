@@ -30,13 +30,11 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// One balloon shape (a rounded dome tapering to a point), matched to the
-// foodXchange mark: local origin is the tip, a smooth cubic taper leads up
-// to a true circular arc (radius 67.5) for the dome, so the rounded end is
-// a perfect curve rather than an approximated trace. Reused for all 4
-// petals — they're the same shape, just rotated and recolored.
-const FX_PETAL_PATH =
-  "M 0 0 C 21.6 -24.3 67.5 -46 67.5 -76 L 67.5 -123 A 67.5 67.5 0 1 0 -67.5 -123 L -67.5 -76 C -67.5 -46 -21.6 -24.3 0 0 Z";
+// One balloon shape (a straight-edged taper to a point, topped with a true
+// circular arc dome), matched to the foodXchange mark: local origin is the
+// tip. Reused for all 4 petals — they're the exact same shape, just rotated
+// and recolored — so every one is guaranteed identical in size.
+const FX_PETAL_PATH = "M 0 0 L 67.5 -76 L 67.5 -123 A 67.5 67.5 0 1 0 -67.5 -123 L -67.5 -76 Z";
 
 const FX_PETALS = [
   { angle: 0, gradient: "fx-pink" },
@@ -69,8 +67,8 @@ function FoodXchangeMark({ reduce, className }: { reduce: boolean; className?: s
                 duration: 6,
                 ease: "linear",
                 repeat: Infinity,
-                delay: 10,
-                repeatDelay: 10,
+                delay: 2,
+                repeatDelay: 2,
               }
         }
       >
@@ -82,7 +80,7 @@ function FoodXchangeMark({ reduce, className }: { reduce: boolean; className?: s
       </motion.g>
 
       <path
-        d="M -193 103 L 176 105 L 129 282 L -159 272 Z"
+        d="M -184 104 L 184 104 L 144 277 L -144 277 Z"
         fill="none"
         stroke="#0a0a0a"
         strokeWidth={16}
