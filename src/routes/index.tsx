@@ -7,6 +7,7 @@ import brandMark from "../assets/fis-mark.png";
 import { Button } from "../components/ui/button";
 import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
+import { isReturningSiteVisit } from "../lib/site-visit";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -29,12 +30,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// Only the very first time this page loads in a browser session should show
-// the logo-only intro before revealing the tagline and nav — coming back to
-// "/" later in the same session (e.g. after visiting another page) skips
-// straight to the settled state.
-const INTRO_SEEN_KEY = "fis-intro-seen";
-
 function Index() {
   const [phase, setPhase] = useState<"brand" | "tagline">("brand");
   const [challengeStage, setChallengeStage] = useState(0);
@@ -53,15 +48,16 @@ function Index() {
   const reduceMotion = useReducedMotion();
 
   useLayoutEffect(() => {
-    const alreadySeenIntro = window.sessionStorage.getItem(INTRO_SEEN_KEY) === "1";
-
-    if (reduceMotion || alreadySeenIntro) {
+    // Only the very first page loaded on the site this session should show
+    // the logo-only intro before revealing the tagline and nav — landing on
+    // another page first, then coming to "/", skips straight to the settled
+    // state, same as coming back to "/" later.
+    if (reduceMotion || isReturningSiteVisit) {
       setPhase("tagline");
       setShowNavigation(true);
       return;
     }
 
-    window.sessionStorage.setItem(INTRO_SEEN_KEY, "1");
     const taglineTimer = window.setTimeout(() => setPhase("tagline"), 2300);
     const navigationTimer = window.setTimeout(() => setShowNavigation(true), 3100);
     return () => {

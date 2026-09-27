@@ -12,6 +12,9 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { CursorFollower } from "../components/cursor-follower";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+// Imported for its module-level side effect: marks this session as having
+// loaded the site, on every page, before any route component mounts.
+import "../lib/site-visit";
 
 function NotFoundComponent() {
   return (
