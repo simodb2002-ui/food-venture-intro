@@ -520,7 +520,7 @@ function FeatureShowcase() {
               </motion.div>
             </AnimatePresence>
 
-            <div className="mt-8 flex items-center justify-center gap-4">
+            <div className="mt-8 flex items-center justify-start gap-4">
               <Button
                 variant="outline"
                 size="icon"
