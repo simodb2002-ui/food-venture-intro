@@ -163,7 +163,7 @@ function JoinPage() {
   const reduce = useReducedMotion();
   const init = reduce ? false : "hidden";
   return (
-    <div className="coming-page relative min-h-dvh overflow-x-clip bg-cta text-cta-foreground">
+    <div className="coming-page relative min-h-dvh overflow-x-clip bg-footer text-footer-foreground">
       <SiteHeader active="join" className="sticky top-0" />
 
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
@@ -182,9 +182,9 @@ function JoinPage() {
             </span>{" "}
             for a Better Food Future
           </h1>
-          <p className="mt-10 text-lg leading-relaxed text-cta-muted">
+          <p className="mt-10 text-lg leading-relaxed text-footer-muted">
             foodXchange is built and owned by its members through{" "}
-            <strong className="text-cta-foreground">The Food Investors Society</strong>, a non-profit UK
+            <strong className="text-footer-foreground">The Food Investors Society</strong>, a non-profit UK
             Community Benefit Society. That means:
           </p>
           <ul className="mt-6 space-y-3">
@@ -214,7 +214,7 @@ function JoinPage() {
         <section id="membership" className="pb-28">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight md:text-5xl">Our Membership Options</h2>
-            <p className="mt-5 text-lg leading-relaxed text-cta-muted">
+            <p className="mt-5 text-lg leading-relaxed text-footer-muted">
               Every member has an equal vote and a say in shaping our priorities, and the future
               direction. Real ownership. Real influence. Collective change.
             </p>
