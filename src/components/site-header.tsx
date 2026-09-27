@@ -108,13 +108,17 @@ export function SiteHeader({ active, className }: SiteHeaderProps) {
               key={item.key}
               href={item.href}
               aria-current={active === item.key ? "page" : undefined}
-              className={cn(
-                "relative flex h-full items-center whitespace-nowrap transition-opacity hover:opacity-60",
-                active === item.key &&
-                  "after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-problem",
-              )}
+              className="flex h-full items-center whitespace-nowrap transition-opacity hover:opacity-60"
             >
-              {item.label}
+              <span
+                className={cn(
+                  "relative",
+                  active === item.key &&
+                    "after:absolute after:-bottom-1 after:inset-x-0 after:h-0.5 after:bg-problem",
+                )}
+              >
+                {item.label}
+              </span>
             </a>
           ))}
         </nav>
