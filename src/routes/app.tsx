@@ -21,9 +21,10 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useCallback, useState } from "react";
+import { useCallback, useState, type ReactNode } from "react";
 
 import foodXchangeLockup from "@/assets/foodxchange-lockup.png.asset.json";
+import { FoodXchangeMark } from "@/components/foodxchange-mark";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
@@ -239,10 +240,14 @@ function PhoneMockup({
   Icon,
   label,
   flat = false,
+  iconContent,
+  labelContent,
 }: {
-  Icon: LucideIcon;
-  label: string;
+  Icon?: LucideIcon;
+  label?: string;
   flat?: boolean;
+  iconContent?: ReactNode;
+  labelContent?: ReactNode;
 }) {
   const reduce = useReducedMotion();
   return (
@@ -256,18 +261,22 @@ function PhoneMockup({
         <div className="relative aspect-[9/19] overflow-hidden rounded-[1.9rem] bg-card">
           <div className="absolute left-1/2 top-2 h-5 w-20 -translate-x-1/2 rounded-full bg-footer" />
           <div className="flex h-full flex-col items-center justify-center gap-4 px-6">
-            <motion.span
-              key={label}
-              initial={{ scale: 1 }}
-              animate={{ scale: reduce ? 1 : [1, 1.22, 1] }}
-              transition={{ duration: 0.7, ease: "easeInOut" }}
-              className="flex h-16 w-16 items-center justify-center rounded-2xl bg-solution/25 text-solution-foreground"
-            >
-              <Icon className="h-8 w-8" />
-            </motion.span>
-            <p className="text-center text-sm font-extrabold uppercase tracking-wide text-foreground">
-              {label}
-            </p>
+            {iconContent ?? (
+              <motion.span
+                key={label}
+                initial={{ scale: 1 }}
+                animate={{ scale: reduce ? 1 : [1, 1.22, 1] }}
+                transition={{ duration: 0.7, ease: "easeInOut" }}
+                className="flex h-16 w-16 items-center justify-center rounded-2xl bg-solution/25 text-solution-foreground"
+              >
+                {Icon && <Icon className="h-8 w-8" />}
+              </motion.span>
+            )}
+            {labelContent ?? (
+              <p className="text-center text-sm font-extrabold uppercase tracking-wide text-foreground">
+                {label}
+              </p>
+            )}
             <div className="w-full space-y-2">
               <div className="h-2.5 w-full rounded-full bg-muted" />
               <div className="h-2.5 w-4/5 rounded-full bg-muted" />
@@ -333,7 +342,21 @@ function Hero() {
           animate={{ opacity: 1, x: -12 }}
           transition={{ duration: 1.3, delay: 0.3, ease: "easeOut" }}
         >
-          <PhoneMockup Icon={ScanLine} label="foodXchange" />
+          <PhoneMockup
+            iconContent={
+              <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-black">
+                <FoodXchangeMark reduce={!!reduce} basketColor="#ffffff" className="h-10 w-10" />
+              </span>
+            }
+            labelContent={
+              <p
+                className="text-center font-montserrat text-sm font-extrabold tracking-wide text-foreground"
+                style={{ fontVariant: "small-caps" }}
+              >
+                foodXchange
+              </p>
+            }
+          />
         </motion.div>
       </div>
     </section>
