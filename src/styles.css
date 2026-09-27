@@ -196,6 +196,18 @@
   }
 }
 
+/* Optical justification for justified body copy: hyphenate long words
+   instead of stretching gaps, and let the browser's newer line-breaking
+   heuristics pick better break points. */
+.prose-justify {
+  text-align: justify;
+  text-justify: inter-character;
+  text-wrap: pretty;
+  word-break: normal;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
 /* One consistent, solid custom cursor across every public page. */
 .cursor-follower {
   display: none;
