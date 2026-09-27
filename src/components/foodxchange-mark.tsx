@@ -10,10 +10,10 @@ const FX_PETAL_PATH =
   "M 0 0 L 54.8 -54.8 Q 67.5 -67.5 67.5 -85.5 L 67.5 -123 A 67.5 67.5 0 1 0 -67.5 -123 L -67.5 -85.5 Q -67.5 -67.5 -54.8 -54.8 Z";
 
 const FX_PETALS = [
-  { angle: 0, gradient: "fx-pink" },
-  { angle: 90, gradient: "fx-orange" },
-  { angle: 180, gradient: "fx-pink" },
-  { angle: 270, gradient: "fx-orange" },
+  { angle: 0, gradient: "fx-orange" },
+  { angle: 90, gradient: "fx-pink" },
+  { angle: 180, gradient: "fx-orange" },
+  { angle: 270, gradient: "fx-pink" },
 ] as const;
 
 export function FoodXchangeMark({
