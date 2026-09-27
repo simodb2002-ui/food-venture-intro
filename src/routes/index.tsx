@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowDown, ArrowRight, Bell, Check, ChevronLeft, ChevronRight, Users } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import brandMark from "../assets/fis-mark.png";
 import { Button } from "../components/ui/button";
@@ -29,6 +29,12 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+// Only the very first time this page loads in a browser session should show
+// the logo-only intro before revealing the tagline and nav — coming back to
+// "/" later in the same session (e.g. after visiting another page) skips
+// straight to the settled state.
+const INTRO_SEEN_KEY = "fis-intro-seen";
+
 function Index() {
   const [phase, setPhase] = useState<"brand" | "tagline">("brand");
   const [challengeStage, setChallengeStage] = useState(0);
@@ -46,13 +52,16 @@ function Index() {
   const freeScrollRef = useRef(false);
   const reduceMotion = useReducedMotion();
 
-  useEffect(() => {
-    if (reduceMotion) {
+  useLayoutEffect(() => {
+    const alreadySeenIntro = window.sessionStorage.getItem(INTRO_SEEN_KEY) === "1";
+
+    if (reduceMotion || alreadySeenIntro) {
       setPhase("tagline");
       setShowNavigation(true);
       return;
     }
 
+    window.sessionStorage.setItem(INTRO_SEEN_KEY, "1");
     const taglineTimer = window.setTimeout(() => setPhase("tagline"), 2300);
     const navigationTimer = window.setTimeout(() => setShowNavigation(true), 3100);
     return () => {
