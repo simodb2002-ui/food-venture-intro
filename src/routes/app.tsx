@@ -283,44 +283,60 @@ function Hero() {
   return (
     <section className="relative text-solution-foreground">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 pt-20 pb-10 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:pt-28 lg:pb-14">
-        <motion.div
-          initial={reduce ? false : { opacity: 0, x: -48, y: 16 }}
-          animate={{ opacity: 1, x: 0, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-        >
-          <img
-            src={foodXchangeLockup.url}
-            alt="foodXchange"
-            className="h-10 w-auto mix-blend-multiply sm:h-12"
-          />
-          <h1 className="mt-6 text-4xl font-black uppercase leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-            Your go-to app for better everyday eating
-          </h1>
-          <p className="mt-5 max-w-xl text-lg font-medium sm:text-xl">
+        <div>
+          <motion.div
+            initial={reduce ? false : { opacity: 0, x: -48, y: 16 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 1.1, delay: 0.1, ease: "easeOut" }}
+          >
+            <img
+              src={foodXchangeLockup.url}
+              alt="foodXchange"
+              className="h-10 w-auto mix-blend-multiply sm:h-12"
+            />
+            <h1 className="mt-6 text-4xl font-black uppercase leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+              Your go-to app for better everyday eating
+            </h1>
+          </motion.div>
+
+          <motion.p
+            initial={reduce ? false : { opacity: 0, x: -32, y: 12 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.1, ease: "easeOut" }}
+            className="mt-5 max-w-xl text-lg font-medium sm:text-xl"
+          >
             Make good food choices with less effort.
-          </p>
+          </motion.p>
 
           <div className="mt-8 flex flex-wrap gap-3" aria-label="App features">
-            {heroIcons.map(({ Icon, label }) => (
-              <span
+            {heroIcons.map(({ Icon, label }, i) => (
+              <motion.span
                 key={label}
                 title={label}
+                initial={reduce ? false : { opacity: 0, y: 14, scale: 0.8 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.35, delay: 1.6 + i * 0.15, ease: "easeOut" }}
                 className="flex h-12 w-12 items-center justify-center rounded-2xl border-2 border-solution-foreground/70 text-solution-foreground"
               >
                 <Icon className="h-6 w-6" />
-              </span>
+              </motion.span>
             ))}
           </div>
 
-          <div className="mt-8">
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 2.7, ease: "easeOut" }}
+            className="mt-8"
+          >
             <PlatformBadges />
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
         <motion.div
           initial={reduce ? false : { opacity: 0, x: 80 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
+          transition={{ duration: 1.3, delay: 0.3, ease: "easeOut" }}
         >
           <PhoneMockup Icon={ScanLine} label="foodXchange" />
         </motion.div>
