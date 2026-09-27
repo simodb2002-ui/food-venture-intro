@@ -179,7 +179,7 @@ const slides: {
   {
     title: "Waste",
     Icon: Trash2,
-    headline: "Track expiry and waste to make groceries last longer",
+    headline: "Track expiry and waste\u00a0\nto make groceries last longer",
     bullets: [
       "View all expiring items in one place",
       "Track weekly and yearly food wastage with visual charts",
