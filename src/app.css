@@ -13,16 +13,31 @@ html:has(.app-page) body {
 
   /* One continuous vertical gradient over the whole page:
      yellow -> white -> pink -> white, interpolated in oklab so there is
-     no banding and no visible seam between sections. */
+     no banding and no visible seam between sections.
+
+     Each hand-off is eased with smoothstep-sampled color-mix stops
+     (zero rate of change right at every anchor) instead of a flat hold
+     followed by a straight ramp, so there's no kink in the gradient's
+     slope anywhere — the color keeps accelerating and decelerating
+     smoothly the whole way down instead of jumping into a transition. */
   background-image: linear-gradient(
     to bottom in oklab,
     var(--solution) 0%,
-    var(--solution) 12%,
-    var(--cta) 30%,
-    var(--cta) 38%,
-    var(--problem) 50%,
-    var(--problem) 60%,
-    var(--cta) 80%,
+    color-mix(in oklab, var(--solution) 89.6%, var(--cta) 10.4%) 6.8%,
+    color-mix(in oklab, var(--solution) 64.8%, var(--cta) 35.2%) 13.6%,
+    color-mix(in oklab, var(--solution) 35.2%, var(--cta) 64.8%) 20.4%,
+    color-mix(in oklab, var(--solution) 10.4%, var(--cta) 89.6%) 27.2%,
+    var(--cta) 34%,
+    color-mix(in oklab, var(--cta) 89.6%, var(--problem) 10.4%) 38.2%,
+    color-mix(in oklab, var(--cta) 64.8%, var(--problem) 35.2%) 42.4%,
+    color-mix(in oklab, var(--cta) 35.2%, var(--problem) 64.8%) 46.6%,
+    color-mix(in oklab, var(--cta) 10.4%, var(--problem) 89.6%) 50.8%,
+    var(--problem) 55%,
+    color-mix(in oklab, var(--problem) 89.6%, var(--cta) 10.4%) 62%,
+    color-mix(in oklab, var(--problem) 64.8%, var(--cta) 35.2%) 69%,
+    color-mix(in oklab, var(--problem) 35.2%, var(--cta) 64.8%) 76%,
+    color-mix(in oklab, var(--problem) 10.4%, var(--cta) 89.6%) 83%,
+    var(--cta) 90%,
     var(--cta) 100%
   );
 }
