@@ -94,33 +94,6 @@ function FoodXchangeMark({ reduce, className }: { reduce: boolean; className?: s
   );
 }
 
-// The FIS brand mark (two overlapping hand-drawn balloons over a basket),
-// traced pixel-for-pixel from fis-mark.png via contour extraction — not
-// redrawn — so it's the exact same artwork, just vector instead of a
-// 200x333 raster that goes soft once it's scaled up past its native size.
-function FISMark({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 200 333" className={className} role="img" aria-label="">
-      <defs>
-        <linearGradient id="fis-mark-blob" x1="0.3" y1="0" x2="0.7" y2="1">
-          <stop offset="0%" stopColor="#FB4EB1" />
-          <stop offset="48%" stopColor="#F98E8C" />
-          <stop offset="100%" stopColor="#FECE3E" />
-        </linearGradient>
-      </defs>
-      <path
-        fill="url(#fis-mark-blob)"
-        d="M 69 0 L 69 3 L 67 5 L 59 7 L 49 13 L 47 12 L 38 19 L 35 19 L 32 23 L 28 24 L 24 31 L 17 36 L 17 38 L 13 41 L 13 46 L 8 49 L 9 54 L 6 56 L 4 69 L 0 72 L 0 113 L 6 117 L 6 124 L 12 131 L 14 138 L 19 143 L 19 146 L 27 152 L 30 157 L 35 160 L 35 176 L 42 184 L 47 197 L 51 200 L 53 204 L 53 207 L 57 207 L 67 218 L 64 235 L 67 233 L 70 235 L 72 227 L 76 224 L 86 225 L 91 230 L 95 230 L 97 234 L 100 233 L 103 235 L 110 231 L 133 231 L 138 228 L 141 230 L 143 227 L 147 225 L 153 225 L 156 223 L 171 224 L 179 218 L 178 213 L 181 209 L 181 201 L 186 197 L 186 193 L 192 187 L 191 184 L 193 179 L 199 175 L 199 121 L 195 118 L 188 102 L 174 85 L 174 72 L 172 70 L 172 66 L 175 63 L 174 64 L 170 61 L 169 51 L 164 48 L 165 43 L 159 38 L 158 34 L 155 33 L 150 26 L 140 20 L 135 14 L 127 12 L 125 10 L 125 7 L 115 7 L 107 3 L 102 4 L 98 0 L 80 0 L 76 4 Z"
-      />
-      <path
-        fillRule="evenodd"
-        fill="#0a0a0a"
-        d="M 73 171 L 69 214 L 57 267 L 55 271 L 51 271 L 31 265 L 27 266 L 26 313 L 95 330 L 116 290 L 115 286 L 88 279 L 101 237 L 105 229 L 104 226 L 100 228 L 84 277 L 80 278 L 70 276 L 60 272 L 73 216 L 76 187 L 76 172 Z M 31 272 L 37 271 L 72 281 L 106 288 L 109 290 L 109 292 L 94 322 L 91 325 L 34 311 L 31 309 Z"
-      />
-    </svg>
-  );
-}
-
 function Index() {
   const [phase, setPhase] = useState<"brand" | "tagline">("brand");
   const [challengeStage, setChallengeStage] = useState(0);
@@ -262,7 +235,13 @@ function Index() {
                   transition={{ duration: 0.8, ease: "easeOut" }}
                   className="absolute flex flex-col items-center gap-5 sm:flex-row sm:gap-10"
                 >
-                  <FISMark className="h-64 w-auto sm:h-80" />
+                  <img
+                    src={brandMark}
+                    alt=""
+                    width={250}
+                    height={420}
+                    className="h-64 w-auto object-contain sm:h-80"
+                  />
                   <p className="text-left font-display text-5xl font-medium leading-[0.87] text-foreground sm:text-7xl">
                     food
                     <br />
