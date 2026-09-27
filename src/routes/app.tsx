@@ -116,7 +116,7 @@ const slides: {
   {
     title: "FoodX",
     Icon: ScanLine,
-    headline: "Scan and discover the best-value, least processed foods",
+    headline: "Scan and discover the best-value,\u00a0\nleast processed foods",
     bullets: [
       "Find the best-priced minimally processed foods",
       "Use small swaps for less processed choices",
