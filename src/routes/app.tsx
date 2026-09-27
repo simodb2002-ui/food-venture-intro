@@ -357,6 +357,7 @@ function Hero() {
                   style={{ objectPosition: "68% 28%" }}
                 />
                 <div className="absolute inset-0 bg-black/55" />
+                <div className="absolute inset-0 bg-white/30" />
                 <div className="relative flex h-full flex-col items-center justify-center gap-3 px-8 text-center">
                   <FoodXchangeMark reduce basketColor="#ffffff" className="h-24 w-24" />
                   <p className="font-montserrat text-lg font-semibold text-white">foodXchange</p>
