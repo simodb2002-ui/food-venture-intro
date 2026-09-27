@@ -200,6 +200,17 @@ const slides: {
       "View group details, join instantly, and share ideas",
     ],
   },
+  {
+    title: "My Groups",
+    Icon: UsersRound,
+    headline: "Build a community that grows through shared ideas and healthier living",
+    bullets: [
+      "Support a like-minded growing community",
+      "Browse your groups, trending and featured groups",
+      "View group details and join instantly",
+      "Create new topics and share your ideas",
+    ],
+  },
 ];
 
 /* ---------------- shared bits ---------------- */
