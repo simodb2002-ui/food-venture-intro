@@ -30,11 +30,14 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// One balloon shape (a straight-edged taper to a point, topped with a true
-// circular arc dome), matched to the foodXchange mark: local origin is the
-// tip. Reused for all 4 petals — they're the exact same shape, just rotated
-// and recolored — so every one is guaranteed identical in size.
-const FX_PETAL_PATH = "M 0 0 L 67.5 -76 L 67.5 -123 A 67.5 67.5 0 1 0 -67.5 -123 L -67.5 -76 Z";
+// One balloon shape, matched to the foodXchange mark: local origin is the
+// tip, a straight 45° taper (so the "X" negative space between petals is a
+// constant width, not flaring), a small rounded shoulder into the straight
+// side, then a true circular arc dome. Reused for all 4 petals — they're
+// the exact same shape, just rotated and recolored — so every one is
+// guaranteed identical in size.
+const FX_PETAL_PATH =
+  "M 0 0 L 54.8 -54.8 Q 67.5 -67.5 67.5 -85.5 L 67.5 -123 A 67.5 67.5 0 1 0 -67.5 -123 L -67.5 -85.5 Q -67.5 -67.5 -54.8 -54.8 Z";
 
 const FX_PETALS = [
   { angle: 0, gradient: "fx-pink" },
