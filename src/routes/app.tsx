@@ -538,32 +538,34 @@ function FeatureShowcase() {
           </motion.div>
 
           <div>
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={slide.title}
-                initial={reduce ? false : { opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -16 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-              >
-                <span className="inline-flex items-center gap-2 rounded-full bg-problem-foreground/15 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-problem-foreground">
-                  <slide.Icon className="h-4 w-4" /> {slide.title}
-                </span>
-                <h3 className="mt-5 text-2xl font-black leading-tight sm:text-3xl">
-                  {slide.headline}
-                </h3>
-                <ul className="mt-6 space-y-3">
-                  {slide.bullets.map((bullet) => (
-                    <li key={bullet} className="flex items-start gap-3 text-sm font-medium text-problem-foreground/85 sm:text-base">
-                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-cta-action text-cta-action-foreground">
-                        <Check className="h-3 w-3" strokeWidth={3} />
-                      </span>
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            </AnimatePresence>
+            <div className="min-h-[440px] sm:min-h-[400px]">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={slide.title}
+                  initial={reduce ? false : { opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reduce ? { opacity: 0 } : { opacity: 0, y: -16 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                  <span className="inline-flex items-center gap-2 rounded-full bg-problem-foreground/15 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-problem-foreground">
+                    <slide.Icon className="h-4 w-4" /> {slide.title}
+                  </span>
+                  <h3 className="mt-5 text-2xl font-black leading-tight sm:text-3xl">
+                    {slide.headline}
+                  </h3>
+                  <ul className="mt-6 space-y-3">
+                    {slide.bullets.map((bullet) => (
+                      <li key={bullet} className="flex items-start gap-3 text-sm font-medium text-problem-foreground/85 sm:text-base">
+                        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-cta-action text-cta-action-foreground">
+                          <Check className="h-3 w-3" strokeWidth={3} />
+                        </span>
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
             <div className="mt-8 flex items-center justify-start gap-4">
               <Button
