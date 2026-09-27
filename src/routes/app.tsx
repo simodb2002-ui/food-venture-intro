@@ -344,7 +344,7 @@ function Hero() {
         >
           <PhoneMockup
             iconContent={
-              <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-black">
+              <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#358f66]">
                 <FoodXchangeMark reduce={!!reduce} basketColor="#ffffff" className="h-10 w-10" />
               </span>
             }
