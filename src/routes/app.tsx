@@ -276,37 +276,46 @@ function PhoneMockup({
         <div className="relative aspect-[9/19] overflow-hidden rounded-[1.9rem] bg-card">
           <div className="absolute left-1/2 top-2 z-10 h-5 w-20 -translate-x-1/2 rounded-full bg-footer" />
           {screenContent ?? (
-            <div className="flex h-full flex-col items-center justify-center gap-4 px-6">
-              {iconContent ?? (
-                <motion.span
-                  key={label}
-                  initial={{ scale: 1 }}
-                  animate={{ scale: reduce ? 1 : [1, 1.22, 1] }}
-                  transition={{ duration: 0.7, ease: "easeInOut" }}
-                  className="flex h-16 w-16 items-center justify-center rounded-2xl bg-solution/25 text-solution-foreground"
-                >
-                  {Icon && <Icon className="h-8 w-8" />}
-                </motion.span>
-              )}
-              {labelContent ?? (
-                <p className="text-center text-sm font-extrabold uppercase tracking-wide text-foreground">
-                  {label}
-                </p>
-              )}
-              {!hidePlaceholders && (
-                <>
-                  <div className="w-full space-y-2">
-                    <div className="h-2.5 w-full rounded-full bg-muted" />
-                    <div className="h-2.5 w-4/5 rounded-full bg-muted" />
-                    <div className="h-2.5 w-3/5 rounded-full bg-muted" />
-                  </div>
-                  <div className="mt-2 grid w-full grid-cols-2 gap-2">
-                    <div className="h-14 rounded-xl bg-solution/30" />
-                    <div className="h-14 rounded-xl bg-problem/20" />
-                  </div>
-                </>
-              )}
-            </div>
+            <>
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to bottom, rgba(38,38,38,0.35) 0%, rgba(38,38,38,0.268) 3.5%, rgba(38,38,38,0.197) 7%, rgba(38,38,38,0.137) 10.5%, rgba(38,38,38,0.088) 14%, rgba(38,38,38,0.049) 17.5%, rgba(38,38,38,0.022) 21%, rgba(38,38,38,0.005) 24.5%, rgba(38,38,38,0) 28%, rgba(38,38,38,0) 72%, rgba(38,38,38,0.005) 75.5%, rgba(38,38,38,0.022) 79%, rgba(38,38,38,0.049) 82.5%, rgba(38,38,38,0.088) 86%, rgba(38,38,38,0.137) 89.5%, rgba(38,38,38,0.197) 93%, rgba(38,38,38,0.268) 96.5%, rgba(38,38,38,0.35) 100%)",
+                }}
+              />
+              <div className="relative flex h-full flex-col items-center justify-center gap-4 px-6">
+                {iconContent ?? (
+                  <motion.span
+                    key={label}
+                    initial={{ scale: 1 }}
+                    animate={{ scale: reduce ? 1 : [1, 1.22, 1] }}
+                    transition={{ duration: 0.7, ease: "easeInOut" }}
+                    className="flex h-16 w-16 items-center justify-center rounded-2xl bg-solution/25 text-solution-foreground"
+                  >
+                    {Icon && <Icon className="h-8 w-8" />}
+                  </motion.span>
+                )}
+                {labelContent ?? (
+                  <p className="text-center text-sm font-extrabold uppercase tracking-wide text-foreground">
+                    {label}
+                  </p>
+                )}
+                {!hidePlaceholders && (
+                  <>
+                    <div className="w-full space-y-2">
+                      <div className="h-2.5 w-full rounded-full bg-muted" />
+                      <div className="h-2.5 w-4/5 rounded-full bg-muted" />
+                      <div className="h-2.5 w-3/5 rounded-full bg-muted" />
+                    </div>
+                    <div className="mt-2 grid w-full grid-cols-2 gap-2">
+                      <div className="h-14 rounded-xl bg-solution/30" />
+                      <div className="h-14 rounded-xl bg-problem/20" />
+                    </div>
+                  </>
+                )}
+              </div>
+            </>
           )}
         </div>
       </div>
