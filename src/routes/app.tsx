@@ -234,9 +234,22 @@ function PlatformBadges({ dark = false }: { dark?: boolean }) {
   );
 }
 
-function PhoneMockup({ Icon, label }: { Icon: LucideIcon; label: string }) {
+function PhoneMockup({
+  Icon,
+  label,
+  flat = false,
+}: {
+  Icon: LucideIcon;
+  label: string;
+  flat?: boolean;
+}) {
   return (
-    <div className="app-phone-float relative mx-auto w-56 sm:w-64">
+    <div
+      className={cn(
+        "relative mx-auto w-56 sm:w-64",
+        flat ? "app-phone-float-flat scale-110" : "app-phone-float",
+      )}
+    >
       <div className="rounded-[2.6rem] border-[10px] border-footer bg-footer shadow-[0_50px_100px_-20px_rgba(0,0,0,0.4)]">
         <div className="relative aspect-[9/19] overflow-hidden rounded-[1.9rem] bg-card">
           <div className="absolute left-1/2 top-2 h-5 w-20 -translate-x-1/2 rounded-full bg-footer" />
@@ -271,8 +284,8 @@ function Hero() {
     <section className="relative text-solution-foreground">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 pt-20 pb-10 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:pt-28 lg:pb-14">
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={reduce ? false : { opacity: 0, x: -48, y: 16 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <img
@@ -305,8 +318,8 @@ function Hero() {
         </motion.div>
 
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={reduce ? false : { opacity: 0, x: 80 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
         >
           <PhoneMockup Icon={ScanLine} label="foodXchange" />
@@ -429,7 +442,13 @@ function FeatureShowcase() {
         </h2>
 
         <div className="mt-14 grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative">
+          <motion.div
+            className="relative"
+            initial={reduce ? false : { opacity: 0, scale: 0.82 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={slide.title}
@@ -438,10 +457,10 @@ function FeatureShowcase() {
                 exit={reduce ? { opacity: 0 } : { opacity: 0, x: -40 * direction }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
               >
-                <PhoneMockup Icon={slide.Icon} label={slide.title} />
+                <PhoneMockup Icon={slide.Icon} label={slide.title} flat />
               </motion.div>
             </AnimatePresence>
-          </div>
+          </motion.div>
 
           <div>
             <AnimatePresence mode="wait" initial={false}>
@@ -471,7 +490,7 @@ function FeatureShowcase() {
               </motion.div>
             </AnimatePresence>
 
-            <div className="mt-8 flex items-center gap-4">
+            <div className="mt-8 flex items-center justify-center gap-4">
               <Button
                 variant="outline"
                 size="icon"
@@ -480,15 +499,6 @@ function FeatureShowcase() {
                 className="rounded-full border-problem-foreground/40 bg-transparent text-problem-foreground hover:bg-problem-foreground hover:text-problem"
               >
                 <ChevronLeft className="h-5 w-5" />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                aria-label="Next feature"
-                onClick={() => go(index + 1)}
-                className="rounded-full border-problem-foreground/40 bg-transparent text-problem-foreground hover:bg-problem-foreground hover:text-problem"
-              >
-                <ChevronRight className="h-5 w-5" />
               </Button>
               <div className="flex items-center gap-2" aria-label="Slide position">
                 {slides.map((s, dotIndex) => (
@@ -507,6 +517,15 @@ function FeatureShowcase() {
                   />
                 ))}
               </div>
+              <Button
+                variant="outline"
+                size="icon"
+                aria-label="Next feature"
+                onClick={() => go(index + 1)}
+                className="rounded-full border-problem-foreground/40 bg-transparent text-problem-foreground hover:bg-problem-foreground hover:text-problem"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </Button>
             </div>
           </div>
         </div>
@@ -518,9 +537,11 @@ function FeatureShowcase() {
 function BottomCta() {
   return (
     <section className="px-6 py-20 text-cta-foreground sm:px-8">
-      <div className="mx-auto max-w-4xl rounded-[2.5rem] border-2 border-cta-foreground/10 bg-card p-8 text-center shadow-xl sm:p-14">
+      <div className="mx-auto max-w-4xl rounded-[2.5rem] border-2 border-cta-foreground/10 bg-card px-8 py-16 text-center shadow-xl sm:px-14 sm:py-24">
         <h2 className="text-3xl font-black uppercase tracking-tight sm:text-4xl">
-          Built by a co-operative. Owned by you.
+          Built by a co-operative.
+          <br />
+          Owned by you.
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-base font-medium leading-relaxed text-cta-muted sm:text-lg">
           foodXchange is created by The Food Investors Society, a member-owned
