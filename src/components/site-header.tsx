@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
-import fisLockup from "@/assets/food-investors-society-lockup.png.asset.json";
+import fisLockup from "@/assets/fis-logo-transparent.png";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -85,7 +85,7 @@ export function SiteHeader({ active, className }: SiteHeaderProps) {
   return (
     <header
       className={cn(
-        "z-50 isolate backdrop-blur-md",
+        "z-50 backdrop-blur-md",
         active === "about" ? "bg-white" : "bg-background/90",
         className,
       )}
@@ -93,9 +93,9 @@ export function SiteHeader({ active, className }: SiteHeaderProps) {
       <div className="mx-auto flex min-h-16 max-w-7xl items-center gap-3 border-b border-border px-4 py-2 sm:px-6 lg:px-8">
         <Link to="/" aria-label="Food Investors Society home" className="shrink-0">
           <img
-            src={fisLockup.url}
+            src={fisLockup}
             alt="Food Investors Society"
-            className="h-10 w-auto bg-transparent object-contain mix-blend-multiply sm:h-12"
+            className="h-10 w-auto object-contain sm:h-12"
           />
         </Link>
 
