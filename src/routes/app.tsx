@@ -23,6 +23,7 @@ import {
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useCallback, useState, type ReactNode } from "react";
 
+import foodTableHero from "@/assets/food-table-hero.jpg";
 import foodXchangeLockup from "@/assets/foodxchange-lockup.png.asset.json";
 import { FoodXchangeMark } from "@/components/foodxchange-mark";
 import { SiteFooter } from "@/components/site-footer";
@@ -243,6 +244,7 @@ function PhoneMockup({
   iconContent,
   labelContent,
   hidePlaceholders = false,
+  screenContent,
 }: {
   Icon?: LucideIcon;
   label?: string;
@@ -250,6 +252,7 @@ function PhoneMockup({
   iconContent?: ReactNode;
   labelContent?: ReactNode;
   hidePlaceholders?: boolean;
+  screenContent?: ReactNode;
 }) {
   const reduce = useReducedMotion();
   return (
@@ -261,38 +264,40 @@ function PhoneMockup({
     >
       <div className="rounded-[2.6rem] border-[10px] border-footer bg-footer shadow-[0_50px_100px_-20px_rgba(0,0,0,0.4)]">
         <div className="relative aspect-[9/19] overflow-hidden rounded-[1.9rem] bg-card">
-          <div className="absolute left-1/2 top-2 h-5 w-20 -translate-x-1/2 rounded-full bg-footer" />
-          <div className="flex h-full flex-col items-center justify-center gap-4 px-6">
-            {iconContent ?? (
-              <motion.span
-                key={label}
-                initial={{ scale: 1 }}
-                animate={{ scale: reduce ? 1 : [1, 1.22, 1] }}
-                transition={{ duration: 0.7, ease: "easeInOut" }}
-                className="flex h-16 w-16 items-center justify-center rounded-2xl bg-solution/25 text-solution-foreground"
-              >
-                {Icon && <Icon className="h-8 w-8" />}
-              </motion.span>
-            )}
-            {labelContent ?? (
-              <p className="text-center text-sm font-extrabold uppercase tracking-wide text-foreground">
-                {label}
-              </p>
-            )}
-            {!hidePlaceholders && (
-              <>
-                <div className="w-full space-y-2">
-                  <div className="h-2.5 w-full rounded-full bg-muted" />
-                  <div className="h-2.5 w-4/5 rounded-full bg-muted" />
-                  <div className="h-2.5 w-3/5 rounded-full bg-muted" />
-                </div>
-                <div className="mt-2 grid w-full grid-cols-2 gap-2">
-                  <div className="h-14 rounded-xl bg-solution/30" />
-                  <div className="h-14 rounded-xl bg-problem/20" />
-                </div>
-              </>
-            )}
-          </div>
+          <div className="absolute left-1/2 top-2 z-10 h-5 w-20 -translate-x-1/2 rounded-full bg-footer" />
+          {screenContent ?? (
+            <div className="flex h-full flex-col items-center justify-center gap-4 px-6">
+              {iconContent ?? (
+                <motion.span
+                  key={label}
+                  initial={{ scale: 1 }}
+                  animate={{ scale: reduce ? 1 : [1, 1.22, 1] }}
+                  transition={{ duration: 0.7, ease: "easeInOut" }}
+                  className="flex h-16 w-16 items-center justify-center rounded-2xl bg-solution/25 text-solution-foreground"
+                >
+                  {Icon && <Icon className="h-8 w-8" />}
+                </motion.span>
+              )}
+              {labelContent ?? (
+                <p className="text-center text-sm font-extrabold uppercase tracking-wide text-foreground">
+                  {label}
+                </p>
+              )}
+              {!hidePlaceholders && (
+                <>
+                  <div className="w-full space-y-2">
+                    <div className="h-2.5 w-full rounded-full bg-muted" />
+                    <div className="h-2.5 w-4/5 rounded-full bg-muted" />
+                    <div className="h-2.5 w-3/5 rounded-full bg-muted" />
+                  </div>
+                  <div className="mt-2 grid w-full grid-cols-2 gap-2">
+                    <div className="h-14 rounded-xl bg-solution/30" />
+                    <div className="h-14 rounded-xl bg-problem/20" />
+                  </div>
+                </>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -349,18 +354,24 @@ function Hero() {
           transition={{ duration: 1.3, delay: 0.3, ease: "easeOut" }}
         >
           <PhoneMockup
-            hidePlaceholders
-            iconContent={
-              <span className="mt-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-[#358f66]">
-                <FoodXchangeMark reduce={!!reduce} basketColor="#ffffff" className="h-16 w-16" />
-              </span>
-            }
-            labelContent={
-              <p className="text-center font-montserrat text-sm font-extrabold tracking-wide text-foreground">
-                <span className="text-[0.72em] uppercase">food</span>
-                <span>X</span>
-                <span className="text-[0.72em] uppercase">change</span>
-              </p>
+            screenContent={
+              <div className="relative h-full w-full">
+                <img
+                  src={foodTableHero}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/55" />
+                <div className="relative flex h-full flex-col items-center justify-center gap-3 px-8 text-center">
+                  <FoodXchangeMark reduce={!!reduce} basketColor="#ffffff" className="h-16 w-16" />
+                  <p className="font-montserrat text-lg font-semibold text-white">foodXchange</p>
+                  <p className="text-xs font-medium leading-snug text-white/80">
+                    Connecting Local
+                    <br />
+                    Kitchens &amp; Growers.
+                  </p>
+                </div>
+              </div>
             }
           />
         </motion.div>
