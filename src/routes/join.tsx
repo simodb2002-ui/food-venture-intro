@@ -294,7 +294,7 @@ function JoinPage() {
               <motion.article
                 key={title}
                 variants={item}
-                className="group relative flex w-[22rem] min-h-[28rem] flex-col rounded-3xl border border-border bg-background/60 p-8 opacity-10 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-4 hover:shadow-xl"
+                className="group relative flex w-[22rem] min-h-[28rem] flex-col rounded-3xl border border-border bg-background/60 p-8 opacity-5 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-4 hover:shadow-xl"
               >
                 <h3 className="text-xl font-bold">{title}</h3>
                 <p className="mt-3 text-sm text-cta-muted">{description}</p>
