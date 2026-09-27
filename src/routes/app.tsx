@@ -242,12 +242,14 @@ function PhoneMockup({
   flat = false,
   iconContent,
   labelContent,
+  hidePlaceholders = false,
 }: {
   Icon?: LucideIcon;
   label?: string;
   flat?: boolean;
   iconContent?: ReactNode;
   labelContent?: ReactNode;
+  hidePlaceholders?: boolean;
 }) {
   const reduce = useReducedMotion();
   return (
@@ -277,15 +279,19 @@ function PhoneMockup({
                 {label}
               </p>
             )}
-            <div className="w-full space-y-2">
-              <div className="h-2.5 w-full rounded-full bg-muted" />
-              <div className="h-2.5 w-4/5 rounded-full bg-muted" />
-              <div className="h-2.5 w-3/5 rounded-full bg-muted" />
-            </div>
-            <div className="mt-2 grid w-full grid-cols-2 gap-2">
-              <div className="h-14 rounded-xl bg-solution/30" />
-              <div className="h-14 rounded-xl bg-problem/20" />
-            </div>
+            {!hidePlaceholders && (
+              <>
+                <div className="w-full space-y-2">
+                  <div className="h-2.5 w-full rounded-full bg-muted" />
+                  <div className="h-2.5 w-4/5 rounded-full bg-muted" />
+                  <div className="h-2.5 w-3/5 rounded-full bg-muted" />
+                </div>
+                <div className="mt-2 grid w-full grid-cols-2 gap-2">
+                  <div className="h-14 rounded-xl bg-solution/30" />
+                  <div className="h-14 rounded-xl bg-problem/20" />
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -343,17 +349,17 @@ function Hero() {
           transition={{ duration: 1.3, delay: 0.3, ease: "easeOut" }}
         >
           <PhoneMockup
+            hidePlaceholders
             iconContent={
-              <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#358f66]">
-                <FoodXchangeMark reduce={!!reduce} basketColor="#ffffff" className="h-10 w-10" />
+              <span className="mt-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-[#358f66]">
+                <FoodXchangeMark reduce={!!reduce} basketColor="#ffffff" className="h-16 w-16" />
               </span>
             }
             labelContent={
-              <p
-                className="text-center font-montserrat text-sm font-extrabold tracking-wide text-foreground"
-                style={{ fontVariant: "small-caps" }}
-              >
-                foodXchange
+              <p className="text-center font-montserrat text-sm font-extrabold tracking-wide text-foreground">
+                <span className="text-[0.72em] uppercase">food</span>
+                <span>X</span>
+                <span className="text-[0.72em] uppercase">change</span>
               </p>
             }
           />
