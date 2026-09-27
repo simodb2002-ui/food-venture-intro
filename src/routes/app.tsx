@@ -357,6 +357,13 @@ function Hero() {
                   style={{ objectPosition: "58% 42%" }}
                 />
                 <div className="absolute inset-0 bg-black/55" />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.957) 4%, rgba(255,255,255,0.844) 8%, rgba(255,255,255,0.684) 12%, rgba(255,255,255,0.5) 16%, rgba(255,255,255,0.316) 20%, rgba(255,255,255,0.156) 24%, rgba(255,255,255,0.043) 28%, rgba(255,255,255,0) 32%)",
+                  }}
+                />
                 <div className="relative flex h-full flex-col items-center justify-center gap-3 px-8 text-center">
                   <FoodXchangeMark reduce basketColor="#ffffff" className="h-24 w-24" />
                   <p className="font-montserrat text-lg font-semibold text-white">foodXchange</p>
