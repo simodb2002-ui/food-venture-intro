@@ -261,7 +261,7 @@ function PhoneMockup({
         flat ? "app-phone-float-flat" : "app-phone-float",
       )}
     >
-      <div className="rounded-[2.6rem] border-[10px] border-footer bg-footer shadow-[0_50px_100px_-20px_rgba(0,0,0,0.4)]">
+      <div className="rounded-[2.6rem] border-[10px] border-footer bg-footer shadow-[0_70px_120px_-15px_rgba(0,0,0,0.55)]">
         <div className="relative aspect-[9/19] overflow-hidden rounded-[1.9rem] bg-card">
           <div className="absolute left-1/2 top-2 z-10 h-5 w-20 -translate-x-1/2 rounded-full bg-footer" />
           {screenContent ?? (
@@ -358,7 +358,7 @@ function Hero() {
                 />
                 <div className="absolute inset-0 bg-black/55" />
                 <div className="absolute inset-0 bg-white/30" />
-                <div className="absolute inset-0 bg-problem/5" />
+                <div className="absolute inset-0 bg-problem/30" />
                 <div className="relative flex h-full flex-col items-center justify-center gap-3 px-8 text-center">
                   <FoodXchangeMark reduce basketColor="#ffffff" className="h-24 w-24" />
                   <p className="font-montserrat text-lg font-semibold text-white">foodXchange</p>
