@@ -18,11 +18,11 @@ html:has(.app-page) body {
     to bottom in oklab,
     var(--solution) 0%,
     var(--solution) 16%,
-    var(--cta) 34%,
-    var(--cta) 42%,
-    var(--problem) 47%,
-    var(--problem) 57%,
-    var(--cta) 82%,
+    var(--cta) 30%,
+    var(--cta) 38%,
+    var(--problem) 50%,
+    var(--problem) 60%,
+    var(--cta) 80%,
     var(--cta) 100%
   );
 }
