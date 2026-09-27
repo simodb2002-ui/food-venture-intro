@@ -97,13 +97,6 @@ html:has(.app-page) body {
   transform: translateY(-6px);
 }
 
-.app-flip-face {
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
-  backface-visibility: hidden;
-}
-
 /* ---------- 3D phone mockup ---------- */
 .app-phone-float {
   animation: app-phone-float 5s ease-in-out infinite;

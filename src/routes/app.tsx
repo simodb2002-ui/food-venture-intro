@@ -392,28 +392,54 @@ function ProblemSolutionCards() {
                   isFlipped && "bg-[#358f66] text-white border-transparent",
                 )}
               >
-                <div className="app-flip-face flex h-full flex-col group-hover:opacity-0 group-focus-visible:opacity-0 group-hover:-translate-y-2"
-                  style={isFlipped ? { opacity: 0, transform: "translateY(-8px)" } : undefined}
-                >
-                  <Icon className="h-8 w-8 text-foreground" />
-                  <span className="mt-4 text-[0.65rem] font-extrabold uppercase tracking-widest text-cta-muted">
-                    Problem
-                  </span>
-                  <p className="mt-2 text-base font-bold leading-snug">
-                    {problem}
-                  </p>
-                </div>
-                <div
-                  className="app-flip-face absolute inset-0 flex flex-col p-6 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0"
-                  style={isFlipped ? { opacity: 1, transform: "translateY(0)" } : undefined}
-                >
-                  <Icon className="h-8 w-8 text-white" />
-                  <span className="mt-4 text-[0.65rem] font-extrabold uppercase tracking-widest text-white/70">
-                    Solution
-                  </span>
-                  <p className="mt-2 text-base font-bold leading-snug">
-                    {solution}
-                  </p>
+                <div className="flex h-full flex-col">
+                  <Icon className="h-8 w-8" aria-hidden="true" />
+
+                  <div className="relative mt-4 h-[0.9rem]">
+                    <span
+                      className={cn(
+                        "absolute inset-0 text-[0.65rem] font-extrabold uppercase tracking-widest text-cta-muted transition-opacity duration-300",
+                        isFlipped
+                          ? "opacity-0"
+                          : "opacity-100 group-hover:opacity-0 group-focus-visible:opacity-0",
+                      )}
+                    >
+                      Problem
+                    </span>
+                    <span
+                      className={cn(
+                        "absolute inset-0 text-[0.65rem] font-extrabold uppercase tracking-widest text-white/70 transition-opacity duration-300",
+                        isFlipped
+                          ? "opacity-100"
+                          : "opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100",
+                      )}
+                    >
+                      Solution
+                    </span>
+                  </div>
+
+                  <div className="relative mt-2 grid">
+                    <p
+                      className={cn(
+                        "col-start-1 row-start-1 text-base font-bold leading-snug transition-opacity duration-300",
+                        isFlipped
+                          ? "opacity-0"
+                          : "opacity-100 group-hover:opacity-0 group-focus-visible:opacity-0",
+                      )}
+                    >
+                      {problem}
+                    </p>
+                    <p
+                      className={cn(
+                        "col-start-1 row-start-1 text-base font-bold leading-snug transition-opacity duration-300",
+                        isFlipped
+                          ? "opacity-100"
+                          : "opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100",
+                      )}
+                    >
+                      {solution}
+                    </p>
+                  </div>
                 </div>
               </button>
             );
