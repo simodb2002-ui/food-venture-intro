@@ -353,7 +353,8 @@ function Hero() {
                 <img
                   src={phoneFoodHero}
                   alt=""
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full scale-125 object-cover"
+                  style={{ objectPosition: "68% 28%" }}
                 />
                 <div className="absolute inset-0 bg-black/55" />
                 <div className="relative flex h-full flex-col items-center justify-center gap-3 px-8 text-center">
