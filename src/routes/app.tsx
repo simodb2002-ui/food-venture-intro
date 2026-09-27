@@ -284,7 +284,7 @@ function PhoneMockup({
                     "linear-gradient(to bottom, rgba(38,38,38,0.35) 0%, rgba(38,38,38,0.268) 3.5%, rgba(38,38,38,0.197) 7%, rgba(38,38,38,0.137) 10.5%, rgba(38,38,38,0.088) 14%, rgba(38,38,38,0.049) 17.5%, rgba(38,38,38,0.022) 21%, rgba(38,38,38,0.005) 24.5%, rgba(38,38,38,0) 28%, rgba(38,38,38,0) 72%, rgba(38,38,38,0.005) 75.5%, rgba(38,38,38,0.022) 79%, rgba(38,38,38,0.049) 82.5%, rgba(38,38,38,0.088) 86%, rgba(38,38,38,0.137) 89.5%, rgba(38,38,38,0.197) 93%, rgba(38,38,38,0.268) 96.5%, rgba(38,38,38,0.35) 100%)",
                 }}
               />
-              <div className="absolute inset-0 bg-cta-action/[0.03]" />
+              <div className="absolute inset-0 bg-cta-action/20" />
               <div className="relative flex h-full flex-col items-center justify-center gap-4 px-6">
                 {iconContent ?? (
                   <motion.span
