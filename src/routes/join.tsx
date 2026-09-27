@@ -230,7 +230,7 @@ function JoinPage() {
               const toneClasses =
                 tone === "solution"
                   ? {
-                      card: "bg-solution/20 hover:bg-solution text-solution-foreground",
+                      card: "bg-solution/50 hover:bg-solution text-solution-foreground",
                       accent: "text-solution-foreground",
                       stroke: "stroke-solution-foreground",
                       muted: "text-solution-foreground/70",
@@ -245,7 +245,7 @@ function JoinPage() {
                 <motion.article
                   key={title}
                   variants={item}
-                  className={`group relative flex w-[22rem] min-h-[28rem] flex-col rounded-3xl p-8 shadow-md transition-all duration-300 hover:-translate-y-4 hover:shadow-xl ${toneClasses.card} ${title === "Community Member" ? "opacity-50" : ""}`}
+                  className={`group relative flex w-[22rem] min-h-[28rem] flex-col rounded-3xl p-8 shadow-md transition-all duration-300 hover:-translate-y-4 hover:shadow-xl ${toneClasses.card}`}
                 >
                   {popular && (
                     <span className="absolute -top-2.5 right-6 rounded-full bg-solution px-3 py-1 text-xs font-bold uppercase tracking-wider text-solution-foreground">
@@ -294,7 +294,7 @@ function JoinPage() {
               <motion.article
                 key={title}
                 variants={item}
-                className="group relative flex w-[22rem] min-h-[28rem] flex-col rounded-3xl border border-border bg-background/60 p-8 opacity-5 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-4 hover:shadow-xl"
+                className="group relative flex w-[22rem] min-h-[28rem] flex-col rounded-3xl border border-footer-foreground/10 bg-background/5 p-8 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-4 hover:shadow-xl"
               >
                 <h3 className="text-xl font-bold">{title}</h3>
                 <p className="mt-3 text-sm text-cta-muted">{description}</p>
