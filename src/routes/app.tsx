@@ -200,6 +200,12 @@ const slides: {
       "View group details, join instantly, and share ideas",
     ],
   },
+  {
+    title: "wHealth",
+    Icon: ListChecks,
+    headline: "Build wHealth one bite at a time",
+    bullets: ["Track your habits, make healthier choices, and invest in long-term wellbeing."],
+  },
 ];
 
 /* ---------------- shared bits ---------------- */
