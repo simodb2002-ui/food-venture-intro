@@ -17,6 +17,15 @@ const FX_PETALS = [
   { angle: 270, gradient: "fx-pink" },
 ] as const;
 
+// Each turn advances by just 90° (a quarter turn, not a full extra spin),
+// at the same angular speed as the original single 360°-in-6s spin. Since
+// opposite petals share a colour, that quarter-turn is all it takes to
+// flip which colour reads as vertical, so the mark settles alternately on
+// "yellow vertical" and "pink vertical" between turns.
+const FX_ROTATION_STEP = 90;
+const FX_SPIN_MS = (FX_ROTATION_STEP / 360) * 6000;
+const FX_PAUSE_MS = 2000;
+
 export function FoodXchangeMark({
   reduce,
   className,
@@ -26,17 +35,11 @@ export function FoodXchangeMark({
   className?: string;
   basketColor?: string;
 }) {
-  // Each spin advances by 450° (360° + a quarter turn) instead of a full
-  // 360°, so it still reads as one energetic windmill spin but lands 90°
-  // further round each time. Since opposite petals share a colour, that
-  // quarter-turn offset is what makes the resting orientation alternate
-  // between "yellow vertical" and "pink vertical" every other spin. The
-  // schedule is driven by our own timer chain (matching the transition's
-  // duration/pause) rather than the animation's completion callback, since
-  // that callback can also fire for the very first, motionless render.
+  // The schedule is driven by our own timer chain (matching the
+  // transition's duration/pause) rather than the animation's completion
+  // callback, since that callback can also fire for the very first,
+  // motionless render.
   const [rotation, setRotation] = useState(0);
-  const spinMs = 4000;
-  const pauseMs = 2000;
 
   useEffect(() => {
     if (reduce) return;
@@ -44,11 +47,11 @@ export function FoodXchangeMark({
 
     const scheduleNextSpin = (delay: number) => {
       timeoutId = setTimeout(() => {
-        setRotation((value) => value + 450);
-        scheduleNextSpin(spinMs + pauseMs);
+        setRotation((value) => value + FX_ROTATION_STEP);
+        scheduleNextSpin(FX_SPIN_MS + FX_PAUSE_MS);
       }, delay);
     };
-    scheduleNextSpin(pauseMs);
+    scheduleNextSpin(FX_PAUSE_MS);
 
     return () => clearTimeout(timeoutId);
   }, [reduce]);
@@ -69,7 +72,7 @@ export function FoodXchangeMark({
       <motion.g
         style={{ transformOrigin: "0px 0px" }}
         animate={{ rotate: reduce ? 0 : rotation }}
-        transition={reduce ? { duration: 0 } : { duration: spinMs / 1000, ease: "linear" }}
+        transition={reduce ? { duration: 0 } : { duration: FX_SPIN_MS / 1000, ease: "linear" }}
       >
         {FX_PETALS.map(({ angle, gradient }, i) => (
           <g key={i} transform={`rotate(${angle}) translate(0, -30)`}>
