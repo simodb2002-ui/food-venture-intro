@@ -24,7 +24,6 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useCallback, useState, type ReactNode } from "react";
 
 import foodTableHero from "@/assets/food-table-hero.jpg";
-import foodXchangeLockup from "@/assets/foodxchange-lockup.png.asset.json";
 import { FoodXchangeMark } from "@/components/foodxchange-mark";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -316,12 +315,7 @@ function Hero() {
           animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: 1.1, delay: 0.1, ease: "easeOut" }}
         >
-          <img
-            src={foodXchangeLockup.url}
-            alt="foodXchange"
-            className="h-10 w-auto mix-blend-multiply sm:h-12"
-          />
-          <h1 className="mt-6 text-4xl font-black uppercase leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="text-4xl font-black uppercase leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
             Your go-to app for better everyday eating
           </h1>
           <p className="mt-5 max-w-xl text-lg font-medium sm:text-xl">
