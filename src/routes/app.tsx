@@ -23,7 +23,7 @@ import {
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useCallback, useState, type ReactNode } from "react";
 
-import foodTableHero from "@/assets/food-table-hero.jpg";
+import phoneFoodHero from "@/assets/phone-food-hero.jpg";
 import { FoodXchangeMark } from "@/components/foodxchange-mark";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -351,9 +351,9 @@ function Hero() {
             screenContent={
               <div className="relative h-full w-full">
                 <img
-                  src={foodTableHero}
+                  src={phoneFoodHero}
                   alt=""
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full scale-110 object-cover blur-sm"
                 />
                 <div className="absolute inset-0 bg-black/55" />
                 <div className="relative flex h-full flex-col items-center justify-center gap-3 px-8 text-center">
