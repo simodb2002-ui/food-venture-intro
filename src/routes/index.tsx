@@ -4,7 +4,6 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import brandMark from "../assets/fis-mark.png";
-import brandMarkHq from "../assets/fis-mark-hq.png";
 import { Button } from "../components/ui/button";
 import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
@@ -237,10 +236,10 @@ function Index() {
                   className="absolute flex flex-col items-center gap-5 sm:flex-row sm:gap-10"
                 >
                   <img
-                    src={brandMarkHq}
+                    src={brandMark}
                     alt=""
-                    width={593}
-                    height={970}
+                    width={250}
+                    height={420}
                     className="h-64 w-auto object-contain sm:h-80"
                   />
                   <p className="text-left font-display text-5xl font-medium leading-[0.87] text-foreground sm:text-7xl">
