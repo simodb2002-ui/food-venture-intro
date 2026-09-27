@@ -378,7 +378,10 @@ function Index() {
                       transition={{ duration: reduceMotion ? 0 : 0.42, ease: "easeOut" }}
                       className="w-full"
                     >
-                      <p className="mx-auto max-w-2xl text-balance text-base font-medium opacity-85 sm:text-xl">
+                      <p
+                        lang="en"
+                        className="prose-justify mx-auto max-w-2xl text-base font-medium opacity-85 sm:text-xl"
+                      >
                         Research shows heavily marketed industrial foods drive higher risks of poor
                         health, including obesity, heart disease, and Type 2 diabetes.
                       </p>
@@ -448,7 +451,8 @@ function Index() {
                               y: narrativeFocus * -18,
                             }}
                             transition={{ duration: reduceMotion ? 0 : 0.18, ease: "easeOut" }}
-                            className="col-start-1 row-start-1 text-justify text-lg font-medium leading-[1.3] [text-justify:inter-word] md:text-xl"
+                            lang="en"
+                            className="prose-justify col-start-1 row-start-1 text-lg font-medium leading-[1.3] md:text-xl"
                           >
                             <strong className="font-extrabold">foodXchange</strong> is a{" "}
                             <strong className="font-extrabold">community-owned platform</strong>{" "}
@@ -470,7 +474,8 @@ function Index() {
                               y: (1 - narrativeFocus) * 18,
                             }}
                             transition={{ duration: reduceMotion ? 0 : 0.18, ease: "easeOut" }}
-                            className="col-start-1 row-start-1 text-justify text-lg font-medium leading-[1.3] [text-justify:inter-word] md:text-xl"
+                            lang="en"
+                            className="prose-justify col-start-1 row-start-1 text-lg font-medium leading-[1.3] md:text-xl"
                           >
                             Together, we&apos;re growing a{" "}
                             <strong className="font-extrabold">people-powered food system</strong>{" "}
@@ -688,7 +693,10 @@ function Index() {
                 Join the Movement Transforming the Future of{" "}
                 <span className="border-b-4 border-cta-accent text-cta-accent">Food</span>
               </h2>
-              <p className="mx-auto mb-8 max-w-xl text-base font-medium leading-relaxed text-cta-muted md:text-lg">
+              <p
+                lang="en"
+                className="prose-justify mx-auto mb-8 max-w-xl text-base font-medium leading-relaxed text-cta-muted md:text-lg"
+              >
                 Be part of a growing community creating a healthier, fairer and more sustainable
                 food system.
               </p>
