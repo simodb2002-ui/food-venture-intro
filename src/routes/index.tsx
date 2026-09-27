@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import brandMark from "../assets/fis-mark.png";
+import foodXchangeLockup from "../assets/foodxchange-lockup.png.asset.json";
 import { Button } from "../components/ui/button";
 import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
@@ -35,7 +36,6 @@ function Index() {
   const [challengeStage, setChallengeStage] = useState(0);
   const [challengeProgress, setChallengeProgress] = useState(0);
   const [challengeActive, setChallengeActive] = useState(false);
-  const [phoneScreen, setPhoneScreen] = useState(0);
   const [showPlatform, setShowPlatform] = useState(false);
   const [platformSlide, setPlatformSlide] = useState(0);
   const [joined, setJoined] = useState(false);
@@ -121,16 +121,6 @@ function Index() {
       scroller.removeEventListener("wheel", onWheel);
       window.clearTimeout(unlockTimer);
     };
-  }, [reduceMotion]);
-
-  useEffect(() => {
-    if (reduceMotion) return;
-
-    const screenTimer = window.setInterval(() => {
-      setPhoneScreen((current) => (current + 1) % 3);
-    }, 6000);
-
-    return () => window.clearInterval(screenTimer);
   }, [reduceMotion]);
 
   const revealPlatform = () => {
@@ -416,29 +406,30 @@ function Index() {
                     >
                       <div className="flex items-center justify-center [perspective:1200px]">
                         <motion.div
-                          className="relative h-[13rem] w-[6.5rem] rounded-[1.8rem] border-[8px] border-foreground bg-foreground p-1 shadow-[0_1.25rem_2.5rem_-1rem_var(--foreground)] md:h-[22rem] md:w-[11rem] md:rounded-[2.7rem] md:border-[12px] md:p-1.5"
-                          animate={reduceMotion ? { rotateY: 0 } : { rotateY: 360 }}
+                          className="relative h-40 w-40 rounded-[2.25rem] bg-gradient-to-br from-solution to-problem shadow-[0_2rem_4rem_-1rem_rgba(0,0,0,0.35)] md:h-56 md:w-56 md:rounded-[3rem]"
+                          initial={{ rotateX: 12, rotateY: -18, y: 0 }}
+                          animate={{
+                            rotateX: 12,
+                            rotateY: -18,
+                            y: reduceMotion ? 0 : [0, -14, 0],
+                          }}
                           transition={
                             reduceMotion
                               ? { duration: 0 }
-                              : { duration: 6, ease: "linear", repeat: Infinity }
+                              : { duration: 4.5, ease: "easeInOut", repeat: Infinity }
                           }
-                          aria-label={`foodXchange phone showcase, screen ${phoneScreen + 1} of 3`}
+                          aria-label="foodXchange app icon"
                         >
-                          <div className="absolute left-1/2 top-2 z-10 h-3 w-12 -translate-x-1/2 rounded-full bg-foreground md:top-3 md:h-4 md:w-16" />
-                          <div className="relative h-full w-full overflow-hidden rounded-[1.25rem] bg-placeholder [backface-visibility:hidden] md:rounded-[1.85rem]">
-                            <AnimatePresence mode="wait">
-                              <motion.div
-                                key={phoneScreen}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: reduceMotion ? 0 : 0.25 }}
-                                className="absolute inset-0 grid place-items-center bg-placeholder px-3 text-center text-xs font-bold text-placeholder-foreground sm:text-sm"
-                              >
-                                (insert screen image {phoneScreen + 1}: grey)
-                              </motion.div>
-                            </AnimatePresence>
+                          <div
+                            className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-br from-white/45 via-white/5 to-transparent"
+                            aria-hidden="true"
+                          />
+                          <div className="absolute inset-[16%] flex items-center justify-center rounded-[1.5rem] bg-white shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)] md:rounded-[2rem]">
+                            <img
+                              src={foodXchangeLockup.url}
+                              alt="foodXchange"
+                              className="h-2/3 w-2/3 object-contain"
+                            />
                           </div>
                         </motion.div>
                       </div>
