@@ -261,9 +261,9 @@ function PhoneMockup({
         flat ? "app-phone-float-flat" : "app-phone-float",
       )}
     >
-      <div className="rounded-[2.6rem] border-[10px] border-white bg-white shadow-[0_70px_120px_-15px_rgba(0,0,0,0.55)]">
+      <div className="rounded-[2.6rem] border-[10px] border-footer bg-footer shadow-[0_70px_120px_-15px_rgba(0,0,0,0.55)]">
         <div className="relative aspect-[9/19] overflow-hidden rounded-[1.9rem] bg-card">
-          <div className="absolute left-1/2 top-2 z-10 h-5 w-20 -translate-x-1/2 rounded-full bg-white" />
+          <div className="absolute left-1/2 top-2 z-10 h-5 w-20 -translate-x-1/2 rounded-full bg-footer" />
           {screenContent ?? (
             <div className="flex h-full flex-col items-center justify-center gap-4 px-6">
               {iconContent ?? (
