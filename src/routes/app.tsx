@@ -244,6 +244,7 @@ function PhoneMockup({
   label: string;
   flat?: boolean;
 }) {
+  const reduce = useReducedMotion();
   return (
     <div
       className={cn(
@@ -255,9 +256,15 @@ function PhoneMockup({
         <div className="relative aspect-[9/19] overflow-hidden rounded-[1.9rem] bg-card">
           <div className="absolute left-1/2 top-2 h-5 w-20 -translate-x-1/2 rounded-full bg-footer" />
           <div className="flex h-full flex-col items-center justify-center gap-4 px-6">
-            <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-solution/25 text-solution-foreground">
+            <motion.span
+              key={label}
+              initial={{ scale: 1 }}
+              animate={{ scale: reduce ? 1 : [1, 1.22, 1] }}
+              transition={{ duration: 0.7, ease: "easeInOut" }}
+              className="flex h-16 w-16 items-center justify-center rounded-2xl bg-solution/25 text-solution-foreground"
+            >
               <Icon className="h-8 w-8" />
-            </span>
+            </motion.span>
             <p className="text-center text-sm font-extrabold uppercase tracking-wide text-foreground">
               {label}
             </p>
@@ -452,17 +459,12 @@ function ProblemSolutionCards() {
 
 function FeatureShowcase() {
   const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState(1);
   const reduce = useReducedMotion();
   const slide = slides[index]!;
 
-  const go = useCallback(
-    (next: number) => {
-      setDirection(next > index ? 1 : -1);
-      setIndex((next + slides.length) % slides.length);
-    },
-    [index],
-  );
+  const go = useCallback((next: number) => {
+    setIndex((next + slides.length) % slides.length);
+  }, []);
 
   return (
     <section className="px-6 pt-40 pb-40 text-problem-foreground sm:px-8">
@@ -479,17 +481,7 @@ function FeatureShowcase() {
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={slide.title}
-                initial={reduce ? false : { opacity: 0, x: 40 * direction }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={reduce ? { opacity: 0 } : { opacity: 0, x: -40 * direction }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
-              >
-                <PhoneMockup Icon={slide.Icon} label={slide.title} flat />
-              </motion.div>
-            </AnimatePresence>
+            <PhoneMockup Icon={slide.Icon} label={slide.title} flat />
           </motion.div>
 
           <div>
