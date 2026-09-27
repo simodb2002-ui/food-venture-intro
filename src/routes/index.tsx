@@ -58,19 +58,17 @@ function FoodXchangeMark({ reduce, className }: { reduce: boolean; className?: s
         </linearGradient>
       </defs>
 
-      {FX_PETALS.map(({ angle, gradient }, i) => (
-        <g key={i} transform={`rotate(${angle}) translate(0, -30)`}>
-          <motion.path
-            d={FX_PETAL_PATH}
-            fill={`url(#${gradient})`}
-            style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
-            animate={{ rotate: reduce ? 0 : 360 }}
-            transition={
-              reduce ? { duration: 0 } : { duration: 6, ease: "linear", repeat: Infinity }
-            }
-          />
-        </g>
-      ))}
+      <motion.g
+        style={{ transformOrigin: "0px 0px" }}
+        animate={{ rotate: reduce ? 0 : 360 }}
+        transition={reduce ? { duration: 0 } : { duration: 6, ease: "linear", repeat: Infinity }}
+      >
+        {FX_PETALS.map(({ angle, gradient }, i) => (
+          <g key={i} transform={`rotate(${angle}) translate(0, -30)`}>
+            <path d={FX_PETAL_PATH} fill={`url(#${gradient})`} />
+          </g>
+        ))}
+      </motion.g>
 
       <path
         d="M -193 103 L 176 105 L 129 282 L -159 272 Z"
