@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Bell,
   ChefHat,
+  Check,
   CookingPot,
   ListChecks,
   MapPin,
@@ -335,7 +336,7 @@ function Hero() {
 function Marquee() {
   const items = [...marqueeItems, ...marqueeItems];
   return (
-    <section className="text-solution-foreground pt-4 pb-14">
+    <section className="text-solution-foreground pt-10 pb-14">
       <h2 className="px-6 text-center text-2xl font-black uppercase tracking-tight sm:text-3xl">
         Everything you need in one place
       </h2>
@@ -387,8 +388,8 @@ function ProblemSolutionCards() {
                 className={cn(
                   "app-flip-card group relative min-h-64 overflow-hidden rounded-3xl p-6 text-left",
                   "border border-border bg-background text-cta-foreground shadow-sm",
-                  "hover:bg-solution hover:text-solution-foreground hover:border-transparent focus-visible:bg-solution focus-visible:text-solution-foreground focus-visible:border-transparent",
-                  isFlipped && "bg-solution text-solution-foreground border-transparent",
+                  "hover:bg-[#358f66] hover:text-white hover:border-transparent focus-visible:bg-[#358f66] focus-visible:text-white focus-visible:border-transparent",
+                  isFlipped && "bg-[#358f66] text-white border-transparent",
                 )}
               >
                 <div className="app-flip-face flex h-full flex-col group-hover:opacity-0 group-focus-visible:opacity-0 group-hover:-translate-y-2"
@@ -406,8 +407,8 @@ function ProblemSolutionCards() {
                   className="app-flip-face absolute inset-0 flex flex-col p-6 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0"
                   style={isFlipped ? { opacity: 1, transform: "translateY(0)" } : undefined}
                 >
-                  <Icon className="h-8 w-8 text-solution-foreground" />
-                  <span className="mt-4 text-[0.65rem] font-extrabold uppercase tracking-widest text-problem">
+                  <Icon className="h-8 w-8 text-white" />
+                  <span className="mt-4 text-[0.65rem] font-extrabold uppercase tracking-widest text-white/70">
                     Solution
                   </span>
                   <p className="mt-2 text-base font-bold leading-snug">
@@ -483,8 +484,8 @@ function FeatureShowcase() {
                 <ul className="mt-6 space-y-3">
                   {slide.bullets.map((bullet) => (
                     <li key={bullet} className="flex items-start gap-3 text-sm font-medium text-problem-foreground/85 sm:text-base">
-                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-cta-action text-[0.65rem] font-black text-cta-action-foreground">
-                        ✓
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-cta-action text-cta-action-foreground">
+                        <Check className="h-3 w-3" strokeWidth={3} />
                       </span>
                       {bullet}
                     </li>
