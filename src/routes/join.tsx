@@ -245,7 +245,7 @@ function JoinPage() {
                 <motion.article
                   key={title}
                   variants={item}
-                  className={`group relative flex w-[22rem] min-h-[28rem] flex-col rounded-3xl p-8 shadow-md transition-all duration-300 hover:-translate-y-4 hover:shadow-xl ${toneClasses.card} ${title === "Community Member" ? "opacity-35" : ""}`}
+                  className={`group relative flex w-[22rem] min-h-[28rem] flex-col rounded-3xl p-8 shadow-md transition-all duration-300 hover:-translate-y-4 hover:shadow-xl ${toneClasses.card} ${title === "Community Member" ? "opacity-50" : ""}`}
                 >
                   {popular && (
                     <span className="absolute -top-2.5 right-6 rounded-full bg-solution px-3 py-1 text-xs font-bold uppercase tracking-wider text-solution-foreground">
