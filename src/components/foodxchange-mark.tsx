@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 
 // One balloon shape, matched to the foodXchange mark: local origin is the
 // tip, a straight 45° taper (so the "X" negative space between petals is a
@@ -25,6 +26,33 @@ export function FoodXchangeMark({
   className?: string;
   basketColor?: string;
 }) {
+  // Each spin advances by 450° (360° + a quarter turn) instead of a full
+  // 360°, so it still reads as one energetic windmill spin but lands 90°
+  // further round each time. Since opposite petals share a colour, that
+  // quarter-turn offset is what makes the resting orientation alternate
+  // between "yellow vertical" and "pink vertical" every other spin. The
+  // schedule is driven by our own timer chain (matching the transition's
+  // duration/pause) rather than the animation's completion callback, since
+  // that callback can also fire for the very first, motionless render.
+  const [rotation, setRotation] = useState(0);
+  const spinMs = 7500;
+  const pauseMs = 2000;
+
+  useEffect(() => {
+    if (reduce) return;
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    const scheduleNextSpin = (delay: number) => {
+      timeoutId = setTimeout(() => {
+        setRotation((value) => value + 450);
+        scheduleNextSpin(spinMs + pauseMs);
+      }, delay);
+    };
+    scheduleNextSpin(pauseMs);
+
+    return () => clearTimeout(timeoutId);
+  }, [reduce]);
+
   return (
     <svg viewBox="-230 -230 460 530" className={className} role="img" aria-label="foodXchange logo">
       <defs>
@@ -40,18 +68,8 @@ export function FoodXchangeMark({
 
       <motion.g
         style={{ transformOrigin: "0px 0px" }}
-        animate={{ rotate: reduce ? 0 : 360 }}
-        transition={
-          reduce
-            ? { duration: 0 }
-            : {
-                duration: 6,
-                ease: "linear",
-                repeat: Infinity,
-                delay: 2,
-                repeatDelay: 2,
-              }
-        }
+        animate={{ rotate: reduce ? 0 : rotation }}
+        transition={reduce ? { duration: 0 } : { duration: spinMs / 1000, ease: "linear" }}
       >
         {FX_PETALS.map(({ angle, gradient }, i) => (
           <g key={i} transform={`rotate(${angle}) translate(0, -30)`}>
