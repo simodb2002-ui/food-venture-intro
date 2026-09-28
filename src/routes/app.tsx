@@ -20,7 +20,7 @@ import {
   ChevronRight,
   type LucideIcon,
 } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { useCallback, useState, type ReactNode } from "react";
 
 import phoneFoodHero from "@/assets/phone-food-hero.jpg";
@@ -81,8 +81,7 @@ const problemCards: {
   {
     Icon: Search,
     problem: "It's hard to decode labels and avoid marketing traps",
-    solution:
-      "Use simple scoring to show what's in your food and reveal hidden influences",
+    solution: "Use simple scoring to show what's in your food and reveal hidden influences",
   },
   {
     Icon: Scale,
@@ -92,20 +91,17 @@ const problemCards: {
   {
     Icon: CookingPot,
     problem: "Convenience wins when life gets busy and overwhelming",
-    solution:
-      "Turn to quick recipes and cooking shortcuts for real-food solutions",
+    solution: "Turn to quick recipes and cooking shortcuts for real-food solutions",
   },
   {
     Icon: RefreshCcw,
     problem: "I don't want to give up the favourite foods I enjoy",
-    solution:
-      "Swap smartly to keep the flavours and feel-good foods you love",
+    solution: "Swap smartly to keep the flavours and feel-good foods you love",
   },
   {
     Icon: MessagesSquare,
     problem: "Eating feels like a chore instead of something shared and enjoyable",
-    solution:
-      "Find community, inspiration, and shared experiences that make food joyful",
+    solution: "Find community, inspiration, and shared experiences that make food joyful",
   },
 ];
 
@@ -131,8 +127,7 @@ const slides: {
   {
     title: "My List",
     Icon: ShoppingBasket,
-    headline:
-      "Turn every shopping list into lasting value for your health and wallet",
+    headline: "Turn every shopping list into lasting value for your health and wallet",
     bullets: [
       "Create and manage shopping lists with ease",
       "Automatically grouped by cheapest retailer",
@@ -168,8 +163,7 @@ const slides: {
   {
     title: "My Spaces & Items",
     Icon: ShoppingBag,
-    headline:
-      "Track, update and organise your pantry to protect food investments",
+    headline: "Track, update and organise your pantry to protect food investments",
     bullets: [
       "Create and manage pantry spaces",
       "View all items within each space",
@@ -238,7 +232,10 @@ function PlatformBadges({ dark = false }: { dark?: boolean }) {
       >
         Planned for Android
       </span>
-      <Button asChild className="rounded-full bg-problem px-5 py-2 text-xs font-extrabold uppercase tracking-wide text-problem-foreground hover:bg-problem/90">
+      <Button
+        asChild
+        className="rounded-full bg-problem px-5 py-2 text-xs font-extrabold uppercase tracking-wide text-problem-foreground hover:bg-problem/90"
+      >
         <Link to="/join">
           <Bell className="h-4 w-4" /> Notify me
         </Link>
@@ -432,13 +429,11 @@ function ProblemSolutionCards() {
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-base font-medium leading-relaxed sm:text-lg">
-            foodXchange is the community-owned app built by The Food Investors
-            Society to help people cut through today&apos;s profit-driven food
-            landscape.
+            foodXchange is the community-owned app built by The Food Investors Society to help
+            people cut through today&apos;s profit-driven food landscape.
           </p>
           <p className="mt-4 text-base font-medium leading-relaxed sm:text-lg">
-            Let&apos;s be honest, making good food choices is easier said than
-            done.
+            Let&apos;s be honest, making good food choices is easier said than done.
           </p>
           <h2 className="mt-8 text-2xl font-black uppercase tracking-tight sm:text-3xl">
             Hover over a card to reveal the solution
@@ -547,24 +542,32 @@ function FeatureShowcase() {
           </motion.div>
 
           <div>
-            <div className="min-h-[440px] sm:min-h-[400px]">
-              <AnimatePresence mode="wait" initial={false}>
+            {/* All slides stay mounted, stacked in one grid cell, so the
+                row's height is always the tallest slide's height and the
+                controls below never shift as `index` changes. */}
+            <div className="grid">
+              {slides.map((s, i) => (
                 <motion.div
-                  key={slide.title}
-                  initial={reduce ? false : { opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={reduce ? { opacity: 0 } : { opacity: 0, y: -16 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  key={s.title}
+                  className="col-start-1 row-start-1"
+                  aria-hidden={i !== index}
+                  style={{ pointerEvents: i === index ? "auto" : "none" }}
+                  initial={false}
+                  animate={{ opacity: i === index ? 1 : 0 }}
+                  transition={{ duration: reduce ? 0 : 0.3, ease: "easeOut" }}
                 >
                   <span className="inline-flex items-center gap-2 rounded-full bg-problem-foreground/15 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-problem-foreground">
-                    <slide.Icon className="h-4 w-4" /> {slide.title}
+                    <s.Icon className="h-4 w-4" /> {s.title}
                   </span>
                   <h3 className="mt-5 text-2xl font-black leading-tight sm:text-3xl">
-                    {slide.headline}
+                    {s.headline}
                   </h3>
                   <ul className="mt-6 space-y-3">
-                    {slide.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-3 text-sm font-medium text-problem-foreground/85 sm:text-base">
+                    {s.bullets.map((bullet) => (
+                      <li
+                        key={bullet}
+                        className="flex items-start gap-3 text-sm font-medium text-problem-foreground/85 sm:text-base"
+                      >
                         <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-cta-action text-cta-action-foreground">
                           <Check className="h-3 w-3" strokeWidth={3} />
                         </span>
@@ -573,7 +576,7 @@ function FeatureShowcase() {
                     ))}
                   </ul>
                 </motion.div>
-              </AnimatePresence>
+              ))}
             </div>
 
             <div className="mt-8 flex items-center justify-start gap-4">
@@ -630,16 +633,16 @@ function BottomCta() {
           Owned by you.
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-base font-medium leading-relaxed text-cta-muted sm:text-lg">
-          foodXchange is created by The Food Investors Society, a member-owned
-          Community Benefit Society. Every feature, tool, and future development
-          is guided by people like you and not by corporate agendas.
+          foodXchange is created by The Food Investors Society, a member-owned Community Benefit
+          Society. Every feature, tool, and future development is guided by people like you and not
+          by corporate agendas.
         </p>
         <h3 className="mt-10 text-xl font-extrabold uppercase tracking-tight text-problem sm:text-2xl">
           Join the Society for early access
         </h3>
         <p className="mx-auto mt-4 max-w-2xl text-base font-medium leading-relaxed text-cta-muted">
-          You can help shape the app by joining the Society and taking part in
-          early trials, feedback opportunities, and future member updates.
+          You can help shape the app by joining the Society and taking part in early trials,
+          feedback opportunities, and future member updates.
         </p>
         <Button
           asChild
