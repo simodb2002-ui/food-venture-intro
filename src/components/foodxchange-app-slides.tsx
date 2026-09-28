@@ -25,9 +25,11 @@ import { BowlIllustration, JarIllustration, PotIllustration } from "./food-icons
 
 type SlideProps = { reduceMotion: boolean };
 
-function ScreenCard({ children }: { children: ReactNode }) {
+function ScreenCard({ children, center }: { children: ReactNode; center?: boolean }) {
   return (
-    <div className="relative flex flex-1 flex-col justify-between overflow-hidden rounded-[1.75rem] border border-solution-foreground/15 bg-white/30 p-5 shadow-[0_20px_45px_-25px_rgba(0,0,0,0.35)] sm:p-6">
+    <div
+      className={`relative flex flex-1 flex-col overflow-hidden rounded-[1.75rem] border border-solution-foreground/15 bg-white/30 p-5 shadow-[0_20px_45px_-25px_rgba(0,0,0,0.35)] sm:p-6 ${center ? "justify-center" : "justify-between"}`}
+    >
       {children}
     </div>
   );
@@ -383,8 +385,8 @@ export function CookSlide({ reduceMotion }: SlideProps) {
         title="Cook Easy"
         subtitle="Browse quick recipes, kitchen hacks, and ideas that make eating well more convenient."
       />
-      <ScreenCard>
-        <div className="flex flex-1 items-center justify-center gap-6 sm:gap-8">
+      <ScreenCard center>
+        <div className="flex items-center justify-center gap-6 sm:gap-8">
           <div className="relative flex h-32 w-32 items-center justify-center sm:h-36 sm:w-36">
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 6, scale: 0.9 }}
