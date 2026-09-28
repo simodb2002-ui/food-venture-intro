@@ -7,6 +7,7 @@ import brandMark from "../assets/fis-mark.png";
 import fisLockupFull from "../assets/fis-lockup-full.png";
 import { Button } from "../components/ui/button";
 import { FoodXchangeMark } from "../components/foodxchange-mark";
+import { FOODXCHANGE_APP_SLIDES } from "../components/foodxchange-app-slides";
 import { SiteFooter } from "../components/site-footer";
 import { SiteHeader } from "../components/site-header";
 import { isReturningSiteVisit } from "../lib/site-visit";
@@ -551,14 +552,12 @@ function Index() {
                           animate={{ x: `-${platformSlide * 100}%` }}
                           transition={{ duration: reduceMotion ? 0 : 0.45, ease: "easeInOut" }}
                         >
-                          {[1, 2, 3, 4, 5].map((section) => (
+                          {FOODXCHANGE_APP_SLIDES.map((Slide, section) => (
                             <div
                               key={section}
-                              className="grid min-h-64 w-full shrink-0 place-items-center px-14 py-10 sm:min-h-80 sm:px-20"
+                              className="grid min-h-64 w-full shrink-0 place-items-center px-6 py-10 sm:min-h-80 sm:px-12"
                             >
-                              <p className="font-display text-lg font-bold text-solution-foreground sm:text-xl">
-                                [foodXchange app interface breakdown {section} - left blank]
-                              </p>
+                              <Slide reduceMotion={!!reduceMotion} />
                             </div>
                           ))}
                         </motion.div>
