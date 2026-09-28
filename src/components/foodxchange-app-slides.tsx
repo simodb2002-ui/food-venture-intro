@@ -145,15 +145,27 @@ function ScanCard({
           style={reduceMotion ? { top: "50%" } : undefined}
           className="absolute left-0 right-0 h-0.5 bg-problem shadow-[0_0_10px_2px_rgba(228,67,160,0.65)]"
         />
+
+        <motion.div
+          aria-hidden="true"
+          animate={reduceMotion ? undefined : { opacity: revealValues, times: revealTimes }}
+          transition={reduceMotion ? undefined : { duration: 3, repeat: Infinity, ease: "linear" }}
+          style={reduceMotion ? { opacity: 1 } : undefined}
+          className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0"
+        >
+          <Icon
+            className="h-10 w-10 text-white drop-shadow-md sm:h-12 sm:w-12"
+            aria-hidden="true"
+          />
+        </motion.div>
       </div>
 
       <motion.span
         animate={reduceMotion ? undefined : { opacity: revealValues, times: revealTimes }}
         transition={reduceMotion ? undefined : { duration: 3, repeat: Infinity, ease: "linear" }}
         style={reduceMotion ? { opacity: 1 } : undefined}
-        className={`inline-flex items-center gap-1 rounded-full ${badgeBg} px-2 py-1 text-[10px] font-bold ${badgeText} sm:text-[11px]`}
+        className={`rounded-full ${badgeBg} px-2 py-1 text-center text-[10px] font-bold ${badgeText} sm:text-[11px]`}
       >
-        <Icon className="h-3 w-3 shrink-0" aria-hidden="true" />
         {label}
       </motion.span>
     </motion.div>
