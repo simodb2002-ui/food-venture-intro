@@ -27,7 +27,7 @@ type SlideProps = { reduceMotion: boolean };
 
 function ScreenCard({ children }: { children: ReactNode }) {
   return (
-    <div className="relative flex flex-1 flex-col justify-center overflow-hidden rounded-[1.75rem] border border-solution-foreground/15 bg-white/80 p-5 shadow-[0_20px_45px_-25px_rgba(0,0,0,0.35)] sm:p-6">
+    <div className="relative flex flex-1 flex-col justify-between overflow-hidden rounded-[1.75rem] border border-solution-foreground/15 bg-white/30 p-5 shadow-[0_20px_45px_-25px_rgba(0,0,0,0.35)] sm:p-6">
       {children}
     </div>
   );
@@ -490,7 +490,7 @@ export function MapSlide({ reduceMotion }: SlideProps) {
         </div>
 
         <div
-          className="relative h-40 overflow-hidden rounded-xl border border-solution-foreground/15 sm:h-44"
+          className="relative min-h-40 flex-1 overflow-hidden rounded-xl border border-solution-foreground/15 sm:min-h-44"
           style={{
             backgroundImage:
               "linear-gradient(to right, rgba(24,18,10,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(24,18,10,0.06) 1px, transparent 1px)",
