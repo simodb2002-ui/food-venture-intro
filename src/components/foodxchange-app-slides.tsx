@@ -371,6 +371,12 @@ function FlowArrow({ delay = 0, reduceMotion }: { delay?: number; reduceMotion: 
 }
 
 export function CookSlide({ reduceMotion }: SlideProps) {
+  // One repeating story: the pot bubbles away, then the arrow and finished
+  // plate pop in and hold, before the cycle resets and cooks again.
+  const revealTimes = [0, 0.55, 0.65, 0.92, 1];
+  const revealOpacity = [0, 0, 1, 1, 0];
+  const revealScale = [0.7, 0.7, 1, 1, 0.85];
+
   return (
     <div className="mx-auto w-full max-w-2xl">
       <SlideHeading
@@ -378,15 +384,7 @@ export function CookSlide({ reduceMotion }: SlideProps) {
         subtitle="Browse quick recipes, kitchen hacks, and ideas that make eating well more convenient."
       />
       <ScreenCard>
-        <div className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-          <div className="flex max-w-[9rem] flex-wrap items-center justify-center gap-1.5 sm:max-w-[8rem]">
-            {RECIPE_TAGS.map((label, i) => (
-              <DataPill key={label} label={label} delay={0.08 * i} reduceMotion={reduceMotion} />
-            ))}
-          </div>
-
-          <FlowArrow reduceMotion={reduceMotion} />
-
+        <div className="flex items-center justify-center gap-4 sm:gap-6">
           <div className="relative flex h-20 w-20 items-center justify-center">
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 6, scale: 0.9 }}
@@ -417,9 +415,27 @@ export function CookSlide({ reduceMotion }: SlideProps) {
             />
           </div>
 
-          <FlowArrow delay={0.4} reduceMotion={reduceMotion} />
+          <motion.div
+            className="flex items-center gap-4 sm:gap-6"
+            animate={
+              reduceMotion
+                ? undefined
+                : { opacity: revealOpacity, scale: revealScale, times: revealTimes }
+            }
+            style={reduceMotion ? { opacity: 1, scale: 1 } : undefined}
+            transition={
+              reduceMotion ? undefined : { duration: 4.5, repeat: Infinity, ease: "easeInOut" }
+            }
+          >
+            <FlowArrow reduceMotion={reduceMotion} />
+            <BowlIllustration className="h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem]" />
+          </motion.div>
+        </div>
 
-          <BowlIllustration className="h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem]" />
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+          {RECIPE_TAGS.map((label, i) => (
+            <DataPill key={label} label={label} delay={0.08 * i} reduceMotion={reduceMotion} />
+          ))}
         </div>
       </ScreenCard>
     </div>
