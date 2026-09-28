@@ -113,17 +113,11 @@ export function BowlIllustration({ className }: IconProps) {
   );
 }
 
-const JAR_TONES = {
-  neutral: { cap: "#4A8F5E", body: "#D9713F", highlight: "#F2A876", badge: "#8A7A63" },
-  bad: { cap: "#8C8577", body: "#C9C2B4", highlight: "#E4DFD3", badge: "#B3452F" },
-  good: { cap: "#3E7A4E", body: "#D9713F", highlight: "#F2A876", badge: "#4A8F5E" },
-} as const;
+const JAR_GREEN = "#4A8F5E";
+const JAR_BODY = "#D9713F";
+const JAR_HIGHLIGHT = "#F2A876";
 
-export function JarIllustration({
-  className,
-  tone = "neutral",
-}: IconProps & { tone?: keyof typeof JAR_TONES }) {
-  const colors = JAR_TONES[tone];
+export function JarIllustration({ className }: IconProps) {
   return (
     <svg viewBox="0 0 56 64" className={className} role="img" aria-label="Packaged product">
       <rect
@@ -132,7 +126,7 @@ export function JarIllustration({
         width="18"
         height="9"
         rx="2.5"
-        fill={colors.cap}
+        fill={JAR_GREEN}
         stroke={INK}
         strokeWidth="2"
       />
@@ -141,7 +135,7 @@ export function JarIllustration({
 
       <path
         d="M 20 11 L 36 11 L 40 19 Q 43 27 43 35 L 43 50 Q 43 58 35 58 L 21 58 Q 13 58 13 50 L 13 35 Q 13 27 16 19 Z"
-        fill={colors.body}
+        fill={JAR_BODY}
         stroke={INK}
         strokeWidth="2.5"
         strokeLinejoin="round"
@@ -149,7 +143,7 @@ export function JarIllustration({
       <path
         d="M 18 22 Q 16 32 16 44"
         fill="none"
-        stroke={colors.highlight}
+        stroke={JAR_HIGHLIGHT}
         strokeWidth="3"
         strokeLinecap="round"
         opacity="0.6"
@@ -161,11 +155,10 @@ export function JarIllustration({
         width="34"
         height="18"
         rx="3"
-        fill="#FCEFDD"
+        fill={JAR_GREEN}
         stroke={INK}
         strokeWidth="2"
       />
-      <circle cx="28" cy="41" r="7" fill={colors.badge} opacity="0.85" />
     </svg>
   );
 }
