@@ -647,7 +647,9 @@ function Index() {
               aria-hidden="true"
               className="pointer-events-none absolute right-[-80px] top-[-56px] z-0 w-[300px] max-w-none bg-transparent object-contain opacity-75 blur-md mix-blend-multiply sm:right-[-8vh] sm:top-[-10vh] sm:h-[115vh] sm:w-auto sm:max-w-[54vw]"
               animate={
-                reduceMotion ? undefined : { x: [0, 35, 0], y: [0, -30, 0], rotate: [0, 3, 0] }
+                reduceMotion
+                  ? undefined
+                  : { x: [0, 55, -25, 35, 0], y: [0, -30, 0], rotate: [0, 3, 0] }
               }
               transition={
                 reduceMotion
