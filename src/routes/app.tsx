@@ -585,7 +585,7 @@ function FeatureShowcase() {
                 size="icon"
                 aria-label="Previous feature"
                 onClick={() => go(index - 1)}
-                className="rounded-full border-problem-foreground/40 bg-transparent text-problem-foreground hover:bg-problem-foreground hover:text-problem"
+                className="rounded-full border-problem-foreground/40 bg-transparent text-problem-foreground hover:translate-y-0 hover:bg-problem-foreground hover:text-problem"
               >
                 <ChevronLeft className="h-5 w-5" />
               </Button>
@@ -611,7 +611,7 @@ function FeatureShowcase() {
                 size="icon"
                 aria-label="Next feature"
                 onClick={() => go(index + 1)}
-                className="rounded-full border-problem-foreground/40 bg-transparent text-problem-foreground hover:bg-problem-foreground hover:text-problem"
+                className="rounded-full border-problem-foreground/40 bg-transparent text-problem-foreground hover:translate-y-0 hover:bg-problem-foreground hover:text-problem"
               >
                 <ChevronRight className="h-5 w-5" />
               </Button>
