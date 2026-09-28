@@ -89,9 +89,9 @@ export function BowlIllustration({ className }: IconProps) {
 }
 
 const JAR_TONES = {
-  neutral: { cap: "#4A8F5E", body: "#F9CB93", dot: "#E4439F" },
-  bad: { cap: "#B3452F", body: "#C9C2B4", dot: "#B3452F" },
-  good: { cap: "#3E7A4E", body: "#F9CB93", dot: "#4A8F5E" },
+  neutral: { cap: "#4A8F5E", body: "#D9713F", highlight: "#F2A876", badge: "#8A7A63" },
+  bad: { cap: "#8C8577", body: "#C9C2B4", highlight: "#E4DFD3", badge: "#B3452F" },
+  good: { cap: "#3E7A4E", body: "#D9713F", highlight: "#F2A876", badge: "#4A8F5E" },
 } as const;
 
 export function JarIllustration({
@@ -100,27 +100,68 @@ export function JarIllustration({
 }: IconProps & { tone?: keyof typeof JAR_TONES }) {
   const colors = JAR_TONES[tone];
   return (
-    <svg viewBox="0 0 64 64" className={className} role="img" aria-label="Packaged product">
+    <svg viewBox="0 0 56 64" className={className} role="img" aria-label="Packaged product">
       <rect
-        x="24"
-        y="4"
-        width="16"
-        height="7"
-        rx="2"
+        x="19"
+        y="2"
+        width="18"
+        height="9"
+        rx="2.5"
         fill={colors.cap}
         stroke={INK}
         strokeWidth="2"
       />
+      <line x1="21" y1="5" x2="35" y2="5" stroke={INK} strokeWidth="1.2" opacity="0.45" />
+      <line x1="21" y1="7.5" x2="35" y2="7.5" stroke={INK} strokeWidth="1.2" opacity="0.45" />
+
       <path
-        d="M 20 11 L 44 11 L 46 16 L 46 52 Q 46 58 40 58 L 24 58 Q 18 58 18 52 L 18 16 Z"
+        d="M 20 11 L 36 11 L 40 19 Q 43 27 43 35 L 43 50 Q 43 58 35 58 L 21 58 Q 13 58 13 50 L 13 35 Q 13 27 16 19 Z"
         fill={colors.body}
         stroke={INK}
         strokeWidth="2.5"
         strokeLinejoin="round"
       />
-      <rect x="18" y="28" width="28" height="18" fill="#FCEFDD" stroke={INK} strokeWidth="2" />
-      <circle cx="32" cy="37" r="6" fill={colors.dot} opacity="0.85" />
-      <path d="M 22 15 L 42 15" stroke={INK} strokeWidth="2" strokeLinecap="round" opacity="0.4" />
+      <path
+        d="M 18 22 Q 16 32 16 44"
+        fill="none"
+        stroke={colors.highlight}
+        strokeWidth="3"
+        strokeLinecap="round"
+        opacity="0.6"
+      />
+
+      <rect
+        x="11"
+        y="32"
+        width="34"
+        height="18"
+        rx="3"
+        fill="#FCEFDD"
+        stroke={INK}
+        strokeWidth="2"
+      />
+      {tone === "neutral" ? (
+        <circle cx="28" cy="41" r="7" fill={colors.badge} opacity="0.85" />
+      ) : (
+        <>
+          <circle cx="28" cy="41" r="7" fill={colors.badge} stroke={INK} strokeWidth="1.5" />
+          {tone === "good" ? (
+            <path
+              d="M 28 37 L 28 45 M 24.5 41 L 31.5 41"
+              stroke="white"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+            />
+          ) : (
+            <path
+              d="M 24.5 38 L 31.5 44 M 31.5 38 L 24.5 44"
+              stroke="white"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+            />
+          )}
+        </>
+      )}
     </svg>
   );
 }
