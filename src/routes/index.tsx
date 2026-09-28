@@ -631,7 +631,7 @@ function Index() {
               src={brandMark}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute -bottom-24 -left-32 z-0 w-[650px] max-w-none bg-transparent object-contain mix-blend-multiply max-sm:-bottom-14 max-sm:-left-16 max-sm:w-[270px] sm:w-[50vw]"
+              className="pointer-events-none absolute -top-16 -left-28 z-0 w-[650px] max-w-none bg-transparent object-contain mix-blend-multiply max-sm:top-auto max-sm:-bottom-14 max-sm:-left-16 max-sm:w-[270px] sm:w-[50vw]"
               animate={
                 reduceMotion ? undefined : { x: [0, 100, 0], y: [0, -45, 0], rotate: [0, -6, 0] }
               }
@@ -643,7 +643,7 @@ function Index() {
               src={brandMark}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute -right-32 -top-20 z-0 w-[750px] max-w-none bg-transparent object-contain opacity-75 blur-md mix-blend-multiply max-sm:-right-20 max-sm:-top-14 max-sm:w-[300px] sm:w-[55vw]"
+              className="pointer-events-none absolute -right-32 -top-8 z-0 w-[750px] max-w-none bg-transparent object-contain opacity-75 blur-md mix-blend-multiply max-sm:-right-20 max-sm:-top-14 max-sm:w-[300px] sm:w-[55vw]"
               animate={
                 reduceMotion ? undefined : { x: [0, 35, 0], y: [0, 18, 0], rotate: [0, 3, 0] }
               }
