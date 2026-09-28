@@ -28,7 +28,7 @@ type SlideProps = { reduceMotion: boolean };
 function ScreenCard({ children, center }: { children: ReactNode; center?: boolean }) {
   return (
     <div
-      className={`relative flex flex-1 flex-col overflow-hidden rounded-[1.75rem] border border-solution-foreground/15 bg-white/30 p-5 shadow-[0_20px_45px_-25px_rgba(0,0,0,0.35)] sm:p-6 ${center ? "justify-center" : "justify-between"}`}
+      className={`relative flex flex-1 flex-col overflow-hidden rounded-[1.75rem] border border-solution-foreground/15 bg-white/5 p-5 shadow-[0_20px_45px_-25px_rgba(0,0,0,0.35)] sm:p-6 ${center ? "justify-center" : "justify-between"}`}
     >
       {children}
     </div>
