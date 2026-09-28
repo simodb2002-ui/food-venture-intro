@@ -1,7 +1,5 @@
 import {
   AlertTriangle,
-  Apple,
-  ArrowRight,
   CalendarCheck,
   Carrot,
   CheckCircle2,
@@ -88,6 +86,80 @@ function DataPill({
 
 /* ---------------- 1. Scan ---------------- */
 
+const SCAN_CARD_TONES = {
+  bad: {
+    tint: "bg-problem",
+    badgeBg: "bg-problem/10",
+    badgeText: "text-problem",
+    Icon: AlertTriangle,
+  },
+  good: {
+    tint: "bg-cta-action",
+    badgeBg: "bg-cta-action/10",
+    badgeText: "text-cta-action",
+    Icon: CheckCircle2,
+  },
+} as const;
+
+function ScanCard({
+  tone,
+  label,
+  reduceMotion,
+}: {
+  tone: "bad" | "good";
+  label: string;
+  reduceMotion: boolean;
+}) {
+  const { tint, badgeBg, badgeText, Icon } = SCAN_CARD_TONES[tone];
+  const scanTimes = [0, 0.5, 1];
+  const revealTimes = [0, 0.45, 0.55, 0.95, 1];
+  const revealValues = [0, 0, 1, 1, 0];
+
+  return (
+    <motion.div
+      initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.6 }}
+      transition={{ duration: reduceMotion ? 0 : 0.35 }}
+      className="flex flex-col items-center gap-2"
+    >
+      <div className="relative h-32 w-24 overflow-hidden rounded-2xl border-2 border-dashed border-solution-foreground/25 bg-solution/15 sm:h-36 sm:w-28">
+        <div className="absolute inset-2 flex items-center justify-center rounded-xl bg-gradient-to-br from-solution/40 to-solution-foreground/10">
+          <JarIllustration className="h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem]" tone={tone} />
+        </div>
+
+        <motion.div
+          aria-hidden="true"
+          animate={reduceMotion ? undefined : { opacity: revealValues, times: revealTimes }}
+          transition={reduceMotion ? undefined : { duration: 3, repeat: Infinity, ease: "linear" }}
+          style={reduceMotion ? { opacity: 0.28 } : undefined}
+          className={`pointer-events-none absolute inset-0 ${tint} opacity-0`}
+        />
+
+        <motion.div
+          aria-hidden="true"
+          animate={reduceMotion ? undefined : { top: ["8%", "88%", "8%"], times: scanTimes }}
+          transition={
+            reduceMotion ? undefined : { duration: 3, repeat: Infinity, ease: "easeInOut" }
+          }
+          style={reduceMotion ? { top: "50%" } : undefined}
+          className="absolute left-0 right-0 h-0.5 bg-problem shadow-[0_0_10px_2px_rgba(228,67,160,0.65)]"
+        />
+      </div>
+
+      <motion.span
+        animate={reduceMotion ? undefined : { opacity: revealValues, times: revealTimes }}
+        transition={reduceMotion ? undefined : { duration: 3, repeat: Infinity, ease: "linear" }}
+        style={reduceMotion ? { opacity: 1 } : undefined}
+        className={`inline-flex items-center gap-1 rounded-full ${badgeBg} px-2 py-1 text-[10px] font-bold ${badgeText} sm:text-[11px]`}
+      >
+        <Icon className="h-3 w-3 shrink-0" aria-hidden="true" />
+        {label}
+      </motion.span>
+    </motion.div>
+  );
+}
+
 const SCAN_TAGS = [
   "Category",
   "Recommended Retail Price",
@@ -107,95 +179,15 @@ export function ScanSlide({ reduceMotion }: SlideProps) {
         subtitle="Simple scoring helps you understand ingredients, additives, and nutritional value without judgement or jargon."
       />
       <ScreenCard>
-        <div className="relative mx-auto h-32 w-28 sm:h-36 sm:w-32">
-          <motion.span
-            aria-hidden="true"
-            animate={reduceMotion ? undefined : { y: [0, -5, 0], rotate: [0, -8, 0] }}
-            transition={
-              reduceMotion ? undefined : { duration: 3, repeat: Infinity, ease: "easeInOut" }
-            }
-            className="absolute -left-4 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-white text-cta-action shadow-md sm:h-8 sm:w-8"
-          >
-            <Carrot className="h-4 w-4" aria-hidden="true" />
-          </motion.span>
-          <motion.span
-            aria-hidden="true"
-            animate={reduceMotion ? undefined : { y: [0, 5, 0], rotate: [0, 8, 0] }}
-            transition={
-              reduceMotion
-                ? undefined
-                : { duration: 3.4, repeat: Infinity, ease: "easeInOut", delay: 0.6 }
-            }
-            className="absolute -right-4 -bottom-2 flex h-7 w-7 items-center justify-center rounded-full bg-white text-problem shadow-md sm:h-8 sm:w-8"
-          >
-            <Apple className="h-4 w-4" aria-hidden="true" />
-          </motion.span>
-
-          <div className="relative h-full w-full overflow-hidden rounded-2xl border-2 border-dashed border-solution-foreground/25 bg-solution/15">
-            <div className="absolute inset-3 flex items-center justify-center rounded-xl bg-gradient-to-br from-solution/40 to-solution-foreground/10">
-              <JarIllustration className="h-14 w-14 sm:h-16 sm:w-16" />
-            </div>
-            <motion.div
-              aria-hidden="true"
-              animate={reduceMotion ? undefined : { top: ["8%", "88%", "8%"] }}
-              transition={
-                reduceMotion ? undefined : { duration: 3, repeat: Infinity, ease: "easeInOut" }
-              }
-              style={reduceMotion ? { top: "50%" } : undefined}
-              className="absolute left-0 right-0 h-0.5 bg-problem shadow-[0_0_10px_2px_rgba(228,67,160,0.65)]"
-            />
-          </div>
+        <div className="flex items-start justify-center gap-4 sm:gap-6">
+          <ScanCard tone="bad" label="Ultra-processed" reduceMotion={reduceMotion} />
+          <ScanCard tone="good" label="Minimally processed" reduceMotion={reduceMotion} />
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
           {SCAN_TAGS.map((label, i) => (
             <DataPill key={label} label={label} delay={0.08 * i} reduceMotion={reduceMotion} />
           ))}
-        </div>
-
-        <div className="mt-5 flex items-center justify-center gap-3 sm:gap-4">
-          <motion.div
-            initial={reduceMotion ? false : { opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: reduceMotion ? 0 : 0.35 }}
-            className="flex flex-col items-center gap-1.5"
-          >
-            <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-problem/30 bg-problem/5 grayscale sm:h-16 sm:w-16">
-              <JarIllustration className="h-10 w-10 sm:h-11 sm:w-11" tone="bad" />
-            </div>
-            <span className="inline-flex items-center gap-1 rounded-full bg-problem/10 px-2 py-1 text-[10px] font-bold text-problem sm:text-[11px]">
-              <AlertTriangle className="h-3 w-3 shrink-0" aria-hidden="true" />
-              Added sugar
-            </span>
-          </motion.div>
-
-          <motion.span
-            aria-hidden="true"
-            animate={reduceMotion ? undefined : { x: [0, 5, 0] }}
-            transition={
-              reduceMotion ? undefined : { duration: 1.2, repeat: Infinity, ease: "easeInOut" }
-            }
-            className="text-solution-foreground/50"
-          >
-            <ArrowRight className="h-4 w-4" />
-          </motion.span>
-
-          <motion.div
-            initial={reduceMotion ? false : { opacity: 0, x: 10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: reduceMotion ? 0 : 0.35, delay: reduceMotion ? 0 : 0.15 }}
-            className="flex flex-col items-center gap-1.5"
-          >
-            <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-cta-action/30 bg-cta-action/5 sm:h-16 sm:w-16">
-              <JarIllustration className="h-10 w-10 sm:h-11 sm:w-11" tone="good" />
-            </div>
-            <span className="inline-flex items-center gap-1 rounded-full bg-cta-action/10 px-2 py-1 text-[10px] font-bold text-cta-action sm:text-[11px]">
-              <CheckCircle2 className="h-3 w-3 shrink-0" aria-hidden="true" />
-              Better Choice
-            </span>
-          </motion.div>
         </div>
       </ScreenCard>
     </div>
