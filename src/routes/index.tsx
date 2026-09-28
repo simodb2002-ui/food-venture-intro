@@ -631,9 +631,9 @@ function Index() {
               src={brandMark}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute bottom-[-56px] left-[-64px] z-0 w-[270px] max-w-none bg-transparent object-contain mix-blend-multiply sm:bottom-auto sm:left-[-8vh] sm:top-[-4vh] sm:h-[128vh] sm:w-auto sm:max-w-[56vw]"
+              className="pointer-events-none absolute bottom-[-56px] left-[-64px] z-0 w-[270px] max-w-none bg-transparent object-contain mix-blend-multiply sm:bottom-auto sm:left-[-8vh] sm:top-[-4vh] sm:h-[112vh] sm:w-auto sm:max-w-[50vw]"
               animate={
-                reduceMotion ? undefined : { x: [0, 100, 0], y: [0, -45, 0], rotate: [0, -6, 0] }
+                reduceMotion ? undefined : { x: [0, 100, 0], y: [0, -65, 0], rotate: [0, -6, 0] }
               }
               transition={
                 reduceMotion ? undefined : { duration: 17, repeat: Infinity, ease: "easeInOut" }
@@ -643,9 +643,9 @@ function Index() {
               src={brandMark}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute right-[-80px] top-[-56px] z-0 w-[300px] max-w-none bg-transparent object-contain opacity-75 blur-md mix-blend-multiply sm:right-[-8vh] sm:top-[-2vh] sm:h-[132vh] sm:w-auto sm:max-w-[60vw]"
+              className="pointer-events-none absolute right-[-80px] top-[-56px] z-0 w-[300px] max-w-none bg-transparent object-contain opacity-75 blur-md mix-blend-multiply sm:right-[-8vh] sm:top-[-2vh] sm:h-[115vh] sm:w-auto sm:max-w-[54vw]"
               animate={
-                reduceMotion ? undefined : { x: [0, 35, 0], y: [0, 18, 0], rotate: [0, 3, 0] }
+                reduceMotion ? undefined : { x: [0, 35, 0], y: [0, -30, 0], rotate: [0, 3, 0] }
               }
               transition={
                 reduceMotion
