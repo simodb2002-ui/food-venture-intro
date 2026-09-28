@@ -113,9 +113,9 @@ function ScanCard({
       transition={{ duration: reduceMotion ? 0 : 0.35 }}
       className="flex flex-col items-center gap-2"
     >
-      <div className="relative h-32 w-24 overflow-hidden rounded-2xl border-2 border-dashed border-solution-foreground/25 bg-solution/15 sm:h-36 sm:w-28">
+      <div className="relative h-36 w-28 overflow-hidden rounded-2xl border-2 border-dashed border-solution-foreground/25 bg-solution/15 sm:h-40 sm:w-32">
         <div className="absolute inset-2 flex items-center justify-center rounded-xl bg-gradient-to-br from-solution/40 to-solution-foreground/10">
-          <JarIllustration className="h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem]" tone={tone} />
+          <JarIllustration className="h-20 w-20 sm:h-24 sm:w-24" tone={tone} />
         </div>
 
         <motion.div
@@ -144,7 +144,7 @@ function ScanCard({
           className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0"
         >
           <Icon
-            className="h-10 w-10 text-white drop-shadow-md sm:h-12 sm:w-12"
+            className="h-12 w-12 text-white drop-shadow-md sm:h-14 sm:w-14"
             aria-hidden="true"
           />
         </motion.div>
@@ -181,7 +181,7 @@ export function ScanSlide({ reduceMotion }: SlideProps) {
         subtitle="Simple scoring helps you understand ingredients, additives, and nutritional value without judgement or jargon."
       />
       <ScreenCard>
-        <div className="flex items-start justify-center gap-4 sm:gap-6">
+        <div className="flex items-start justify-center gap-6 sm:gap-8">
           <ScanCard tone="bad" label="Ultra-processed" reduceMotion={reduceMotion} />
           <ScanCard tone="good" label="Minimally processed" reduceMotion={reduceMotion} />
         </div>
@@ -213,16 +213,16 @@ export function PriceSlide({ reduceMotion }: SlideProps) {
         subtitle="Real-time price comparisons help you stretch your budget while still investing in good food."
       />
       <ScreenCard>
-        <div className="relative grid grid-cols-2 gap-2.5 sm:gap-3">
+        <div className="relative grid grid-cols-2 gap-3 sm:gap-4">
           <motion.span
             aria-hidden="true"
             initial={reduceMotion ? false : { opacity: 0, scale: 0.6 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.6 }}
             transition={{ duration: reduceMotion ? 0 : 0.35, ease: "easeOut" }}
-            className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-solution bg-white shadow-md sm:h-16 sm:w-16"
+            className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-solution bg-white shadow-md sm:h-20 sm:w-20"
           >
-            <JarIllustration className="h-9 w-9 sm:h-10 sm:w-10" />
+            <JarIllustration className="h-10 w-10 sm:h-12 sm:w-12" />
           </motion.span>
           {PRICE_TAGS.map((tag, i) => {
             const isBest = tag.store === "Morrisons";
@@ -253,27 +253,27 @@ export function PriceSlide({ reduceMotion }: SlideProps) {
                   />
                 )}
                 <div
-                  className={`relative flex items-center justify-between rounded-xl border px-3 py-2 ${
+                  className={`relative flex items-center justify-between rounded-xl border px-4 py-3.5 sm:py-4 ${
                     isBest
                       ? "border-cta-action bg-cta-action/10"
                       : "border-solution-foreground/15 bg-white"
                   }`}
                 >
                   <span className="flex flex-col">
-                    <span className="text-[10px] font-bold uppercase tracking-wide text-solution-foreground/55 sm:text-[11px]">
+                    <span className="text-[11px] font-bold uppercase tracking-wide text-solution-foreground/55 sm:text-xs">
                       {tag.store}
                     </span>
-                    <span className="text-sm font-extrabold text-solution-foreground sm:text-base">
+                    <span className="text-base font-extrabold text-solution-foreground sm:text-lg">
                       {tag.price}
                     </span>
                   </span>
                   {isBest ? (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-cta-action px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-cta-action-foreground sm:text-[10px]">
-                      <TrendingDown className="h-3 w-3" aria-hidden="true" />
+                    <span className="inline-flex items-center gap-1 rounded-full bg-cta-action px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wide text-cta-action-foreground sm:text-[11px]">
+                      <TrendingDown className="h-3.5 w-3.5" aria-hidden="true" />
                       Best price
                     </span>
                   ) : (
-                    <Store className="h-4 w-4 text-solution-foreground/30" aria-hidden="true" />
+                    <Store className="h-5 w-5 text-solution-foreground/30" aria-hidden="true" />
                   )}
                 </div>
               </motion.div>
@@ -287,9 +287,9 @@ export function PriceSlide({ reduceMotion }: SlideProps) {
             transition={
               reduceMotion ? undefined : { duration: 1.6, repeat: Infinity, ease: "easeInOut" }
             }
-            className="inline-flex items-center gap-1.5 rounded-full bg-solution-foreground px-4 py-2 text-xs font-extrabold text-solution shadow-md sm:text-sm"
+            className="inline-flex items-center gap-2 rounded-full bg-solution-foreground px-5 py-2.5 text-sm font-extrabold text-solution shadow-md sm:text-base"
           >
-            <Plus className="h-4 w-4" aria-hidden="true" />
+            <Plus className="h-5 w-5" aria-hidden="true" />
             Add to My List
           </motion.span>
         </div>
@@ -314,7 +314,7 @@ export function ShopSlide({ reduceMotion }: SlideProps) {
         subtitle='Plan meals, reduce waste, and build shopping lists that keep your "food assets" growing week by week.'
       />
       <ScreenCard>
-        <div className="grid grid-cols-3 gap-2 sm:gap-3">
+        <div className="grid grid-cols-3 gap-3 sm:gap-4">
           {SHOP_CARDS.map(({ label, Icon }, i) => (
             <motion.div
               key={label}
@@ -322,12 +322,12 @@ export function ShopSlide({ reduceMotion }: SlideProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: reduceMotion ? 0 : 0.35, delay: reduceMotion ? 0 : 0.1 * i }}
-              className="flex flex-col items-center gap-1.5 rounded-xl border border-solution-foreground/15 bg-white px-2 py-3 text-center sm:gap-2 sm:py-4"
+              className="flex flex-col items-center gap-2.5 rounded-xl border border-solution-foreground/15 bg-white px-3 py-6 text-center sm:gap-3 sm:py-8"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-solution/25 text-solution-foreground sm:h-9 sm:w-9">
-                <Icon className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-solution/25 text-solution-foreground sm:h-12 sm:w-12">
+                <Icon className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden="true" />
               </span>
-              <span className="text-[11px] font-bold leading-tight text-solution-foreground sm:text-xs">
+              <span className="text-xs font-bold leading-tight text-solution-foreground sm:text-sm">
                 {label}
               </span>
             </motion.div>
@@ -340,9 +340,9 @@ export function ShopSlide({ reduceMotion }: SlideProps) {
             transition={
               reduceMotion ? undefined : { duration: 2.2, repeat: Infinity, ease: "easeInOut" }
             }
-            className="inline-flex items-center gap-1.5 rounded-full bg-problem px-3 py-1.5 text-[11px] font-extrabold text-problem-foreground shadow-md sm:text-xs"
+            className="inline-flex items-center gap-2 rounded-full bg-problem px-4 py-2 text-xs font-extrabold text-problem-foreground shadow-md sm:text-sm"
           >
-            <TrendingUp className="h-3.5 w-3.5" aria-hidden="true" />
+            <TrendingUp className="h-4 w-4" aria-hidden="true" />
             Build your Food Assets
           </motion.span>
         </div>
@@ -365,7 +365,7 @@ function FlowArrow({ delay = 0, reduceMotion }: { delay?: number; reduceMotion: 
       }
       className="rotate-90 text-cta-action sm:rotate-0"
     >
-      <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={2.75} aria-hidden="true" />
+      <ArrowRight className="h-6 w-6 sm:h-7 sm:w-7" strokeWidth={2.75} aria-hidden="true" />
     </motion.span>
   );
 }
@@ -384,23 +384,23 @@ export function CookSlide({ reduceMotion }: SlideProps) {
         subtitle="Browse quick recipes, kitchen hacks, and ideas that make eating well more convenient."
       />
       <ScreenCard>
-        <div className="flex items-center justify-center gap-4 sm:gap-6">
-          <div className="relative flex h-20 w-20 items-center justify-center">
+        <div className="flex items-center justify-center gap-6 sm:gap-8">
+          <div className="relative flex h-28 w-28 items-center justify-center sm:h-32 sm:w-32">
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 6, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: reduceMotion ? 0 : 0.35, delay: reduceMotion ? 0 : 0.2 }}
-              className="absolute -top-9 left-1/2 -translate-x-1/2"
+              className="absolute -top-10 left-1/2 -translate-x-1/2"
             >
               <motion.div
                 animate={reduceMotion ? undefined : { y: [0, -3, 0] }}
                 transition={
                   reduceMotion ? undefined : { duration: 2.4, repeat: Infinity, ease: "easeInOut" }
                 }
-                className="relative flex items-center gap-1 whitespace-nowrap rounded-2xl bg-footer px-3 py-1.5 text-[10px] font-extrabold text-footer-foreground shadow-md sm:text-[11px]"
+                className="relative flex items-center gap-1 whitespace-nowrap rounded-2xl bg-footer px-3.5 py-2 text-[11px] font-extrabold text-footer-foreground shadow-md sm:text-xs"
               >
-                <Lightbulb className="h-3.5 w-3.5 text-solution" aria-hidden="true" />
+                <Lightbulb className="h-4 w-4 text-solution" aria-hidden="true" />
                 Quick Tips
                 <span
                   aria-hidden="true"
@@ -409,14 +409,11 @@ export function CookSlide({ reduceMotion }: SlideProps) {
               </motion.div>
             </motion.div>
 
-            <PotIllustration
-              className="h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem]"
-              reduceMotion={reduceMotion}
-            />
+            <PotIllustration className="h-24 w-24 sm:h-28 sm:w-28" reduceMotion={reduceMotion} />
           </div>
 
           <motion.div
-            className="flex items-center gap-4 sm:gap-6"
+            className="flex items-center gap-6 sm:gap-8"
             animate={
               reduceMotion
                 ? undefined
@@ -428,7 +425,7 @@ export function CookSlide({ reduceMotion }: SlideProps) {
             }
           >
             <FlowArrow reduceMotion={reduceMotion} />
-            <BowlIllustration className="h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem]" />
+            <BowlIllustration className="h-24 w-24 sm:h-28 sm:w-28" />
           </motion.div>
         </div>
 
@@ -521,11 +518,11 @@ export function MapSlide({ reduceMotion }: SlideProps) {
                 }
                 className="flex flex-col items-center"
               >
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-problem text-problem-foreground shadow-md sm:h-7 sm:w-7">
-                  <pin.Icon className="h-3.5 w-3.5" aria-hidden="true" />
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-problem text-problem-foreground shadow-md sm:h-8 sm:w-8">
+                  <pin.Icon className="h-4 w-4" aria-hidden="true" />
                 </span>
                 <MapPin
-                  className="-mt-1 h-3 w-3 text-problem"
+                  className="-mt-1 h-3.5 w-3.5 text-problem"
                   aria-hidden="true"
                   fill="currentColor"
                 />
