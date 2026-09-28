@@ -27,7 +27,7 @@ type SlideProps = { reduceMotion: boolean };
 
 function ScreenCard({ children }: { children: ReactNode }) {
   return (
-    <div className="relative overflow-hidden rounded-[1.75rem] border border-solution-foreground/15 bg-white/80 p-5 shadow-[0_20px_45px_-25px_rgba(0,0,0,0.35)] sm:p-6">
+    <div className="relative flex flex-1 flex-col justify-center overflow-hidden rounded-[1.75rem] border border-solution-foreground/15 bg-white/80 p-5 shadow-[0_20px_45px_-25px_rgba(0,0,0,0.35)] sm:p-6">
       {children}
     </div>
   );
@@ -175,7 +175,7 @@ const SCAN_TAGS = [
 
 export function ScanSlide({ reduceMotion }: SlideProps) {
   return (
-    <div className="mx-auto w-full max-w-2xl">
+    <div className="mx-auto flex h-full w-full max-w-2xl flex-col">
       <SlideHeading
         title="See Your Food Clearly"
         subtitle="Simple scoring helps you understand ingredients, additives, and nutritional value without judgement or jargon."
@@ -207,7 +207,7 @@ const PRICE_TAGS = [
 
 export function PriceSlide({ reduceMotion }: SlideProps) {
   return (
-    <div className="mx-auto w-full max-w-2xl">
+    <div className="mx-auto flex h-full w-full max-w-2xl flex-col">
       <SlideHeading
         title="Find Better Value"
         subtitle="Real-time price comparisons help you stretch your budget while still investing in good food."
@@ -308,7 +308,7 @@ const SHOP_CARDS = [
 
 export function ShopSlide({ reduceMotion }: SlideProps) {
   return (
-    <div className="mx-auto w-full max-w-2xl">
+    <div className="mx-auto flex h-full w-full max-w-2xl flex-col">
       <SlideHeading
         title="Shop Smarter"
         subtitle='Plan meals, reduce waste, and build shopping lists that keep your "food assets" growing week by week.'
@@ -378,7 +378,7 @@ export function CookSlide({ reduceMotion }: SlideProps) {
   const revealScale = [0.7, 0.7, 1, 1, 0.85];
 
   return (
-    <div className="mx-auto w-full max-w-2xl">
+    <div className="mx-auto flex h-full w-full max-w-2xl flex-col">
       <SlideHeading
         title="Cook Easy"
         subtitle="Browse quick recipes, kitchen hacks, and ideas that make eating well more convenient."
@@ -463,7 +463,7 @@ const MAP_PINS = [
 
 export function MapSlide({ reduceMotion }: SlideProps) {
   return (
-    <div className="mx-auto w-full max-w-2xl">
+    <div className="mx-auto flex h-full w-full max-w-2xl flex-col">
       <SlideHeading
         title="Connect With Your Local Food Community"
         subtitle="Discover food projects, cooking workshops, growing groups, and independent shops working to make good food easier for everyone."
