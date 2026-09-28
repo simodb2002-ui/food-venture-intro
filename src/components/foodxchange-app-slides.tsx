@@ -153,11 +153,23 @@ export function ScanSlide({ reduceMotion }: SlideProps) {
           ))}
         </div>
 
-        <div className="mt-5 flex items-center justify-center gap-2 sm:gap-3">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-problem/10 px-2.5 py-1.5 text-[11px] font-bold text-problem sm:text-xs">
-            <AlertTriangle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-            Added sugar, Tomato paste
-          </span>
+        <div className="mt-5 flex items-center justify-center gap-3 sm:gap-4">
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: reduceMotion ? 0 : 0.35 }}
+            className="flex flex-col items-center gap-1.5"
+          >
+            <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-problem/30 bg-problem/5 grayscale sm:h-16 sm:w-16">
+              <JarIllustration className="h-10 w-10 sm:h-11 sm:w-11" tone="bad" />
+            </div>
+            <span className="inline-flex items-center gap-1 rounded-full bg-problem/10 px-2 py-1 text-[10px] font-bold text-problem sm:text-[11px]">
+              <AlertTriangle className="h-3 w-3 shrink-0" aria-hidden="true" />
+              Added sugar
+            </span>
+          </motion.div>
+
           <motion.span
             aria-hidden="true"
             animate={reduceMotion ? undefined : { x: [0, 5, 0] }}
@@ -168,10 +180,22 @@ export function ScanSlide({ reduceMotion }: SlideProps) {
           >
             <ArrowRight className="h-4 w-4" />
           </motion.span>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-cta-action/10 px-2.5 py-1.5 text-[11px] font-bold text-cta-action sm:text-xs">
-            <CheckCircle2 className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-            Better Choice
-          </span>
+
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, x: 10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: reduceMotion ? 0 : 0.35, delay: reduceMotion ? 0 : 0.15 }}
+            className="flex flex-col items-center gap-1.5"
+          >
+            <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-cta-action/30 bg-cta-action/5 sm:h-16 sm:w-16">
+              <JarIllustration className="h-10 w-10 sm:h-11 sm:w-11" tone="good" />
+            </div>
+            <span className="inline-flex items-center gap-1 rounded-full bg-cta-action/10 px-2 py-1 text-[10px] font-bold text-cta-action sm:text-[11px]">
+              <CheckCircle2 className="h-3 w-3 shrink-0" aria-hidden="true" />
+              Better Choice
+            </span>
+          </motion.div>
         </div>
       </ScreenCard>
     </div>
