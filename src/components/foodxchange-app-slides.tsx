@@ -318,20 +318,20 @@ const SHOP_CARDS = [
   {
     label: "Plan Better",
     Icon: CalendarCheck,
-    bubble: "h-12 w-12 sm:h-14 sm:w-14",
-    icon: "h-6 w-6 sm:h-7 sm:w-7",
+    bubble: "h-16 w-16 sm:h-20 sm:w-20",
+    icon: "h-7 w-7 sm:h-8 sm:w-8",
   },
   {
     label: "Waste Less",
     Icon: Trash2,
-    bubble: "h-14 w-14 sm:h-16 sm:w-16",
-    icon: "h-7 w-7 sm:h-8 sm:w-8",
+    bubble: "h-20 w-20 sm:h-24 sm:w-24",
+    icon: "h-9 w-9 sm:h-10 sm:w-10",
   },
   {
     label: "Shop Smarter",
     Icon: ShoppingBasket,
-    bubble: "h-16 w-16 sm:h-20 sm:w-20",
-    icon: "h-8 w-8 sm:h-9 sm:w-9",
+    bubble: "h-24 w-24 sm:h-28 sm:w-28",
+    icon: "h-11 w-11 sm:h-12 sm:w-12",
   },
 ] as const;
 
@@ -343,74 +343,80 @@ export function ShopSlide({ reduceMotion }: SlideProps) {
         subtitle='Plan meals, reduce waste, and build shopping lists that keep your "food assets" growing week by week.'
       />
       <ScreenCard justify="down">
-        <div className="flex items-end justify-center gap-5 sm:gap-8">
-          {SHOP_CARDS.map(({ label, Icon, bubble, icon }, i) => (
-            <motion.div
-              key={label}
-              initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{ duration: reduceMotion ? 0 : 0.35, delay: reduceMotion ? 0 : 0.12 * i }}
-              className="flex flex-col items-center gap-2"
-            >
-              <span
-                className={`flex ${bubble} items-center justify-center rounded-full bg-solution-foreground text-solution shadow-md`}
-              >
-                <Icon className={icon} aria-hidden="true" />
-              </span>
-              <span className="text-xs font-bold leading-tight text-solution-foreground sm:text-sm">
-                {label}
-              </span>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="mt-6 flex flex-col items-center sm:mt-8">
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 180 56"
-            className="h-14 w-44 text-solution sm:h-16 sm:w-52"
-            fill="none"
-          >
-            <motion.path
-              d="M 10 48 Q 95 -8 165 12"
-              stroke="currentColor"
-              strokeWidth="5"
-              strokeLinecap="round"
-              initial={reduceMotion ? false : { pathLength: 0 }}
-              whileInView={{ pathLength: 1 }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{
-                duration: reduceMotion ? 0 : 0.9,
-                ease: "easeInOut",
-                delay: reduceMotion ? 0 : 0.35,
-              }}
-              style={reduceMotion ? { pathLength: 1 } : undefined}
-            />
-            <motion.path
-              d="M 151 2 L 165 12 L 149 20"
-              stroke="currentColor"
-              strokeWidth="5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              initial={reduceMotion ? false : { opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{ duration: reduceMotion ? 0 : 0.25, delay: reduceMotion ? 0 : 1.15 }}
-              style={reduceMotion ? { opacity: 1 } : undefined}
-            />
-          </svg>
-
+        <div className="flex flex-col items-center">
           <motion.span
             animate={reduceMotion ? undefined : { y: [0, -5, 0] }}
             transition={
               reduceMotion ? undefined : { duration: 2.2, repeat: Infinity, ease: "easeInOut" }
             }
-            className="relative z-10 -mt-1 inline-flex items-center gap-2 rounded-full bg-problem px-4 py-2 text-xs font-extrabold text-problem-foreground shadow-md sm:text-sm"
+            className="relative z-20 inline-flex items-center gap-2 rounded-full bg-problem px-4 py-2 text-xs font-extrabold text-problem-foreground shadow-md sm:text-sm"
           >
             <TrendingUp className="h-4 w-4" aria-hidden="true" />
             Build your Food Assets
           </motion.span>
+
+          <div className="relative mt-4 flex items-end justify-center gap-6 pt-10 sm:mt-6 sm:gap-9 sm:pt-14">
+            {/* The arrow is drawn above the icons (z-10) and sweeps from
+                the first, smallest bubble to the last, biggest one, so it
+                reads as tracing straight over the top of the row. */}
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 280 90"
+              className="pointer-events-none absolute inset-x-2 top-0 z-10 h-24 w-[calc(100%-1rem)] text-solution sm:h-28"
+              fill="none"
+            >
+              <motion.path
+                d="M 18 78 Q 140 -20 258 10"
+                stroke="currentColor"
+                strokeWidth="6"
+                strokeLinecap="round"
+                initial={reduceMotion ? false : { pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true, amount: 0.6 }}
+                transition={{
+                  duration: reduceMotion ? 0 : 0.9,
+                  ease: "easeInOut",
+                  delay: reduceMotion ? 0 : 0.35,
+                }}
+                style={reduceMotion ? { pathLength: 1 } : undefined}
+              />
+              <motion.path
+                d="M 244 -4 L 258 10 L 240 18"
+                stroke="currentColor"
+                strokeWidth="6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                initial={reduceMotion ? false : { opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.6 }}
+                transition={{ duration: reduceMotion ? 0 : 0.25, delay: reduceMotion ? 0 : 1.15 }}
+                style={reduceMotion ? { opacity: 1 } : undefined}
+              />
+            </svg>
+
+            {SHOP_CARDS.map(({ label, Icon, bubble, icon }, i) => (
+              <motion.div
+                key={label}
+                initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.6 }}
+                transition={{
+                  duration: reduceMotion ? 0 : 0.35,
+                  delay: reduceMotion ? 0 : 0.12 * i,
+                }}
+                className="flex flex-col items-center gap-2"
+              >
+                <span
+                  className={`flex ${bubble} items-center justify-center rounded-full bg-solution-foreground text-solution shadow-md`}
+                >
+                  <Icon className={icon} aria-hidden="true" />
+                </span>
+                <span className="text-xs font-bold leading-tight text-solution-foreground sm:text-sm">
+                  {label}
+                </span>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </ScreenCard>
     </div>
