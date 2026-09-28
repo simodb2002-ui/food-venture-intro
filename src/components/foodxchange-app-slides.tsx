@@ -384,14 +384,14 @@ export function CookSlide({ reduceMotion }: SlideProps) {
         subtitle="Browse quick recipes, kitchen hacks, and ideas that make eating well more convenient."
       />
       <ScreenCard>
-        <div className="flex items-center justify-center gap-6 sm:gap-8">
-          <div className="relative flex h-28 w-28 items-center justify-center sm:h-32 sm:w-32">
+        <div className="flex flex-1 items-center justify-center gap-6 sm:gap-8">
+          <div className="relative flex h-32 w-32 items-center justify-center sm:h-36 sm:w-36">
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 6, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: reduceMotion ? 0 : 0.35, delay: reduceMotion ? 0 : 0.2 }}
-              className="absolute -top-10 left-1/2 -translate-x-1/2"
+              className="absolute -top-11 left-1/2 -translate-x-1/2"
             >
               <motion.div
                 animate={reduceMotion ? undefined : { y: [0, -3, 0] }}
@@ -409,7 +409,7 @@ export function CookSlide({ reduceMotion }: SlideProps) {
               </motion.div>
             </motion.div>
 
-            <PotIllustration className="h-24 w-24 sm:h-28 sm:w-28" reduceMotion={reduceMotion} />
+            <PotIllustration className="h-28 w-28 sm:h-32 sm:w-32" reduceMotion={reduceMotion} />
           </div>
 
           <motion.div
@@ -425,7 +425,7 @@ export function CookSlide({ reduceMotion }: SlideProps) {
             }
           >
             <FlowArrow reduceMotion={reduceMotion} />
-            <BowlIllustration className="h-24 w-24 sm:h-28 sm:w-28" />
+            <BowlIllustration className="h-28 w-28 sm:h-32 sm:w-32" />
           </motion.div>
         </div>
 
