@@ -546,7 +546,7 @@ function Index() {
                       transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="relative overflow-hidden border-t-2 border-solution-foreground bg-solution-foreground/10">
+                      <div className="relative overflow-hidden border-t-2 border-solution-foreground bg-cta-action">
                         <motion.div
                           className="flex"
                           animate={{ x: `-${platformSlide * 100}%` }}
