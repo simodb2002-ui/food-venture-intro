@@ -555,7 +555,7 @@ function Index() {
                           {FOODXCHANGE_APP_SLIDES.map((Slide, section) => (
                             <div
                               key={section}
-                              className="grid min-h-64 w-full shrink-0 place-items-center px-6 py-10 sm:min-h-80 sm:px-12"
+                              className="grid min-h-64 w-full shrink-0 items-stretch justify-items-center px-6 py-10 sm:min-h-80 sm:px-12"
                             >
                               <Slide reduceMotion={!!reduceMotion} />
                             </div>
