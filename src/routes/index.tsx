@@ -627,17 +627,31 @@ function Index() {
 
         <section id="join" className="w-full shrink-0 bg-footer text-footer-foreground">
           <div className="relative flex min-h-[78dvh] items-center justify-center overflow-hidden bg-cta px-6 py-28 text-cta-foreground sm:min-h-[82dvh]">
-            <img
+            <motion.img
               src={brandMark}
               alt=""
               aria-hidden="true"
               className="pointer-events-none absolute -bottom-24 -left-32 z-0 w-[650px] max-w-none bg-transparent object-contain mix-blend-multiply max-sm:-bottom-14 max-sm:-left-16 max-sm:w-[270px] sm:w-[50vw]"
+              animate={
+                reduceMotion ? undefined : { x: [0, 55, 0], y: [0, -22, 0], rotate: [0, -3, 0] }
+              }
+              transition={
+                reduceMotion ? undefined : { duration: 17, repeat: Infinity, ease: "easeInOut" }
+              }
             />
-            <img
+            <motion.img
               src={brandMark}
               alt=""
               aria-hidden="true"
               className="pointer-events-none absolute -right-32 -top-20 z-0 w-[750px] max-w-none bg-transparent object-contain opacity-75 blur-md mix-blend-multiply max-sm:-right-20 max-sm:-top-14 max-sm:w-[300px] sm:w-[55vw]"
+              animate={
+                reduceMotion ? undefined : { x: [0, 35, 0], y: [0, 18, 0], rotate: [0, 3, 0] }
+              }
+              transition={
+                reduceMotion
+                  ? undefined
+                  : { duration: 21, repeat: Infinity, ease: "easeInOut", delay: 2 }
+              }
             />
 
             <motion.div
