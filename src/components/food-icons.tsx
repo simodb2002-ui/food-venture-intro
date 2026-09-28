@@ -25,8 +25,8 @@ export function PotIllustration({ className, reduceMotion }: IconProps) {
           reduceMotion ? undefined : { duration: 2.6, repeat: Infinity, ease: "easeInOut" }
         }
       >
-        <path d="M 24 10 C 22 6 27 5 25 1" />
-        <path d="M 32 10 C 30 6 35 5 33 1" />
+        <path d="M 24 10 C 22 6 27 5 25 2" />
+        <path d="M 32 10 C 30 6 35 5 33 2" />
       </motion.g>
 
       <ellipse cx="29" cy="16" rx="17" ry="5" fill={INK} />
@@ -41,15 +41,40 @@ export function PotIllustration({ className, reduceMotion }: IconProps) {
       />
       <ellipse cx="19" cy="30" rx="3.5" ry="12" fill="#F9CB93" opacity="0.55" />
 
+      {!reduceMotion && (
+        <g aria-hidden="true">
+          {[
+            { cx: 21, delay: 0 },
+            { cx: 29, delay: 0.5 },
+            { cx: 37, delay: 1 },
+          ].map((bubble) => (
+            <motion.circle
+              key={bubble.cx}
+              cx={bubble.cx}
+              r="2"
+              fill="#FCEFDD"
+              initial={{ cy: 46, opacity: 0 }}
+              animate={{ cy: [46, 22], opacity: [0, 0.9, 0] }}
+              transition={{
+                duration: 1.6,
+                repeat: Infinity,
+                ease: "easeOut",
+                delay: bubble.delay,
+              }}
+            />
+          ))}
+        </g>
+      )}
+
       <path
-        d="M 4 24 Q -1 24 0 30 Q 1 36 6 35"
+        d="M 6 24 Q 2 24 2 30 Q 2 36 7 35"
         fill="none"
         stroke={INK}
         strokeWidth="2.5"
         strokeLinecap="round"
       />
       <path
-        d="M 54 24 Q 59 24 58 30 Q 57 36 52 35"
+        d="M 52 24 Q 56 24 56 30 Q 56 36 51 35"
         fill="none"
         stroke={INK}
         strokeWidth="2.5"
