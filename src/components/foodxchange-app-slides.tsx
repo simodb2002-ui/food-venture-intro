@@ -1,11 +1,10 @@
 import {
   AlertTriangle,
+  ArrowRight,
   CalendarCheck,
-  Carrot,
   CheckCircle2,
   ChevronRight,
   Croissant,
-  Egg,
   Landmark,
   Leaf,
   Lightbulb,
@@ -18,7 +17,6 @@ import {
   TrendingDown,
   TrendingUp,
   Trash2,
-  Wheat,
 } from "lucide-react";
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
@@ -344,42 +342,13 @@ export function ShopSlide({ reduceMotion }: SlideProps) {
           ))}
         </div>
 
-        <div className="relative mt-3 flex flex-col items-center">
-          <svg
-            width="90"
-            height="40"
-            viewBox="0 0 90 40"
-            fill="none"
-            aria-hidden="true"
-            className="text-solution-foreground/40"
-          >
-            <motion.path
-              d="M 10 38 C 10 10, 80 10, 80 4"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeDasharray="4 5"
-              initial={reduceMotion ? false : { pathLength: 0, opacity: 0 }}
-              whileInView={{ pathLength: 1, opacity: 1 }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{ duration: reduceMotion ? 0 : 0.9, ease: "easeInOut" }}
-            />
-            <path
-              d="M 74 1 L 81 4 L 76 10"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              fill="none"
-            />
-          </svg>
-
+        <div className="relative mt-4 flex flex-col items-center">
           <motion.span
             animate={reduceMotion ? undefined : { y: [0, -5, 0] }}
             transition={
               reduceMotion ? undefined : { duration: 2.2, repeat: Infinity, ease: "easeInOut" }
             }
-            className="-mt-1 inline-flex items-center gap-1.5 rounded-full bg-problem px-3 py-1.5 text-[11px] font-extrabold text-problem-foreground shadow-md sm:text-xs"
+            className="inline-flex items-center gap-1.5 rounded-full bg-problem px-3 py-1.5 text-[11px] font-extrabold text-problem-foreground shadow-md sm:text-xs"
           >
             <TrendingUp className="h-3.5 w-3.5" aria-hidden="true" />
             Build your Food Assets
@@ -394,6 +363,21 @@ export function ShopSlide({ reduceMotion }: SlideProps) {
 
 const RECIPE_TAGS = ["3-Ingredients", "Family Favourites", "One Pot", "Takeaways"];
 
+function FlowArrow({ delay = 0, reduceMotion }: { delay?: number; reduceMotion: boolean }) {
+  return (
+    <motion.span
+      aria-hidden="true"
+      animate={reduceMotion ? undefined : { x: [0, 5, 0] }}
+      transition={
+        reduceMotion ? undefined : { duration: 1.3, repeat: Infinity, ease: "easeInOut", delay }
+      }
+      className="rotate-90 text-cta-action sm:rotate-0"
+    >
+      <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={2.75} aria-hidden="true" />
+    </motion.span>
+  );
+}
+
 export function CookSlide({ reduceMotion }: SlideProps) {
   return (
     <div className="mx-auto w-full max-w-2xl">
@@ -402,85 +386,48 @@ export function CookSlide({ reduceMotion }: SlideProps) {
         subtitle="Browse quick recipes, kitchen hacks, and ideas that make eating well more convenient."
       />
       <ScreenCard>
-        <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
-          {RECIPE_TAGS.map((label, i) => (
-            <DataPill key={label} label={label} delay={0.08 * i} reduceMotion={reduceMotion} />
-          ))}
-        </div>
-
-        <div className="relative mt-3 flex flex-col items-center">
-          <div className="flex items-center gap-3">
-            <motion.span
-              aria-hidden="true"
-              animate={reduceMotion ? undefined : { y: [0, -4, 0] }}
-              transition={
-                reduceMotion ? undefined : { duration: 2, repeat: Infinity, ease: "easeInOut" }
-              }
-              className="text-cta-action"
-            >
-              <Carrot className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
-            </motion.span>
-            <motion.span
-              aria-hidden="true"
-              animate={reduceMotion ? undefined : { y: [0, -4, 0] }}
-              transition={
-                reduceMotion
-                  ? undefined
-                  : { duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }
-              }
-              className="text-solution-foreground/50"
-            >
-              <Wheat className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
-            </motion.span>
-            <motion.span
-              aria-hidden="true"
-              animate={reduceMotion ? undefined : { y: [0, -4, 0] }}
-              transition={
-                reduceMotion
-                  ? undefined
-                  : { duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }
-              }
-              className="text-problem"
-            >
-              <Egg className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
-            </motion.span>
-          </div>
-          <span
-            aria-hidden="true"
-            className="h-6 w-px border-l-2 border-dashed border-solution-foreground/25 sm:h-8"
-          />
-
-          <div className="relative flex h-16 w-16 items-center justify-center sm:h-20 sm:w-20">
-            <motion.span
-              animate={reduceMotion ? undefined : { opacity: [1, 1, 0, 0, 1] }}
-              transition={
-                reduceMotion ? undefined : { duration: 3.6, repeat: Infinity, ease: "easeInOut" }
-              }
-              className="absolute inset-0 flex items-center justify-center"
-            >
-              <PotIllustration className="h-14 w-14 sm:h-16 sm:w-16" reduceMotion={reduceMotion} />
-            </motion.span>
-            <motion.span
-              animate={reduceMotion ? undefined : { opacity: [0, 0, 1, 1, 0] }}
-              transition={
-                reduceMotion ? undefined : { duration: 3.6, repeat: Infinity, ease: "easeInOut" }
-              }
-              className="absolute inset-0 flex items-center justify-center"
-            >
-              <BowlIllustration className="h-14 w-14 sm:h-16 sm:w-16" />
-            </motion.span>
+        <div className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+          <div className="flex max-w-[9rem] flex-wrap items-center justify-center gap-1.5 sm:max-w-[8rem]">
+            {RECIPE_TAGS.map((label, i) => (
+              <DataPill key={label} label={label} delay={0.08 * i} reduceMotion={reduceMotion} />
+            ))}
           </div>
 
-          <motion.span
-            animate={reduceMotion ? undefined : { y: [0, -5, 0], rotate: [0, 4, 0] }}
-            transition={
-              reduceMotion ? undefined : { duration: 2.4, repeat: Infinity, ease: "easeInOut" }
-            }
-            className="absolute -right-1 top-2 inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-[10px] font-extrabold text-solution-foreground shadow-md sm:right-4 sm:text-[11px]"
-          >
-            <Lightbulb className="h-3.5 w-3.5 text-problem" aria-hidden="true" />
-            Quick Tips
-          </motion.span>
+          <FlowArrow reduceMotion={reduceMotion} />
+
+          <div className="relative flex h-20 w-20 items-center justify-center">
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 6, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: reduceMotion ? 0 : 0.35, delay: reduceMotion ? 0 : 0.2 }}
+              className="absolute -top-9 left-1/2 -translate-x-1/2"
+            >
+              <motion.div
+                animate={reduceMotion ? undefined : { y: [0, -3, 0] }}
+                transition={
+                  reduceMotion ? undefined : { duration: 2.4, repeat: Infinity, ease: "easeInOut" }
+                }
+                className="relative flex items-center gap-1 whitespace-nowrap rounded-2xl bg-footer px-3 py-1.5 text-[10px] font-extrabold text-footer-foreground shadow-md sm:text-[11px]"
+              >
+                <Lightbulb className="h-3.5 w-3.5 text-solution" aria-hidden="true" />
+                Quick Tips
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 bg-footer"
+                />
+              </motion.div>
+            </motion.div>
+
+            <PotIllustration
+              className="h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem]"
+              reduceMotion={reduceMotion}
+            />
+          </div>
+
+          <FlowArrow delay={0.4} reduceMotion={reduceMotion} />
+
+          <BowlIllustration className="h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem]" />
         </div>
       </ScreenCard>
     </div>
