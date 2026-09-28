@@ -67,17 +67,9 @@ function DataPill({
       }}
       className="inline-block"
     >
-      <motion.span
-        animate={reduceMotion ? undefined : { y: [0, -4, 0] }}
-        transition={
-          reduceMotion
-            ? undefined
-            : { duration: 2.4, repeat: Infinity, ease: "easeInOut", delay: delay + 0.4 }
-        }
-        className="inline-flex items-center rounded-full border border-solution-foreground/15 bg-solution-foreground/[0.06] px-2.5 py-1 text-[11px] font-bold text-solution-foreground/80 sm:text-xs"
-      >
+      <span className="inline-flex items-center rounded-full border border-solution-foreground/15 bg-solution-foreground/[0.06] px-2.5 py-1 text-[11px] font-bold text-solution-foreground/80 sm:text-xs">
         {label}
-      </motion.span>
+      </span>
     </motion.span>
   );
 }

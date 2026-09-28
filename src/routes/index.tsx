@@ -569,7 +569,7 @@ function Index() {
                           aria-label="Show previous foodXchange section"
                           disabled={platformSlide === 0}
                           onClick={() => setPlatformSlide((current) => Math.max(0, current - 1))}
-                          className={`absolute left-3 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full border border-solution-foreground bg-solution text-solution-foreground shadow-none transition-opacity hover:bg-solution/85 disabled:pointer-events-none disabled:opacity-0 sm:left-5 ${
+                          className={`absolute left-3 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full border border-solution-foreground bg-solution text-solution-foreground shadow-none transition-opacity hover:-translate-y-1/2 hover:bg-solution/85 disabled:pointer-events-none disabled:opacity-0 sm:left-5 ${
                             platformSlide === 0 ? "opacity-0" : "opacity-100"
                           }`}
                         >
@@ -581,9 +581,17 @@ function Index() {
                           variant="ghost"
                           size="icon"
                           aria-label="Show next foodXchange section"
-                          disabled={platformSlide === 4}
-                          onClick={() => setPlatformSlide((current) => Math.min(4, current + 1))}
-                            className="absolute right-3 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full border border-solution-foreground bg-solution text-solution-foreground shadow-none hover:bg-solution/85 disabled:opacity-20 sm:right-5"
+                          disabled={platformSlide === FOODXCHANGE_APP_SLIDES.length - 1}
+                          onClick={() =>
+                            setPlatformSlide((current) =>
+                              Math.min(FOODXCHANGE_APP_SLIDES.length - 1, current + 1),
+                            )
+                          }
+                          className={`absolute right-3 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full border border-solution-foreground bg-solution text-solution-foreground shadow-none transition-opacity hover:-translate-y-1/2 hover:bg-solution/85 disabled:pointer-events-none disabled:opacity-0 sm:right-5 ${
+                            platformSlide === FOODXCHANGE_APP_SLIDES.length - 1
+                              ? "opacity-0"
+                              : "opacity-100"
+                          }`}
                         >
                           <ChevronRight className="h-5 w-5" aria-hidden="true" />
                         </Button>
@@ -593,7 +601,7 @@ function Index() {
                           role="tablist"
                           aria-label="foodXchange interface sections"
                         >
-                          {[0, 1, 2, 3, 4].map((section) => (
+                          {FOODXCHANGE_APP_SLIDES.map((_, section) => (
                             <Button
                               key={section}
                               type="button"
@@ -603,7 +611,7 @@ function Index() {
                               aria-label={`Show foodXchange section ${section + 1}`}
                               aria-selected={platformSlide === section}
                               onClick={() => setPlatformSlide(section)}
-                              className="h-5 w-5 rounded-full p-0 hover:bg-transparent"
+                              className="h-5 w-5 rounded-full p-0 hover:translate-y-0 hover:bg-transparent"
                             >
                               <span
                                 className={`h-2.5 w-2.5 rounded-full border border-solution-foreground transition-colors ${
