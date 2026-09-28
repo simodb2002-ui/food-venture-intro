@@ -6,7 +6,6 @@ import {
   Carrot,
   CheckCircle2,
   ChevronRight,
-  CookingPot,
   Croissant,
   Egg,
   Landmark,
@@ -14,9 +13,7 @@ import {
   Lightbulb,
   MapPin,
   Plus,
-  Salad,
   ShoppingBasket,
-  Soup,
   Sparkles,
   Store,
   Tag,
@@ -27,6 +24,8 @@ import {
 } from "lucide-react";
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
+
+import { BowlIllustration, JarIllustration, PotIllustration } from "./food-icons";
 
 type SlideProps = { reduceMotion: boolean };
 
@@ -134,10 +133,7 @@ export function ScanSlide({ reduceMotion }: SlideProps) {
 
           <div className="relative h-full w-full overflow-hidden rounded-2xl border-2 border-dashed border-solution-foreground/25 bg-solution/15">
             <div className="absolute inset-3 flex items-center justify-center rounded-xl bg-gradient-to-br from-solution/40 to-solution-foreground/10">
-              <Salad
-                className="h-10 w-10 text-solution-foreground/50 sm:h-12 sm:w-12"
-                aria-hidden="true"
-              />
+              <JarIllustration className="h-14 w-14 sm:h-16 sm:w-16" />
             </div>
             <motion.div
               aria-hidden="true"
@@ -206,9 +202,9 @@ export function PriceSlide({ reduceMotion }: SlideProps) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.6 }}
             transition={{ duration: reduceMotion ? 0 : 0.35, ease: "easeOut" }}
-            className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-solution bg-white text-solution-foreground shadow-md sm:h-14 sm:w-14"
+            className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-solution bg-white shadow-md sm:h-16 sm:w-16"
           >
-            <Soup className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden="true" />
+            <JarIllustration className="h-9 w-9 sm:h-10 sm:w-10" />
           </motion.span>
           {PRICE_TAGS.map((tag, i) => {
             const isBest = tag.store === "Morrisons";
@@ -426,24 +422,24 @@ export function CookSlide({ reduceMotion }: SlideProps) {
             className="h-6 w-px border-l-2 border-dashed border-solution-foreground/25 sm:h-8"
           />
 
-          <div className="relative flex h-14 w-14 items-center justify-center sm:h-16 sm:w-16">
+          <div className="relative flex h-16 w-16 items-center justify-center sm:h-20 sm:w-20">
             <motion.span
               animate={reduceMotion ? undefined : { opacity: [1, 1, 0, 0, 1] }}
               transition={
                 reduceMotion ? undefined : { duration: 3.6, repeat: Infinity, ease: "easeInOut" }
               }
-              className="absolute inset-0 flex items-center justify-center rounded-full bg-solution/25 text-solution-foreground"
+              className="absolute inset-0 flex items-center justify-center"
             >
-              <CookingPot className="h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true" />
+              <PotIllustration className="h-14 w-14 sm:h-16 sm:w-16" reduceMotion={reduceMotion} />
             </motion.span>
             <motion.span
               animate={reduceMotion ? undefined : { opacity: [0, 0, 1, 1, 0] }}
               transition={
                 reduceMotion ? undefined : { duration: 3.6, repeat: Infinity, ease: "easeInOut" }
               }
-              className="absolute inset-0 flex items-center justify-center rounded-full bg-cta-action/20 text-cta-action"
+              className="absolute inset-0 flex items-center justify-center"
             >
-              <Soup className="h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true" />
+              <BowlIllustration className="h-14 w-14 sm:h-16 sm:w-16" />
             </motion.span>
           </div>
 
