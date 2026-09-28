@@ -1,15 +1,20 @@
 import {
   AlertTriangle,
+  Apple,
   ArrowRight,
   CalendarCheck,
+  Carrot,
   CheckCircle2,
   ChevronRight,
+  CookingPot,
   Croissant,
+  Egg,
   Landmark,
   Leaf,
   Lightbulb,
   MapPin,
   Plus,
+  Salad,
   ShoppingBasket,
   Soup,
   Sparkles,
@@ -18,7 +23,7 @@ import {
   TrendingDown,
   TrendingUp,
   Trash2,
-  Utensils,
+  Wheat,
 } from "lucide-react";
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
@@ -103,17 +108,47 @@ export function ScanSlide({ reduceMotion }: SlideProps) {
         subtitle="Simple scoring helps you understand ingredients, additives, and nutritional value without judgement or jargon."
       />
       <ScreenCard>
-        <div className="relative mx-auto h-32 w-28 overflow-hidden rounded-2xl border-2 border-dashed border-solution-foreground/25 bg-solution/15 sm:h-36 sm:w-32">
-          <div className="absolute inset-3 rounded-xl bg-gradient-to-br from-solution/40 to-solution-foreground/10" />
-          <motion.div
+        <div className="relative mx-auto h-32 w-28 sm:h-36 sm:w-32">
+          <motion.span
             aria-hidden="true"
-            animate={reduceMotion ? undefined : { top: ["8%", "88%", "8%"] }}
+            animate={reduceMotion ? undefined : { y: [0, -5, 0], rotate: [0, -8, 0] }}
             transition={
               reduceMotion ? undefined : { duration: 3, repeat: Infinity, ease: "easeInOut" }
             }
-            style={reduceMotion ? { top: "50%" } : undefined}
-            className="absolute left-0 right-0 h-0.5 bg-problem shadow-[0_0_10px_2px_rgba(228,67,160,0.65)]"
-          />
+            className="absolute -left-4 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-white text-cta-action shadow-md sm:h-8 sm:w-8"
+          >
+            <Carrot className="h-4 w-4" aria-hidden="true" />
+          </motion.span>
+          <motion.span
+            aria-hidden="true"
+            animate={reduceMotion ? undefined : { y: [0, 5, 0], rotate: [0, 8, 0] }}
+            transition={
+              reduceMotion
+                ? undefined
+                : { duration: 3.4, repeat: Infinity, ease: "easeInOut", delay: 0.6 }
+            }
+            className="absolute -right-4 -bottom-2 flex h-7 w-7 items-center justify-center rounded-full bg-white text-problem shadow-md sm:h-8 sm:w-8"
+          >
+            <Apple className="h-4 w-4" aria-hidden="true" />
+          </motion.span>
+
+          <div className="relative h-full w-full overflow-hidden rounded-2xl border-2 border-dashed border-solution-foreground/25 bg-solution/15">
+            <div className="absolute inset-3 flex items-center justify-center rounded-xl bg-gradient-to-br from-solution/40 to-solution-foreground/10">
+              <Salad
+                className="h-10 w-10 text-solution-foreground/50 sm:h-12 sm:w-12"
+                aria-hidden="true"
+              />
+            </div>
+            <motion.div
+              aria-hidden="true"
+              animate={reduceMotion ? undefined : { top: ["8%", "88%", "8%"] }}
+              transition={
+                reduceMotion ? undefined : { duration: 3, repeat: Infinity, ease: "easeInOut" }
+              }
+              style={reduceMotion ? { top: "50%" } : undefined}
+              className="absolute left-0 right-0 h-0.5 bg-problem shadow-[0_0_10px_2px_rgba(228,67,160,0.65)]"
+            />
+          </div>
         </div>
 
         <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
@@ -164,7 +199,17 @@ export function PriceSlide({ reduceMotion }: SlideProps) {
         subtitle="Real-time price comparisons help you stretch your budget while still investing in good food."
       />
       <ScreenCard>
-        <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+        <div className="relative grid grid-cols-2 gap-2.5 sm:gap-3">
+          <motion.span
+            aria-hidden="true"
+            initial={reduceMotion ? false : { opacity: 0, scale: 0.6 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: reduceMotion ? 0 : 0.35, ease: "easeOut" }}
+            className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-solution bg-white text-solution-foreground shadow-md sm:h-14 sm:w-14"
+          >
+            <Soup className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden="true" />
+          </motion.span>
           {PRICE_TAGS.map((tag, i) => {
             const isBest = tag.store === "Morrisons";
             return (
@@ -340,6 +385,42 @@ export function CookSlide({ reduceMotion }: SlideProps) {
         </div>
 
         <div className="relative mt-3 flex flex-col items-center">
+          <div className="flex items-center gap-3">
+            <motion.span
+              aria-hidden="true"
+              animate={reduceMotion ? undefined : { y: [0, -4, 0] }}
+              transition={
+                reduceMotion ? undefined : { duration: 2, repeat: Infinity, ease: "easeInOut" }
+              }
+              className="text-cta-action"
+            >
+              <Carrot className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
+            </motion.span>
+            <motion.span
+              aria-hidden="true"
+              animate={reduceMotion ? undefined : { y: [0, -4, 0] }}
+              transition={
+                reduceMotion
+                  ? undefined
+                  : { duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }
+              }
+              className="text-solution-foreground/50"
+            >
+              <Wheat className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
+            </motion.span>
+            <motion.span
+              aria-hidden="true"
+              animate={reduceMotion ? undefined : { y: [0, -4, 0] }}
+              transition={
+                reduceMotion
+                  ? undefined
+                  : { duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }
+              }
+              className="text-problem"
+            >
+              <Egg className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
+            </motion.span>
+          </div>
           <span
             aria-hidden="true"
             className="h-6 w-px border-l-2 border-dashed border-solution-foreground/25 sm:h-8"
@@ -353,7 +434,7 @@ export function CookSlide({ reduceMotion }: SlideProps) {
               }
               className="absolute inset-0 flex items-center justify-center rounded-full bg-solution/25 text-solution-foreground"
             >
-              <Soup className="h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true" />
+              <CookingPot className="h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true" />
             </motion.span>
             <motion.span
               animate={reduceMotion ? undefined : { opacity: [0, 0, 1, 1, 0] }}
@@ -362,7 +443,7 @@ export function CookSlide({ reduceMotion }: SlideProps) {
               }
               className="absolute inset-0 flex items-center justify-center rounded-full bg-cta-action/20 text-cta-action"
             >
-              <Utensils className="h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true" />
+              <Soup className="h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true" />
             </motion.span>
           </div>
 
