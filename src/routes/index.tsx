@@ -549,17 +549,17 @@ function Index() {
                       <div className="relative overflow-hidden border-t-2 border-solution-foreground bg-solution">
                         <div
                           aria-hidden="true"
-                          className="pointer-events-none absolute inset-0 bg-white/30"
+                          className="pointer-events-none absolute inset-0 z-0 bg-black/30"
                         />
                         <motion.div
-                          className="flex"
+                          className="relative z-10 flex"
                           animate={{ x: `-${platformSlide * 100}%` }}
                           transition={{ duration: reduceMotion ? 0 : 0.45, ease: "easeInOut" }}
                         >
                           {FOODXCHANGE_APP_SLIDES.map((Slide, section) => (
                             <div
                               key={section}
-                              className="grid min-h-64 w-full shrink-0 items-stretch justify-items-center px-6 py-10 sm:min-h-80 sm:px-12"
+                              className="grid min-h-64 w-full shrink-0 items-stretch justify-items-center px-6 pt-10 pb-16 sm:min-h-80 sm:px-12 sm:pb-20"
                             >
                               <Slide reduceMotion={!!reduceMotion} />
                             </div>
@@ -573,7 +573,7 @@ function Index() {
                           aria-label="Show previous foodXchange section"
                           disabled={platformSlide === 0}
                           onClick={() => setPlatformSlide((current) => Math.max(0, current - 1))}
-                          className={`absolute left-3 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full border border-solution-foreground bg-solution text-solution-foreground shadow-none transition-opacity hover:-translate-y-1/2 hover:bg-solution/85 disabled:pointer-events-none disabled:opacity-0 sm:left-5 ${
+                          className={`absolute left-3 top-1/2 z-10 h-11 w-11 -translate-y-1/2 rounded-full border border-solution-foreground bg-solution text-solution-foreground shadow-none transition-opacity hover:-translate-y-1/2 hover:bg-solution/85 disabled:pointer-events-none disabled:opacity-0 sm:left-5 ${
                             platformSlide === 0 ? "opacity-0" : "opacity-100"
                           }`}
                         >
@@ -591,7 +591,7 @@ function Index() {
                               Math.min(FOODXCHANGE_APP_SLIDES.length - 1, current + 1),
                             )
                           }
-                          className={`absolute right-3 top-1/2 h-11 w-11 -translate-y-1/2 rounded-full border border-solution-foreground bg-solution text-solution-foreground shadow-none transition-opacity hover:-translate-y-1/2 hover:bg-solution/85 disabled:pointer-events-none disabled:opacity-0 sm:right-5 ${
+                          className={`absolute right-3 top-1/2 z-10 h-11 w-11 -translate-y-1/2 rounded-full border border-solution-foreground bg-solution text-solution-foreground shadow-none transition-opacity hover:-translate-y-1/2 hover:bg-solution/85 disabled:pointer-events-none disabled:opacity-0 sm:right-5 ${
                             platformSlide === FOODXCHANGE_APP_SLIDES.length - 1
                               ? "opacity-0"
                               : "opacity-100"
@@ -601,7 +601,7 @@ function Index() {
                         </Button>
 
                         <div
-                          className="absolute inset-x-0 bottom-5 flex justify-center gap-2"
+                          className="absolute inset-x-0 bottom-5 z-10 flex justify-center gap-2"
                           role="tablist"
                           aria-label="foodXchange interface sections"
                         >
