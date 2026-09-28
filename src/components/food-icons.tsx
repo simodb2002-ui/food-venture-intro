@@ -140,28 +140,7 @@ export function JarIllustration({
         stroke={INK}
         strokeWidth="2"
       />
-      {tone === "neutral" ? (
-        <circle cx="28" cy="41" r="7" fill={colors.badge} opacity="0.85" />
-      ) : (
-        <>
-          <circle cx="28" cy="41" r="7" fill={colors.badge} stroke={INK} strokeWidth="1.5" />
-          {tone === "good" ? (
-            <path
-              d="M 28 37 L 28 45 M 24.5 41 L 31.5 41"
-              stroke="white"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-            />
-          ) : (
-            <path
-              d="M 24.5 38 L 31.5 44 M 31.5 38 L 24.5 44"
-              stroke="white"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-            />
-          )}
-        </>
-      )}
+      <circle cx="28" cy="41" r="7" fill={colors.badge} opacity="0.85" />
     </svg>
   );
 }
