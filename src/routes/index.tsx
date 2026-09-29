@@ -519,7 +519,7 @@ function Index() {
                 <span className="grid w-full grid-cols-[9rem_1fr] items-center gap-4">
                   <span className="grid place-items-center">
                     <HeartHandshake
-                      className="h-28 w-28 text-solution sm:h-32 sm:w-32"
+                      className="h-28! w-28! text-solution sm:h-32! sm:w-32!"
                       aria-hidden="true"
                     />
                   </span>
@@ -546,7 +546,7 @@ function Index() {
                   <span className="grid w-full grid-cols-[9rem_1fr] items-center gap-4">
                     <span className="grid place-items-center">
                       <Smartphone
-                        className="h-28 w-28 text-solution-foreground sm:h-32 sm:w-32"
+                        className="h-28! w-28! text-solution-foreground sm:h-32! sm:w-32!"
                         aria-hidden="true"
                       />
                     </span>
