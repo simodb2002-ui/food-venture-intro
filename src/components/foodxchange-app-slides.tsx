@@ -362,7 +362,7 @@ export function ShopSlide({ reduceMotion }: SlideProps) {
             <svg
               aria-hidden="true"
               viewBox="0 0 280 90"
-              className="pointer-events-none absolute inset-x-2 top-0 z-10 h-24 w-[calc(100%-1rem)] text-solution sm:h-28"
+              className="pointer-events-none absolute inset-x-2 top-0 z-10 h-24 w-[calc(100%-1rem)] text-problem sm:h-28"
               fill="none"
             >
               <motion.path
