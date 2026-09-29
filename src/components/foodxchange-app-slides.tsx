@@ -1,6 +1,5 @@
 import {
   AlertTriangle,
-  ArrowRight,
   CalendarCheck,
   CheckCircle2,
   ChevronRight,
@@ -444,18 +443,44 @@ export function ShopSlide({ reduceMotion }: SlideProps) {
 
 const RECIPE_TAGS = ["3-Ingredients", "Family Favourites", "One Pot", "Takeaways"];
 
-function FlowArrow({ delay = 0, reduceMotion }: { delay?: number; reduceMotion: boolean }) {
+function FlowArrow({ reduceMotion }: { reduceMotion: boolean }) {
+  // Synced to CookSlide's own reveal timeline so the shaft draws itself in
+  // (pot to bowl) at the same moment the arrow+bowl group fades into view,
+  // reading as one immediate travel rather than a static icon.
+  const drawTimes = [0, 0.55, 0.65, 0.92, 1];
+  const drawValues = [0, 0, 1, 1, 0];
+
   return (
-    <motion.span
+    <svg
       aria-hidden="true"
-      animate={reduceMotion ? undefined : { x: [0, 5, 0] }}
-      transition={
-        reduceMotion ? undefined : { duration: 1.3, repeat: Infinity, ease: "easeInOut", delay }
-      }
-      className="rotate-90 text-cta-action sm:rotate-0"
+      viewBox="0 0 80 24"
+      className="h-6 w-16 shrink-0 text-cta-action sm:h-7 sm:w-20"
+      fill="none"
     >
-      <ArrowRight className="h-6 w-6 sm:h-7 sm:w-7" strokeWidth={2.75} aria-hidden="true" />
-    </motion.span>
+      <motion.path
+        d="M 2 12 L 62 12"
+        stroke="currentColor"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        animate={reduceMotion ? undefined : { pathLength: drawValues, times: drawTimes }}
+        transition={
+          reduceMotion ? undefined : { duration: 4.5, repeat: Infinity, ease: "easeInOut" }
+        }
+        style={reduceMotion ? { pathLength: 1 } : undefined}
+      />
+      <motion.path
+        d="M 52 2 L 78 12 L 52 22"
+        stroke="currentColor"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        animate={reduceMotion ? undefined : { opacity: drawValues, times: drawTimes }}
+        transition={
+          reduceMotion ? undefined : { duration: 4.5, repeat: Infinity, ease: "easeInOut" }
+        }
+        style={reduceMotion ? { opacity: 1 } : undefined}
+      />
+    </svg>
   );
 }
 
@@ -473,7 +498,7 @@ export function CookSlide({ reduceMotion }: SlideProps) {
         subtitle="Browse quick recipes, kitchen hacks, and ideas that make eating well more convenient."
       />
       <ScreenCard justify="down">
-        <div className="flex items-center justify-center gap-6 sm:gap-8">
+        <div className="flex items-center justify-center gap-2 sm:gap-3">
           <div className="relative flex h-28 w-28 items-center justify-center sm:h-32 sm:w-32">
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 6, scale: 0.9 }}
@@ -502,7 +527,7 @@ export function CookSlide({ reduceMotion }: SlideProps) {
           </div>
 
           <motion.div
-            className="flex items-center gap-6 sm:gap-8"
+            className="flex items-center gap-2 sm:gap-3"
             animate={
               reduceMotion
                 ? undefined
