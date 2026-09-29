@@ -1,16 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ChefHat, ScanLine, UsersRound } from "lucide-react";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 
 import communityImage from "@/assets/coming-soon/community.jpg";
 import cookImage from "@/assets/coming-soon/cook.jpg";
 import foodX100Image from "@/assets/coming-soon/foodx100.jpg";
+import launchDoodleImage from "@/assets/coming-soon/launch-doodle.webp";
 import { Button } from "@/components/ui/button";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -330,8 +326,7 @@ function ComingSoonPage() {
             Discover what&apos;s coming next with an early preview of three future foodXchange
             features. Explore them first on the web, then continue{"\u00a0"}
             <br />
-            the experience when the full
-            foodXchange app launches.
+            the experience when the full foodXchange app launches.
           </p>
         </motion.section>
 
@@ -342,34 +337,42 @@ function ComingSoonPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ type: "spring", stiffness: 100, damping: 18 }}
-          className="relative mt-16 px-6 py-20 text-center text-black md:px-16 md:py-28"
+          className="relative mt-16 overflow-hidden px-6 py-20 text-center text-black md:px-16 md:py-28"
         >
-          <h2 className="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
-            Want to follow the{" "}
-            <span className="relative inline-block">
-              launch?
-              <ScribbleUnderline className="-bottom-3 h-5 md:h-6" />
-            </span>
-          </h2>
-          <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-black/70 md:text-xl">
-            Join the Society or sign up for news, and you&apos;ll be among the first to hear when
-            these next features become available.
-          </p>
-          <div className="mt-12 flex flex-col justify-center gap-4 sm:flex-row">
-            <Button
-              asChild
-              size="lg"
-              className="rounded-full bg-solution px-10 text-base font-semibold text-solution-foreground hover:bg-solution/90 md:px-12 md:text-lg"
-            >
-              <a href="/#membership">Explore membership</a>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              className="rounded-full bg-problem px-10 text-base font-semibold text-white hover:bg-problem/90 md:px-12 md:text-lg"
-            >
-              <a href="/about#newsletter">Sign up for news</a>
-            </Button>
+          <img
+            src={launchDoodleImage}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 h-full w-full object-contain opacity-15"
+          />
+          <div className="relative">
+            <h2 className="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
+              Want to follow the{" "}
+              <span className="relative inline-block">
+                launch?
+                <ScribbleUnderline className="-bottom-3 h-5 md:h-6" />
+              </span>
+            </h2>
+            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-black/70 md:text-xl">
+              Join the Society or sign up for news, and you&apos;ll be among the first to hear when
+              these next features become available.
+            </p>
+            <div className="mt-12 flex flex-col justify-center gap-4 sm:flex-row">
+              <Button
+                asChild
+                size="lg"
+                className="rounded-full bg-solution px-10 text-base font-semibold text-solution-foreground hover:bg-solution/90 md:px-12 md:text-lg"
+              >
+                <a href="/#membership">Explore membership</a>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                className="rounded-full bg-problem px-10 text-base font-semibold text-white hover:bg-problem/90 md:px-12 md:text-lg"
+              >
+                <a href="/about#newsletter">Sign up for news</a>
+              </Button>
+            </div>
           </div>
         </motion.section>
       </main>
