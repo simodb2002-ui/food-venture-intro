@@ -151,6 +151,14 @@ function ScanCard({
 
         <motion.div
           aria-hidden="true"
+          animate={reduceMotion ? undefined : { opacity: revealValues, times: revealTimes }}
+          transition={reduceMotion ? undefined : { duration: 3, repeat: Infinity, ease: "linear" }}
+          style={reduceMotion ? { opacity: 1 } : undefined}
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/0 to-white/30 opacity-0"
+        />
+
+        <motion.div
+          aria-hidden="true"
           animate={reduceMotion ? undefined : { top: ["8%", "88%", "8%"], times: scanTimes }}
           transition={
             reduceMotion ? undefined : { duration: 3, repeat: Infinity, ease: "easeInOut" }
