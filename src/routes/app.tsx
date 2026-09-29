@@ -413,7 +413,7 @@ function Hero() {
   const reduce = useReducedMotion();
   return (
     <section className="relative text-solution-foreground">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 pt-20 pb-10 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:pt-28 lg:pb-14">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 pt-20 pb-6 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:pt-28 lg:pb-8">
         <motion.div
           initial={reduce ? false : { opacity: 0, x: -48, y: 16 }}
           animate={{ opacity: 1, x: 0, y: 0 }}
@@ -490,7 +490,7 @@ function Hero() {
 function Marquee() {
   const items = [...marqueeItems, ...marqueeItems];
   return (
-    <section className="text-solution-foreground pt-10 pb-14">
+    <section className="text-solution-foreground pt-8 pb-8">
       <h2 className="px-6 text-center text-2xl font-black uppercase tracking-tight sm:text-3xl">
         Everything you need in one place
       </h2>
@@ -513,7 +513,7 @@ function Marquee() {
 function ProblemSolutionCards() {
   const [flipped, setFlipped] = useState<number | null>(null);
   return (
-    <section className="px-6 pt-40 pb-20 text-cta-foreground sm:px-8">
+    <section className="px-6 pt-24 pb-14 text-cta-foreground sm:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-base font-medium leading-relaxed sm:text-lg">
@@ -612,7 +612,7 @@ function FeatureShowcase() {
   }, []);
 
   return (
-    <section className="px-6 pt-40 pb-40 text-problem-foreground sm:px-8">
+    <section className="px-6 pt-24 pb-24 text-problem-foreground sm:px-8">
       <div className="mx-auto max-w-7xl">
         <h2 className="text-center text-3xl font-black uppercase tracking-tight sm:text-4xl">
           Explore the app&apos;s features
@@ -713,7 +713,7 @@ function FeatureShowcase() {
 
 function BottomCta() {
   return (
-    <section className="px-6 py-20 text-cta-foreground sm:px-8">
+    <section className="px-6 py-14 text-cta-foreground sm:px-8">
       <div className="mx-auto max-w-4xl rounded-[2.5rem] border-2 border-cta-foreground/10 bg-card px-8 py-16 text-center shadow-xl sm:px-14 sm:py-24">
         <h2 className="text-3xl font-black uppercase tracking-tight sm:text-4xl">
           Built by a co-operative.
