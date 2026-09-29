@@ -244,25 +244,48 @@ function PlatformBadges({ dark = false }: { dark?: boolean }) {
   );
 }
 
+/** Traced from the reference screenshot's own pink/orange coils (pixel-masked
+ * and skeletonized per squiggle, then chained end-to-end), not hand-drawn. */
+const PHONE_SCRIBBLES = {
+  hero: {
+    viewBox: "0 0 600 570",
+    scalePercent: 340,
+    path: "M 326.0 109.0 C 328.2 109.8 334.8 113.0 339.0 114.0 C 343.2 115.0 346.8 114.7 351.0 115.0 C 355.2 115.3 359.8 115.3 364.0 116.0 C 368.2 116.7 371.8 117.7 376.0 119.0 C 380.2 120.3 385.7 121.2 389.0 124.0 C 392.3 126.8 396.0 131.8 396.0 136.0 C 396.0 140.2 392.2 145.7 389.0 149.0 C 385.8 152.3 381.2 153.8 377.0 156.0 C 372.8 158.2 368.2 160.2 364.0 162.0 C 359.8 163.8 355.2 164.3 352.0 167.0 C 348.8 169.7 346.2 176.2 345.0 178.0 L 130.0 186.0 C 128.8 185.5 125.2 183.3 123.0 183.0 C 120.8 182.7 119.0 183.2 117.0 184.0 C 115.0 184.8 112.7 186.3 111.0 188.0 C 109.3 189.7 108.0 192.0 107.0 194.0 C 106.0 196.0 105.0 198.0 105.0 200.0 C 105.0 202.0 105.7 204.7 107.0 206.0 C 108.3 207.3 110.8 207.7 113.0 208.0 C 115.2 208.3 117.8 208.0 120.0 208.0 C 122.2 208.0 124.0 207.7 126.0 208.0 C 128.0 208.3 130.0 209.2 132.0 210.0 C 134.0 210.8 137.0 212.5 138.0 213.0 L 145.0 235.0 C 143.3 237.3 139.3 245.7 135.0 249.0 C 130.7 252.3 124.5 252.8 119.0 255.0 C 113.5 257.2 107.5 259.5 102.0 262.0 C 96.5 264.5 90.7 266.3 86.0 270.0 C 81.3 273.7 74.7 279.3 74.0 284.0 C 73.3 288.7 78.0 295.3 82.0 298.0 C 86.0 300.7 92.7 299.7 98.0 300.0 C 103.3 300.3 108.5 300.3 114.0 300.0 C 119.5 299.7 125.5 299.0 131.0 298.0 C 136.5 297.0 141.7 294.3 147.0 294.0 C 152.3 293.7 160.3 295.7 163.0 296.0 L 384.0 295.0 C 387.5 293.0 397.5 286.3 405.0 283.0 C 412.5 279.7 421.0 277.7 429.0 275.0 C 437.0 272.3 445.0 270.0 453.0 267.0 C 461.0 264.0 469.7 261.7 477.0 257.0 C 484.3 252.3 496.7 244.5 497.0 239.0 C 497.3 233.5 486.0 227.0 479.0 224.0 C 472.0 221.0 463.0 221.7 455.0 221.0 C 447.0 220.3 439.0 219.8 431.0 220.0 C 423.0 220.2 415.0 221.2 407.0 222.0 C 399.0 222.8 391.2 225.3 383.0 225.0 C 374.8 224.7 362.2 220.8 358.0 220.0 L 399.0 338.0 C 402.8 338.3 414.5 340.3 422.0 340.0 C 429.5 339.7 436.5 337.3 444.0 336.0 C 451.5 334.7 459.5 332.8 467.0 332.0 C 474.5 331.2 481.5 330.8 489.0 331.0 C 496.5 331.2 507.0 329.8 512.0 333.0 C 517.0 336.2 521.5 345.5 519.0 350.0 C 516.5 354.5 504.3 357.2 497.0 360.0 C 489.7 362.8 482.5 365.0 475.0 367.0 C 467.5 369.0 459.5 370.2 452.0 372.0 C 444.5 373.8 437.3 377.7 430.0 378.0 C 422.7 378.3 411.7 374.7 408.0 374.0 L 199.0 401.0 C 195.5 400.7 185.2 398.5 178.0 399.0 C 170.8 399.5 163.3 402.7 156.0 404.0 C 148.7 405.3 141.2 406.2 134.0 407.0 C 126.8 407.8 120.2 408.7 113.0 409.0 C 105.8 409.3 97.0 411.0 91.0 409.0 C 85.0 407.0 76.5 402.2 77.0 397.0 C 77.5 391.8 87.7 383.0 94.0 378.0 C 100.3 373.0 107.8 370.3 115.0 367.0 C 122.2 363.7 129.7 360.7 137.0 358.0 C 144.3 355.3 152.3 354.2 159.0 351.0 C 165.7 347.8 174.0 341.0 177.0 339.0 L 210.0 432.0 C 203.2 436.2 182.3 446.8 169.0 457.0 C 155.7 467.2 130.0 485.2 130.0 493.0 C 130.0 500.8 154.8 504.0 169.0 504.0 C 183.2 504.0 199.7 498.3 215.0 493.0 C 230.3 487.7 245.8 479.8 261.0 472.0 C 276.2 464.2 290.8 452.8 306.0 446.0 C 321.2 439.2 336.7 434.0 352.0 431.0 C 367.3 428.0 385.2 424.2 398.0 428.0 C 410.8 431.8 431.3 447.5 429.0 454.0 C 426.7 460.5 399.2 464.2 384.0 467.0 C 368.8 469.8 345.7 470.3 338.0 471.0",
+  },
+  feature: {
+    viewBox: "0 0 480 450",
+    scalePercent: 320,
+    path: "M 114.0 127.0 C 111.0 128.5 102.0 133.8 96.0 136.0 C 90.0 138.2 84.0 138.5 78.0 140.0 C 72.0 141.5 66.0 142.3 60.0 145.0 C 54.0 147.7 45.8 151.2 42.0 156.0 C 38.2 160.8 35.3 168.7 37.0 174.0 C 38.7 179.3 46.5 185.0 52.0 188.0 C 57.5 191.0 64.0 191.0 70.0 192.0 C 76.0 193.0 82.0 193.5 88.0 194.0 C 94.0 194.5 103.0 194.8 106.0 195.0 L 109.0 253.0 C 105.5 254.0 95.0 257.2 88.0 259.0 C 81.0 260.8 73.8 262.2 67.0 264.0 C 60.2 265.8 53.8 266.5 47.0 270.0 C 40.2 273.5 29.2 279.3 26.0 285.0 C 22.8 290.7 24.2 300.0 28.0 304.0 C 31.8 308.0 42.2 307.8 49.0 309.0 C 55.8 310.2 62.2 310.3 69.0 311.0 C 75.8 311.7 83.2 311.7 90.0 313.0 C 96.8 314.3 106.7 318.0 110.0 319.0 L 116.0 377.0 C 117.0 373.2 114.2 357.7 122.0 354.0 C 129.8 350.3 149.2 353.7 163.0 355.0 C 176.8 356.3 191.2 359.5 205.0 362.0 C 218.8 364.5 232.3 367.3 246.0 370.0 C 259.7 372.7 273.2 375.3 287.0 378.0 C 300.8 380.7 315.2 384.5 329.0 386.0 C 342.8 387.5 364.0 392.7 370.0 387.0 C 376.0 381.3 372.5 361.5 365.0 352.0 C 357.5 342.5 331.7 333.7 325.0 330.0 L 325.0 280.0 C 328.0 281.5 336.7 287.0 343.0 289.0 C 349.3 291.0 356.2 291.7 363.0 292.0 C 369.8 292.3 377.2 292.3 384.0 291.0 C 390.8 289.7 401.0 288.5 404.0 284.0 C 407.0 279.5 405.8 270.3 402.0 264.0 C 398.2 257.7 387.8 251.0 381.0 246.0 C 374.2 241.0 367.7 237.7 361.0 234.0 C 354.3 230.3 347.3 228.0 341.0 224.0 C 334.7 220.0 326.0 212.3 323.0 210.0 L 326.0 157.0 C 327.7 158.2 332.3 162.3 336.0 164.0 C 339.7 165.7 344.0 166.2 348.0 167.0 C 352.0 167.8 356.0 168.8 360.0 169.0 C 364.0 169.2 368.0 168.8 372.0 168.0 C 376.0 167.2 381.2 166.7 384.0 164.0 C 386.8 161.3 388.7 156.0 389.0 152.0 C 389.3 148.0 387.7 144.0 386.0 140.0 C 384.3 136.0 380.5 132.0 379.0 128.0 C 377.5 124.0 377.3 118.0 377.0 116.0",
+  },
+} as const;
+
 /**
- * Loose hand-drawn coil that wraps around a phone mockup, drawn as a
- * single continuous stroke (three overlapping loops) so it reads as one
- * scribble rather than separate rings.
+ * Hand-drawn-style coil that wraps around a phone mockup, drawn as a
+ * single continuous stroke so it reads as one scribble rather than
+ * separate rings.
  */
-function PhoneScribble({ className }: { className?: string }) {
+function PhoneScribble({
+  variant,
+  className,
+}: {
+  variant: keyof typeof PHONE_SCRIBBLES;
+  className?: string | undefined;
+}) {
   const reduce = useReducedMotion();
+  const { viewBox, path, scalePercent } = PHONE_SCRIBBLES[variant];
   return (
     <svg
       aria-hidden="true"
-      viewBox="0 0 340 620"
+      viewBox={viewBox}
       className={cn(
-        "pointer-events-none absolute -inset-10 h-[calc(100%+5rem)] w-[calc(100%+5rem)] sm:-inset-14 sm:h-[calc(100%+7rem)] sm:w-[calc(100%+7rem)]",
+        "pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
         className,
       )}
+      style={{ width: `${scalePercent}%`, height: `${scalePercent}%` }}
       fill="none"
     >
       <motion.path
-        d="M 140 613.3 L 111.4 604.2 L 86.1 588.1 L 65.8 566 L 51.9 539.3 L 45.4 510 L 46.7 480 L 55.8 451.4 L 71.9 426.1 L 94 405.8 L 120.7 391.9 L 150 385.4 L 180 386.7 L 208.6 395.8 L 233.9 411.9 L 254.2 434 L 268.1 460.7 L 274.6 490 L 273.3 520 L 264.2 548.6 L 248.1 573.9 L 129 187.2 L 101.2 201.7 L 78.1 222.9 L 61.2 249.3 L 51.8 279.2 L 50.5 310.5 L 57.2 341 L 71.7 368.8 L 92.9 391.9 L 119.3 408.8 L 149.2 418.2 L 180.5 419.5 L 211 412.8 L 238.8 398.3 L 261.9 377.1 L 278.8 350.7 L 288.2 320.8 L 289.5 289.5 L 282.8 259 L 268.3 231.2 L 247.1 208.1 L 73.4 174.3 L 59.4 152.3 L 51.5 127.4 L 50.4 101.3 L 56 75.8 L 68.1 52.6 L 85.7 33.4 L 107.7 19.4 L 132.6 11.5 L 158.7 10.4 L 184.2 16 L 207.4 28.1 L 226.6 45.7 L 240.6 67.7 L 248.5 92.6 L 249.6 118.7 L 244 144.2 L 231.9 167.4 L 214.3 186.6 L 192.3 200.6 L 167.4 208.5"
+        d={path}
         stroke="currentColor"
         strokeWidth="14"
         strokeLinecap="round"
@@ -285,6 +308,7 @@ function PhoneMockup({
   labelContent,
   hidePlaceholders = false,
   screenContent,
+  scribbleVariant,
   scribbleClassName,
 }: {
   Icon?: LucideIcon;
@@ -294,6 +318,7 @@ function PhoneMockup({
   labelContent?: ReactNode;
   hidePlaceholders?: boolean;
   screenContent?: ReactNode;
+  scribbleVariant?: keyof typeof PHONE_SCRIBBLES;
   scribbleClassName?: string;
 }) {
   const reduce = useReducedMotion();
@@ -304,7 +329,7 @@ function PhoneMockup({
         flat ? "app-phone-float-flat" : "app-phone-float",
       )}
     >
-      {scribbleClassName && <PhoneScribble className={scribbleClassName} />}
+      {scribbleVariant && <PhoneScribble variant={scribbleVariant} className={scribbleClassName} />}
       <div className="relative z-10 rounded-[2.6rem] border-[10px] border-footer bg-footer shadow-[0_70px_120px_-15px_rgba(0,0,0,0.55)]">
         <div className="relative aspect-[9/19] overflow-hidden rounded-[1.9rem] bg-card">
           <div className="absolute left-1/2 top-2 z-10 h-5 w-20 -translate-x-1/2 rounded-full bg-footer" />
@@ -401,6 +426,7 @@ function Hero() {
           transition={{ duration: 1.3, delay: 0.3, ease: "easeOut" }}
         >
           <PhoneMockup
+            scribbleVariant="hero"
             scribbleClassName="text-problem"
             screenContent={
               <div className="relative h-full w-full">
@@ -579,6 +605,7 @@ function FeatureShowcase() {
               Icon={slide.Icon}
               label={slide.title}
               flat
+              scribbleVariant="feature"
               scribbleClassName="text-white"
             />
           </motion.div>
