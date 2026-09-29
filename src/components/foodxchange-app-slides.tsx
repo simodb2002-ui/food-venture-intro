@@ -175,7 +175,7 @@ function ScanCard({
           className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0"
         >
           <Icon
-            className="h-12 w-12 text-white drop-shadow-md sm:h-14 sm:w-14"
+            className="h-14 w-14 shrink-0 text-white drop-shadow-md sm:h-16 sm:w-16"
             aria-hidden="true"
           />
         </motion.div>
