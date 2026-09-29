@@ -256,7 +256,7 @@ export function PriceSlide({ reduceMotion }: SlideProps) {
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/0 to-white/30"
             />
-            <JarIllustration className="h-10 w-10 sm:h-12 sm:w-12" />
+            <JarIllustration className="relative h-10 w-10 sm:h-12 sm:w-12" />
           </motion.span>
           {PRICE_TAGS.map((tag, i) => {
             const isBest = tag.store === "Morrisons";
