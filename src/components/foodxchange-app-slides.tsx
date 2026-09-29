@@ -457,12 +457,12 @@ function FlowArrow({ reduceMotion }: { reduceMotion: boolean }) {
   return (
     <svg
       aria-hidden="true"
-      viewBox="0 -6 64 30"
+      viewBox="0 0 64 24"
       className="h-6 w-16 shrink-0 text-cta-action sm:h-7 sm:w-20"
       fill="none"
     >
       <motion.path
-        d="M4 18 C 22 2 42 2 60 12 L51 -2.4 L60 12 L43 12"
+        d="M4 18 C 22 2 42 2 60 12 L45.3 3.5 L60 12 L45.3 20.5"
         stroke="currentColor"
         strokeWidth="5"
         strokeLinecap="round"
