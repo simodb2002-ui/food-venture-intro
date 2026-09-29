@@ -680,16 +680,9 @@ export function MapSlide({ reduceMotion }: SlideProps) {
 export function LearnMoreSlide(_props: SlideProps) {
   return (
     <div className="mx-auto flex h-full w-full max-w-2xl flex-col items-center justify-center gap-3 text-center">
-      <div>
-        <h3 className="font-display text-xl font-extrabold text-solution-foreground sm:text-2xl">
-          The App Is Coming Soon
-        </h3>
-        <p className="mx-auto mt-1.5 max-w-md text-sm font-medium leading-snug text-solution-foreground/70 sm:text-base">
-          Everything you just saw is coming soon to the app.
-          <br />
-          Tap below to find out more.
-        </p>
-      </div>
+      <h3 className="font-display text-xl font-extrabold text-solution-foreground sm:text-2xl">
+        The App Is Coming Soon
+      </h3>
       <a
         href="/app"
         className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-extrabold text-white shadow-md sm:text-base"
