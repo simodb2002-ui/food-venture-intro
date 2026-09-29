@@ -448,41 +448,30 @@ export function ShopSlide({ reduceMotion }: SlideProps) {
 const RECIPE_TAGS = ["3-Ingredients", "Family Favourites", "One Pot", "Takeaways"];
 
 function FlowArrow({ reduceMotion }: { reduceMotion: boolean }) {
-  // Synced to CookSlide's own reveal timeline so the shaft draws itself in
-  // (pot to bowl) at the same moment the arrow+bowl group fades into view,
-  // reading as one immediate travel rather than a static icon.
+  // One continuous hand-drawn stroke (shaft and arrowhead in a single path,
+  // same technique as the FIS-to-foodXchange bridge arrow on the About
+  // page) so it draws itself in as a single motion, not two separate parts.
   const drawTimes = [0, 0.55, 0.65, 0.92, 1];
   const drawValues = [0, 0, 1, 1, 0];
 
   return (
     <svg
       aria-hidden="true"
-      viewBox="0 0 80 24"
+      viewBox="0 0 64 22"
       className="h-6 w-16 shrink-0 text-cta-action sm:h-7 sm:w-20"
       fill="none"
     >
       <motion.path
-        d="M 2 12 L 62 12"
+        d="M4 18 C 22 2 42 2 60 12 L48 4 L60 12 L46 18"
         stroke="currentColor"
-        strokeWidth="3.5"
+        strokeWidth="5"
         strokeLinecap="round"
+        strokeLinejoin="round"
         animate={reduceMotion ? undefined : { pathLength: drawValues, times: drawTimes }}
         transition={
           reduceMotion ? undefined : { duration: 4.5, repeat: Infinity, ease: "easeInOut" }
         }
         style={reduceMotion ? { pathLength: 1 } : undefined}
-      />
-      <motion.path
-        d="M 52 2 L 78 12 L 52 22"
-        stroke="currentColor"
-        strokeWidth="3.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        animate={reduceMotion ? undefined : { opacity: drawValues, times: drawTimes }}
-        transition={
-          reduceMotion ? undefined : { duration: 4.5, repeat: Infinity, ease: "easeInOut" }
-        }
-        style={reduceMotion ? { opacity: 1 } : undefined}
       />
     </svg>
   );
