@@ -690,7 +690,7 @@ export function LearnMoreSlide({ reduceMotion }: SlideProps) {
           className="absolute inset-0 z-0"
           style={{
             background:
-              "linear-gradient(120deg, var(--color-solution), black, white, var(--color-solution))",
+              "linear-gradient(120deg, var(--color-problem), oklch(0.8 0.16 350), var(--color-problem))",
             backgroundSize: "300% 300%",
           }}
           animate={
