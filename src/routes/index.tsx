@@ -550,7 +550,7 @@ function Index() {
                         className="relative overflow-hidden border-t-2 border-solution-foreground"
                         style={{
                           background:
-                            "linear-gradient(to bottom, oklch(0.78 0.16 74) 0%, #ffffff 100%)",
+                            "linear-gradient(to bottom, #ffffff 0%, oklch(0.78 0.16 74) 100%)",
                         }}
                       >
                         <div
