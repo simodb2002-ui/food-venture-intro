@@ -291,11 +291,11 @@ function PhoneScribble({ variant }: { variant: keyof typeof PHONE_SCRIBBLES }) {
         strokeLinecap="round"
         strokeLinejoin="round"
         vectorEffect="non-scaling-stroke"
-        initial={reduce ? false : { pathLength: 0, opacity: 0 }}
-        whileInView={{ pathLength: 1, opacity: 1 }}
+        initial={reduce ? false : { opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: reduce ? 0 : 1.4, ease: "easeInOut" }}
-        style={reduce ? { pathLength: 1, opacity: 1 } : undefined}
+        transition={{ duration: reduce ? 0 : 0.8, ease: "easeOut" }}
+        style={reduce ? { opacity: 1 } : undefined}
       />
     </svg>
   );
