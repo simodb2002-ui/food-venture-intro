@@ -244,52 +244,53 @@ function PlatformBadges({ dark = false }: { dark?: boolean }) {
   );
 }
 
-/** Traced from the reference screenshot's own pink/orange coils (pixel-masked
- * and skeletonized per squiggle, then chained end-to-end), not hand-drawn. */
+/**
+ * Exact vector artwork supplied by the user (not traced/altered) — a
+ * hand-drawn coil that wraps around each phone mockup. The `viewBox` is
+ * cropped to the coil's own bounding box (with a little padding) so it
+ * renders at a sensible scale; the `d` path data itself is untouched.
+ */
 const PHONE_SCRIBBLES = {
   hero: {
-    viewBox: "0 0 600 570",
-    scalePercent: 340,
-    path: "M 326.0 109.0 C 328.2 109.8 334.8 113.0 339.0 114.0 C 343.2 115.0 346.8 114.7 351.0 115.0 C 355.2 115.3 359.8 115.3 364.0 116.0 C 368.2 116.7 371.8 117.7 376.0 119.0 C 380.2 120.3 385.7 121.2 389.0 124.0 C 392.3 126.8 396.0 131.8 396.0 136.0 C 396.0 140.2 392.2 145.7 389.0 149.0 C 385.8 152.3 381.2 153.8 377.0 156.0 C 372.8 158.2 368.2 160.2 364.0 162.0 C 359.8 163.8 355.2 164.3 352.0 167.0 C 348.8 169.7 346.2 176.2 345.0 178.0 L 130.0 186.0 C 128.8 185.5 125.2 183.3 123.0 183.0 C 120.8 182.7 119.0 183.2 117.0 184.0 C 115.0 184.8 112.7 186.3 111.0 188.0 C 109.3 189.7 108.0 192.0 107.0 194.0 C 106.0 196.0 105.0 198.0 105.0 200.0 C 105.0 202.0 105.7 204.7 107.0 206.0 C 108.3 207.3 110.8 207.7 113.0 208.0 C 115.2 208.3 117.8 208.0 120.0 208.0 C 122.2 208.0 124.0 207.7 126.0 208.0 C 128.0 208.3 130.0 209.2 132.0 210.0 C 134.0 210.8 137.0 212.5 138.0 213.0 L 145.0 235.0 C 143.3 237.3 139.3 245.7 135.0 249.0 C 130.7 252.3 124.5 252.8 119.0 255.0 C 113.5 257.2 107.5 259.5 102.0 262.0 C 96.5 264.5 90.7 266.3 86.0 270.0 C 81.3 273.7 74.7 279.3 74.0 284.0 C 73.3 288.7 78.0 295.3 82.0 298.0 C 86.0 300.7 92.7 299.7 98.0 300.0 C 103.3 300.3 108.5 300.3 114.0 300.0 C 119.5 299.7 125.5 299.0 131.0 298.0 C 136.5 297.0 141.7 294.3 147.0 294.0 C 152.3 293.7 160.3 295.7 163.0 296.0 L 384.0 295.0 C 387.5 293.0 397.5 286.3 405.0 283.0 C 412.5 279.7 421.0 277.7 429.0 275.0 C 437.0 272.3 445.0 270.0 453.0 267.0 C 461.0 264.0 469.7 261.7 477.0 257.0 C 484.3 252.3 496.7 244.5 497.0 239.0 C 497.3 233.5 486.0 227.0 479.0 224.0 C 472.0 221.0 463.0 221.7 455.0 221.0 C 447.0 220.3 439.0 219.8 431.0 220.0 C 423.0 220.2 415.0 221.2 407.0 222.0 C 399.0 222.8 391.2 225.3 383.0 225.0 C 374.8 224.7 362.2 220.8 358.0 220.0 L 399.0 338.0 C 402.8 338.3 414.5 340.3 422.0 340.0 C 429.5 339.7 436.5 337.3 444.0 336.0 C 451.5 334.7 459.5 332.8 467.0 332.0 C 474.5 331.2 481.5 330.8 489.0 331.0 C 496.5 331.2 507.0 329.8 512.0 333.0 C 517.0 336.2 521.5 345.5 519.0 350.0 C 516.5 354.5 504.3 357.2 497.0 360.0 C 489.7 362.8 482.5 365.0 475.0 367.0 C 467.5 369.0 459.5 370.2 452.0 372.0 C 444.5 373.8 437.3 377.7 430.0 378.0 C 422.7 378.3 411.7 374.7 408.0 374.0 L 199.0 401.0 C 195.5 400.7 185.2 398.5 178.0 399.0 C 170.8 399.5 163.3 402.7 156.0 404.0 C 148.7 405.3 141.2 406.2 134.0 407.0 C 126.8 407.8 120.2 408.7 113.0 409.0 C 105.8 409.3 97.0 411.0 91.0 409.0 C 85.0 407.0 76.5 402.2 77.0 397.0 C 77.5 391.8 87.7 383.0 94.0 378.0 C 100.3 373.0 107.8 370.3 115.0 367.0 C 122.2 363.7 129.7 360.7 137.0 358.0 C 144.3 355.3 152.3 354.2 159.0 351.0 C 165.7 347.8 174.0 341.0 177.0 339.0 L 210.0 432.0 C 203.2 436.2 182.3 446.8 169.0 457.0 C 155.7 467.2 130.0 485.2 130.0 493.0 C 130.0 500.8 154.8 504.0 169.0 504.0 C 183.2 504.0 199.7 498.3 215.0 493.0 C 230.3 487.7 245.8 479.8 261.0 472.0 C 276.2 464.2 290.8 452.8 306.0 446.0 C 321.2 439.2 336.7 434.0 352.0 431.0 C 367.3 428.0 385.2 424.2 398.0 428.0 C 410.8 431.8 431.3 447.5 429.0 454.0 C 426.7 460.5 399.2 464.2 384.0 467.0 C 368.8 469.8 345.7 470.3 338.0 471.0",
+    viewBox: "55.37 257.19 493.15 363.08",
+    color: "#e94997",
+    widthPercent: 220,
+    heightPercent: 76.9,
+    path: "M188.69,332.15c37.64-21.03,29.56-18.87,67.13-33.16,28.35-10.78,82.41-16.8,107.33-7.27,21.88,11.27-25.43,32.3-44.02,40.32-26.92,11.45-54.76,21.85-82.71,32.52-16.88,6.66-132.02,47.14-74.65,47.85,47.16-1.15,117.41-14.54,170.11-21.07,44.51-5.66,90.11-12.28,129.4-8.18,25.27,3.37,23.44,12.71,2.21,22.87-24.48,11.55-54.09,19.55-81.33,26.91-64.96,17.04-132.39,29.68-196.32,48.74-9.54,2.72-96.47,28.54-61.72,37.07,6.27,1.29,11.62,1.58,18.98,1.76,32.07,1.12,103.28-8.41,147.48-15.53,45.36-7.01,95.06-14.88,138.68-18.95,12.38-1.37,85.26-7.21,51.5,7.55-46.54,17.52-109.64,28.52-164.65,41.4-53.1,12.66-107.84,25.7-153.15,49.23-5.01,2.92-13.64,8.63-3.15,10.05,6.39,1.01,17.58-.07,27.13-.81,42.8-4.42,112.9-10.85,154.88-21.92.96-.32,3.06-1.13.95-1.02-9.78,1.33-18.91,4.33-29.76,7.2",
   },
   feature: {
-    viewBox: "0 0 480 450",
-    scalePercent: 320,
-    path: "M 114.0 127.0 C 111.0 128.5 102.0 133.8 96.0 136.0 C 90.0 138.2 84.0 138.5 78.0 140.0 C 72.0 141.5 66.0 142.3 60.0 145.0 C 54.0 147.7 45.8 151.2 42.0 156.0 C 38.2 160.8 35.3 168.7 37.0 174.0 C 38.7 179.3 46.5 185.0 52.0 188.0 C 57.5 191.0 64.0 191.0 70.0 192.0 C 76.0 193.0 82.0 193.5 88.0 194.0 C 94.0 194.5 103.0 194.8 106.0 195.0 L 109.0 253.0 C 105.5 254.0 95.0 257.2 88.0 259.0 C 81.0 260.8 73.8 262.2 67.0 264.0 C 60.2 265.8 53.8 266.5 47.0 270.0 C 40.2 273.5 29.2 279.3 26.0 285.0 C 22.8 290.7 24.2 300.0 28.0 304.0 C 31.8 308.0 42.2 307.8 49.0 309.0 C 55.8 310.2 62.2 310.3 69.0 311.0 C 75.8 311.7 83.2 311.7 90.0 313.0 C 96.8 314.3 106.7 318.0 110.0 319.0 L 116.0 377.0 C 117.0 373.2 114.2 357.7 122.0 354.0 C 129.8 350.3 149.2 353.7 163.0 355.0 C 176.8 356.3 191.2 359.5 205.0 362.0 C 218.8 364.5 232.3 367.3 246.0 370.0 C 259.7 372.7 273.2 375.3 287.0 378.0 C 300.8 380.7 315.2 384.5 329.0 386.0 C 342.8 387.5 364.0 392.7 370.0 387.0 C 376.0 381.3 372.5 361.5 365.0 352.0 C 357.5 342.5 331.7 333.7 325.0 330.0 L 325.0 280.0 C 328.0 281.5 336.7 287.0 343.0 289.0 C 349.3 291.0 356.2 291.7 363.0 292.0 C 369.8 292.3 377.2 292.3 384.0 291.0 C 390.8 289.7 401.0 288.5 404.0 284.0 C 407.0 279.5 405.8 270.3 402.0 264.0 C 398.2 257.7 387.8 251.0 381.0 246.0 C 374.2 241.0 367.7 237.7 361.0 234.0 C 354.3 230.3 347.3 228.0 341.0 224.0 C 334.7 220.0 326.0 212.3 323.0 210.0 L 326.0 157.0 C 327.7 158.2 332.3 162.3 336.0 164.0 C 339.7 165.7 344.0 166.2 348.0 167.0 C 352.0 167.8 356.0 168.8 360.0 169.0 C 364.0 169.2 368.0 168.8 372.0 168.0 C 376.0 167.2 381.2 166.7 384.0 164.0 C 386.8 161.3 388.7 156.0 389.0 152.0 C 389.3 148.0 387.7 144.0 386.0 140.0 C 384.3 136.0 380.5 132.0 379.0 128.0 C 377.5 124.0 377.3 118.0 377.0 116.0",
+    viewBox: "82.35 303.96 424.99 308.78",
+    color: "#f6ae46",
+    widthPercent: 220,
+    heightPercent: 76.9,
+    path: "M363.2,325.26c16.43,7.06,30.4,12.79,43.27,19.02,6.59,3.37,24.68,11.31,8.6,16.05-16.26,4.47-43.18,4.65-68.09,3.57-42.29-1.87-86.22-8.18-128.89-7.22-16.5.24-36.35,1.79-51.29,4.45-32.03,5.51-55.15,17.9-13.88,29.6,45.05,11.83,96.87,13.55,144.26,18.85,36.95,3.89,73.18,9.59,108.34,20.1,16.52,4.48,72.52,24.98,54.75,36.07-7.95,4.72-32.07,5.16-46.17,4.62-28.18-.85-57.46-3.88-91.22-6.71-50.53-4.21-101.19-5.87-149.94,4.54-27.51,6.14-42.78,17.4-8.94,26.29,32.97,8.25,69.14,10.39,108.46,13.65,32.98,2.42,66.36,5.09,98.79,10.6,22.21,3.69,41.41,8.15,55.89,12.62,12.4,3.83,21.31,7.62,25.87,10.93,4.43,3.01,5.48,6.88-.6,9.17-6.73,2.61-17.89,3.53-26.17,3.91-38.67,1.63-86.62-4.92-126.2-2.03-33.02,2.41-50.72,6.3-77.88,10.61,0,0-17.39,2.5-31.63,6.29-9.95,2.65-15.53,4.18-15.64,6.52-.24,5.1,25.84,10.15,30.62,11.08,12.93,2.5,23.76,3,29.97,3.26,8.2.34,15.12.21,20.2,0",
   },
 } as const;
 
 /**
- * Hand-drawn-style coil that wraps around a phone mockup, drawn as a
- * single continuous stroke so it reads as one scribble rather than
- * separate rings.
+ * Hand-drawn coil that wraps around a phone mockup, using the user's exact
+ * vector path data verbatim (no tracing/alteration). `non-scaling-stroke`
+ * keeps the line weight consistent however far the artwork is scaled up.
  */
-function PhoneScribble({
-  variant,
-  className,
-}: {
-  variant: keyof typeof PHONE_SCRIBBLES;
-  className?: string | undefined;
-}) {
+function PhoneScribble({ variant }: { variant: keyof typeof PHONE_SCRIBBLES }) {
   const reduce = useReducedMotion();
-  const { viewBox, path, scalePercent } = PHONE_SCRIBBLES[variant];
+  const { viewBox, path, color, widthPercent, heightPercent } = PHONE_SCRIBBLES[variant];
   return (
     <svg
       aria-hidden="true"
       viewBox={viewBox}
-      className={cn(
-        "pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
-        className,
-      )}
-      style={{ width: `${scalePercent}%`, height: `${scalePercent}%` }}
+      className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible"
+      style={{ width: `${widthPercent}%`, height: `${heightPercent}%` }}
       fill="none"
     >
       <motion.path
         d={path}
-        stroke="currentColor"
-        strokeWidth="14"
+        stroke={color}
+        strokeWidth="12"
+        strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"
+        vectorEffect="non-scaling-stroke"
         initial={reduce ? false : { pathLength: 0, opacity: 0 }}
         whileInView={{ pathLength: 1, opacity: 1 }}
         viewport={{ once: true, amount: 0.4 }}
@@ -309,7 +310,6 @@ function PhoneMockup({
   hidePlaceholders = false,
   screenContent,
   scribbleVariant,
-  scribbleClassName,
 }: {
   Icon?: LucideIcon;
   label?: string;
@@ -319,7 +319,6 @@ function PhoneMockup({
   hidePlaceholders?: boolean;
   screenContent?: ReactNode;
   scribbleVariant?: keyof typeof PHONE_SCRIBBLES;
-  scribbleClassName?: string;
 }) {
   const reduce = useReducedMotion();
   return (
@@ -329,7 +328,7 @@ function PhoneMockup({
         flat ? "app-phone-float-flat" : "app-phone-float",
       )}
     >
-      {scribbleVariant && <PhoneScribble variant={scribbleVariant} className={scribbleClassName} />}
+      {scribbleVariant && <PhoneScribble variant={scribbleVariant} />}
       <div className="relative z-10 rounded-[2.6rem] border-[10px] border-footer bg-footer shadow-[0_70px_120px_-15px_rgba(0,0,0,0.55)]">
         <div className="relative aspect-[9/19] overflow-hidden rounded-[1.9rem] bg-card">
           <div className="absolute left-1/2 top-2 z-10 h-5 w-20 -translate-x-1/2 rounded-full bg-footer" />
@@ -427,7 +426,6 @@ function Hero() {
         >
           <PhoneMockup
             scribbleVariant="hero"
-            scribbleClassName="text-problem"
             screenContent={
               <div className="relative h-full w-full">
                 <img
@@ -601,13 +599,7 @@ function FeatureShowcase() {
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <PhoneMockup
-              Icon={slide.Icon}
-              label={slide.title}
-              flat
-              scribbleVariant="feature"
-              scribbleClassName="text-white"
-            />
+            <PhoneMockup Icon={slide.Icon} label={slide.title} flat scribbleVariant="feature" />
           </motion.div>
 
           <div>
