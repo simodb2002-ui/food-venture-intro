@@ -87,28 +87,32 @@ export function PotIllustration({ className, reduceMotion }: IconProps) {
 export function BowlIllustration({ className }: IconProps) {
   return (
     <svg viewBox="0 0 64 64" className={className} role="img" aria-label="Bowl of food">
-      <path
-        d="M 8 26 L 56 26 L 49 48 Q 46 56 36 56 L 28 56 Q 18 56 15 48 Z"
-        fill="#F4EFE6"
-        stroke={INK}
-        strokeWidth="2.5"
-        strokeLinejoin="round"
-      />
-      <ellipse cx="32" cy="26" rx="24" ry="6" fill="#E3DACB" stroke={INK} strokeWidth="2.5" />
-      <ellipse cx="32" cy="25.5" rx="20" ry="4.5" fill="#EA9A4A" />
+      {/* Shifted up 6 units so the bowl's base lands on the same y as the
+          pot's base (y=50) within the shared 64-tall viewBox. */}
+      <g transform="translate(0, -6)">
+        <path
+          d="M 8 26 L 56 26 L 49 48 Q 46 56 36 56 L 28 56 Q 18 56 15 48 Z"
+          fill="#F4EFE6"
+          stroke={INK}
+          strokeWidth="2.5"
+          strokeLinejoin="round"
+        />
+        <ellipse cx="32" cy="26" rx="24" ry="6" fill="#E3DACB" stroke={INK} strokeWidth="2.5" />
+        <ellipse cx="32" cy="25.5" rx="20" ry="4.5" fill="#EA9A4A" />
 
-      <circle cx="24" cy="25" r="1.8" fill="#C64B3C" />
-      <circle cx="38" cy="24.5" r="1.6" fill="#C64B3C" />
-      <circle cx="31" cy="26.5" r="1.4" fill="#5C8A54" />
+        <circle cx="24" cy="25" r="1.8" fill="#C64B3C" />
+        <circle cx="38" cy="24.5" r="1.6" fill="#C64B3C" />
+        <circle cx="31" cy="26.5" r="1.4" fill="#5C8A54" />
 
-      <path
-        d="M 32 18 C 30 15 34 13 32 9"
-        fill="none"
-        stroke="#F4EFE6"
-        strokeWidth="2"
-        strokeLinecap="round"
-        opacity="0.8"
-      />
+        <path
+          d="M 32 18 C 30 15 34 13 32 9"
+          fill="none"
+          stroke="#F4EFE6"
+          strokeWidth="2"
+          strokeLinecap="round"
+          opacity="0.8"
+        />
+      </g>
     </svg>
   );
 }
