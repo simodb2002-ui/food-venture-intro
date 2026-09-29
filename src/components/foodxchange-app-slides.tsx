@@ -617,31 +617,32 @@ export function MapSlide({ reduceMotion }: SlideProps) {
               className="absolute z-10 -translate-x-1/2 -translate-y-full"
             >
               <motion.span
-                animate={reduceMotion ? undefined : { y: [0, -4, 0], scale: 1 }}
-                whileHover={
-                  reduceMotion
-                    ? undefined
-                    : { scale: 1.6, y: 0, transition: { duration: 0.4, ease: "easeInOut" } }
-                }
+                animate={reduceMotion ? undefined : { y: [0, -4, 0] }}
                 transition={
                   reduceMotion
                     ? undefined
-                    : {
-                        y: { duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.2 * i },
-                        scale: { duration: 0.4, ease: "easeInOut" },
-                      }
+                    : { duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.2 * i }
                 }
-                style={{ transformOrigin: "bottom center" }}
-                className="flex cursor-pointer flex-col items-center"
+                className="flex flex-col items-center"
               >
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-problem text-problem-foreground shadow-md sm:h-8 sm:w-8">
-                  <pin.Icon className="h-4 w-4" aria-hidden="true" />
-                </span>
-                <MapPin
-                  className="-mt-1 h-3.5 w-3.5 text-problem"
-                  aria-hidden="true"
-                  fill="currentColor"
-                />
+                {/* Hover scale lives on its own element, separate from the
+                    idle bob above, so the two never fight over the same
+                    animated property and can't stutter on hand-off. */}
+                <motion.span
+                  whileHover={reduceMotion ? undefined : { scale: 1.6 }}
+                  transition={reduceMotion ? undefined : { duration: 0.4, ease: "easeInOut" }}
+                  style={{ transformOrigin: "bottom center" }}
+                  className="flex cursor-pointer flex-col items-center"
+                >
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-problem text-problem-foreground shadow-md sm:h-8 sm:w-8">
+                    <pin.Icon className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <MapPin
+                    className="-mt-1 h-3.5 w-3.5 text-problem"
+                    aria-hidden="true"
+                    fill="currentColor"
+                  />
+                </motion.span>
               </motion.span>
             </motion.span>
           ))}
