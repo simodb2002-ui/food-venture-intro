@@ -361,7 +361,7 @@ export function ShopSlide({ reduceMotion }: SlideProps) {
                 reads as tracing straight over the top of the row. */}
             <svg
               aria-hidden="true"
-              viewBox="0 0 280 90"
+              viewBox="0 -15 280 105"
               className="pointer-events-none absolute inset-x-2 top-0 z-10 h-24 w-[calc(100%-1rem)] text-problem sm:h-28"
               fill="none"
             >
