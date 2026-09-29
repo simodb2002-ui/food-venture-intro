@@ -127,7 +127,7 @@ function ScanCard({
       transition={{ duration: reduceMotion ? 0 : 0.35 }}
       className="flex flex-col items-center gap-2"
     >
-      <div className="relative h-36 w-28 overflow-hidden rounded-2xl border-2 border-dashed border-solution-foreground/25 sm:h-40 sm:w-32">
+      <div className="relative h-36 w-28 overflow-hidden rounded-2xl border-2 border-dashed border-black sm:h-40 sm:w-32">
         <div className="absolute inset-2 flex items-center justify-center rounded-xl">
           <JarIllustration className="h-20 w-20 sm:h-24 sm:w-24" />
         </div>
