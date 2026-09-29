@@ -340,7 +340,7 @@ function ComingSoonPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ type: "spring", stiffness: 100, damping: 18 }}
-          className="relative mt-16 px-6 py-6 text-black md:px-16 md:py-8"
+          className="relative mt-0 px-6 pt-6 pb-2 text-black md:px-16 md:pt-8 md:pb-4"
         >
           <div className="mx-auto grid max-w-6xl items-center gap-12 text-center md:grid-cols-[0.9fr_1.1fr] md:text-left">
             <div>
