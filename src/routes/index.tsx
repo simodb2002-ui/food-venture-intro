@@ -565,8 +565,8 @@ function Index() {
                           className="pointer-events-none absolute inset-0 z-0"
                           style={{
                             background:
-                              "linear-gradient(120deg, var(--color-solution) 0%, var(--color-solution) 35%, oklch(0.88 0.1 74) 50%, var(--color-solution) 65%, var(--color-solution) 100%)",
-                            backgroundSize: "300% 300%",
+                              "radial-gradient(circle, var(--color-solution) 0%, oklch(0.85 0.13 74) 100%)",
+                            backgroundSize: "220% 220%",
                           }}
                           animate={{
                             opacity: platformSlide === FOODXCHANGE_APP_SLIDES.length - 1 ? 1 : 0,
