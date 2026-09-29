@@ -675,10 +675,47 @@ export function MapSlide({ reduceMotion }: SlideProps) {
   );
 }
 
+/* ---------------- 6. Learn more ---------------- */
+
+export function LearnMoreSlide({ reduceMotion }: SlideProps) {
+  return (
+    <div className="mx-auto flex h-full w-full max-w-2xl flex-col">
+      <SlideHeading
+        title="Try foodXchange"
+        subtitle="Everything you just saw, all in one place. Jump into the full app experience."
+      />
+      <div className="relative flex flex-1 items-center justify-center overflow-hidden rounded-[1.75rem] border border-black">
+        <motion.div
+          aria-hidden="true"
+          className="absolute inset-0 z-0"
+          style={{
+            background:
+              "linear-gradient(120deg, var(--color-problem), white, var(--color-problem))",
+            backgroundSize: "300% 300%",
+          }}
+          animate={
+            reduceMotion ? undefined : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }
+          }
+          transition={
+            reduceMotion ? undefined : { duration: 8, repeat: Infinity, ease: "easeInOut" }
+          }
+        />
+        <a
+          href="/app"
+          className="relative z-10 inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-extrabold text-white shadow-md sm:text-base"
+        >
+          Learn more
+        </a>
+      </div>
+    </div>
+  );
+}
+
 export const FOODXCHANGE_APP_SLIDES = [
   ScanSlide,
   PriceSlide,
   ShopSlide,
   CookSlide,
   MapSlide,
+  LearnMoreSlide,
 ] as const;
