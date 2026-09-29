@@ -547,14 +547,6 @@ function Index() {
                       className="overflow-hidden"
                     >
                       <div className="relative overflow-hidden border-t-2 border-solution-foreground bg-solution">
-                        <div
-                          aria-hidden="true"
-                          className="pointer-events-none absolute inset-0 z-0"
-                          style={{
-                            background:
-                              "linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 100%)",
-                          }}
-                        />
                         <motion.div
                           className="relative z-10 flex"
                           animate={{ x: `-${platformSlide * 100}%` }}
