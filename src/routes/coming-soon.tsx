@@ -337,42 +337,43 @@ function ComingSoonPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ type: "spring", stiffness: 100, damping: 18 }}
-          className="relative mt-16 overflow-hidden px-6 py-20 text-center text-black md:px-16 md:py-28"
+          className="relative mt-16 px-6 py-20 text-black md:px-16 md:py-28"
         >
-          <img
-            src={launchDoodleImage}
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 h-full w-full object-contain opacity-15"
-          />
-          <div className="relative">
-            <h2 className="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
-              Want to follow the{" "}
-              <span className="relative inline-block">
-                launch?
-                <ScribbleUnderline className="-bottom-3 h-5 md:h-6" />
-              </span>
-            </h2>
-            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-black/70 md:text-xl">
-              Join the Society or sign up for news, and you&apos;ll be among the first to hear when
-              these next features become available.
-            </p>
-            <div className="mt-12 flex flex-col justify-center gap-4 sm:flex-row">
-              <Button
-                asChild
-                size="lg"
-                className="rounded-full bg-solution px-10 text-base font-semibold text-solution-foreground hover:bg-solution/90 md:px-12 md:text-lg"
-              >
-                <a href="/#membership">Explore membership</a>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                className="rounded-full bg-problem px-10 text-base font-semibold text-white hover:bg-problem/90 md:px-12 md:text-lg"
-              >
-                <a href="/about#newsletter">Sign up for news</a>
-              </Button>
+          <div className="mx-auto grid max-w-6xl items-center gap-12 text-center md:grid-cols-[1.1fr_0.9fr] md:text-left">
+            <div>
+              <h2 className="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
+                Want to follow the{" "}
+                <span className="relative inline-block">
+                  launch?
+                  <ScribbleUnderline className="-bottom-3 h-5 md:h-6" />
+                </span>
+              </h2>
+              <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-black/70 md:mx-0 md:text-xl">
+                Join the Society or sign up for news, and you&apos;ll be among the first to hear
+                when these next features become available.
+              </p>
+              <div className="mt-12 flex flex-col justify-center gap-4 sm:flex-row md:justify-start">
+                <Button
+                  asChild
+                  size="lg"
+                  className="rounded-full bg-solution px-10 text-base font-semibold text-solution-foreground hover:bg-solution/90 md:px-12 md:text-lg"
+                >
+                  <a href="/#membership">Explore membership</a>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  className="rounded-full bg-problem px-10 text-base font-semibold text-white hover:bg-problem/90 md:px-12 md:text-lg"
+                >
+                  <a href="/about#newsletter">Sign up for news</a>
+                </Button>
+              </div>
             </div>
+            <img
+              src={launchDoodleImage}
+              alt="A stack of three loaves of bread decorated with hand-drawn doodles"
+              className="mx-auto h-auto w-full max-w-sm md:max-w-none"
+            />
           </div>
         </motion.section>
       </main>
