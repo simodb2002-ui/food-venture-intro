@@ -677,40 +677,23 @@ export function MapSlide({ reduceMotion }: SlideProps) {
 
 /* ---------------- 6. Learn more ---------------- */
 
-export function LearnMoreSlide({ reduceMotion }: SlideProps) {
+export function LearnMoreSlide(_props: SlideProps) {
   return (
-    <div className="mx-auto flex h-full w-full max-w-2xl flex-col">
-      <SlideHeading
-        title="The App Is Coming Soon"
-        subtitle="Everything you just saw is on its way to your pocket. Tap below to find out more."
-      />
-      <div className="relative flex flex-1 items-center justify-center overflow-hidden rounded-[1.75rem] border border-black">
-        <motion.div
-          aria-hidden="true"
-          className="absolute inset-0 z-0"
-          style={{
-            background:
-              "linear-gradient(120deg, var(--color-solution), oklch(0.88 0.1 74), var(--color-solution))",
-            backgroundSize: "300% 300%",
-          }}
-          animate={
-            reduceMotion
-              ? undefined
-              : {
-                  backgroundPosition: ["0% 50%", "50% 0%", "100% 50%", "50% 100%", "0% 50%"],
-                }
-          }
-          transition={
-            reduceMotion ? undefined : { duration: 10, repeat: Infinity, ease: "easeInOut" }
-          }
-        />
-        <a
-          href="/app"
-          className="relative z-10 inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-extrabold text-white shadow-md sm:text-base"
-        >
-          Learn more
-        </a>
+    <div className="mx-auto flex h-full w-full max-w-2xl flex-col items-center justify-center gap-3 text-center">
+      <div>
+        <h3 className="font-display text-xl font-extrabold text-solution-foreground sm:text-2xl">
+          The App Is Coming Soon
+        </h3>
+        <p className="mx-auto mt-1.5 max-w-md text-sm font-medium leading-snug text-solution-foreground/70 sm:text-base">
+          Everything you just saw is on its way to your pocket. Tap below to find out more.
+        </p>
       </div>
+      <a
+        href="/app"
+        className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-extrabold text-white shadow-md sm:text-base"
+      >
+        Learn more
+      </a>
     </div>
   );
 }
