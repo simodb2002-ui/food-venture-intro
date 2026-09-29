@@ -7,6 +7,9 @@ import communityImage from "@/assets/coming-soon/community.jpg";
 import cookImage from "@/assets/coming-soon/cook.jpg";
 import foodX100Image from "@/assets/coming-soon/foodx100.jpg";
 import launchDoodleImage from "@/assets/coming-soon/launch-doodle.webp";
+import launchFlameImage from "@/assets/coming-soon/launch-flame.png";
+import launchStar1Image from "@/assets/coming-soon/launch-star1.png";
+import launchStar2Image from "@/assets/coming-soon/launch-star2.png";
 import { Button } from "@/components/ui/button";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -369,11 +372,40 @@ function ComingSoonPage() {
                 </Button>
               </div>
             </div>
-            <img
-              src={launchDoodleImage}
-              alt="A stack of three loaves of bread decorated with hand-drawn doodles"
-              className="mx-auto h-auto w-full max-w-md md:max-w-none"
-            />
+            <div className="relative mx-auto w-full max-w-md md:max-w-none">
+              <img
+                src={launchDoodleImage}
+                alt="A stack of three loaves of bread decorated with hand-drawn doodles"
+                className="h-auto w-full"
+              />
+              <motion.img
+                src={launchStar1Image}
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none absolute"
+                style={{ left: "58.84%", top: "15.9%", width: "3.436%" }}
+                animate={reduce ? undefined : { scale: [1, 0.55, 1] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <motion.img
+                src={launchStar2Image}
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none absolute"
+                style={{ left: "35.361%", top: "44.75%", width: "3.794%" }}
+                animate={reduce ? undefined : { scale: [1, 0.55, 1] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+              />
+              <motion.img
+                src={launchFlameImage}
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none absolute origin-bottom"
+                style={{ left: "54.689%", top: "32.35%", width: "9.664%" }}
+                animate={reduce ? undefined : { scaleY: [1, 1.12, 0.95, 1], rotate: [0, -3, 2, 0] }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </div>
           </div>
         </motion.section>
       </main>
