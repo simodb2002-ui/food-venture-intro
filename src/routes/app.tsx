@@ -352,7 +352,7 @@ function PhoneMockup({
             width: `${hidePatch.widthPercent}%`,
             height: `${hidePatch.heightPercent}%`,
             background:
-              "radial-gradient(circle, color-mix(in oklab, var(--solution) 70%, var(--cta) 30%) 0%, color-mix(in oklab, var(--solution) 70%, var(--cta) 30%) 30%, transparent 70%)",
+              "radial-gradient(circle, color-mix(in oklab, var(--solution) 85%, var(--cta) 15%) 0%, color-mix(in oklab, var(--solution) 85%, var(--cta) 15%) 30%, transparent 70%)",
           }}
         />
       )}
