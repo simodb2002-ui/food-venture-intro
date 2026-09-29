@@ -287,7 +287,7 @@ export function PriceSlide({ reduceMotion }: SlideProps) {
                   className={`relative flex items-center justify-between rounded-xl border px-4 py-3.5 sm:py-4 ${
                     isBest
                       ? "border-cta-action bg-cta-action/10"
-                      : "border-solution-foreground/15 bg-white"
+                      : "border-solution-foreground/15 bg-white/40"
                   }`}
                 >
                   <span className="flex flex-col">
