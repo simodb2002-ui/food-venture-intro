@@ -36,7 +36,7 @@ function ScreenCard({
     justify === "between" ? "justify-between" : justify === "center" ? "justify-center" : "";
   return (
     <div
-      className={`relative flex flex-1 flex-col overflow-hidden rounded-[1.75rem] border border-solution-foreground/15 bg-white/5 p-5 shadow-[0_20px_45px_-25px_rgba(0,0,0,0.35)] sm:p-6 ${justifyClass}`}
+      className={`relative flex flex-1 flex-col overflow-hidden rounded-[1.75rem] border border-solution-foreground/15 bg-white/50 p-5 shadow-[0_20px_45px_-25px_rgba(0,0,0,0.35)] sm:p-6 ${justifyClass}`}
     >
       {/* "down" biases content toward the bottom (more free space above
           than below) rather than pinning it flush or dead-centering it. */}
