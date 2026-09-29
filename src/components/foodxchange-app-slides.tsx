@@ -532,7 +532,7 @@ export function CookSlide({ reduceMotion }: SlideProps) {
             }
           >
             <FlowArrow reduceMotion={reduceMotion} />
-            <BowlIllustration className="h-28 w-28 sm:h-32 sm:w-32" />
+            <BowlIllustration className="h-28 w-28 sm:h-32 sm:w-32" reduceMotion={reduceMotion} />
           </motion.div>
         </div>
 
