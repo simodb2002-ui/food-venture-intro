@@ -1,5 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, ArrowRight, Bell, Check, ChevronLeft, ChevronRight, Users } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowRight,
+  Bell,
+  Check,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Users,
+} from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
@@ -518,7 +527,8 @@ function Index() {
               <div className="overflow-hidden rounded-[2rem] border-2 border-solution-foreground">
                 <Button
                   onClick={revealPlatform}
-                  className="group h-auto min-h-32 w-full items-stretch justify-between gap-4 whitespace-normal rounded-[1.85rem] border-0 bg-transparent p-5 text-left text-solution-foreground shadow-none hover:bg-solution-foreground/10 sm:min-h-40 sm:p-6"
+                  aria-expanded={showPlatform}
+                  className="flex h-auto min-h-32 w-full flex-col items-stretch justify-between gap-3 whitespace-normal rounded-[1.85rem] border-0 bg-transparent p-5 text-left text-solution-foreground shadow-none sm:min-h-40 sm:p-6"
                 >
                   <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4">
                     <span className="grid aspect-[4/3] place-items-center bg-placeholder p-2 text-center text-xs font-bold text-placeholder-foreground">
@@ -534,7 +544,10 @@ function Index() {
                       </span>
                     </span>
                   </span>
-                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  <ChevronDown
+                    className={`mx-auto h-5 w-5 transition-transform ${showPlatform ? "rotate-180" : ""}`}
+                    aria-hidden="true"
+                  />
                 </Button>
                 <AnimatePresence initial={false}>
                   {showPlatform && (
