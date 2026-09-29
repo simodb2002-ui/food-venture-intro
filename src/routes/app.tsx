@@ -286,7 +286,7 @@ function PhoneScribble({ variant }: { variant: keyof typeof PHONE_SCRIBBLES }) {
       <motion.path
         d={path}
         stroke={color}
-        strokeWidth="12"
+        strokeWidth="18"
         strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"
