@@ -255,11 +255,11 @@ export function PriceSlide({ reduceMotion }: SlideProps) {
           >
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/0 to-white/30"
+              className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/0 to-white/15"
             />
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 rounded-full bg-white/20"
+              className="pointer-events-none absolute inset-0 rounded-full bg-white/10"
             />
             <JarIllustration className="relative h-10 w-10 sm:h-12 sm:w-12" />
           </motion.span>
