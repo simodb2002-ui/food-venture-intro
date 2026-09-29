@@ -244,6 +244,39 @@ function PlatformBadges({ dark = false }: { dark?: boolean }) {
   );
 }
 
+/**
+ * Loose hand-drawn coil that wraps around a phone mockup, drawn as a
+ * single continuous stroke (three overlapping loops) so it reads as one
+ * scribble rather than separate rings.
+ */
+function PhoneScribble({ className }: { className?: string }) {
+  const reduce = useReducedMotion();
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 340 620"
+      className={cn(
+        "pointer-events-none absolute -inset-10 h-[calc(100%+5rem)] w-[calc(100%+5rem)] sm:-inset-14 sm:h-[calc(100%+7rem)] sm:w-[calc(100%+7rem)]",
+        className,
+      )}
+      fill="none"
+    >
+      <motion.path
+        d="M 140 613.3 L 111.4 604.2 L 86.1 588.1 L 65.8 566 L 51.9 539.3 L 45.4 510 L 46.7 480 L 55.8 451.4 L 71.9 426.1 L 94 405.8 L 120.7 391.9 L 150 385.4 L 180 386.7 L 208.6 395.8 L 233.9 411.9 L 254.2 434 L 268.1 460.7 L 274.6 490 L 273.3 520 L 264.2 548.6 L 248.1 573.9 L 129 187.2 L 101.2 201.7 L 78.1 222.9 L 61.2 249.3 L 51.8 279.2 L 50.5 310.5 L 57.2 341 L 71.7 368.8 L 92.9 391.9 L 119.3 408.8 L 149.2 418.2 L 180.5 419.5 L 211 412.8 L 238.8 398.3 L 261.9 377.1 L 278.8 350.7 L 288.2 320.8 L 289.5 289.5 L 282.8 259 L 268.3 231.2 L 247.1 208.1 L 73.4 174.3 L 59.4 152.3 L 51.5 127.4 L 50.4 101.3 L 56 75.8 L 68.1 52.6 L 85.7 33.4 L 107.7 19.4 L 132.6 11.5 L 158.7 10.4 L 184.2 16 L 207.4 28.1 L 226.6 45.7 L 240.6 67.7 L 248.5 92.6 L 249.6 118.7 L 244 144.2 L 231.9 167.4 L 214.3 186.6 L 192.3 200.6 L 167.4 208.5"
+        stroke="currentColor"
+        strokeWidth="14"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={reduce ? false : { pathLength: 0, opacity: 0 }}
+        whileInView={{ pathLength: 1, opacity: 1 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: reduce ? 0 : 1.4, ease: "easeInOut" }}
+        style={reduce ? { pathLength: 1, opacity: 1 } : undefined}
+      />
+    </svg>
+  );
+}
+
 function PhoneMockup({
   Icon,
   label,
@@ -252,6 +285,7 @@ function PhoneMockup({
   labelContent,
   hidePlaceholders = false,
   screenContent,
+  scribbleClassName,
 }: {
   Icon?: LucideIcon;
   label?: string;
@@ -260,6 +294,7 @@ function PhoneMockup({
   labelContent?: ReactNode;
   hidePlaceholders?: boolean;
   screenContent?: ReactNode;
+  scribbleClassName?: string;
 }) {
   const reduce = useReducedMotion();
   return (
@@ -269,7 +304,8 @@ function PhoneMockup({
         flat ? "app-phone-float-flat" : "app-phone-float",
       )}
     >
-      <div className="rounded-[2.6rem] border-[10px] border-footer bg-footer shadow-[0_70px_120px_-15px_rgba(0,0,0,0.55)]">
+      {scribbleClassName && <PhoneScribble className={scribbleClassName} />}
+      <div className="relative z-10 rounded-[2.6rem] border-[10px] border-footer bg-footer shadow-[0_70px_120px_-15px_rgba(0,0,0,0.55)]">
         <div className="relative aspect-[9/19] overflow-hidden rounded-[1.9rem] bg-card">
           <div className="absolute left-1/2 top-2 z-10 h-5 w-20 -translate-x-1/2 rounded-full bg-footer" />
           {screenContent ?? (
@@ -365,6 +401,7 @@ function Hero() {
           transition={{ duration: 1.3, delay: 0.3, ease: "easeOut" }}
         >
           <PhoneMockup
+            scribbleClassName="text-problem"
             screenContent={
               <div className="relative h-full w-full">
                 <img
@@ -538,7 +575,12 @@ function FeatureShowcase() {
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <PhoneMockup Icon={slide.Icon} label={slide.title} flat />
+            <PhoneMockup
+              Icon={slide.Icon}
+              label={slide.title}
+              flat
+              scribbleClassName="text-white"
+            />
           </motion.div>
 
           <div>
