@@ -561,6 +561,27 @@ function Index() {
                     >
                       <div className="relative overflow-hidden border-t-2 border-solution-foreground bg-solution">
                         <motion.div
+                          aria-hidden="true"
+                          className="pointer-events-none absolute inset-0 z-0"
+                          style={{
+                            background:
+                              "linear-gradient(120deg, var(--color-solution), oklch(0.88 0.1 74), var(--color-solution))",
+                            backgroundSize: "300% 300%",
+                          }}
+                          animate={{
+                            opacity: platformSlide === FOODXCHANGE_APP_SLIDES.length - 1 ? 1 : 0,
+                            backgroundPosition: reduceMotion
+                              ? undefined
+                              : ["0% 50%", "50% 0%", "100% 50%", "50% 100%", "0% 50%"],
+                          }}
+                          transition={{
+                            opacity: { duration: reduceMotion ? 0 : 0.4, ease: "easeInOut" },
+                            backgroundPosition: reduceMotion
+                              ? undefined
+                              : { duration: 5, repeat: Infinity, ease: "easeInOut" },
+                          }}
+                        />
+                        <motion.div
                           className="relative z-10 flex"
                           animate={{ x: `-${platformSlide * 100}%` }}
                           transition={{ duration: reduceMotion ? 0 : 0.45, ease: "easeInOut" }}
