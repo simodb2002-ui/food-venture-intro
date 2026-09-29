@@ -18,7 +18,7 @@ import {
   Trash2,
 } from "lucide-react";
 import { motion } from "motion/react";
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import { BowlIllustration, JarIllustration, PotIllustration } from "./food-icons";
 
@@ -678,13 +678,27 @@ export function MapSlide({ reduceMotion }: SlideProps) {
 /* ---------------- 6. Learn more ---------------- */
 
 export function LearnMoreSlide({ reduceMotion }: SlideProps) {
+  const [revealed, setRevealed] = useState(!!reduceMotion);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+    const timer = window.setTimeout(() => setRevealed(true), 2400);
+    return () => window.clearTimeout(timer);
+  }, [reduceMotion]);
+
   return (
     <div className="mx-auto flex h-full w-full max-w-2xl flex-col">
       <SlideHeading
-        title="Try foodXchange"
-        subtitle="Everything you just saw, all in one place. Jump into the full app experience."
+        title="The App Is Coming Soon"
+        subtitle="Everything you just saw is on its way to your pocket. Tap below to find out more."
       />
       <div className="relative flex flex-1 items-center justify-center overflow-hidden rounded-[1.75rem] border border-black">
+        <motion.div
+          aria-hidden="true"
+          className="absolute inset-0 z-0 bg-black"
+          animate={{ opacity: revealed ? 0 : 1 }}
+          transition={{ duration: reduceMotion ? 0 : 0.8, ease: "easeInOut" }}
+        />
         <motion.div
           aria-hidden="true"
           className="absolute inset-0 z-0"
@@ -693,19 +707,53 @@ export function LearnMoreSlide({ reduceMotion }: SlideProps) {
               "linear-gradient(120deg, var(--color-problem), white, var(--color-problem))",
             backgroundSize: "300% 300%",
           }}
-          animate={
-            reduceMotion ? undefined : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }
-          }
-          transition={
-            reduceMotion ? undefined : { duration: 8, repeat: Infinity, ease: "easeInOut" }
-          }
+          animate={{
+            opacity: revealed ? 1 : 0,
+            backgroundPosition: reduceMotion ? undefined : ["0% 50%", "100% 50%", "0% 50%"],
+          }}
+          transition={{
+            opacity: { duration: reduceMotion ? 0 : 0.8, ease: "easeInOut" },
+            backgroundPosition: reduceMotion
+              ? undefined
+              : { duration: 8, repeat: Infinity, ease: "easeInOut" },
+          }}
         />
-        <a
+
+        <motion.div
+          aria-hidden={revealed}
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-1"
+          animate={{ opacity: revealed ? 0 : 1 }}
+          transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeInOut" }}
+        >
+          <motion.span
+            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.5, delay: reduceMotion ? 0 : 0.2 }}
+            className="font-display text-3xl font-black uppercase tracking-wide text-white sm:text-4xl"
+          >
+            Coming
+          </motion.span>
+          <motion.span
+            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.5, delay: reduceMotion ? 0 : 0.6 }}
+            className="font-display text-3xl font-black uppercase tracking-wide text-problem sm:text-4xl"
+          >
+            Soon
+          </motion.span>
+        </motion.div>
+
+        <motion.a
           href="/app"
+          aria-hidden={!revealed}
+          tabIndex={revealed ? 0 : -1}
           className="relative z-10 inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-extrabold text-white shadow-md sm:text-base"
+          animate={{ opacity: revealed ? 1 : 0 }}
+          transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeInOut" }}
+          style={{ pointerEvents: revealed ? "auto" : "none" }}
         >
           Learn more
-        </a>
+        </motion.a>
       </div>
     </div>
   );
