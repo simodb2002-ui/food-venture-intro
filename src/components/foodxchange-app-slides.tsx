@@ -677,73 +677,22 @@ export function MapSlide({ reduceMotion }: SlideProps) {
 
 /* ---------------- 6. Learn more ---------------- */
 
-const LEARN_MORE_ORBS = [
-  {
-    className: "-left-12 -top-12 h-56 w-56 bg-problem/30 sm:h-72 sm:w-72",
-    drift: { x: [0, 24, 0], y: [0, 16, 0] },
-    duration: 9,
-    delay: 0,
-  },
-  {
-    className: "-right-14 top-2 h-48 w-48 bg-cta-action/30 sm:h-64 sm:w-64",
-    drift: { x: [0, -20, 0], y: [0, 20, 0] },
-    duration: 11,
-    delay: 1,
-  },
-  {
-    className: "-bottom-16 left-1/3 h-52 w-52 bg-white/30 sm:h-64 sm:w-64",
-    drift: { x: [0, 16, 0], y: [0, -18, 0] },
-    duration: 10,
-    delay: 2,
-  },
-] as const;
-
-export function LearnMoreSlide({ reduceMotion }: SlideProps) {
+export function LearnMoreSlide(_props: SlideProps) {
   return (
-    <div className="relative mx-auto flex h-full w-full max-w-2xl flex-col items-center justify-center gap-3 overflow-hidden text-center">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
-        {LEARN_MORE_ORBS.map((orb, i) => (
-          <motion.div
-            key={i}
-            className={`absolute rounded-full blur-3xl ${orb.className}`}
-            animate={reduceMotion ? undefined : orb.drift}
-            transition={
-              reduceMotion
-                ? undefined
-                : { duration: orb.duration, repeat: Infinity, ease: "easeInOut", delay: orb.delay }
-            }
-          />
-        ))}
+    <div className="mx-auto flex h-full w-full max-w-2xl flex-col items-center justify-center gap-3 text-center">
+      <div>
+        <h3 className="font-display text-xl font-extrabold text-solution-foreground sm:text-2xl">
+          The App Is Coming Soon
+        </h3>
+        <p className="mx-auto mt-1.5 max-w-md text-sm font-medium leading-snug text-solution-foreground/70 sm:text-base">
+          Everything you just saw is coming soon to the app.
+          <br />
+          Tap below to find out more.
+        </p>
       </div>
-
-      <motion.h3
-        className="relative z-10 font-display text-xl font-extrabold text-solution-foreground sm:text-2xl"
-        initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeOut" }}
-      >
-        The App Is Coming Soon
-      </motion.h3>
-      <motion.p
-        className="relative z-10 mx-auto mt-1.5 max-w-md text-sm font-medium leading-snug text-solution-foreground/70 sm:text-base"
-        initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.6 }}
-        transition={{
-          duration: reduceMotion ? 0 : 0.5,
-          delay: reduceMotion ? 0 : 0.15,
-          ease: "easeOut",
-        }}
-      >
-        Everything you just saw is coming soon to the app.
-        <br />
-        Tap below to find out more.
-      </motion.p>
-
       <a
         href="/app"
-        className="relative z-10 inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-extrabold text-white shadow-md sm:text-base"
+        className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-extrabold text-white shadow-md sm:text-base"
       >
         Learn more
       </a>
