@@ -117,6 +117,7 @@ function ScanCard({
   const scanTimes = [0, 0.5, 1];
   const revealTimes = [0, 0.45, 0.55, 0.95, 1];
   const revealValues = [0, 0, 1, 1, 0];
+  const tintValues = [0, 0, 0.6, 0.6, 0];
   const whiteWashValues = [0, 0, 0.05, 0.05, 0];
 
   return (
@@ -134,9 +135,9 @@ function ScanCard({
 
         <motion.div
           aria-hidden="true"
-          animate={reduceMotion ? undefined : { opacity: revealValues, times: revealTimes }}
+          animate={reduceMotion ? undefined : { opacity: tintValues, times: revealTimes }}
           transition={reduceMotion ? undefined : { duration: 3, repeat: Infinity, ease: "linear" }}
-          style={reduceMotion ? { opacity: 0.28 } : undefined}
+          style={reduceMotion ? { opacity: 0.6 } : undefined}
           className={`pointer-events-none absolute inset-0 ${tint} opacity-0`}
         />
 
