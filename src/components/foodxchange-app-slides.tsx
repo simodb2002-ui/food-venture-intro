@@ -685,7 +685,7 @@ export function LearnMoreSlide(_props: SlideProps) {
           The App Is Coming Soon
         </h3>
         <p className="mx-auto mt-1.5 max-w-md text-sm font-medium leading-snug text-solution-foreground/70 sm:text-base">
-          Everything you just saw is on its way to your pocket.
+          Everything you just saw is coming soon to the app.
           <br />
           Tap below to find out more.
         </p>
