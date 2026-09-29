@@ -13,7 +13,12 @@ const INK = "#2e2013";
 
 export function PotIllustration({ className, reduceMotion }: IconProps) {
   return (
-    <svg viewBox="0 0 64 64" className={className} role="img" aria-label="Cooking pot">
+    <svg
+      viewBox="0 0 64 64"
+      className={`overflow-visible ${className ?? ""}`}
+      role="img"
+      aria-label="Cooking pot"
+    >
       <motion.g
         aria-hidden="true"
         stroke="#f6ead9"
@@ -84,9 +89,14 @@ export function PotIllustration({ className, reduceMotion }: IconProps) {
   );
 }
 
-export function BowlIllustration({ className }: IconProps) {
+export function BowlIllustration({ className, reduceMotion }: IconProps) {
   return (
-    <svg viewBox="0 0 64 64" className={className} role="img" aria-label="Bowl of food">
+    <svg
+      viewBox="0 0 64 64"
+      className={`overflow-visible ${className ?? ""}`}
+      role="img"
+      aria-label="Bowl of food"
+    >
       {/* Shifted up 6 units so the bowl's base lands on the same y as the
           pot's base (y=50) within the shared 64-tall viewBox. */}
       <g transform="translate(0, -6)">
@@ -104,14 +114,20 @@ export function BowlIllustration({ className }: IconProps) {
         <circle cx="38" cy="24.5" r="1.6" fill="#C64B3C" />
         <circle cx="31" cy="26.5" r="1.4" fill="#5C8A54" />
 
-        <path
-          d="M 32 18 C 30 15 34 13 32 9"
-          fill="none"
-          stroke="#F4EFE6"
-          strokeWidth="2"
+        <motion.g
+          aria-hidden="true"
+          stroke="#f6ead9"
+          strokeWidth="2.5"
           strokeLinecap="round"
-          opacity="0.8"
-        />
+          fill="none"
+          animate={reduceMotion ? undefined : { opacity: [0.25, 0.85, 0.25], y: [0, -3, 0] }}
+          transition={
+            reduceMotion ? undefined : { duration: 2.6, repeat: Infinity, ease: "easeInOut" }
+          }
+        >
+          <path d="M 24 20 C 22 16 27 15 25 12" />
+          <path d="M 32 20 C 30 16 35 15 33 12" />
+        </motion.g>
       </g>
     </svg>
   );
