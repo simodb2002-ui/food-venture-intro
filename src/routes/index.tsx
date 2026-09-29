@@ -145,6 +145,14 @@ function Index() {
     }, 150);
   };
 
+  const toggleExplorePanel = () => {
+    if (showPlatform) {
+      setShowPlatform(false);
+      return;
+    }
+    revealPlatform();
+  };
+
   const narrativeFocus = Math.min(1, Math.max(0, challengeProgress - 5));
 
   return (
@@ -508,10 +516,10 @@ function Index() {
                 onClick={() => setJoined(true)}
                 className="group h-auto min-h-32 items-stretch justify-between gap-4 whitespace-normal rounded-[2rem] border-2 border-solution-foreground bg-solution-foreground p-5 text-left text-solution shadow-none hover:bg-solution-foreground/90 sm:min-h-40 sm:p-6"
               >
-                <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4">
+                <span className="grid w-full grid-cols-[7rem_1fr] items-center gap-4">
                   <span className="grid place-items-center">
                     <HeartHandshake
-                      className="h-16 w-16 text-solution sm:h-20 sm:w-20"
+                      className="h-20 w-20 text-solution sm:h-24 sm:w-24"
                       aria-hidden="true"
                     />
                   </span>
@@ -531,14 +539,14 @@ function Index() {
 
               <div className="overflow-hidden rounded-[2rem] border-2 border-solution-foreground">
                 <Button
-                  onClick={revealPlatform}
+                  onClick={toggleExplorePanel}
                   aria-expanded={showPlatform}
                   className="flex h-auto min-h-32 w-full flex-col items-stretch justify-between gap-3 whitespace-normal rounded-[1.85rem] border-0 bg-transparent p-5 text-left text-solution-foreground shadow-none hover:bg-transparent sm:min-h-40 sm:p-6"
                 >
-                  <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4">
+                  <span className="grid w-full grid-cols-[7rem_1fr] items-center gap-4">
                     <span className="grid place-items-center">
                       <Smartphone
-                        className="h-16 w-16 text-solution-foreground sm:h-20 sm:w-20"
+                        className="h-20 w-20 text-solution-foreground sm:h-24 sm:w-24"
                         aria-hidden="true"
                       />
                     </span>
