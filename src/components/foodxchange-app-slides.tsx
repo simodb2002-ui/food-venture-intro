@@ -690,14 +690,18 @@ export function LearnMoreSlide({ reduceMotion }: SlideProps) {
           className="absolute inset-0 z-0"
           style={{
             background:
-              "linear-gradient(120deg, var(--color-problem), oklch(0.8 0.16 350), var(--color-problem))",
+              "linear-gradient(120deg, var(--color-solution), oklch(0.88 0.1 74), var(--color-solution))",
             backgroundSize: "300% 300%",
           }}
           animate={
-            reduceMotion ? undefined : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }
+            reduceMotion
+              ? undefined
+              : {
+                  backgroundPosition: ["0% 50%", "50% 0%", "100% 50%", "50% 100%", "0% 50%"],
+                }
           }
           transition={
-            reduceMotion ? undefined : { duration: 8, repeat: Infinity, ease: "easeInOut" }
+            reduceMotion ? undefined : { duration: 10, repeat: Infinity, ease: "easeInOut" }
           }
         />
         <a
