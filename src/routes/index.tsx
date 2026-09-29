@@ -528,7 +528,7 @@ function Index() {
                 <Button
                   onClick={revealPlatform}
                   aria-expanded={showPlatform}
-                  className="flex h-auto min-h-32 w-full flex-col items-stretch justify-between gap-3 whitespace-normal rounded-[1.85rem] border-0 bg-transparent p-5 text-left text-solution-foreground shadow-none sm:min-h-40 sm:p-6"
+                  className="flex h-auto min-h-32 w-full flex-col items-stretch justify-between gap-3 whitespace-normal rounded-[1.85rem] border-0 bg-transparent p-5 text-left text-solution-foreground shadow-none hover:bg-transparent sm:min-h-40 sm:p-6"
                 >
                   <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4">
                     <span className="grid aspect-[4/3] place-items-center bg-placeholder p-2 text-center text-xs font-bold text-placeholder-foreground">
