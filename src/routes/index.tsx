@@ -509,9 +509,9 @@ function Index() {
                 className="group h-auto min-h-32 items-stretch justify-between gap-4 whitespace-normal rounded-[2rem] border-2 border-solution-foreground bg-solution-foreground p-5 text-left text-solution shadow-none hover:bg-solution-foreground/90 sm:min-h-40 sm:p-6"
               >
                 <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4">
-                  <span className="grid aspect-[4/3] place-items-center rounded-xl bg-solution/15">
+                  <span className="grid place-items-center">
                     <HeartHandshake
-                      className="h-8 w-8 text-solution sm:h-10 sm:w-10"
+                      className="h-16 w-16 text-solution sm:h-20 sm:w-20"
                       aria-hidden="true"
                     />
                   </span>
@@ -536,9 +536,9 @@ function Index() {
                   className="flex h-auto min-h-32 w-full flex-col items-stretch justify-between gap-3 whitespace-normal rounded-[1.85rem] border-0 bg-transparent p-5 text-left text-solution-foreground shadow-none hover:bg-transparent sm:min-h-40 sm:p-6"
                 >
                   <span className="grid w-full grid-cols-[6rem_1fr] items-center gap-4">
-                    <span className="grid aspect-[4/3] place-items-center rounded-xl bg-solution-foreground/10">
+                    <span className="grid place-items-center">
                       <Smartphone
-                        className="h-8 w-8 text-solution-foreground sm:h-10 sm:w-10"
+                        className="h-16 w-16 text-solution-foreground sm:h-20 sm:w-20"
                         aria-hidden="true"
                       />
                     </span>
