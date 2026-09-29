@@ -250,8 +250,12 @@ export function PriceSlide({ reduceMotion }: SlideProps) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.6 }}
             transition={{ duration: reduceMotion ? 0 : 0.35, ease: "easeOut" }}
-            className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-solution bg-cta-action shadow-md sm:h-20 sm:w-20"
+            className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border-2 border-solution bg-cta-action shadow-md sm:h-20 sm:w-20"
           >
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/0 to-white/30"
+            />
             <JarIllustration className="h-10 w-10 sm:h-12 sm:w-12" />
           </motion.span>
           {PRICE_TAGS.map((tag, i) => {
