@@ -384,7 +384,7 @@ function ComingSoonPage() {
                 aria-hidden="true"
                 className="pointer-events-none absolute"
                 style={{ left: "58.84%", top: "15.9%", width: "3.436%" }}
-                animate={reduce ? undefined : { scale: [1, 0.55, 1] }}
+                animate={reduce ? undefined : { scale: [0.65, 1.3, 0.65] }}
                 transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
               />
               <motion.img
@@ -393,17 +393,15 @@ function ComingSoonPage() {
                 aria-hidden="true"
                 className="pointer-events-none absolute"
                 style={{ left: "35.361%", top: "44.75%", width: "3.794%" }}
-                animate={reduce ? undefined : { scale: [1, 0.55, 1] }}
+                animate={reduce ? undefined : { scale: [0.65, 1.3, 0.65] }}
                 transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
               />
-              <motion.img
+              <img
                 src={launchFlameImage}
                 alt=""
                 aria-hidden="true"
-                className="pointer-events-none absolute origin-bottom"
+                className="pointer-events-none absolute"
                 style={{ left: "54.689%", top: "32.35%", width: "9.664%" }}
-                animate={reduce ? undefined : { scaleY: [1, 1.12, 0.95, 1], rotate: [0, -3, 2, 0] }}
-                transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
               />
             </div>
           </div>
