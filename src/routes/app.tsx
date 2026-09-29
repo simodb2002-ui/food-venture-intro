@@ -262,10 +262,10 @@ const PHONE_SCRIBBLES = {
     // dot. Covered by a background-colored patch (see hidePatch below)
     // rather than touching `path` or masking the SVG itself.
     hidePatch: {
-      leftPercent: -24.65,
-      topPercent: 16.16,
-      widthPercent: 34.47,
-      heightPercent: 16.37,
+      leftPercent: -35.3,
+      topPercent: 11.1,
+      widthPercent: 55.76,
+      heightPercent: 26.48,
     },
   },
   feature: {
@@ -345,12 +345,14 @@ function PhoneMockup({
       {hidePatch && (
         <div
           aria-hidden="true"
-          className="bg-solution absolute z-[5] rounded-full"
+          className="absolute z-[5] blur-[10px]"
           style={{
             left: `${hidePatch.leftPercent}%`,
             top: `${hidePatch.topPercent}%`,
             width: `${hidePatch.widthPercent}%`,
             height: `${hidePatch.heightPercent}%`,
+            background:
+              "radial-gradient(circle, color-mix(in oklab, var(--solution) 70%, var(--cta) 30%) 0%, color-mix(in oklab, var(--solution) 70%, var(--cta) 30%) 30%, transparent 70%)",
           }}
         />
       )}
