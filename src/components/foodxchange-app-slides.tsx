@@ -474,7 +474,7 @@ export function CookSlide({ reduceMotion }: SlideProps) {
       />
       <ScreenCard justify="down">
         <div className="flex items-center justify-center gap-6 sm:gap-8">
-          <div className="relative flex h-32 w-32 items-center justify-center sm:h-36 sm:w-36">
+          <div className="relative flex h-28 w-28 items-center justify-center sm:h-32 sm:w-32">
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 6, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
