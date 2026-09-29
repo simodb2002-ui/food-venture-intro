@@ -569,7 +569,7 @@ function Index() {
                           aria-label="Show previous foodXchange section"
                           disabled={platformSlide === 0}
                           onClick={() => setPlatformSlide((current) => Math.max(0, current - 1))}
-                          className={`absolute left-3 top-[calc(50%+24px)] z-10 h-11 w-11 -translate-y-1/2 rounded-full border border-solution-foreground bg-solution text-solution-foreground shadow-none transition-[opacity,filter] hover:-translate-y-1/2 hover:brightness-90 disabled:pointer-events-none disabled:opacity-0 sm:left-5 ${
+                          className={`absolute left-3 top-[calc(50%+24px)] z-10 h-11 w-11 -translate-y-1/2 rounded-full border border-solution-foreground bg-solution text-solution-foreground shadow-none transition-[opacity,filter] hover:-translate-y-1/2 hover:bg-solution hover:brightness-90 disabled:pointer-events-none disabled:opacity-0 sm:left-5 ${
                             platformSlide === 0 ? "opacity-0" : "opacity-100"
                           }`}
                         >
@@ -587,7 +587,7 @@ function Index() {
                               Math.min(FOODXCHANGE_APP_SLIDES.length - 1, current + 1),
                             )
                           }
-                          className={`absolute right-3 top-[calc(50%+24px)] z-10 h-11 w-11 -translate-y-1/2 rounded-full border border-solution-foreground bg-solution text-solution-foreground shadow-none transition-[opacity,filter] hover:-translate-y-1/2 hover:brightness-90 disabled:pointer-events-none disabled:opacity-0 sm:right-5 ${
+                          className={`absolute right-3 top-[calc(50%+24px)] z-10 h-11 w-11 -translate-y-1/2 rounded-full border border-solution-foreground bg-solution text-solution-foreground shadow-none transition-[opacity,filter] hover:-translate-y-1/2 hover:bg-solution hover:brightness-90 disabled:pointer-events-none disabled:opacity-0 sm:right-5 ${
                             platformSlide === FOODXCHANGE_APP_SLIDES.length - 1
                               ? "opacity-0"
                               : "opacity-100"
