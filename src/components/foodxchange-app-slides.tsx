@@ -576,7 +576,7 @@ export function MapSlide({ reduceMotion }: SlideProps) {
         </div>
 
         <div
-          className="relative min-h-40 flex-1 overflow-hidden rounded-xl border border-solution-foreground/15 sm:min-h-44"
+          className="relative min-h-40 flex-1 rounded-xl border border-solution-foreground/15 sm:min-h-44"
           style={{
             backgroundImage:
               "linear-gradient(to right, rgba(24,18,10,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(24,18,10,0.06) 1px, transparent 1px)",
@@ -596,16 +596,22 @@ export function MapSlide({ reduceMotion }: SlideProps) {
                   : { type: "spring", stiffness: 260, damping: 12, delay: 0.12 * i }
               }
               style={{ top: pin.top, left: pin.left }}
-              className="absolute -translate-x-1/2 -translate-y-full"
+              className="absolute z-10 -translate-x-1/2 -translate-y-full"
             >
               <motion.span
                 animate={reduceMotion ? undefined : { y: [0, -4, 0] }}
+                whileHover={
+                  reduceMotion
+                    ? undefined
+                    : { scale: 1.6, y: 0, transition: { duration: 0.2, ease: "easeOut" } }
+                }
                 transition={
                   reduceMotion
                     ? undefined
                     : { duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.2 * i }
                 }
-                className="flex flex-col items-center"
+                style={{ transformOrigin: "bottom center" }}
+                className="flex cursor-pointer flex-col items-center"
               >
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-problem text-problem-foreground shadow-md sm:h-8 sm:w-8">
                   <pin.Icon className="h-4 w-4" aria-hidden="true" />
