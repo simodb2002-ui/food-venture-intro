@@ -546,7 +546,7 @@ function Index() {
                       transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="relative overflow-hidden border-t-2 border-solution-foreground bg-solution">
+                      <div className="relative overflow-hidden border-t-2 border-solution-foreground bg-white">
                         <div
                           aria-hidden="true"
                           className="pointer-events-none absolute inset-0 z-0"
