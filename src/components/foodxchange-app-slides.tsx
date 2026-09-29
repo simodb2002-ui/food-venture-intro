@@ -257,6 +257,10 @@ export function PriceSlide({ reduceMotion }: SlideProps) {
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/0 to-white/30"
             />
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 rounded-full bg-white/20"
+            />
             <JarIllustration className="relative h-10 w-10 sm:h-12 sm:w-12" />
           </motion.span>
           {PRICE_TAGS.map((tag, i) => {
@@ -317,16 +321,10 @@ export function PriceSlide({ reduceMotion }: SlideProps) {
         </div>
 
         <div className="mt-4 flex justify-center">
-          <motion.span
-            animate={reduceMotion ? undefined : { scale: [1, 1.05, 1], y: [0, -2, 0] }}
-            transition={
-              reduceMotion ? undefined : { duration: 1.6, repeat: Infinity, ease: "easeInOut" }
-            }
-            className="inline-flex items-center gap-2 rounded-full bg-solution-foreground px-5 py-2.5 text-sm font-extrabold text-solution shadow-md sm:text-base"
-          >
+          <span className="inline-flex items-center gap-2 rounded-full bg-solution-foreground px-5 py-2.5 text-sm font-extrabold text-solution shadow-md sm:text-base">
             <Plus className="h-5 w-5" aria-hidden="true" />
             Add to My List
-          </motion.span>
+          </span>
         </div>
       </ScreenCard>
     </div>
