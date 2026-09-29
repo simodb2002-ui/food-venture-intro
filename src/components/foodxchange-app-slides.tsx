@@ -243,7 +243,7 @@ export function PriceSlide({ reduceMotion }: SlideProps) {
         subtitle="Real-time price comparisons help you stretch your budget while still investing in good food."
       />
       <ScreenCard justify="down">
-        <div className="relative grid grid-cols-2 gap-3 sm:gap-4">
+        <div className="relative -mt-3 grid grid-cols-2 gap-3 sm:-mt-4 sm:gap-4">
           <motion.span
             aria-hidden="true"
             initial={reduceMotion ? false : { opacity: 0, scale: 0.6 }}
