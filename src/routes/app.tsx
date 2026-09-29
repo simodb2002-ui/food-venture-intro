@@ -257,6 +257,10 @@ const PHONE_SCRIBBLES = {
     widthPercent: 250,
     heightPercent: 87.4,
     path: "M188.69,332.15c37.64-21.03,29.56-18.87,67.13-33.16,28.35-10.78,82.41-16.8,107.33-7.27,21.88,11.27-25.43,32.3-44.02,40.32-26.92,11.45-54.76,21.85-82.71,32.52-16.88,6.66-132.02,47.14-74.65,47.85,47.16-1.15,117.41-14.54,170.11-21.07,44.51-5.66,90.11-12.28,129.4-8.18,25.27,3.37,23.44,12.71,2.21,22.87-24.48,11.55-54.09,19.55-81.33,26.91-64.96,17.04-132.39,29.68-196.32,48.74-9.54,2.72-96.47,28.54-61.72,37.07,6.27,1.29,11.62,1.58,18.98,1.76,32.07,1.12,103.28-8.41,147.48-15.53,45.36-7.01,95.06-14.88,138.68-18.95,12.38-1.37,85.26-7.21,51.5,7.55-46.54,17.52-109.64,28.52-164.65,41.4-53.1,12.66-107.84,25.7-153.15,49.23-5.01,2.92-13.64,8.63-3.15,10.05,6.39,1.01,17.58-.07,27.13-.81,42.8-4.42,112.9-10.85,154.88-21.92.96-.32,3.06-1.13.95-1.02-9.78,1.33-18.91,4.33-29.76,7.2",
+    // The path's start cap sits just outside the rotated phone's silhouette
+    // (see app-phone-float's -18deg rotate), so it reads as a stray floating
+    // dot. Mask it out at its own coordinates rather than touching `path`.
+    hideAt: { cx: 188.69, cy: 332.15, r: 32 },
   },
   feature: {
     viewBox: "82.35 303.96 424.99 308.78",
@@ -274,7 +278,10 @@ const PHONE_SCRIBBLES = {
  */
 function PhoneScribble({ variant }: { variant: keyof typeof PHONE_SCRIBBLES }) {
   const reduce = useReducedMotion();
-  const { viewBox, path, color, widthPercent, heightPercent } = PHONE_SCRIBBLES[variant];
+  const config = PHONE_SCRIBBLES[variant];
+  const { viewBox, path, color, widthPercent, heightPercent } = config;
+  const hideAt = "hideAt" in config ? config.hideAt : undefined;
+  const maskId = `phone-scribble-mask-${variant}`;
   return (
     <svg
       aria-hidden="true"
@@ -283,6 +290,14 @@ function PhoneScribble({ variant }: { variant: keyof typeof PHONE_SCRIBBLES }) {
       style={{ width: `${widthPercent}%`, height: `${heightPercent}%` }}
       fill="none"
     >
+      {hideAt && (
+        <defs>
+          <mask id={maskId} maskUnits="userSpaceOnUse">
+            <rect x="-2000" y="-2000" width="4000" height="4000" fill="white" />
+            <circle cx={hideAt.cx} cy={hideAt.cy} r={hideAt.r} fill="black" />
+          </mask>
+        </defs>
+      )}
       <motion.path
         d={path}
         stroke={color}
@@ -291,6 +306,7 @@ function PhoneScribble({ variant }: { variant: keyof typeof PHONE_SCRIBBLES }) {
         strokeLinecap="round"
         strokeLinejoin="round"
         vectorEffect="non-scaling-stroke"
+        mask={hideAt ? `url(#${maskId})` : undefined}
         initial={reduce ? false : { opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.4 }}
