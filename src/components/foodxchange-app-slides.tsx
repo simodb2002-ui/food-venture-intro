@@ -558,11 +558,11 @@ const MAP_FILTERS = [
 ];
 
 const MAP_PINS = [
-  { label: "Local bakery", top: "12%", left: "14%", Icon: Croissant },
-  { label: "Community pantry", top: "52%", left: "8%", Icon: Landmark },
-  { label: "Food project", top: "20%", left: "80%", Icon: Leaf },
-  { label: "Growing group", top: "66%", left: "64%", Icon: Sparkles },
-  { label: "Independent shop", top: "38%", left: "44%", Icon: Store },
+  { label: "Local bakery", top: "16%", left: "20%", Icon: Croissant },
+  { label: "Community pantry", top: "52%", left: "14%", Icon: Landmark },
+  { label: "Food project", top: "20%", left: "86%", Icon: Leaf },
+  { label: "Growing group", top: "66%", left: "70%", Icon: Sparkles },
+  { label: "Independent shop", top: "38%", left: "50%", Icon: Store },
 ] as const;
 
 export function MapSlide({ reduceMotion }: SlideProps) {
