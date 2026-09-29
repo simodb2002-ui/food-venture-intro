@@ -28,7 +28,7 @@ type SlideProps = { reduceMotion: boolean };
 function ScreenCard({
   children,
   justify = "between",
-  bg = "bg-white/90",
+  bg = "bg-gradient-to-b from-solution to-white",
 }: {
   children: ReactNode;
   justify?: "between" | "center" | "down";
@@ -196,7 +196,7 @@ export function ScanSlide({ reduceMotion }: SlideProps) {
         title="See Your Food Clearly"
         subtitle="Simple scoring helps you understand ingredients, additives, and nutritional value without judgement or jargon."
       />
-      <ScreenCard bg="bg-white/70">
+      <ScreenCard>
         <div className="flex items-start justify-center gap-6 sm:gap-8">
           <ScanCard tone="bad" label="Ultra-processed" reduceMotion={reduceMotion} />
           <ScanCard tone="good" label="Minimally processed" reduceMotion={reduceMotion} />
