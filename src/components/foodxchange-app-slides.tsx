@@ -621,7 +621,7 @@ export function MapSlide({ reduceMotion }: SlideProps) {
                 whileHover={
                   reduceMotion
                     ? undefined
-                    : { scale: 1.6, y: 0, transition: { duration: 0.2, ease: "easeOut" } }
+                    : { scale: 1.6, y: 0, transition: { duration: 0.4, ease: "easeInOut" } }
                 }
                 transition={
                   reduceMotion
