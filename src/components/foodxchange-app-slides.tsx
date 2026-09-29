@@ -28,15 +28,17 @@ type SlideProps = { reduceMotion: boolean };
 function ScreenCard({
   children,
   justify = "between",
+  bg = "bg-white/90",
 }: {
   children: ReactNode;
   justify?: "between" | "center" | "down";
+  bg?: string;
 }) {
   const justifyClass =
     justify === "between" ? "justify-between" : justify === "center" ? "justify-center" : "";
   return (
     <div
-      className={`relative flex flex-1 flex-col overflow-hidden rounded-[1.75rem] border border-solution-foreground/15 bg-white p-5 shadow-[0_20px_45px_-25px_rgba(0,0,0,0.35)] sm:p-6 ${justifyClass}`}
+      className={`relative flex flex-1 flex-col overflow-hidden rounded-[1.75rem] border border-solution-foreground/15 ${bg} p-5 shadow-[0_20px_45px_-25px_rgba(0,0,0,0.35)] sm:p-6 ${justifyClass}`}
     >
       {/* "down" biases content toward the bottom (more free space above
           than below) rather than pinning it flush or dead-centering it. */}
@@ -194,7 +196,7 @@ export function ScanSlide({ reduceMotion }: SlideProps) {
         title="See Your Food Clearly"
         subtitle="Simple scoring helps you understand ingredients, additives, and nutritional value without judgement or jargon."
       />
-      <ScreenCard>
+      <ScreenCard bg="bg-white/70">
         <div className="flex items-start justify-center gap-6 sm:gap-8">
           <ScanCard tone="bad" label="Ultra-processed" reduceMotion={reduceMotion} />
           <ScanCard tone="good" label="Minimally processed" reduceMotion={reduceMotion} />
