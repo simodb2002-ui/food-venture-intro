@@ -28,7 +28,7 @@ type SlideProps = { reduceMotion: boolean };
 function ScreenCard({
   children,
   justify = "between",
-  bg = "bg-gradient-to-b from-solution to-white",
+  bg = "bg-white/80",
 }: {
   children: ReactNode;
   justify?: "between" | "center" | "down";
