@@ -617,7 +617,7 @@ export function MapSlide({ reduceMotion }: SlideProps) {
               className="absolute z-10 -translate-x-1/2 -translate-y-full"
             >
               <motion.span
-                animate={reduceMotion ? undefined : { y: [0, -4, 0] }}
+                animate={reduceMotion ? undefined : { y: [0, -4, 0], scale: 1 }}
                 whileHover={
                   reduceMotion
                     ? undefined
@@ -626,7 +626,10 @@ export function MapSlide({ reduceMotion }: SlideProps) {
                 transition={
                   reduceMotion
                     ? undefined
-                    : { duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.2 * i }
+                    : {
+                        y: { duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.2 * i },
+                        scale: { duration: 0.4, ease: "easeInOut" },
+                      }
                 }
                 style={{ transformOrigin: "bottom center" }}
                 className="flex cursor-pointer flex-col items-center"
