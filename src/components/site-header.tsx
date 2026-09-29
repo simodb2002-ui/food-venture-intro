@@ -1,14 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import {
-  ArrowUpRight,
-  BarChart3,
-  Heart,
-  Menu,
-  Plus,
-  Sprout,
-  X,
-  type LucideIcon,
-} from "lucide-react";
+import { BarChart3, Heart, Menu, Plus, Sprout, X, type LucideIcon } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
 import fisLockup from "@/assets/fis-logo-transparent.png";
@@ -71,7 +62,7 @@ const pageHeaders: Record<
   },
   join: {
     tagline: ["Invest together", "Grow our shared commonwHealth"],
-    Icon: () => <IconBadge Base={BarChart3} Badge={ArrowUpRight} badgePosition="corner" />,
+    Icon: () => <BarChart3 className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden="true" />,
   },
   about: null,
 };
