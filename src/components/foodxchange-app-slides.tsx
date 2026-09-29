@@ -18,7 +18,7 @@ import {
   Trash2,
 } from "lucide-react";
 import { motion } from "motion/react";
-import { useEffect, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 
 import { BowlIllustration, JarIllustration, PotIllustration } from "./food-icons";
 
@@ -680,19 +680,23 @@ export function MapSlide({ reduceMotion }: SlideProps) {
 export function LearnMoreSlide({ reduceMotion }: SlideProps) {
   const [revealed, setRevealed] = useState(!!reduceMotion);
 
-  useEffect(() => {
-    if (reduceMotion) return;
-    const timer = window.setTimeout(() => setRevealed(true), 2400);
-    return () => window.clearTimeout(timer);
-  }, [reduceMotion]);
-
   return (
     <div className="mx-auto flex h-full w-full max-w-2xl flex-col">
       <SlideHeading
         title="The App Is Coming Soon"
         subtitle="Everything you just saw is on its way to your pocket. Tap below to find out more."
       />
-      <div className="relative flex flex-1 items-center justify-center overflow-hidden rounded-[1.75rem] border border-black">
+      <motion.div
+        className="relative flex flex-1 items-center justify-center overflow-hidden rounded-[1.75rem] border border-black"
+        viewport={{ once: true, amount: 0.6 }}
+        onViewportEnter={
+          reduceMotion
+            ? undefined
+            : () => {
+                window.setTimeout(() => setRevealed(true), 2400);
+              }
+        }
+      >
         <motion.div
           aria-hidden="true"
           className="absolute inset-0 z-0 bg-black"
@@ -754,7 +758,7 @@ export function LearnMoreSlide({ reduceMotion }: SlideProps) {
         >
           Learn more
         </motion.a>
-      </div>
+      </motion.div>
     </div>
   );
 }
