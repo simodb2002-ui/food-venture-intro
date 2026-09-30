@@ -3,6 +3,7 @@ import { UserRound, UserRoundCheck } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
 
+import pancakeSurfImage from "@/assets/join/pancake-surf.webp";
 import umbrellaBaseImage from "@/assets/join/umbrella-base.png";
 import umbrellaRain0Image from "@/assets/join/umbrella-rain-0.png";
 import umbrellaRain1Image from "@/assets/join/umbrella-rain-1.png";
@@ -181,6 +182,23 @@ const support = [
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.15 } } };
 const item = { hidden: { opacity: 0, y: 50 }, show: { opacity: 1, y: 0, transition: spring } };
 
+/**
+ * Pancake-surfer doodle behind the intro title: the stick figure rides the
+ * top pancake above the "Join the Movement..." heading, and the stacked
+ * pancakes trail down behind the heading/copy rather than getting their own
+ * dedicated banner.
+ */
+function PancakeSurfer() {
+  return (
+    <img
+      src={pancakeSurfImage}
+      alt=""
+      aria-hidden="true"
+      className="pointer-events-none absolute top-[-70px] left-1/2 -z-10 w-[300px] -translate-x-1/2 sm:top-[-90px] sm:w-[380px] md:top-[-110px] md:w-[460px]"
+    />
+  );
+}
+
 const umbrellaRain = [
   { src: umbrellaRain0Image, left: 36.167, top: 0.663, width: 2.882, height: 8.619 },
   { src: umbrellaRain1Image, left: 52.161, top: 2.983, width: 2.594, height: 4.751 },
@@ -205,7 +223,7 @@ function UmbrellaRain() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute -top-24 left-[-210px] hidden w-56 lg:block xl:left-[-250px] xl:w-64"
+      className="pointer-events-none absolute -top-10 left-6 hidden w-48 lg:block lg:w-56"
     >
       <div className="relative" style={{ aspectRatio: "694 / 905" }}>
         {umbrellaRain.map((drop, index) => (
@@ -253,8 +271,9 @@ function JoinPage() {
           initial={reduce ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={spring}
-          className="mx-auto max-w-3xl pt-20 pb-24 md:pt-28"
+          className="relative mx-auto max-w-3xl pt-20 pb-24 md:pt-28"
         >
+          <PancakeSurfer />
           <h1 className="text-center text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
             Join the{" "}
             <span className="relative inline-block">
