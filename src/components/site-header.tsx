@@ -147,7 +147,11 @@ export function Strapline({
           )}
         >
           <span className="h-2 w-2 shrink-0 rounded-full bg-problem" aria-hidden="true" />
-          {text}
+          {/* A real element, not a bare fragment: the pill is a gap-flex
+              row, so an unwrapped fragment's children (the leading text,
+              the pink "H" span, the trailing text) would each land as
+              their own flex item and pick up the gap between them. */}
+          <span>{text}</span>
         </div>
       </div>
     </div>
