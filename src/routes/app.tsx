@@ -570,7 +570,13 @@ function Marquee() {
                       duration: 1.6,
                       delay: i * 0.12,
                       ease: [0.16, 1, 0.3, 1],
-                      opacity: { duration: 1.6, times: [0, 0.2, 0.75, 1] },
+                      // A per-property override replaces the whole
+                      // transition for that property rather than merging
+                      // with it, so delay has to be repeated here too —
+                      // otherwise opacity ignored the stagger and every
+                      // pill flashed visible at its start point before
+                      // its (delayed) move even began.
+                      opacity: { duration: 1.6, delay: i * 0.12, times: [0, 0.2, 0.75, 1] },
                     }}
                     className="block rounded-full bg-problem px-5 py-2 text-xs font-extrabold uppercase tracking-wide text-problem-foreground"
                   >
