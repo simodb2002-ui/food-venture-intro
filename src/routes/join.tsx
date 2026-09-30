@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { UserRound, UserRoundCheck } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import type { ReactNode } from "react";
 
 import pancakeSurfImage from "@/assets/join/pancake-surf.webp";
@@ -182,21 +182,6 @@ const support = [
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.15 } } };
 const item = { hidden: { opacity: 0, y: 50 }, show: { opacity: 1, y: 0, transition: spring } };
 
-/**
- * Pancake-surfer doodle: fills the intro's left column, opposite the
- * heading/copy on the right, so it doesn't overlap the text.
- */
-function PancakeSurfer() {
-  return (
-    <img
-      src={pancakeSurfImage}
-      alt=""
-      aria-hidden="true"
-      className="pointer-events-none h-auto w-full"
-    />
-  );
-}
-
 const umbrellaRain = [
   { src: umbrellaRain0Image, left: 36.167, top: 0.663, width: 2.882, height: 8.619 },
   { src: umbrellaRain1Image, left: 52.161, top: 2.983, width: 2.594, height: 4.751 },
@@ -221,7 +206,7 @@ function UmbrellaRain() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute -top-20 right-10 hidden w-48 lg:block lg:w-56"
+      className="pointer-events-none absolute -top-24 right-8 hidden w-48 lg:block lg:w-56"
     >
       <div className="relative" style={{ aspectRatio: "694 / 905" }}>
         {umbrellaRain.map((drop, index) => (
@@ -259,22 +244,34 @@ function UmbrellaRain() {
 function JoinPage() {
   const reduce = useReducedMotion();
   const init = reduce ? false : "hidden";
+  const { scrollY } = useScroll();
+  const textX = useTransform(scrollY, [0, 220], ["0%", "-60%"]);
+  const textOpacity = useTransform(scrollY, [30, 200], [1, 0]);
+  const imageX = useTransform(scrollY, [0, 220], ["45%", "0%"]);
+  const imageOpacity = useTransform(scrollY, [50, 200], [0, 1]);
+
   return (
     <div className="coming-page relative min-h-dvh overflow-x-clip bg-footer text-footer-foreground">
       <SiteHeader active="join" className="sticky top-0" />
 
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
         {/* Intro */}
-        <motion.section
-          initial={reduce ? false : { opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={spring}
-          className="grid items-center gap-10 pt-20 pb-24 md:pt-28 lg:grid-cols-[1.4fr_1fr] lg:gap-8"
-        >
-          <div className="order-2 lg:order-1">
-            <PancakeSurfer />
-          </div>
-          <div className="order-1 lg:order-2">
+        <section className="relative pt-20 pb-24 md:pt-28">
+          <motion.img
+            src={pancakeSurfImage}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute top-0 right-0 -z-10 hidden h-auto md:block"
+            style={{
+              width: "clamp(420px, 55vw, 820px)",
+              x: reduce ? 0 : imageX,
+              opacity: reduce ? 1 : imageOpacity,
+            }}
+          />
+          <motion.div
+            style={{ x: reduce ? 0 : textX, opacity: reduce ? 1 : textOpacity }}
+            className="relative mx-auto max-w-3xl text-center"
+          >
             <h1 className="text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
               Join the{" "}
               <span className="relative inline-block">
@@ -309,8 +306,8 @@ function JoinPage() {
               </span>{" "}
               in a shared mission for change.
             </p>
-          </div>
-        </motion.section>
+          </motion.div>
+        </section>
 
         {/* Tiers */}
         <section id="membership" className="pb-28">
