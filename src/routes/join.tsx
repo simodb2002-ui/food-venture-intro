@@ -273,14 +273,15 @@ function JoinPage() {
             </span>{" "}
             for a Better Food Future
           </h1>
-          <div className="relative mx-auto mt-8 w-full max-w-md md:max-w-lg" aria-hidden="true">
+          <div className="relative mx-auto mt-8 w-full max-w-2xl md:max-w-4xl" aria-hidden="true">
             <img src={pancakeSurferBaseImage} alt="" className="h-auto w-full" />
             <motion.img
               src={pancakeSurferWaveImage}
               alt=""
               className="absolute inset-0 h-full w-full"
-              animate={reduce ? undefined : { y: [0, -4, 0, 3, 0], rotate: [0, -1.5, 0, 1.5, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              style={{ transformOrigin: "58% 50%" }}
+              animate={reduce ? undefined : { scaleX: [1, 1.12, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             />
           </div>
           <p className="mt-10 text-lg leading-relaxed text-footer-muted">
