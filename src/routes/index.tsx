@@ -296,7 +296,7 @@ function Index() {
                     alt=""
                     className="h-full w-full bg-problem object-contain object-bottom"
                     initial={{ opacity: 0.2 }}
-                    animate={{ opacity: 0.6 }}
+                    animate={{ opacity: 0.4 }}
                     transition={{ duration: reduceMotion ? 0 : 3.5, ease: "easeOut" }}
                   />
                   <motion.img
