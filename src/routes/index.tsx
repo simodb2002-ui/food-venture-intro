@@ -167,7 +167,7 @@ function Index() {
             className="fixed inset-x-0 top-0 z-50"
           >
             <SiteHeader active="fis" />
-            <div className="flex justify-center bg-background/90 px-4 pt-3 pb-1 backdrop-blur-md">
+            <div className="mx-auto max-w-7xl bg-background/90 px-4 pt-3 pb-1 backdrop-blur-md sm:px-6 lg:px-8">
               <Strapline text="Invest in food Reap the wHealth" className="text-foreground" />
             </div>
           </motion.div>
