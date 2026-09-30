@@ -506,7 +506,7 @@ function Marquee() {
           animate={{ opacity: revealed ? 1 : 0, scale: revealed ? 1 : 0.85 }}
           transition={{
             duration: reduce ? 0 : 0.9,
-            delay: revealed && !reduce ? 1 : 0,
+            delay: revealed && !reduce ? 0.25 : 0,
             ease: [0.16, 1, 0.3, 1],
           }}
           aria-hidden={!revealed}
@@ -563,28 +563,20 @@ function Marquee() {
                   }}
                 >
                   <motion.span
-                    initial={{ opacity: 0, y: 0, scale: 0.3, rotate: 0 }}
-                    animate={{
-                      // Each is one keyframe track sharing the same
-                      // `times` below (rather than per-property transition
-                      // overrides, which replace instead of merge with
-                      // the shared transition and previously desynced
-                      // opacity from the rest). Phase 1 (0 -> 0.18): spin
-                      // fast while popping up to size, still at the
-                      // basket. Phase 2 (0.18 -> 0.82): no more spinning,
-                      // glide up toward the marquee. Phase 3: hold and
-                      // fade out.
-                      opacity: [0, 1, 1, 0],
-                      scale: [0.3, 1.15, 1, 1],
-                      rotate: [0, 1080, 1080, 1080],
-                      y: [0, 0, -170, -170],
-                    }}
+                    initial={{ opacity: 0, y: 0, scale: 0.6 }}
+                    animate={{ opacity: [0, 1, 1, 0], y: -170, scale: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{
-                      duration: 1.9,
+                      duration: 1.6,
                       delay: i * 0.12,
-                      times: [0, 0.18, 0.82, 1],
-                      ease: ["easeOut", "easeInOut", "easeOut"],
+                      ease: [0.16, 1, 0.3, 1],
+                      // A per-property override replaces the whole
+                      // transition for that property rather than merging
+                      // with it, so delay has to be repeated here too —
+                      // otherwise opacity ignored the stagger and every
+                      // pill flashed visible at its start point before
+                      // its (delayed) move even began.
+                      opacity: { duration: 1.6, delay: i * 0.12, times: [0, 0.2, 0.75, 1] },
                     }}
                     className="block rounded-full bg-problem px-5 py-2 text-xs font-extrabold uppercase tracking-wide text-problem-foreground"
                   >
