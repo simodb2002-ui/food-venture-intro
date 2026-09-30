@@ -3,9 +3,6 @@ import { UserRound, UserRoundCheck } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
 
-import bikeBaseImage from "@/assets/join/bike-base.png";
-import bikeWheel0Image from "@/assets/join/bike-wheel-0.png";
-import bikeWheel1Image from "@/assets/join/bike-wheel-1.png";
 import umbrellaBaseImage from "@/assets/join/umbrella-base.png";
 import umbrellaRain0Image from "@/assets/join/umbrella-rain-0.png";
 import umbrellaRain1Image from "@/assets/join/umbrella-rain-1.png";
@@ -184,55 +181,6 @@ const support = [
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.15 } } };
 const item = { hidden: { opacity: 0, y: 50 }, show: { opacity: 1, y: 0, transition: spring } };
 
-const bikeWheels = [
-  { src: bikeWheel0Image, left: 0.659, top: 25.697, width: 42.481, height: 60.526 },
-  { src: bikeWheel1Image, left: 61.581, top: 32.043, width: 37.761, height: 54.025 },
-];
-
-/**
- * The lemon-wheel "bike" doodle that rides across the top of the page. The
- * two wheel photos were cropped out of the source image into their own
- * sprites so they can spin independently of the (static) frame underneath.
- */
-function RidingBike() {
-  const reduce = useReducedMotion();
-  return (
-    <div
-      className="relative w-full overflow-hidden"
-      style={{ height: "clamp(190px, 18.4vw, 290px)" }}
-      aria-hidden="true"
-    >
-      <motion.div
-        className="absolute top-1/2 -translate-y-1/2"
-        style={{ width: "clamp(260px, 26vw, 400px)" }}
-        initial={reduce ? { x: "40vw" } : { x: "145vw" }}
-        animate={reduce ? undefined : { x: ["145vw", "-45vw"] }}
-        transition={reduce ? undefined : { duration: 13, repeat: Infinity, ease: "linear" }}
-      >
-        <div className="relative" style={{ aspectRatio: "911 / 646" }}>
-          {bikeWheels.map((wheel) => (
-            <motion.img
-              key={wheel.src}
-              src={wheel.src}
-              alt=""
-              className="absolute"
-              style={{
-                left: `${wheel.left}%`,
-                top: `${wheel.top}%`,
-                width: `${wheel.width}%`,
-                height: `${wheel.height}%`,
-              }}
-              animate={reduce ? undefined : { rotate: 360 }}
-              transition={reduce ? undefined : { duration: 1.1, repeat: Infinity, ease: "linear" }}
-            />
-          ))}
-          <img src={bikeBaseImage} alt="" className="absolute inset-0 h-full w-full" />
-        </div>
-      </motion.div>
-    </div>
-  );
-}
-
 const umbrellaRain = [
   { src: umbrellaRain0Image, left: 36.167, top: 0.663, width: 2.882, height: 8.619 },
   { src: umbrellaRain1Image, left: 52.161, top: 2.983, width: 2.594, height: 4.751 },
@@ -257,7 +205,7 @@ function UmbrellaRain() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute -top-24 right-[-210px] hidden w-56 lg:block xl:right-[-250px] xl:w-64"
+      className="pointer-events-none absolute -top-24 left-[-210px] hidden w-56 lg:block xl:left-[-250px] xl:w-64"
     >
       <div className="relative" style={{ aspectRatio: "694 / 905" }}>
         {umbrellaRain.map((drop, index) => (
@@ -299,15 +247,13 @@ function JoinPage() {
     <div className="coming-page relative min-h-dvh overflow-x-clip bg-footer text-footer-foreground">
       <SiteHeader active="join" className="sticky top-0" />
 
-      <RidingBike />
-
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
         {/* Intro */}
         <motion.section
           initial={reduce ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={spring}
-          className="mx-auto max-w-3xl pt-4 pb-24 md:pt-6"
+          className="mx-auto max-w-3xl pt-20 pb-24 md:pt-28"
         >
           <h1 className="text-center text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
             Join the{" "}
