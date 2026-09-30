@@ -281,7 +281,7 @@ function JoinPage() {
               alt=""
               className="absolute inset-0 h-full w-full"
               style={{ transformOrigin: "58% 50%" }}
-              animate={reduce ? undefined : { scaleX: [1, 1.12, 1], skewY: [0, -1.5, 0] }}
+              animate={reduce ? undefined : { scaleX: [1, 1.12, 1], skewY: [0, -2.5, 0, 2.5, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             />
             <motion.img
