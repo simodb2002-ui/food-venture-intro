@@ -16,7 +16,8 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import brandMark from "../assets/fis-mark.png";
 import fisLockupFull from "../assets/fis-lockup-full.png";
-import marketedBackground from "../assets/index/marketed-background.webp";
+import marketedBackgroundBase from "../assets/index/marketed-background-base.webp";
+import marketedMegaphoneOverlay from "../assets/index/marketed-megaphone-overlay.webp";
 import { Button } from "../components/ui/button";
 import { FoodXchangeMark } from "../components/foodxchange-mark";
 import { FOODXCHANGE_APP_SLIDES } from "../components/foodxchange-app-slides";
@@ -291,10 +292,35 @@ function Index() {
                   aria-hidden="true"
                 >
                   <img
-                    src={marketedBackground}
+                    src={marketedBackgroundBase}
                     alt=""
                     className="h-full w-full bg-problem object-contain object-bottom"
                   />
+                  <motion.img
+                    src={marketedMegaphoneOverlay}
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-contain object-bottom"
+                    animate={reduceMotion ? { opacity: 1 } : { opacity: [1, 0.3, 1] }}
+                    transition={
+                      reduceMotion
+                        ? { duration: 0 }
+                        : { duration: 1.7, repeat: Infinity, ease: "easeInOut" }
+                    }
+                  />
+                  {!reduceMotion && (
+                    <motion.div
+                      className="absolute inset-y-0"
+                      style={{
+                        left: "-10%",
+                        width: "120%",
+                        background:
+                          "linear-gradient(100deg, var(--color-problem) 0%, var(--color-problem) 78%, transparent 100%)",
+                      }}
+                      initial={{ x: "0%" }}
+                      animate={{ x: "105%" }}
+                      transition={{ duration: 1.1, ease: [0.4, 0, 0.2, 1] }}
+                    />
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>
