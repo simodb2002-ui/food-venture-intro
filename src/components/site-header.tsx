@@ -122,6 +122,9 @@ export function SiteHeader({ active, className }: SiteHeaderProps) {
  * container, rather than being nested in each page's own (differently
  * sized) content column, so the pill lands in the identical spot below
  * the logo on every route — only its text and resulting width change.
+ * The top padding (26px) matches the About page's own hero tagline
+ * pill, measured at 90px from the viewport top (64px header + 26px),
+ * so every route's pill sits on the same y-axis as About's.
  * `barClassName` is for the row (e.g. a background on pages where the
  * header floats over content); `className` styles the pill itself.
  */
@@ -136,7 +139,7 @@ export function Strapline({
 }) {
   return (
     <div className={cn("w-full", barClassName)}>
-      <div className="mx-auto max-w-7xl px-4 pt-4 pb-2 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 pt-[26px] pb-2 sm:px-6 lg:px-8">
         <div
           className={cn(
             "inline-flex items-center gap-2.5 rounded-full border-2 border-solution px-3.5 py-2 text-xs font-bold",
