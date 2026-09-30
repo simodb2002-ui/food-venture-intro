@@ -568,24 +568,29 @@ function Marquee() {
                         progressively, rather than clustering near the
                         basket before separating. No scale animation —
                         growing from a smaller size while also moving
-                        read as a downward dip before the rise, so the
-                        pill is full-size the whole time and only
-                        opacity/position change. Starting already partly
-                        visible (opacity 0.5, not 0) and a tight stagger
-                        keep it feeling like one continuous motion. */}
+                        read as a downward dip before the rise. The
+                        "standard" ease has a near-flat start (opacity
+                        was visibly increasing while position had barely
+                        moved yet), which read as a dip/settle too, so
+                        position now uses easeOut — fast, unambiguous
+                        movement from the very first frame. */}
                     <motion.span
-                      initial={{ opacity: 0.5, x: 0, y: 0 }}
+                      initial={{ opacity: 0.6, x: 0, y: 0 }}
                       animate={{
-                        opacity: [0.5, 1, 1, 0],
+                        opacity: [0.6, 1, 1, 0],
                         x: finalX,
                         y: -150,
                       }}
                       exit={{ opacity: 0 }}
                       transition={{
-                        duration: 1.5,
-                        delay: i * 0.07,
-                        times: [0, 0.2, 0.8, 1],
-                        ease: [0.4, 0, 0.2, 1],
+                        x: { duration: 1.5, delay: i * 0.07, ease: "easeOut" },
+                        y: { duration: 1.5, delay: i * 0.07, ease: "easeOut" },
+                        opacity: {
+                          duration: 1.5,
+                          delay: i * 0.07,
+                          times: [0, 0.15, 0.8, 1],
+                          ease: "easeOut",
+                        },
                       }}
                       className="block rounded-full bg-problem px-5 py-2 text-xs font-extrabold uppercase tracking-wide text-problem-foreground"
                     >
