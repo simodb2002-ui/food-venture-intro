@@ -128,7 +128,11 @@ const bowls = [
           communities share in the benefits of better food.
         </p>
         <p className="commonhealth">
-          We call this <mark>CommonwHealth</mark> — shared wealth, created through good food.
+          We call this{" "}
+          <mark>
+            Commonw<span className="text-problem">H</span>ealth
+          </mark>{" "}
+          — shared wealth, created through good food.
         </p>
       </>
     ),
@@ -519,9 +523,17 @@ function AboutPage() {
                 <motion.div
                   key="cover"
                   className="recipe-book-closed"
-                  initial={reduceMotion ? { opacity: 0, rotate: 15 } : { opacity: 0, rotate: 15, rotateY: -8, scale: 0.96 }}
+                  initial={
+                    reduceMotion
+                      ? { opacity: 0, rotate: 15 }
+                      : { opacity: 0, rotate: 15, rotateY: -8, scale: 0.96 }
+                  }
                   animate={{ opacity: 1, rotate: 15, rotateY: 0, scale: 1 }}
-                  exit={reduceMotion ? { opacity: 0, rotate: 15 } : { opacity: 0, rotate: 15, rotateY: -72, x: -80 }}
+                  exit={
+                    reduceMotion
+                      ? { opacity: 0, rotate: 15 }
+                      : { opacity: 0, rotate: 15, rotateY: -72, x: -80 }
+                  }
                   transition={{ duration: reduceMotion ? 0.15 : 0.55, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <Button
@@ -533,8 +545,14 @@ function AboutPage() {
                     onClick={() => setIsBookOpen(true)}
                   >
                     <span className="recipe-cover-kicker">The Food Investors Society</span>
-                    <span className="recipe-cover-title">Our Story:<br />The Recipe</span>
-                    <span className="recipe-cover-action">Open book <ArrowRight /></span>
+                    <span className="recipe-cover-title">
+                      Our Story:
+                      <br />
+                      The Recipe
+                    </span>
+                    <span className="recipe-cover-action">
+                      Open book <ArrowRight />
+                    </span>
                   </Button>
                 </motion.div>
               ) : (
@@ -561,9 +579,9 @@ function AboutPage() {
                     </svg>
                     <p>
                       The co-founders came together with the belief that the UK needs a fairer, more
-                      transparent food system. What began as a conversation about ultra-processed foods
-                      and public health grew into a mission to create a platform for informed choice,
-                      community power, and system change.
+                      transparent food system. What began as a conversation about ultra-processed
+                      foods and public health grew into a mission to create a platform for informed
+                      choice, community power, and system change.
                     </p>
                     <div className="recipe-page-actions">
                       <Button asChild variant="movement" size="lg">

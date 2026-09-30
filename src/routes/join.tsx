@@ -247,7 +247,11 @@ function JoinPage() {
     <div className="coming-page relative min-h-dvh overflow-x-clip bg-footer text-footer-foreground">
       <SiteHeader active="join" className="sticky top-0" />
       <Strapline
-        text="Invest together Grow our shared commonwHealth"
+        text={
+          <>
+            Invest together Grow our shared commonw<span className="text-problem">H</span>ealth
+          </>
+        }
         className="text-footer-foreground"
       />
 

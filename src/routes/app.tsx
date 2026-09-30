@@ -753,7 +753,11 @@ function AppPage() {
     <div className="app-page min-h-screen">
       <SiteHeader active="app" className="sticky top-0" />
       <Strapline
-        text="Build wHealth one bite at a time"
+        text={
+          <>
+            Build w<span className="text-problem">H</span>ealth one bite at a time
+          </>
+        }
         className="border-solution-foreground text-solution-foreground"
       />
       <main>
