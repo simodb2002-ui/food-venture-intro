@@ -191,7 +191,14 @@ function Index() {
               transition={{ duration: reduceMotion ? 0 : 0.45, ease: "easeOut" }}
               className="absolute inset-x-0 top-16 z-10"
             >
-              <Strapline text="Invest in food Reap the wHealth" className="text-foreground" />
+              <Strapline
+                text={
+                  <>
+                    Invest in food Reap the w<span className="text-problem">H</span>ealth
+                  </>
+                }
+                className="text-foreground"
+              />
             </motion.div>
           )}
 
@@ -410,7 +417,10 @@ function Index() {
                             <strong className="font-extrabold">clarity and confidence</strong> you
                             deserve. <strong className="font-extrabold">foodXchange</strong> turns
                             everyday eating into an investment in energy, wellbeing, and our shared{" "}
-                            <strong className="font-extrabold">commonwHealth</strong>.
+                            <strong className="font-extrabold">
+                              commonw<span className="text-problem">H</span>ealth
+                            </strong>
+                            .
                           </motion.p>
 
                           <motion.p

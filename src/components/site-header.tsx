@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
 import fisLockup from "@/assets/fis-logo-transparent.png";
 import { Button } from "@/components/ui/button";
@@ -133,7 +133,7 @@ export function Strapline({
   barClassName = "",
   className = "",
 }: {
-  text: string;
+  text: ReactNode;
   barClassName?: string;
   className?: string;
 }) {
