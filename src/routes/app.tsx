@@ -26,7 +26,7 @@ import { useCallback, useState, type ReactNode } from "react";
 import phoneFoodHero from "@/assets/phone-food-hero.jpg";
 import { FoodXchangeMark } from "@/components/foodxchange-mark";
 import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
+import { SiteHeader, Strapline } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import "../app.css";
@@ -413,7 +413,13 @@ function Hero() {
   const reduce = useReducedMotion();
   return (
     <section className="relative text-solution-foreground">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 pt-20 pb-6 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:pt-28 lg:pb-8">
+      <div className="mx-auto max-w-7xl px-6 pt-6 sm:px-8">
+        <Strapline
+          text="Build wHealth one bite at a time"
+          className="border-solution-foreground text-solution-foreground"
+        />
+      </div>
+      <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 pt-6 pb-6 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:pt-10 lg:pb-8">
         <motion.div
           initial={reduce ? false : { opacity: 0, x: -48, y: 16 }}
           animate={{ opacity: 1, x: 0, y: 0 }}

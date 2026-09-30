@@ -20,7 +20,7 @@ import { Button } from "../components/ui/button";
 import { FoodXchangeMark } from "../components/foodxchange-mark";
 import { FOODXCHANGE_APP_SLIDES } from "../components/foodxchange-app-slides";
 import { SiteFooter } from "../components/site-footer";
-import { SiteHeader } from "../components/site-header";
+import { SiteHeader, Strapline } from "../components/site-header";
 import { isReturningSiteVisit } from "../lib/site-visit";
 
 export const Route = createFileRoute("/")({
@@ -167,6 +167,9 @@ function Index() {
             className="fixed inset-x-0 top-0 z-50"
           >
             <SiteHeader active="fis" />
+            <div className="flex justify-center bg-background/90 px-4 pt-3 pb-1 backdrop-blur-md">
+              <Strapline text="Invest in food Reap the wHealth" className="text-foreground" />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
