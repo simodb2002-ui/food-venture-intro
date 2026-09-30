@@ -488,6 +488,7 @@ function Hero() {
 }
 
 function Marquee() {
+  const reduce = useReducedMotion();
   const items = [...marqueeItems, ...marqueeItems];
   return (
     <section className="text-solution-foreground pt-8 pb-8">
@@ -505,6 +506,9 @@ function Marquee() {
             </span>
           ))}
         </div>
+      </div>
+      <div className="mt-10 flex items-center justify-center">
+        <FoodXchangeMark reduce={!!reduce} className="h-56 w-auto md:h-72" />
       </div>
     </section>
   );
