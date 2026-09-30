@@ -503,7 +503,7 @@ function Marquee() {
         <motion.div
           className="app-marquee"
           initial={false}
-          animate={{ opacity: revealed ? 1 : 0, scale: revealed ? 1 : 0.94 }}
+          animate={{ opacity: revealed ? 1 : 0 }}
           transition={{
             duration: reduce ? 0 : 1,
             delay: revealed && !reduce ? 0.35 : 0,
@@ -566,19 +566,19 @@ function Marquee() {
                         pills being stuck together), so each pill rises
                         and fans out to its own x at the same time,
                         progressively, rather than clustering near the
-                        basket before separating. Only opacity is
-                        keyframed (fade in, hold, fade out); x/y/scale are
-                        plain start->end targets sharing the same smooth
-                        "standard" ease. Starting already partly visible
-                        (opacity 0.5, not 0) and a tight stagger keep it
-                        feeling like one continuous motion. */}
+                        basket before separating. No scale animation —
+                        growing from a smaller size while also moving
+                        read as a downward dip before the rise, so the
+                        pill is full-size the whole time and only
+                        opacity/position change. Starting already partly
+                        visible (opacity 0.5, not 0) and a tight stagger
+                        keep it feeling like one continuous motion. */}
                     <motion.span
-                      initial={{ opacity: 0.5, x: 0, y: 0, scale: 0.88 }}
+                      initial={{ opacity: 0.5, x: 0, y: 0 }}
                       animate={{
                         opacity: [0.5, 1, 1, 0],
                         x: finalX,
                         y: -150,
-                        scale: 1,
                       }}
                       exit={{ opacity: 0 }}
                       transition={{
