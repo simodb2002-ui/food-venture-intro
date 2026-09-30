@@ -280,6 +280,22 @@ function Index() {
               aria-hidden="true"
             />
             <AnimatePresence>
+              {challengeStage === 1 && (
+                <motion.div
+                  key="challenge-bg"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeOut" }}
+                  className="pointer-events-none absolute inset-0"
+                  aria-hidden="true"
+                >
+                  <img src={marketedBackground} alt="" className="h-full w-full object-cover" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <AnimatePresence>
               {challengeActive && (
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -310,22 +326,6 @@ function Index() {
             </AnimatePresence>
 
             <div className="relative mx-auto h-full w-full max-w-6xl text-center">
-              <AnimatePresence>
-                {challengeStage === 1 && (
-                  <motion.div
-                    key="challenge-bg"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeOut" }}
-                    className="pointer-events-none absolute inset-0"
-                    aria-hidden="true"
-                  >
-                    <img src={marketedBackground} alt="" className="h-full w-full object-cover" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
               <motion.div
                 initial={false}
                 animate={{ opacity: challengeStage <= 1 ? 1 : 0 }}
