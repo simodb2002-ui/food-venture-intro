@@ -508,7 +508,7 @@ function Marquee() {
         </div>
       </div>
       <div className="mt-10 flex items-center justify-center">
-        <FoodXchangeMark reduce={!!reduce} className="h-56 w-auto md:h-72" />
+        <FoodXchangeMark reduce={!!reduce} showPetals={false} className="h-56 w-auto md:h-72" />
       </div>
     </section>
   );
