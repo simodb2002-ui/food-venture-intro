@@ -197,12 +197,16 @@ const bikeWheels = [
 function RidingBike() {
   const reduce = useReducedMotion();
   return (
-    <div className="relative w-full overflow-hidden py-8 sm:py-12" aria-hidden="true">
+    <div
+      className="relative w-full overflow-hidden"
+      style={{ height: "clamp(190px, 18.4vw, 290px)" }}
+      aria-hidden="true"
+    >
       <motion.div
         className="absolute top-1/2 -translate-y-1/2"
         style={{ width: "clamp(260px, 26vw, 400px)" }}
-        initial={reduce ? { x: "40vw" } : { x: "-45vw" }}
-        animate={reduce ? undefined : { x: ["-45vw", "145vw"] }}
+        initial={reduce ? { x: "40vw" } : { x: "145vw" }}
+        animate={reduce ? undefined : { x: ["145vw", "-45vw"] }}
         transition={reduce ? undefined : { duration: 13, repeat: Infinity, ease: "linear" }}
       >
         <div className="relative" style={{ aspectRatio: "911 / 646" }}>
@@ -253,7 +257,7 @@ function UmbrellaRain() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute top-0 right-[-150px] hidden w-56 lg:block xl:right-[-190px] xl:w-64"
+      className="pointer-events-none absolute -top-24 right-[-210px] hidden w-56 lg:block xl:right-[-250px] xl:w-64"
     >
       <div className="relative" style={{ aspectRatio: "694 / 905" }}>
         {umbrellaRain.map((drop, index) => (
@@ -303,7 +307,7 @@ function JoinPage() {
           initial={reduce ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={spring}
-          className="mx-auto max-w-3xl pt-20 pb-24 md:pt-28"
+          className="mx-auto max-w-3xl pt-4 pb-24 md:pt-6"
         >
           <h1 className="text-center text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
             Join the{" "}
