@@ -561,30 +561,30 @@ function Marquee() {
                     className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2"
                     style={{ top: "80%" }}
                   >
-                    {/* All pills rise in a single file (x pinned to 0)
-                        until they clear the "line" above the basket
-                        (y: -35, at times[1] below), then fan out to
-                        their own x as they continue up to the marquee —
-                        x and y share one `times` array so the two stay
-                        in lockstep instead of drifting apart. A gentle
-                        "standard" ease (no fast initial snap), a subtle
-                        scale pop, a tight stagger, and starting already
-                        partly visible (opacity 0.5, not 0) keep the
-                        whole thing feeling like one continuous motion
-                        rather than pieces materializing separately. */}
+                    {/* x and y both move continuously from the very start
+                        (no held "stay put" phase — that read as the
+                        pills being stuck together), so each pill rises
+                        and fans out to its own x at the same time,
+                        progressively, rather than clustering near the
+                        basket before separating. Only opacity is
+                        keyframed (fade in, hold, fade out); x/y/scale are
+                        plain start->end targets sharing the same smooth
+                        "standard" ease. Starting already partly visible
+                        (opacity 0.5, not 0) and a tight stagger keep it
+                        feeling like one continuous motion. */}
                     <motion.span
                       initial={{ opacity: 0.5, x: 0, y: 0, scale: 0.88 }}
                       animate={{
                         opacity: [0.5, 1, 1, 0],
-                        x: [0, 0, finalX, finalX],
-                        y: [0, -35, -150, -150],
-                        scale: [0.88, 1, 1, 1],
+                        x: finalX,
+                        y: -150,
+                        scale: 1,
                       }}
                       exit={{ opacity: 0 }}
                       transition={{
-                        duration: 1.7,
+                        duration: 1.5,
                         delay: i * 0.07,
-                        times: [0, 0.25, 0.82, 1],
+                        times: [0, 0.2, 0.8, 1],
                         ease: [0.4, 0, 0.2, 1],
                       }}
                       className="block rounded-full bg-problem px-5 py-2 text-xs font-extrabold uppercase tracking-wide text-problem-foreground"
