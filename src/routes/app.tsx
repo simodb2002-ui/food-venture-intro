@@ -491,7 +491,7 @@ function Marquee() {
   const reduce = useReducedMotion();
   const [revealed, setRevealed] = useState(false);
   const items = [...marqueeItems, ...marqueeItems];
-  const burstItems = marqueeItems.slice(0, 2);
+  const burstItems = marqueeItems.slice(0, 3);
 
   return (
     <section className="text-solution-foreground pt-8 pb-2">
