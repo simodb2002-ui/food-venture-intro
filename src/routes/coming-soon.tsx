@@ -312,10 +312,9 @@ function ComingSoonPage() {
   return (
     <div className="coming-page relative min-h-dvh overflow-x-clip bg-white text-cta-foreground">
       <SiteHeader active="coming-soon" className="sticky top-0" />
+      <Strapline text="Building a better food future" className="text-foreground" />
 
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
-        <Strapline text="Building a better food future" className="mt-6 text-foreground" />
-
         <motion.section
           initial={reduce ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}

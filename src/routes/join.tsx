@@ -246,13 +246,12 @@ function JoinPage() {
   return (
     <div className="coming-page relative min-h-dvh overflow-x-clip bg-footer text-footer-foreground">
       <SiteHeader active="join" className="sticky top-0" />
+      <Strapline
+        text="Invest together Grow our shared commonwHealth"
+        className="text-footer-foreground"
+      />
 
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
-        <Strapline
-          text="Invest together Grow our shared commonwHealth"
-          className="mt-6 text-footer-foreground"
-        />
-
         {/* Intro */}
         <motion.section
           initial={reduce ? false : { opacity: 0, y: 40 }}
