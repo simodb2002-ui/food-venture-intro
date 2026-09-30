@@ -58,8 +58,14 @@ export function FoodXchangeMark({
     return () => clearTimeout(timeoutId);
   }, [reduce]);
 
+  // With the petals hidden, the full mark's viewBox leaves most of its
+  // height empty above the basket (that space existed to fit the petals).
+  // Crop tightly around just the basket so the rendered element doesn't
+  // carry that dead space into the page layout.
+  const viewBox = showPetals ? "-230 -230 460 530" : "-200 70 400 220";
+
   return (
-    <svg viewBox="-230 -230 460 530" className={className} role="img" aria-label="foodXchange logo">
+    <svg viewBox={viewBox} className={className} role="img" aria-label="foodXchange logo">
       <defs>
         <linearGradient id="fx-pink" x1="0" y1="1" x2="0" y2="0">
           <stop offset="0%" stopColor="#E443A0" />
