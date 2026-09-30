@@ -330,10 +330,10 @@ function Index() {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: reduceMotion ? 1 : 0.94 }}
                       transition={{ duration: reduceMotion ? 0 : 0.35, ease: "easeOut" }}
-                      className="pointer-events-none absolute inset-x-0 top-[16%] flex justify-center"
+                      className="pointer-events-none absolute inset-x-0 top-[58%] flex justify-center"
                       aria-hidden="true"
                     >
-                      <img src={marketedMegaphone} alt="" className="h-auto w-32 sm:w-44" />
+                      <img src={marketedMegaphone} alt="" className="h-auto w-56 sm:w-72" />
                     </motion.div>
                   ) : (
                     <motion.div
@@ -342,10 +342,10 @@ function Index() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeOut" }}
-                      className="pointer-events-none absolute inset-x-0 top-0 bottom-[18%] flex items-center justify-center"
+                      className="pointer-events-none absolute inset-0"
                       aria-hidden="true"
                     >
-                      <img src={marketedScatter} alt="" className="h-[55dvh] w-auto" />
+                      <img src={marketedScatter} alt="" className="h-full w-full object-cover" />
                     </motion.div>
                   )}
                 </AnimatePresence>
