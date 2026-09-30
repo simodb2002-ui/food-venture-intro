@@ -16,6 +16,10 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import brandMark from "../assets/fis-mark.png";
 import fisLockupFull from "../assets/fis-lockup-full.png";
+import marketedAny8SignImage from "../assets/index/marketed-any8-sign.jpg";
+import marketedChipsImage from "../assets/index/marketed-chips.jpg";
+import marketedPromotionImage from "../assets/index/marketed-promotion.jpg";
+import marketedShelfTagsImage from "../assets/index/marketed-shelf-tags.jpg";
 import { Button } from "../components/ui/button";
 import { FoodXchangeMark } from "../components/foodxchange-mark";
 import { FOODXCHANGE_APP_SLIDES } from "../components/foodxchange-app-slides";
@@ -337,28 +341,32 @@ function Index() {
                   >
                     {[
                       {
-                        label: "(insert GIF 1)",
+                        src: marketedChipsImage,
+                        alt: "Shopper carrying an armful of heavily branded snack bags",
                         position: "left-[5%] top-[15%] rotate-[3deg]",
                         delay: 0,
                       },
                       {
-                        label: "(insert GIF 2)",
+                        src: marketedShelfTagsImage,
+                        alt: "Supermarket shelf price tags advertising savings",
                         position: "right-[4%] top-[38%] -rotate-[6deg]",
                         delay: 0.15,
                       },
                       {
-                        label: "(insert GIF 3)",
+                        src: marketedPromotionImage,
+                        alt: "Promotion tags fanned out on a shelf",
                         position: "bottom-[13%] left-[11%] rotate-[4deg]",
                         delay: 0.3,
                       },
                       {
-                        label: "(insert GIF 4)",
+                        src: marketedAny8SignImage,
+                        alt: "Store sign advertising any 8 items for £10",
                         position: "bottom-[22%] right-[22%] -rotate-[3deg]",
                         delay: 0.45,
                       },
                     ].map((box) => (
                       <motion.div
-                        key={box.label}
+                        key={box.src}
                         initial={{ scale: 0, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0, opacity: 0 }}
@@ -367,9 +375,9 @@ function Index() {
                           duration: 0.3,
                           ease: "easeOut",
                         }}
-                        className={`absolute grid h-24 w-32 place-items-center overflow-hidden rounded-md border-4 border-problem-foreground bg-placeholder p-2 text-center text-[0.62rem] font-bold normal-case leading-tight text-placeholder-foreground shadow-2xl sm:h-36 sm:w-52 sm:text-sm ${box.position}`}
+                        className={`absolute h-24 w-32 overflow-hidden rounded-md border-4 border-problem-foreground shadow-2xl sm:h-36 sm:w-52 ${box.position}`}
                       >
-                        {box.label}
+                        <img src={box.src} alt={box.alt} className="h-full w-full object-cover" />
                       </motion.div>
                     ))}
                   </motion.div>
