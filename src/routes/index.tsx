@@ -290,7 +290,11 @@ function Index() {
                   className="pointer-events-none absolute inset-0"
                   aria-hidden="true"
                 >
-                  <img src={marketedBackground} alt="" className="h-full w-full object-cover" />
+                  <img
+                    src={marketedBackground}
+                    alt=""
+                    className="h-full w-full object-cover object-[center_65%]"
+                  />
                 </motion.div>
               )}
             </AnimatePresence>
