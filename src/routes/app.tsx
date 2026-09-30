@@ -491,7 +491,7 @@ function Marquee() {
   const reduce = useReducedMotion();
   const [revealed, setRevealed] = useState(false);
   const items = [...marqueeItems, ...marqueeItems];
-  const burstItems = marqueeItems.slice(0, 3);
+  const burstItems = marqueeItems.slice(0, 2);
 
   return (
     <section className="text-solution-foreground pt-8 pb-2">
@@ -567,13 +567,15 @@ function Marquee() {
                         their own x as they continue up to the marquee —
                         x and y share one `times` array so the two stay
                         in lockstep instead of drifting apart. A gentle
-                        "standard" ease (no fast initial snap) and a
-                        subtle scale pop keep the whole thing calm rather
-                        than a dramatic pop-and-dash. */}
+                        "standard" ease (no fast initial snap), a subtle
+                        scale pop, a tight stagger, and starting already
+                        partly visible (opacity 0.5, not 0) keep the
+                        whole thing feeling like one continuous motion
+                        rather than pieces materializing separately. */}
                     <motion.span
-                      initial={{ opacity: 0, x: 0, y: 0, scale: 0.88 }}
+                      initial={{ opacity: 0.5, x: 0, y: 0, scale: 0.88 }}
                       animate={{
-                        opacity: [0, 1, 1, 0],
+                        opacity: [0.5, 1, 1, 0],
                         x: [0, 0, finalX, finalX],
                         y: [0, -35, -150, -150],
                         scale: [0.88, 1, 1, 1],
@@ -581,7 +583,7 @@ function Marquee() {
                       exit={{ opacity: 0 }}
                       transition={{
                         duration: 1.7,
-                        delay: i * 0.1,
+                        delay: i * 0.07,
                         times: [0, 0.25, 0.82, 1],
                         ease: [0.4, 0, 0.2, 1],
                       }}
