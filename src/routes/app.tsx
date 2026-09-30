@@ -504,7 +504,11 @@ function Marquee() {
           className="app-marquee"
           initial={false}
           animate={{ opacity: revealed ? 1 : 0, scale: revealed ? 1 : 0.85 }}
-          transition={{ duration: reduce ? 0 : 0.5, ease: "easeOut" }}
+          transition={{
+            duration: reduce ? 0 : 0.9,
+            delay: revealed && !reduce ? 0.25 : 0,
+            ease: [0.16, 1, 0.3, 1],
+          }}
           aria-hidden={!revealed}
         >
           <div className="app-marquee-track gap-4 pr-4">
@@ -538,28 +542,41 @@ function Marquee() {
           </div>
         </div>
 
-        {/* One-shot burst: pink pills fly up from the basket toward the
-            marquee as it fades in, so the marquee reads as "emerging"
-            from the basket instead of just appearing. */}
+        {/* One-shot burst: pink pills drift up from the basket toward the
+            marquee as it fades in, so the marquee reads as "emerging" from
+            the basket instead of just appearing. Each pill is a static-
+            positioned anchor (top/left, plain CSS) around a motion.span
+            that only ever animates opacity/y/scale — keeping the moving
+            part to transform-only properties is what makes it glide
+            smoothly instead of the choppy feel of animating layout
+            properties like top/left directly. */}
         <AnimatePresence>
           {revealed && !reduce && (
             <div className="pointer-events-none absolute inset-0" aria-hidden="true">
               {burstItems.map((item, i) => (
-                <motion.span
+                <span
                   key={item}
-                  initial={{
-                    opacity: 1,
-                    top: "82%",
+                  className="absolute -translate-x-1/2 -translate-y-1/2"
+                  style={{
+                    top: "80%",
                     left: `${50 + (i - (burstItems.length - 1) / 2) * 9}%`,
-                    scale: 0.85,
                   }}
-                  animate={{ opacity: 0, top: "8%", scale: 1.05 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.7, delay: i * 0.06, ease: "easeOut" }}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-problem px-5 py-2 text-xs font-extrabold uppercase tracking-wide text-problem-foreground"
                 >
-                  {item}
-                </motion.span>
+                  <motion.span
+                    initial={{ opacity: 0, y: 0, scale: 0.6 }}
+                    animate={{ opacity: [0, 1, 1, 0], y: -170, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: 1.6,
+                      delay: i * 0.12,
+                      ease: [0.16, 1, 0.3, 1],
+                      opacity: { duration: 1.6, times: [0, 0.2, 0.75, 1] },
+                    }}
+                    className="block rounded-full bg-problem px-5 py-2 text-xs font-extrabold uppercase tracking-wide text-problem-foreground"
+                  >
+                    {item}
+                  </motion.span>
+                </span>
               ))}
             </div>
           )}
