@@ -505,8 +505,13 @@ function Marquee() {
           initial={false}
           animate={{ opacity: revealed ? 1 : 0 }}
           transition={{
-            duration: reduce ? 0 : 1,
-            delay: revealed && !reduce ? 0.35 : 0,
+            duration: reduce ? 0 : 0.6,
+            // Waits until the burst pills below are actually well on
+            // their way up (not an arbitrary independent delay), so the
+            // marquee visibly fills in as they arrive instead of
+            // appearing on its own before the pills are anywhere near
+            // it — it should read as the pills becoming the marquee.
+            delay: revealed && !reduce ? 0.75 : 0,
             ease: [0.4, 0, 0.2, 1],
           }}
           aria-hidden={!revealed}
@@ -561,34 +566,25 @@ function Marquee() {
                     className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2"
                     style={{ top: "80%" }}
                   >
-                    {/* x and y both move continuously from the very start
-                        (no held "stay put" phase — that read as the
-                        pills being stuck together), so each pill rises
-                        and fans out to its own x at the same time,
-                        progressively, rather than clustering near the
-                        basket before separating. No scale animation —
-                        growing from a smaller size while also moving
-                        read as a downward dip before the rise. The
-                        "standard" ease has a near-flat start (opacity
-                        was visibly increasing while position had barely
-                        moved yet), which read as a dip/settle too, so
-                        position now uses easeOut — fast, unambiguous
-                        movement from the very first frame. */}
+                    {/* x and y move continuously from the very start (no
+                        held "stay put" phase, no scale-pop) using a fast
+                        easeOut, so each pill is unmistakably rising and
+                        fanning out within the first frame — see the
+                        marquee's own transition above for why its delay
+                        is tied to this pill's timing rather than
+                        independent of it. */}
                     <motion.span
                       initial={{ opacity: 0.6, x: 0, y: 0 }}
-                      animate={{
-                        opacity: [0.6, 1, 1, 0],
-                        x: finalX,
-                        y: -150,
-                      }}
+                      animate={{ opacity: [0.6, 1, 1, 0], x: finalX, y: -150 }}
                       exit={{ opacity: 0 }}
                       transition={{
-                        x: { duration: 1.5, delay: i * 0.07, ease: "easeOut" },
-                        y: { duration: 1.5, delay: i * 0.07, ease: "easeOut" },
+                        duration: 1.1,
+                        delay: i * 0.1,
+                        ease: "easeOut",
                         opacity: {
-                          duration: 1.5,
-                          delay: i * 0.07,
-                          times: [0, 0.15, 0.8, 1],
+                          duration: 1.1,
+                          delay: i * 0.1,
+                          times: [0, 0.15, 0.75, 1],
                           ease: "easeOut",
                         },
                       }}
