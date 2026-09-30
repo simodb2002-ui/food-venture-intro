@@ -494,7 +494,7 @@ function Marquee() {
   const burstItems = marqueeItems.slice(0, 5);
 
   return (
-    <section className="text-solution-foreground pt-8 pb-8">
+    <section className="text-solution-foreground pt-8 pb-2">
       <h2 className="px-6 text-center text-2xl font-black uppercase tracking-tight sm:text-3xl">
         Everything you need in one place
       </h2>
@@ -519,14 +519,18 @@ function Marquee() {
           </div>
         </motion.div>
 
-        <div className="mt-10 flex items-center justify-center">
+        <div className="mt-2 flex items-center justify-center">
           <div className="relative inline-flex">
-            <FoodXchangeMark reduce={!!reduce} showPetals={false} className="h-64 w-auto md:h-80" />
+            <FoodXchangeMark
+              reduce={!!reduce}
+              showPetals={false}
+              className="h-auto w-64 md:w-80 lg:w-96"
+            />
             {!revealed && (
               <button
                 type="button"
                 onClick={() => setRevealed(true)}
-                className="absolute top-[78%] left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-problem px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-problem-foreground shadow-md transition-transform hover:-translate-y-[calc(50%+2px)]"
+                className="absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-problem px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-problem-foreground shadow-md transition-transform hover:-translate-y-[calc(50%+2px)]"
               >
                 Click me
               </button>
