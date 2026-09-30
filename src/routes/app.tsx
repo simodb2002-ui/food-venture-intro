@@ -553,37 +553,42 @@ function Marquee() {
         <AnimatePresence>
           {revealed && !reduce && (
             <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-              {burstItems.map((item, i) => (
-                <span
-                  key={item}
-                  className="absolute -translate-x-1/2 -translate-y-1/2"
-                  style={{
-                    top: "80%",
-                    left: `${50 + (i - (burstItems.length - 1) / 2) * 9}%`,
-                  }}
-                >
-                  <motion.span
-                    initial={{ opacity: 0, y: 0, scale: 0.6 }}
-                    animate={{ opacity: [0, 1, 1, 0], y: -170, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{
-                      duration: 1.6,
-                      delay: i * 0.12,
-                      ease: [0.16, 1, 0.3, 1],
-                      // A per-property override replaces the whole
-                      // transition for that property rather than merging
-                      // with it, so delay has to be repeated here too —
-                      // otherwise opacity ignored the stagger and every
-                      // pill flashed visible at its start point before
-                      // its (delayed) move even began.
-                      opacity: { duration: 1.6, delay: i * 0.12, times: [0, 0.2, 0.75, 1] },
-                    }}
-                    className="block rounded-full bg-problem px-5 py-2 text-xs font-extrabold uppercase tracking-wide text-problem-foreground"
+              {burstItems.map((item, i) => {
+                const finalX = (i - (burstItems.length - 1) / 2) * 72;
+                return (
+                  <span
+                    key={item}
+                    className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2"
+                    style={{ top: "80%" }}
                   >
-                    {item}
-                  </motion.span>
-                </span>
-              ))}
+                    {/* All pills rise in a single file (x pinned to 0)
+                        until they clear the "line" above the basket
+                        (y: -40, at times[1] below), then fan out to
+                        their own x as they continue up to the marquee —
+                        x and y share one `times` array so the two stay
+                        in lockstep instead of drifting apart. */}
+                    <motion.span
+                      initial={{ opacity: 0, x: 0, y: 0, scale: 0.6 }}
+                      animate={{
+                        opacity: [0, 1, 1, 0],
+                        x: [0, 0, finalX, finalX],
+                        y: [0, -40, -170, -170],
+                        scale: [0.6, 1, 1, 1],
+                      }}
+                      exit={{ opacity: 0 }}
+                      transition={{
+                        duration: 1.6,
+                        delay: i * 0.12,
+                        times: [0, 0.2, 0.75, 1],
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                      className="block rounded-full bg-problem px-5 py-2 text-xs font-extrabold uppercase tracking-wide text-problem-foreground"
+                    >
+                      {item}
+                    </motion.span>
+                  </span>
+                );
+              })}
             </div>
           )}
         </AnimatePresence>
