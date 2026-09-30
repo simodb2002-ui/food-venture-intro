@@ -16,6 +16,8 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import brandMark from "../assets/fis-mark.png";
 import fisLockupFull from "../assets/fis-lockup-full.png";
+import marketedMegaphone from "../assets/index/marketed-megaphone.webp";
+import marketedScatter from "../assets/index/marketed-scatter.webp";
 import { Button } from "../components/ui/button";
 import { FoodXchangeMark } from "../components/foodxchange-mark";
 import { FOODXCHANGE_APP_SLIDES } from "../components/foodxchange-app-slides";
@@ -49,6 +51,7 @@ function Index() {
   const [challengeStage, setChallengeStage] = useState(0);
   const [challengeProgress, setChallengeProgress] = useState(0);
   const [challengeActive, setChallengeActive] = useState(false);
+  const [challengeBgPhase, setChallengeBgPhase] = useState<"megaphone" | "scatter">("megaphone");
   const [showPlatform, setShowPlatform] = useState(false);
   const [platformSlide, setPlatformSlide] = useState(0);
   const [joined, setJoined] = useState(false);
@@ -101,6 +104,15 @@ function Index() {
     scroller.addEventListener("scroll", updateChallenge, { passive: true });
     return () => scroller.removeEventListener("scroll", updateChallenge);
   }, []);
+
+  useEffect(() => {
+    if (challengeStage !== 1 || reduceMotion) {
+      setChallengeBgPhase("megaphone");
+      return;
+    }
+    const timer = window.setTimeout(() => setChallengeBgPhase("scatter"), 900);
+    return () => window.clearTimeout(timer);
+  }, [challengeStage, reduceMotion]);
 
   useEffect(() => {
     const scroller = scrollerRef.current;
@@ -309,6 +321,36 @@ function Index() {
             </AnimatePresence>
 
             <div className="relative mx-auto h-full w-full max-w-6xl text-center">
+              {challengeStage === 1 && (
+                <AnimatePresence mode="wait">
+                  {challengeBgPhase === "megaphone" ? (
+                    <motion.div
+                      key="megaphone"
+                      initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: reduceMotion ? 1 : 0.94 }}
+                      transition={{ duration: reduceMotion ? 0 : 0.35, ease: "easeOut" }}
+                      className="pointer-events-none absolute inset-x-0 top-[16%] flex justify-center"
+                      aria-hidden="true"
+                    >
+                      <img src={marketedMegaphone} alt="" className="h-auto w-32 sm:w-44" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="scatter"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeOut" }}
+                      className="pointer-events-none absolute inset-x-0 top-0 bottom-[18%] flex items-center justify-center"
+                      aria-hidden="true"
+                    >
+                      <img src={marketedScatter} alt="" className="h-[55dvh] w-auto" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              )}
+
               <motion.div
                 initial={false}
                 animate={{ opacity: challengeStage <= 1 ? 1 : 0 }}
