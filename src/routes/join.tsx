@@ -183,10 +183,10 @@ const container = { hidden: {}, show: { transition: { staggerChildren: 0.15 } } 
 const item = { hidden: { opacity: 0, y: 50 }, show: { opacity: 1, y: 0, transition: spring } };
 
 /**
- * Pancake-surfer doodle behind the intro title: the stick figure rides the
- * top pancake above the "Join the Movement..." heading, and the stacked
- * pancakes trail down behind the heading/copy rather than getting their own
- * dedicated banner.
+ * Pancake-surfer doodle behind the intro title: a large background graphic
+ * that starts just below the site header (never overlapping/touching it)
+ * and sits toward the right, with the title/copy painting over it since it
+ * comes later in the DOM.
  */
 function PancakeSurfer() {
   return (
@@ -194,7 +194,8 @@ function PancakeSurfer() {
       src={pancakeSurfImage}
       alt=""
       aria-hidden="true"
-      className="pointer-events-none absolute top-[-70px] left-1/2 -z-10 w-[300px] -translate-x-1/2 sm:top-[-90px] sm:w-[380px] md:top-[-110px] md:w-[460px]"
+      className="pointer-events-none absolute top-10 right-0 h-auto"
+      style={{ width: "clamp(420px, 55vw, 820px)" }}
     />
   );
 }
@@ -266,6 +267,8 @@ function JoinPage() {
       <SiteHeader active="join" className="sticky top-0" />
 
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
+        <PancakeSurfer />
+
         {/* Intro */}
         <motion.section
           initial={reduce ? false : { opacity: 0, y: 40 }}
@@ -273,7 +276,6 @@ function JoinPage() {
           transition={spring}
           className="relative mx-auto max-w-3xl pt-20 pb-24 md:pt-28"
         >
-          <PancakeSurfer />
           <h1 className="text-center text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
             Join the{" "}
             <span className="relative inline-block">
