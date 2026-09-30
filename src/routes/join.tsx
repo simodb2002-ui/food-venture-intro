@@ -221,7 +221,7 @@ function UmbrellaRain() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute -top-16 right-12 hidden w-48 lg:block lg:w-56"
+      className="pointer-events-none absolute -top-20 right-10 hidden w-48 lg:block lg:w-56"
     >
       <div className="relative" style={{ aspectRatio: "694 / 905" }}>
         {umbrellaRain.map((drop, index) => (
@@ -269,7 +269,7 @@ function JoinPage() {
           initial={reduce ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={spring}
-          className="grid items-center gap-10 pt-20 pb-24 md:pt-28 lg:grid-cols-[0.9fr_1.1fr] lg:gap-8"
+          className="grid items-center gap-10 pt-20 pb-24 md:pt-28 lg:grid-cols-[1.4fr_1fr] lg:gap-8"
         >
           <div className="order-2 lg:order-1">
             <PancakeSurfer />
