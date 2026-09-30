@@ -293,7 +293,7 @@ function Index() {
                   <img
                     src={marketedBackground}
                     alt=""
-                    className="h-full w-full object-cover object-[center_65%]"
+                    className="h-full w-full scale-[1.15] translate-y-[6%] object-cover"
                   />
                 </motion.div>
               )}
