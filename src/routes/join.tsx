@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
 
 import pancakeSurferBaseImage from "@/assets/join/pancake-surfer-base.png";
+import pancakeSurferHairImage from "@/assets/join/pancake-surfer-hair.png";
 import pancakeSurferWaveImage from "@/assets/join/pancake-surfer-wave.png";
 import umbrellaBaseImage from "@/assets/join/umbrella-base.png";
 import umbrellaRain0Image from "@/assets/join/umbrella-rain-0.png";
@@ -280,8 +281,16 @@ function JoinPage() {
               alt=""
               className="absolute inset-0 h-full w-full"
               style={{ transformOrigin: "58% 50%" }}
-              animate={reduce ? undefined : { scaleX: [1, 1.12, 1] }}
+              animate={reduce ? undefined : { scaleX: [1, 1.12, 1], skewY: [0, -1.5, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.img
+              src={pancakeSurferHairImage}
+              alt=""
+              className="absolute inset-0 h-full w-full"
+              style={{ transformOrigin: "47.7% 15.9%" }}
+              animate={reduce ? undefined : { skewX: [0, 3, 0, -3, 0] }}
+              transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
             />
           </div>
           <p className="mt-10 text-lg leading-relaxed text-footer-muted">
