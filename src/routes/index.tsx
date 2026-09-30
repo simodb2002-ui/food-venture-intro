@@ -291,10 +291,13 @@ function Index() {
                   className="pointer-events-none absolute inset-0"
                   aria-hidden="true"
                 >
-                  <img
+                  <motion.img
                     src={marketedBackgroundBase}
                     alt=""
-                    className="h-full w-full bg-problem object-contain object-bottom opacity-20"
+                    className="h-full w-full bg-problem object-contain object-bottom"
+                    initial={{ opacity: 0.2 }}
+                    animate={{ opacity: 0.6 }}
+                    transition={{ duration: reduceMotion ? 0 : 3.5, ease: "easeOut" }}
                   />
                   <motion.img
                     src={marketedMegaphoneOverlay}
