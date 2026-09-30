@@ -140,8 +140,12 @@ function FeatureCarousel() {
   const scrollToCard = (index: number, behavior: ScrollBehavior = "smooth") => {
     const track = trackRef.current;
     const card = track?.children.item(index);
-    if (!(card instanceof HTMLElement)) return;
-    card.scrollIntoView({ behavior, block: "nearest", inline: "center" });
+    if (!track || !(card instanceof HTMLElement)) return;
+    // Scroll the track's own horizontal axis directly, rather than
+    // card.scrollIntoView, which also drags the whole page's vertical
+    // scroll down to bring the card fully into view on first mount.
+    const target = card.offsetLeft - (track.clientWidth - card.clientWidth) / 2;
+    track.scrollTo({ left: target, behavior });
   };
 
   useEffect(() => {
