@@ -20,7 +20,7 @@ import {
   ChevronRight,
   type LucideIcon,
 } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useCallback, useState, type ReactNode } from "react";
 
 import phoneFoodHero from "@/assets/phone-food-hero.jpg";
@@ -489,26 +489,77 @@ function Hero() {
 
 function Marquee() {
   const reduce = useReducedMotion();
+  const [revealed, setRevealed] = useState(false);
   const items = [...marqueeItems, ...marqueeItems];
+  const burstItems = marqueeItems.slice(0, 5);
+
   return (
     <section className="text-solution-foreground pt-8 pb-8">
       <h2 className="px-6 text-center text-2xl font-black uppercase tracking-tight sm:text-3xl">
         Everything you need in one place
       </h2>
-      <div className="app-marquee mt-8">
-        <div className="app-marquee-track gap-4 pr-4">
-          {items.map((item, index) => (
-            <span
-              key={`${item}-${index}`}
-              className="app-marquee-tab rounded-full bg-problem px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-problem-foreground"
-            >
-              <span>{item}</span>
-            </span>
-          ))}
+
+      <div className="relative mt-8">
+        <motion.div
+          className="app-marquee"
+          initial={false}
+          animate={{ opacity: revealed ? 1 : 0, scale: revealed ? 1 : 0.85 }}
+          transition={{ duration: reduce ? 0 : 0.5, ease: "easeOut" }}
+          aria-hidden={!revealed}
+        >
+          <div className="app-marquee-track gap-4 pr-4">
+            {items.map((item, index) => (
+              <span
+                key={`${item}-${index}`}
+                className="app-marquee-tab rounded-full bg-problem px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-problem-foreground"
+              >
+                <span>{item}</span>
+              </span>
+            ))}
+          </div>
+        </motion.div>
+
+        <div className="mt-10 flex items-center justify-center">
+          <div className="relative inline-flex">
+            <FoodXchangeMark reduce={!!reduce} showPetals={false} className="h-64 w-auto md:h-80" />
+            {!revealed && (
+              <button
+                type="button"
+                onClick={() => setRevealed(true)}
+                className="absolute top-[78%] left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-problem px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-problem-foreground shadow-md transition-transform hover:-translate-y-[calc(50%+2px)]"
+              >
+                Click me
+              </button>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="mt-10 flex items-center justify-center">
-        <FoodXchangeMark reduce={!!reduce} showPetals={false} className="h-56 w-auto md:h-72" />
+
+        {/* One-shot burst: pink pills fly up from the basket toward the
+            marquee as it fades in, so the marquee reads as "emerging"
+            from the basket instead of just appearing. */}
+        <AnimatePresence>
+          {revealed && !reduce && (
+            <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+              {burstItems.map((item, i) => (
+                <motion.span
+                  key={item}
+                  initial={{
+                    opacity: 1,
+                    top: "82%",
+                    left: `${50 + (i - (burstItems.length - 1) / 2) * 9}%`,
+                    scale: 0.85,
+                  }}
+                  animate={{ opacity: 0, top: "8%", scale: 1.05 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.7, delay: i * 0.06, ease: "easeOut" }}
+                  className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-problem px-5 py-2 text-xs font-extrabold uppercase tracking-wide text-problem-foreground"
+                >
+                  {item}
+                </motion.span>
+              ))}
+            </div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
