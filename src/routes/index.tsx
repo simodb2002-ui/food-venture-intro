@@ -299,7 +299,7 @@ function Index() {
                   <motion.img
                     src={marketedMegaphoneOverlay}
                     alt=""
-                    className="absolute inset-0 h-full w-full object-contain object-bottom"
+                    className="absolute inset-0 h-full w-full origin-[20%_100%] scale-[0.95] object-contain object-bottom"
                     animate={reduceMotion ? { opacity: 1 } : { opacity: [1, 0.3, 1] }}
                     transition={
                       reduceMotion
