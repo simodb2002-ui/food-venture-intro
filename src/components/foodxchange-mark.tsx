@@ -30,10 +30,12 @@ export function FoodXchangeMark({
   reduce,
   className,
   basketColor = "#0a0a0a",
+  showPetals = true,
 }: {
   reduce: boolean;
   className?: string;
   basketColor?: string;
+  showPetals?: boolean;
 }) {
   // The schedule is driven by our own timer chain (matching the
   // transition's duration/pause) rather than the animation's completion
@@ -69,17 +71,19 @@ export function FoodXchangeMark({
         </linearGradient>
       </defs>
 
-      <motion.g
-        style={{ transformOrigin: "0px 0px" }}
-        animate={{ rotate: reduce ? 0 : rotation }}
-        transition={reduce ? { duration: 0 } : { duration: FX_SPIN_MS / 1000, ease: "linear" }}
-      >
-        {FX_PETALS.map(({ angle, gradient }, i) => (
-          <g key={i} transform={`rotate(${angle}) translate(0, -30)`}>
-            <path d={FX_PETAL_PATH} fill={`url(#${gradient})`} />
-          </g>
-        ))}
-      </motion.g>
+      {showPetals && (
+        <motion.g
+          style={{ transformOrigin: "0px 0px" }}
+          animate={{ rotate: reduce ? 0 : rotation }}
+          transition={reduce ? { duration: 0 } : { duration: FX_SPIN_MS / 1000, ease: "linear" }}
+        >
+          {FX_PETALS.map(({ angle, gradient }, i) => (
+            <g key={i} transform={`rotate(${angle}) translate(0, -30)`}>
+              <path d={FX_PETAL_PATH} fill={`url(#${gradient})`} />
+            </g>
+          ))}
+        </motion.g>
+      )}
 
       <path
         d="M -184 104 L 184 104 L 144 277 L -144 277 Z"
