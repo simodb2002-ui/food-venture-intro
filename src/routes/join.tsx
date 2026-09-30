@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { UserRound, UserRoundCheck } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import type { ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 
 import pancakeSurfImage from "@/assets/join/pancake-surf.webp";
 import umbrellaBaseImage from "@/assets/join/umbrella-base.png";
@@ -206,7 +206,7 @@ function UmbrellaRain() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute -top-24 right-8 hidden w-48 lg:block lg:w-56"
+      className="pointer-events-none absolute -top-28 right-6 hidden w-48 lg:block lg:w-56"
     >
       <div className="relative" style={{ aspectRatio: "694 / 905" }}>
         {umbrellaRain.map((drop, index) => (
@@ -241,73 +241,106 @@ function UmbrellaRain() {
   );
 }
 
+const introText = (
+  <>
+    <h1 className="text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
+      Join the{" "}
+      <span className="relative inline-block">
+        Movement
+        <Underline className="-bottom-3 h-5" />
+      </span>{" "}
+      for a Better Food Future
+    </h1>
+    <p className="mt-10 text-lg leading-relaxed text-footer-muted">
+      foodXchange is built and owned by its members through{" "}
+      <strong className="text-footer-foreground">The Food Investors Society</strong>, a non-profit
+      UK Community Benefit Society. That means:
+    </p>
+    <ul className="mt-6 space-y-3">
+      {[
+        "No profit-driven shareholders",
+        "One member, one vote",
+        "Full accountability and transparency",
+        "A mission-first approach focused on health, fairness, and community benefit",
+      ].map((b) => (
+        <li key={b} className="flex gap-3 text-base font-medium md:text-lg">
+          <Tick />
+          {b}
+        </li>
+      ))}
+    </ul>
+    <p className="mt-8 text-lg leading-relaxed">
+      By joining, you&apos;re not just signing up. You&apos;re becoming a{" "}
+      <span className="relative inline-block font-bold">
+        co-owner
+        <Underline className="-bottom-2 h-3" />
+      </span>{" "}
+      in a shared mission for change.
+    </p>
+  </>
+);
+
+/**
+ * Pinned scroll-reveal hero: a tall wrapper holds a sticky viewport-height
+ * stage, so scrolling through it feels "blocked" while the text exits left
+ * and the pancake-surfer image slides in from the right — then, once the
+ * reveal finishes, normal scrolling resumes and carries the page down past
+ * the (now empty) wrapper into the rest of the page. Driven by the
+ * wrapper's own scroll progress (same useScroll/useTransform pattern as
+ * the coming-soon page's parallax) rather than raw window scrollY, so it
+ * doesn't depend on assumptions about which element actually scrolls.
+ */
+function IntroReveal() {
+  const reduce = useReducedMotion();
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: wrapperRef,
+    offset: ["start start", "end start"],
+  });
+  const textX = useTransform(scrollYProgress, [0, 0.4], ["0%", "-60%"]);
+  const textOpacity = useTransform(scrollYProgress, [0.05, 0.35], [1, 0]);
+  const imageX = useTransform(scrollYProgress, [0.05, 0.45], ["45%", "0%"]);
+  const imageOpacity = useTransform(scrollYProgress, [0.1, 0.4], [0, 1]);
+
+  if (reduce) {
+    return (
+      <section className="pt-20 pb-24 text-center md:pt-28">
+        <div className="mx-auto max-w-3xl">{introText}</div>
+      </section>
+    );
+  }
+
+  return (
+    <div ref={wrapperRef} className="relative h-[220vh]">
+      <div className="sticky top-16 flex h-[calc(100dvh-4rem)] items-center overflow-hidden md:top-20 md:h-[calc(100dvh-5rem)]">
+        <motion.img
+          src={pancakeSurfImage}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute top-1/2 right-0 -z-10 hidden h-auto -translate-y-1/2 md:block"
+          style={{ width: "clamp(420px, 55vw, 820px)", x: imageX, opacity: imageOpacity }}
+        />
+        <motion.div
+          style={{ x: textX, opacity: textOpacity }}
+          className="relative mx-auto max-w-3xl text-center"
+        >
+          {introText}
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
 function JoinPage() {
   const reduce = useReducedMotion();
   const init = reduce ? false : "hidden";
-  const { scrollY } = useScroll();
-  const textX = useTransform(scrollY, [0, 220], ["0%", "-60%"]);
-  const textOpacity = useTransform(scrollY, [30, 200], [1, 0]);
-  const imageX = useTransform(scrollY, [0, 220], ["45%", "0%"]);
-  const imageOpacity = useTransform(scrollY, [50, 200], [0, 1]);
 
   return (
     <div className="coming-page relative min-h-dvh overflow-x-clip bg-footer text-footer-foreground">
       <SiteHeader active="join" className="sticky top-0" />
 
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
-        {/* Intro */}
-        <section className="relative pt-20 pb-24 md:pt-28">
-          <motion.img
-            src={pancakeSurfImage}
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none absolute top-0 right-0 -z-10 hidden h-auto md:block"
-            style={{
-              width: "clamp(420px, 55vw, 820px)",
-              x: reduce ? 0 : imageX,
-              opacity: reduce ? 1 : imageOpacity,
-            }}
-          />
-          <motion.div
-            style={{ x: reduce ? 0 : textX, opacity: reduce ? 1 : textOpacity }}
-            className="relative mx-auto max-w-3xl text-center"
-          >
-            <h1 className="text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
-              Join the{" "}
-              <span className="relative inline-block">
-                Movement
-                <Underline className="-bottom-3 h-5" />
-              </span>{" "}
-              for a Better Food Future
-            </h1>
-            <p className="mt-10 text-lg leading-relaxed text-footer-muted">
-              foodXchange is built and owned by its members through{" "}
-              <strong className="text-footer-foreground">The Food Investors Society</strong>, a
-              non-profit UK Community Benefit Society. That means:
-            </p>
-            <ul className="mt-6 space-y-3">
-              {[
-                "No profit-driven shareholders",
-                "One member, one vote",
-                "Full accountability and transparency",
-                "A mission-first approach focused on health, fairness, and community benefit",
-              ].map((b) => (
-                <li key={b} className="flex gap-3 text-base font-medium md:text-lg">
-                  <Tick />
-                  {b}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-8 text-lg leading-relaxed">
-              By joining, you&apos;re not just signing up. You&apos;re becoming a{" "}
-              <span className="relative inline-block font-bold">
-                co-owner
-                <Underline className="-bottom-2 h-3" />
-              </span>{" "}
-              in a shared mission for change.
-            </p>
-          </motion.div>
-        </section>
+        <IntroReveal />
 
         {/* Tiers */}
         <section id="membership" className="pb-28">
