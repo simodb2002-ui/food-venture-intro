@@ -557,7 +557,7 @@ function Index() {
                   aria-expanded={showPlatform}
                   className="flex h-auto min-h-32 w-full flex-col items-stretch justify-between gap-3 whitespace-normal rounded-[1.85rem] border-0 bg-transparent p-5 text-left text-solution-foreground shadow-none hover:bg-transparent sm:min-h-40 sm:p-6"
                 >
-                  <span className="grid w-full grid-cols-[9rem_1fr] items-center gap-4">
+                  <span className="grid w-full flex-1 grid-cols-[9rem_1fr] items-center gap-4">
                     <span className="grid place-items-center">
                       <Smartphone
                         className="h-28! w-28! text-solution-foreground sm:h-32! sm:w-32!"
