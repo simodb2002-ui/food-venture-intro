@@ -12,7 +12,7 @@ import launchStar1Image from "@/assets/coming-soon/launch-star1.png";
 import launchStar2Image from "@/assets/coming-soon/launch-star2.png";
 import { Button } from "@/components/ui/button";
 import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
+import { SiteHeader, Strapline } from "@/components/site-header";
 import "../coming-soon.css";
 
 export const Route = createFileRoute("/coming-soon")({
@@ -310,11 +310,13 @@ function ComingSoonPage() {
       <SiteHeader active="coming-soon" className="sticky top-0" />
 
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
+        <Strapline text="Building a better food future" className="mt-6 text-foreground" />
+
         <motion.section
           initial={reduce ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 100, damping: 18 }}
-          className="mx-auto max-w-3xl pt-20 pb-24 text-center md:pt-28"
+          className="mx-auto max-w-3xl pt-8 pb-24 text-center md:pt-12"
         >
           <h1 className="text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
             More of foodXchange

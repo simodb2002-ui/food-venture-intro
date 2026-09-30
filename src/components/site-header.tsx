@@ -1,9 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { BarChart3, Heart, Menu, Plus, Sprout, X, type LucideIcon } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
 
 import fisLockup from "@/assets/fis-logo-transparent.png";
 import { Button } from "@/components/ui/button";
+import { FoodXchangeMark } from "@/components/foodxchange-mark";
 import { cn } from "@/lib/utils";
 
 type SiteHeaderProps = {
@@ -19,57 +20,8 @@ const navItems = [
   { label: "About", href: "/about", key: "about" },
 ] as const;
 
-/** Base icon with a small badge icon layered on top, for composite marks. */
-function IconBadge({
-  Base,
-  Badge,
-  badgePosition = "corner",
-}: {
-  Base: LucideIcon;
-  Badge: LucideIcon;
-  badgePosition?: "corner" | "center";
-}) {
-  return (
-    <span className="relative inline-flex h-6 w-6 shrink-0 items-center justify-center sm:h-7 sm:w-7">
-      <Base className="h-full w-full" aria-hidden="true" />
-      <Badge
-        aria-hidden="true"
-        className={cn(
-          "absolute",
-          badgePosition === "corner"
-            ? "-right-0.5 -top-0.5 h-3 w-3 rounded-full bg-foreground text-background sm:h-3.5 sm:w-3.5"
-            : "h-2.5 w-2.5 text-black sm:h-3 sm:w-3",
-        )}
-      />
-    </span>
-  );
-}
-
-const pageHeaders: Record<
-  SiteHeaderProps["active"],
-  { tagline: [string, string]; Icon?: () => ReactNode } | null
-> = {
-  fis: {
-    tagline: ["Invest in food", "Reap the wHealth"],
-    Icon: () => <IconBadge Base={Heart} Badge={Plus} badgePosition="center" />,
-  },
-  app: {
-    tagline: ["Build wHealth", "one bite at a time"],
-  },
-  "coming-soon": {
-    tagline: ["Building a better", "food future"],
-    Icon: () => <Sprout className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden="true" />,
-  },
-  join: {
-    tagline: ["Invest together", "Grow our shared commonwHealth"],
-    Icon: () => <BarChart3 className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden="true" />,
-  },
-  about: null,
-};
-
 export function SiteHeader({ active, className }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
-  const header = pageHeaders[active];
 
   return (
     <header
@@ -112,18 +64,19 @@ export function SiteHeader({ active, className }: SiteHeaderProps) {
           ))}
         </nav>
 
-        {/* Fixed width (not content-based) so the nav's centered position never
-            shifts between tabs, even when this tab has no tagline/icon (About). */}
-        <div className="flex shrink-0 items-center justify-end gap-3 sm:w-80">
-          {header && (
-            <div className="hidden items-center gap-2 sm:flex sm:gap-3">
-              <div className="text-right font-montserrat text-xs font-semibold leading-tight text-foreground sm:text-sm">
-                <p className="whitespace-nowrap">{header.tagline[0]}</p>
-                <p className="whitespace-nowrap">{header.tagline[1]}</p>
-              </div>
-              {header.Icon && <header.Icon />}
-            </div>
-          )}
+        <div className="flex shrink-0 items-center justify-end gap-3">
+          <div className="hidden shrink-0 items-center gap-2 rounded-full border border-foreground px-3 py-2 sm:flex sm:gap-3 sm:px-5">
+            <span className="whitespace-nowrap text-[0.52rem] font-extrabold uppercase leading-[0.85] text-foreground sm:text-[0.6rem]">
+              Powered by
+            </span>
+            <span className="h-4 w-px bg-border" aria-hidden="true" />
+            <span className="flex items-center gap-1.5">
+              <FoodXchangeMark reduce basketColor="#0a0a0a" className="h-4 w-4 sm:h-5 sm:w-5" />
+              <span className="whitespace-nowrap font-montserrat text-xs font-bold text-foreground sm:text-sm">
+                foodXchange
+              </span>
+            </span>
+          </div>
 
           <Button
             variant="ghost"
@@ -158,5 +111,23 @@ export function SiteHeader({ active, className }: SiteHeaderProps) {
         </nav>
       )}
     </header>
+  );
+}
+
+/**
+ * Small pill shown just below the header on each page, carrying that page's
+ * one-line strapline (mirrors the "About" page's hero tagline pill).
+ */
+export function Strapline({ text, className = "" }: { text: string; className?: string }) {
+  return (
+    <div
+      className={cn(
+        "inline-flex items-center gap-2.5 rounded-full border-2 border-solution px-3.5 py-2 text-xs font-bold",
+        className,
+      )}
+    >
+      <span className="h-2 w-2 shrink-0 rounded-full bg-problem" aria-hidden="true" />
+      {text}
+    </div>
   );
 }

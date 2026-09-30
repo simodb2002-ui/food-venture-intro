@@ -16,7 +16,7 @@ import umbrellaRain8Image from "@/assets/join/umbrella-rain-8.png";
 import umbrellaRain9Image from "@/assets/join/umbrella-rain-9.png";
 import { Button } from "@/components/ui/button";
 import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
+import { SiteHeader, Strapline } from "@/components/site-header";
 import "../coming-soon.css";
 
 export const Route = createFileRoute("/join")({
@@ -248,12 +248,17 @@ function JoinPage() {
       <SiteHeader active="join" className="sticky top-0" />
 
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
+        <Strapline
+          text="Invest together Grow our shared commonwHealth"
+          className="mt-6 text-footer-foreground"
+        />
+
         {/* Intro */}
         <motion.section
           initial={reduce ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={spring}
-          className="mx-auto max-w-3xl pt-20 pb-24 md:pt-28"
+          className="mx-auto max-w-3xl pt-8 pb-24 md:pt-12"
         >
           <h1 className="text-center text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
             Join the{" "}
