@@ -503,11 +503,11 @@ function Marquee() {
         <motion.div
           className="app-marquee"
           initial={false}
-          animate={{ opacity: revealed ? 1 : 0, scale: revealed ? 1 : 0.85 }}
+          animate={{ opacity: revealed ? 1 : 0, scale: revealed ? 1 : 0.94 }}
           transition={{
-            duration: reduce ? 0 : 0.9,
-            delay: revealed && !reduce ? 0.25 : 0,
-            ease: [0.16, 1, 0.3, 1],
+            duration: reduce ? 0 : 1,
+            delay: revealed && !reduce ? 0.35 : 0,
+            ease: [0.4, 0, 0.2, 1],
           }}
           aria-hidden={!revealed}
         >
@@ -554,7 +554,7 @@ function Marquee() {
           {revealed && !reduce && (
             <div className="pointer-events-none absolute inset-0" aria-hidden="true">
               {burstItems.map((item, i) => {
-                const finalX = (i - (burstItems.length - 1) / 2) * 72;
+                const finalX = (i - (burstItems.length - 1) / 2) * 52;
                 return (
                   <span
                     key={item}
@@ -563,24 +563,27 @@ function Marquee() {
                   >
                     {/* All pills rise in a single file (x pinned to 0)
                         until they clear the "line" above the basket
-                        (y: -40, at times[1] below), then fan out to
+                        (y: -35, at times[1] below), then fan out to
                         their own x as they continue up to the marquee —
                         x and y share one `times` array so the two stay
-                        in lockstep instead of drifting apart. */}
+                        in lockstep instead of drifting apart. A gentle
+                        "standard" ease (no fast initial snap) and a
+                        subtle scale pop keep the whole thing calm rather
+                        than a dramatic pop-and-dash. */}
                     <motion.span
-                      initial={{ opacity: 0, x: 0, y: 0, scale: 0.6 }}
+                      initial={{ opacity: 0, x: 0, y: 0, scale: 0.88 }}
                       animate={{
                         opacity: [0, 1, 1, 0],
                         x: [0, 0, finalX, finalX],
-                        y: [0, -40, -170, -170],
-                        scale: [0.6, 1, 1, 1],
+                        y: [0, -35, -150, -150],
+                        scale: [0.88, 1, 1, 1],
                       }}
                       exit={{ opacity: 0 }}
                       transition={{
-                        duration: 1.6,
-                        delay: i * 0.12,
-                        times: [0, 0.2, 0.75, 1],
-                        ease: [0.16, 1, 0.3, 1],
+                        duration: 1.7,
+                        delay: i * 0.1,
+                        times: [0, 0.25, 0.82, 1],
+                        ease: [0.4, 0, 0.2, 1],
                       }}
                       className="block rounded-full bg-problem px-5 py-2 text-xs font-extrabold uppercase tracking-wide text-problem-foreground"
                     >
