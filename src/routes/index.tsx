@@ -189,7 +189,7 @@ function Index() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: reduceMotion ? 0 : 0.45, ease: "easeOut" }}
-              className="absolute inset-x-0 top-20 z-10 sm:top-24"
+              className="absolute inset-x-0 top-16 z-10"
             >
               <Strapline text="Invest in food Reap the wHealth" className="text-foreground" />
             </motion.div>
