@@ -183,10 +183,8 @@ const container = { hidden: {}, show: { transition: { staggerChildren: 0.15 } } 
 const item = { hidden: { opacity: 0, y: 50 }, show: { opacity: 1, y: 0, transition: spring } };
 
 /**
- * Pancake-surfer doodle behind the intro title: a large background graphic
- * that starts just below the site header (never overlapping/touching it)
- * and sits toward the right, with the title/copy painting over it since it
- * comes later in the DOM.
+ * Pancake-surfer doodle: fills the intro's left column, opposite the
+ * heading/copy on the right, so it doesn't overlap the text.
  */
 function PancakeSurfer() {
   return (
@@ -194,8 +192,7 @@ function PancakeSurfer() {
       src={pancakeSurfImage}
       alt=""
       aria-hidden="true"
-      className="pointer-events-none absolute top-10 right-0 h-auto"
-      style={{ width: "clamp(420px, 55vw, 820px)" }}
+      className="pointer-events-none h-auto w-full"
     />
   );
 }
@@ -224,7 +221,7 @@ function UmbrellaRain() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute -top-10 left-6 hidden w-48 lg:block lg:w-56"
+      className="pointer-events-none absolute -top-16 right-12 hidden w-48 lg:block lg:w-56"
     >
       <div className="relative" style={{ aspectRatio: "694 / 905" }}>
         {umbrellaRain.map((drop, index) => (
@@ -267,49 +264,52 @@ function JoinPage() {
       <SiteHeader active="join" className="sticky top-0" />
 
       <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
-        <PancakeSurfer />
-
         {/* Intro */}
         <motion.section
           initial={reduce ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={spring}
-          className="relative mx-auto max-w-3xl pt-20 pb-24 md:pt-28"
+          className="grid items-center gap-10 pt-20 pb-24 md:pt-28 lg:grid-cols-[0.9fr_1.1fr] lg:gap-8"
         >
-          <h1 className="text-center text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
-            Join the{" "}
-            <span className="relative inline-block">
-              Movement
-              <Underline className="-bottom-3 h-5" />
-            </span>{" "}
-            for a Better Food Future
-          </h1>
-          <p className="mt-10 text-lg leading-relaxed text-footer-muted">
-            foodXchange is built and owned by its members through{" "}
-            <strong className="text-footer-foreground">The Food Investors Society</strong>, a
-            non-profit UK Community Benefit Society. That means:
-          </p>
-          <ul className="mt-6 space-y-3">
-            {[
-              "No profit-driven shareholders",
-              "One member, one vote",
-              "Full accountability and transparency",
-              "A mission-first approach focused on health, fairness, and community benefit",
-            ].map((b) => (
-              <li key={b} className="flex gap-3 text-base font-medium md:text-lg">
-                <Tick />
-                {b}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-8 text-lg leading-relaxed">
-            By joining, you&apos;re not just signing up. You&apos;re becoming a{" "}
-            <span className="relative inline-block font-bold">
-              co-owner
-              <Underline className="-bottom-2 h-3" />
-            </span>{" "}
-            in a shared mission for change.
-          </p>
+          <div className="order-2 lg:order-1">
+            <PancakeSurfer />
+          </div>
+          <div className="order-1 lg:order-2">
+            <h1 className="text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
+              Join the{" "}
+              <span className="relative inline-block">
+                Movement
+                <Underline className="-bottom-3 h-5" />
+              </span>{" "}
+              for a Better Food Future
+            </h1>
+            <p className="mt-10 text-lg leading-relaxed text-footer-muted">
+              foodXchange is built and owned by its members through{" "}
+              <strong className="text-footer-foreground">The Food Investors Society</strong>, a
+              non-profit UK Community Benefit Society. That means:
+            </p>
+            <ul className="mt-6 space-y-3">
+              {[
+                "No profit-driven shareholders",
+                "One member, one vote",
+                "Full accountability and transparency",
+                "A mission-first approach focused on health, fairness, and community benefit",
+              ].map((b) => (
+                <li key={b} className="flex gap-3 text-base font-medium md:text-lg">
+                  <Tick />
+                  {b}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-8 text-lg leading-relaxed">
+              By joining, you&apos;re not just signing up. You&apos;re becoming a{" "}
+              <span className="relative inline-block font-bold">
+                co-owner
+                <Underline className="-bottom-2 h-3" />
+              </span>{" "}
+              in a shared mission for change.
+            </p>
+          </div>
         </motion.section>
 
         {/* Tiers */}
