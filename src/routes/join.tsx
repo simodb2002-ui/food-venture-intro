@@ -205,7 +205,7 @@ function UmbrellaRain() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute -top-32 right-3 hidden w-48 lg:block lg:w-56"
+      className="pointer-events-none absolute -top-36 right-3 hidden w-48 lg:block lg:w-56"
     >
       <div className="relative" style={{ aspectRatio: "694 / 905" }}>
         {umbrellaRain.map((drop, index) => (
