@@ -18,6 +18,7 @@ import umbrellaRain6Image from "@/assets/join/umbrella-rain-6.png";
 import umbrellaRain7Image from "@/assets/join/umbrella-rain-7.png";
 import umbrellaRain8Image from "@/assets/join/umbrella-rain-8.png";
 import umbrellaRain9Image from "@/assets/join/umbrella-rain-9.png";
+import watermelonDoodleImage from "@/assets/join/watermelon-doodle.svg";
 import { Button } from "@/components/ui/button";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader, Strapline } from "@/components/site-header";
@@ -273,6 +274,12 @@ function JoinPage() {
             backgroundPosition: "center",
             y: reduce ? 0 : doodleY,
           }}
+        />
+        <img
+          src={watermelonDoodleImage}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-0 left-0 z-0 w-[min(300px,31vw)] max-w-none opacity-70"
         />
         <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
           {/* Intro */}
