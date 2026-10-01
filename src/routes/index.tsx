@@ -551,13 +551,13 @@ function Index() {
                 {joined ? <Check className="h-5 w-5" /> : <Users className="h-5 w-5" />}
               </Button>
 
-              <div className="overflow-hidden rounded-[2rem] border-2 border-solution-foreground">
+              <div className="overflow-hidden rounded-[2rem] border-2 border-solution-foreground bg-solution">
                 <Button
                   onClick={toggleExplorePanel}
                   aria-expanded={showPlatform}
-                  className="flex h-auto min-h-32 w-full flex-col items-stretch justify-between gap-3 whitespace-normal rounded-[1.85rem] border-0 bg-transparent p-5 text-left text-solution-foreground shadow-none hover:bg-transparent sm:min-h-40 sm:p-6"
+                  className="relative flex h-auto min-h-32 w-full flex-col items-stretch justify-center gap-3 whitespace-normal rounded-[1.85rem] border-0 bg-transparent p-5 text-left text-solution-foreground shadow-none hover:bg-transparent sm:min-h-40 sm:p-6"
                 >
-                  <span className="grid w-full flex-1 grid-cols-[9rem_1fr] items-center gap-4">
+                  <span className="grid w-full grid-cols-[9rem_1fr] items-center gap-4">
                     <span className="grid place-items-center">
                       <Smartphone
                         className="h-28! w-28! text-solution-foreground sm:h-32! sm:w-32!"
@@ -575,7 +575,7 @@ function Index() {
                     </span>
                   </span>
                   <ChevronDown
-                    className={`mx-auto h-5 w-5 transition-transform ${showPlatform ? "rotate-180" : ""}`}
+                    className={`absolute bottom-3 left-1/2 h-5 w-5 -translate-x-1/2 transition-transform ${showPlatform ? "rotate-180" : ""}`}
                     aria-hidden="true"
                   />
                 </Button>

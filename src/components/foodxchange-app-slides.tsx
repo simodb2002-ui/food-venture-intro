@@ -703,7 +703,7 @@ export function LearnMoreSlide(_props: SlideProps) {
   return (
     <div className="mx-auto flex h-full w-full max-w-2xl flex-col items-center justify-center gap-10 text-center">
       <h3 className="text-5xl font-black uppercase leading-[1.05] tracking-tight text-solution-foreground sm:text-6xl md:text-7xl">
-        The App
+        The App Is
         <br />
         <span className="relative inline-block">
           Coming Soon
