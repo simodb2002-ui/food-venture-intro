@@ -983,11 +983,28 @@ body:has(.about-page) {
 .founders-section {
   padding: 120px 0;
   background: transparent;
+  position: relative;
+  overflow: hidden;
 }
 .founders-heading > p {
   max-width: 430px;
   font-size: 17px;
   line-height: 1.6;
+}
+.founders-heading-copy {
+  position: relative;
+}
+.founders-heading-mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1400px;
+  max-width: none;
+  transform: translate(-50%, -50%);
+  filter: blur(60px);
+  opacity: 0.55;
+  z-index: -1;
+  pointer-events: none;
 }
 .founder-grid {
   display: grid;
