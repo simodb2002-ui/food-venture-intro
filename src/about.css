@@ -86,22 +86,6 @@ body:has(.about-page) {
   background: var(--pink);
   animation: ambient-drift-right 22s ease-in-out infinite alternate;
 }
-.floating-mark-anchor {
-  position: fixed;
-  top: 50%;
-  left: 78%;
-  transform: translate(-50%, -22%);
-  z-index: -1;
-  pointer-events: none;
-}
-.floating-mark {
-  display: block;
-  width: min(1100px, 115vw);
-  max-width: none;
-  filter: blur(60px);
-  opacity: 0.5;
-  pointer-events: none;
-}
 .about-page > main,
 .about-page > footer {
   position: relative;
@@ -458,8 +442,7 @@ body:has(.about-page) {
   animation: sparkle-hover 0.9s ease-in-out infinite alternate;
 }
 .brand-bridge {
-  position: relative;
-  background: var(--card);
+  background: transparent;
   padding: 12px 0 0;
   margin-bottom: 60px;
 }
@@ -1790,7 +1773,7 @@ body:has(.about-page) {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: transparent;
+  background: var(--card);
 }
 
 .hero-visual {
