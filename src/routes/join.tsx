@@ -3,7 +3,7 @@ import { UserRound, UserRoundCheck } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import type { ReactNode } from "react";
 
-import doodlePatternImage from "@/assets/join/doodle-pattern.png";
+import doodlePatternImage from "@/assets/join/doodle-pattern.svg";
 import pancakeSurferBaseImage from "@/assets/join/pancake-surfer-base.png";
 import pancakeSurferHairImage from "@/assets/join/pancake-surfer-hair.png";
 import pancakeSurferWaveImage from "@/assets/join/pancake-surfer-wave.png";
