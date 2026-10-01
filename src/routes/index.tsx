@@ -15,6 +15,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import brandMark from "../assets/fis-mark.png";
+import brandMarkVector from "../assets/fis-mark-vector.svg";
 import fisLockupFull from "../assets/fis-lockup-full.png";
 import marketedBackgroundBase from "../assets/index/marketed-background-base.webp";
 import marketedMegaphoneOverlay from "../assets/index/marketed-megaphone-overlay.webp";
@@ -694,7 +695,7 @@ function Index() {
         <section id="join" className="w-full shrink-0 bg-footer text-footer-foreground">
           <div className="relative flex min-h-[78dvh] items-center justify-center overflow-hidden bg-cta px-6 py-28 text-cta-foreground sm:min-h-[82dvh]">
             <motion.img
-              src={brandMark}
+              src={brandMarkVector}
               alt=""
               aria-hidden="true"
               className="pointer-events-none absolute bottom-[-56px] left-[-64px] z-0 w-[270px] max-w-none bg-transparent object-contain mix-blend-multiply sm:bottom-auto sm:left-[-8vh] sm:top-[-12vh] sm:h-[112vh] sm:w-auto sm:max-w-[50vw]"
