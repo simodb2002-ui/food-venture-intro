@@ -268,9 +268,9 @@ function JoinPage() {
           className="pointer-events-none absolute inset-0 z-0 opacity-70"
           style={{
             backgroundImage: `url(${doodlePatternImage})`,
-            backgroundRepeat: "repeat-y",
-            backgroundSize: "100% auto",
-            backgroundPosition: "top center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "100% 100%",
+            backgroundPosition: "center",
             y: reduce ? 0 : doodleY,
           }}
         />
@@ -428,7 +428,7 @@ function JoinPage() {
                 <motion.article
                   key={title}
                   variants={item}
-                  className="group relative flex w-[22rem] min-h-[28rem] flex-col rounded-3xl border border-footer-foreground/10 bg-background/10 p-8 shadow-sm ring-1 ring-transparent backdrop-blur-sm transition-all duration-300 hover:-translate-y-4 hover:shadow-xl hover:ring-white hover:backdrop-blur-md"
+                  className="group relative flex w-[22rem] min-h-[28rem] flex-col rounded-3xl border border-footer-foreground/10 bg-background/5 p-8 shadow-sm ring-1 ring-transparent transition-all duration-300 hover:-translate-y-4 hover:shadow-xl hover:ring-white hover:backdrop-blur-md"
                 >
                   <h3 className="text-xl font-bold">{title}</h3>
                   <p className="mt-3 text-sm text-cta-muted">{description}</p>
