@@ -280,7 +280,7 @@ function JoinPage() {
               src={pancakeSurferWaveImage}
               alt=""
               className="absolute inset-0 h-full w-full"
-              style={{ transformOrigin: "58% 50%" }}
+              style={{ transformOrigin: "55.2% 59.1%" }}
               animate={reduce ? undefined : { scaleX: [1, 1.12, 1], skewY: [0, -2.5, 0, 2.5, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             />
