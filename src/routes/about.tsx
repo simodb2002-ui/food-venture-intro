@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowDown, ArrowRight, Mail, RotateCcw } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -290,15 +290,10 @@ function StackedBowls() {
 function AboutPage() {
   const storyRef = useRef<HTMLElement>(null);
   const [activeMilestone, setActiveMilestone] = useState<number | null>(null);
-  const [isBookOpen, setIsBookOpen] = useState(false);
-  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setActiveMilestone(null);
-        setIsBookOpen(false);
-      }
+      if (event.key === "Escape") setActiveMilestone(null);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
@@ -518,129 +513,67 @@ function AboutPage() {
 
         <section id="story" ref={storyRef} className="story-section">
           <div className="section-inner recipe-book-stage">
-            <AnimatePresence mode="wait" initial={false}>
-              {!isBookOpen ? (
-                <motion.div
-                  key="cover"
-                  className="recipe-book-closed"
-                  initial={
-                    reduceMotion
-                      ? { opacity: 0, rotate: 15 }
-                      : { opacity: 0, rotate: 15, rotateY: -8, scale: 0.96 }
-                  }
-                  animate={{ opacity: 1, rotate: 15, rotateY: 0, scale: 1 }}
-                  exit={
-                    reduceMotion
-                      ? { opacity: 0, rotate: 15 }
-                      : { opacity: 0, rotate: 15, rotateY: -72, x: -80 }
-                  }
-                  transition={{ duration: reduceMotion ? 0.15 : 0.55, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    className="recipe-book-cover"
-                    aria-expanded="false"
-                    aria-controls="story-book-pages"
-                    onClick={() => setIsBookOpen(true)}
-                  >
-                    <span className="recipe-cover-kicker">The Food Investors Society</span>
-                    <span className="recipe-cover-title">
-                      Our Story:
-                      <br />
-                      The Recipe
-                    </span>
-                    <span className="recipe-cover-action">
-                      Open book <ArrowRight />
-                    </span>
-                  </Button>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="pages"
-                  id="story-book-pages"
-                  className="recipe-book-pages is-open"
-                  aria-label="Our Story: The Recipe"
-                  initial={reduceMotion ? { opacity: 0 } : { opacity: 0, scaleX: 0.72, rotateX: 5 }}
-                  animate={{ opacity: 1, scaleX: 1, rotateX: 0 }}
-                  exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scaleX: 0.82 }}
-                  transition={{ duration: reduceMotion ? 0.15 : 0.6, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <span className="book-spine" aria-hidden="true" />
-                  <div className="story-intro recipe-page recipe-page-left">
-                    <p className="eyebrow">Our Story: The Recipe</p>
-                    <h2>
-                      A conversation
-                      <br />
-                      became a movement.
-                    </h2>
-                    <svg className="recipe-scribble" viewBox="0 0 360 34" aria-hidden="true">
-                      <path d="M6 17C91 5 188 29 352 13C243 26 125 7 28 25" />
-                    </svg>
-                    <p>
-                      The co-founders came together with the belief that the UK needs a fairer, more
-                      transparent food system. What began as a conversation about ultra-processed
-                      foods and public health grew into a mission to create a platform for informed
-                      choice, community power, and system change.
-                    </p>
-                    <div className="recipe-page-actions">
-                      <Button asChild variant="movement" size="lg">
-                        <Link to="/">
-                          Join the movement <ArrowRight />
-                        </Link>
-                      </Button>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="lg"
-                        onClick={() => {
-                          setActiveMilestone(null);
-                          setIsBookOpen(false);
-                        }}
-                      >
-                        Close book
-                      </Button>
-                    </div>
-                  </div>
-                  <div className="recipe-page recipe-page-right">
-                    <p className="recipe-method-title">Method &amp; Ingredients for Change</p>
-                    <ol className="timeline">
-                      {milestones.map((milestone, index) => {
-                        const isActive = activeMilestone === index;
-                        return (
-                          <li key={milestone} className={isActive ? "is-active" : ""}>
-                            <Button
-                              type="button"
-                              variant="ghost"
-                              className="recipe-step"
-                              aria-expanded={isActive}
-                              onClick={() => setActiveMilestone(isActive ? null : index)}
+            <div className="recipe-book-pages" aria-label="Our Story: The Recipe">
+              <span className="book-spine" aria-hidden="true" />
+              <div className="story-intro recipe-page recipe-page-left" data-reveal>
+                <p className="eyebrow">Our Story: The Recipe</p>
+                <h2>
+                  A conversation
+                  <br />
+                  became a movement.
+                </h2>
+                <svg className="recipe-scribble" viewBox="0 0 360 34" aria-hidden="true">
+                  <path d="M6 17C91 5 188 29 352 13C243 26 125 7 28 25" />
+                </svg>
+                <p>
+                  The co-founders came together with the belief that the UK needs a fairer, more
+                  transparent food system. What began as a conversation about ultra-processed foods
+                  and public health grew into a mission to create a platform for informed choice,
+                  community power, and system change.
+                </p>
+                <Button asChild variant="movement" size="lg">
+                  <Link to="/">
+                    Join the movement <ArrowRight />
+                  </Link>
+                </Button>
+              </div>
+              <div className="recipe-page recipe-page-right">
+                <p className="recipe-method-title">Method &amp; Ingredients for Change</p>
+                <ol className="timeline">
+                  {milestones.map((milestone, index) => {
+                    const isActive = activeMilestone === index;
+                    return (
+                      <li key={milestone} className={isActive ? "is-active" : ""} data-reveal>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          className="recipe-step"
+                          aria-expanded={isActive}
+                          onClick={() => setActiveMilestone(isActive ? null : index)}
+                        >
+                          <span className="milestone-number">0{index + 1}</span>
+                          <span className="milestone-copy">{milestone}</span>
+                        </Button>
+                        <AnimatePresence initial={false}>
+                          {isActive && (
+                            <motion.div
+                              className="recipe-note"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                             >
-                              <span className="milestone-number">0{index + 1}</span>
-                              <span className="milestone-copy">{milestone}</span>
-                            </Button>
-                            <AnimatePresence initial={false}>
-                              {isActive && (
-                                <motion.div
-                                  className="recipe-note"
-                                  initial={{ height: 0, opacity: 0 }}
-                                  animate={{ height: "auto", opacity: 1 }}
-                                  exit={{ height: 0, opacity: 0 }}
-                                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                                >
-                                  <p>{milestone}</p>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-                            <DrawnLeaf className="milestone-leaf" />
-                          </li>
-                        );
-                      })}
-                    </ol>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                              <p>{milestone}</p>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                        <DrawnLeaf className="milestone-leaf" />
+                      </li>
+                    );
+                  })}
+                </ol>
+              </div>
+            </div>
           </div>
         </section>
 

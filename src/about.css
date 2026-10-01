@@ -501,7 +501,11 @@ body:has(.about-page) {
   position: relative;
   margin: 80px 0 28px;
   padding: 56px 0;
-  background: var(--ink);
+  background: linear-gradient(
+    135deg,
+    var(--pink) 0%,
+    color-mix(in oklab, var(--pink) 78%, var(--ink)) 100%
+  );
   color: #fff;
   overflow: hidden;
   isolation: isolate;
@@ -2235,103 +2239,8 @@ body:has(.about-page) {
   }
 }
 
-/* Interactive recipe book */
-.recipe-book-stage {
-  display: grid;
-  min-height: 690px;
-  align-items: center;
-  justify-items: start;
-  padding-top: clamp(24px, 3vw, 48px);
-  padding-left: clamp(10px, 7vw, 110px);
-  perspective: 1800px;
-}
-.recipe-book-closed {
-  width: min(460px, 86vw);
-  height: min(590px, 72vw);
-  min-height: 500px;
-  transform-origin: center center;
-  transform-style: preserve-3d;
-}
-.recipe-book-cover {
-  position: relative;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  overflow: hidden;
-  border: 0;
-  border-radius: 8px 24px 24px 8px;
-  background: var(--solution) !important;
-  color: var(--solution-foreground) !important;
-  padding: 48px 46px 42px;
-  text-align: left;
-  white-space: normal;
-  box-shadow: 14px 16px 0 color-mix(in oklab, var(--ink) 18%, transparent) !important;
-  transform: none !important;
-}
-.recipe-book-cover::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 22px;
-  width: 2px;
-  background: color-mix(in oklab, var(--card) 45%, transparent);
-}
-.recipe-cover-kicker,
-.recipe-cover-action {
-  position: relative;
-  z-index: 1;
-  text-transform: uppercase;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-}
-.recipe-cover-title {
-  position: relative;
-  z-index: 1;
-  max-width: 340px;
-  font-family: var(--font-display);
-  font-size: clamp(44px, 5vw, 68px);
-  font-weight: 800;
-  line-height: 0.98;
-}
-.recipe-cover-action {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  border-bottom: 2px solid currentColor;
-  padding-bottom: 5px;
-}
-.recipe-cover-action svg {
-  width: 17px;
-}
-.recipe-book-pages.is-open {
-  width: 100%;
-  border: 2px solid var(--ink);
-  border-radius: 16px;
-  background: var(--card);
-  box-shadow: 0 20px 50px color-mix(in oklab, var(--ink) 13%, transparent);
-  transform-origin: center bottom;
-}
-.recipe-book-pages.is-open .recipe-page-left {
-  border-radius: 14px 0 0 14px;
-}
-.recipe-book-pages.is-open .recipe-page-right {
-  border-radius: 0 14px 14px 0;
-}
-.recipe-page-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
+/* Interactive line-art recipe book */
 @media (max-width: 900px) {
-  .recipe-book-stage {
-    min-height: 620px;
-  }
-  .recipe-book-closed {
-    height: 560px;
-  }
   .recipe-book-pages {
     min-height: 0;
     grid-template-columns: 1fr;
@@ -2343,12 +2252,12 @@ body:has(.about-page) {
     padding: 38px 34px;
   }
   .recipe-page-left {
-    border-radius: 14px 14px 0 0 !important;
+    border-radius: 0;
   }
   .recipe-page-right {
     border-left: 0;
     border-top: 2px dashed var(--ink);
-    border-radius: 0 0 14px 14px !important;
+    border-radius: 0;
   }
   .recipe-method-title {
     margin-left: 52px;
@@ -2361,18 +2270,6 @@ body:has(.about-page) {
   }
   .recipe-book-stage {
     width: min(100% - 24px, 1180px);
-    min-height: 540px;
-  }
-  .recipe-book-closed {
-    width: min(330px, 88vw);
-    height: 460px;
-    min-height: 460px;
-  }
-  .recipe-book-cover {
-    padding: 36px 30px 32px 42px;
-  }
-  .recipe-cover-title {
-    font-size: 44px;
   }
   .recipe-page {
     padding: 30px 22px;
@@ -2413,9 +2310,5 @@ body:has(.about-page) {
   }
   .timeline li {
     transform: none !important;
-  }
-  .recipe-book-cover,
-  .recipe-book-pages {
-    transition: none !important;
   }
 }
