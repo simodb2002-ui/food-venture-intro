@@ -275,11 +275,12 @@ function JoinPage() {
             y: reduce ? 0 : doodleY,
           }}
         />
-        <img
+        <motion.img
           src={watermelonDoodleImage}
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute bottom-0 left-0 z-0 w-[min(300px,31vw)] max-w-none opacity-70"
+          style={{ y: reduce ? 0 : doodleY }}
         />
         <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
           {/* Intro */}
