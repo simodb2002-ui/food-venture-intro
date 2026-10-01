@@ -72,7 +72,7 @@ export function SiteHeader({ active, className }: SiteHeaderProps) {
             <span className="h-4 w-px bg-border" aria-hidden="true" />
             <span className="flex items-center gap-1.5">
               <FoodXchangeMark reduce basketColor="#0a0a0a" className="h-4 w-4 sm:h-5 sm:w-5" />
-              <span className="whitespace-nowrap font-montserrat text-xs font-bold text-foreground sm:text-sm">
+              <span className="whitespace-nowrap font-montserrat text-xs font-medium text-foreground sm:text-sm">
                 foodXchange
               </span>
             </span>
