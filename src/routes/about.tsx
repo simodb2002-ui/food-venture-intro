@@ -9,8 +9,7 @@ import { SiteHeader } from "@/components/site-header";
 import "../about.css";
 import fisMark from "@/assets/fis-mark.png";
 import fisLogo from "@/assets/fis-logo-bridge.png";
-import heroHandsImage from "@/assets/about/hero-hands.png";
-import heroPlateImage from "@/assets/about/hero-plate.png";
+import heroCoffeeHeartImage from "@/assets/about/hero-coffee-heart.webp";
 import foodxLogo from "@/assets/about/foodx-logo.png.asset.json";
 import fiona from "@/assets/about/fiona.jpg.asset.json";
 import edwina from "@/assets/about/edwina.jpg.asset.json";
@@ -429,14 +428,11 @@ function AboutPage() {
               </Button>
             </div>
             <div className="hero-visual hero-plate-visual">
-              <div className="hero-plate-frame">
-                <img src={heroHandsImage} alt="" className="hero-hands" aria-hidden="true" />
-                <img
-                  src={heroPlateImage}
-                  alt="A plated meal of grains, salmon, and vegetables"
-                  className="hero-plate"
-                />
-              </div>
+              <img
+                src={heroCoffeeHeartImage}
+                alt="Chocolate-covered coffee beans arranged in a heart shape"
+                className="hero-coffee-heart"
+              />
             </div>
           </div>
         </section>
