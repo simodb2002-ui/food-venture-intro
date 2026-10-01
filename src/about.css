@@ -2041,10 +2041,16 @@ body:has(.about-page) {
   vector-effect: non-scaling-stroke;
 }
 .bowl-fill {
-  transform-box: fill-box;
-  transform-origin: bottom center;
-  transform: scaleY(0);
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Animate the rect's own geometry (not a CSS transform): a scaleY +
+     transform-origin on an SVG child does not scale correctly once the
+     bowl's viewBox is stretched non-uniformly (preserveAspectRatio="none")
+     to each bowl's own box aspect ratio, so the fill level is driven by
+     y/height directly, which scales correctly with the rest of the shape. */
+  y: 100px;
+  height: 0px;
+  transition:
+    y 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
 }
 .bowl-vision .bowl-fill {
@@ -2057,10 +2063,12 @@ body:has(.about-page) {
   fill: var(--green);
 }
 .stacked-bowl:hover .bowl-fill {
-  transform: scaleY(0.18);
+  y: 82px;
+  height: 18px;
 }
 .stacked-bowl.is-filling .bowl-fill {
-  transform: scaleY(1);
+  y: 0px;
+  height: 100px;
 }
 .bowl-button:hover,
 .bowl-button:focus-visible {
