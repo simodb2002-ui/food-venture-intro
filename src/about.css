@@ -859,7 +859,7 @@ body:has(.about-page) {
   position: relative;
   top: auto;
   align-self: stretch;
-  border-radius: 0;
+  border-radius: 20px 0 0 20px;
   background: var(--orange);
 }
 .recipe-page-right {
