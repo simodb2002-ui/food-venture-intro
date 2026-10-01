@@ -1,12 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowDown, ArrowRight, Mail, RotateCcw } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "../about.css";
+import fisMark from "@/assets/fis-mark.png";
 import fisLogo from "@/assets/about/fis-logo.png.asset.json";
 import foodxLogo from "@/assets/about/foodx-logo.png.asset.json";
 import communityMeal from "@/assets/about/pizza-party-hero.jpg.asset.json";
@@ -290,6 +291,7 @@ function StackedBowls() {
 function AboutPage() {
   const storyRef = useRef<HTMLElement>(null);
   const [activeMilestone, setActiveMilestone] = useState<number | null>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -578,6 +580,18 @@ function AboutPage() {
         </section>
 
         <section id="founders" className="founders-section">
+          <motion.img
+            src={fisMark}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-[-80px] -z-10 w-[360px] max-w-none -translate-x-1/2 object-contain mix-blend-multiply sm:top-[-14vh] sm:h-[125vh] sm:w-auto sm:max-w-[62vw]"
+            animate={
+              reduceMotion ? undefined : { x: [0, -40, 30, 0], y: [0, -50, 0], rotate: [0, -5, 0] }
+            }
+            transition={
+              reduceMotion ? undefined : { duration: 19, repeat: Infinity, ease: "easeInOut" }
+            }
+          />
           <div className="section-inner">
             <div className="section-heading founders-heading" data-reveal>
               <div>

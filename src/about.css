@@ -988,6 +988,8 @@ body:has(.about-page) {
   animation: leaf-sway 1.2s ease-in-out infinite alternate;
 }
 .founders-section {
+  position: relative;
+  isolation: isolate;
   padding: 120px 0;
   background: transparent;
 }
