@@ -323,6 +323,17 @@ function HeroPhotoCycle() {
   const reduceMotion = useReducedMotion();
   const [index, setIndex] = useState(0);
 
+  // Preload every frame up front so each swap is instant - without this, the
+  // first time a given photo appears the browser has to fetch/decode it,
+  // which (varying by file size) delays that particular swap past the 1s
+  // tick and makes the interval feel uneven.
+  useEffect(() => {
+    HERO_PHOTOS.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   useEffect(() => {
     if (reduceMotion) return;
     const timer = window.setInterval(() => {
