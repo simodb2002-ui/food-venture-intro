@@ -248,21 +248,10 @@ function JoinPage() {
   const reduce = useReducedMotion();
   const init = reduce ? false : "hidden";
   const { scrollY } = useScroll();
-  const doodleY = useTransform(scrollY, [0, 500], [0, -70], { clamp: true });
+  const doodleY = useTransform(scrollY, [0, 500], [0, -40], { clamp: true });
 
   return (
     <div className="coming-page relative min-h-dvh overflow-x-clip bg-footer text-footer-foreground">
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-20 -bottom-20 left-0 right-0 z-0 opacity-70"
-        style={{
-          backgroundImage: `url(${doodlePatternImage})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "100% 100%",
-          backgroundPosition: "center",
-          y: reduce ? 0 : doodleY,
-        }}
-      />
       <SiteHeader active="join" className="sticky top-0" />
       <Strapline
         text={
@@ -273,187 +262,200 @@ function JoinPage() {
         className="text-footer-foreground"
       />
 
-      <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
-        {/* Intro */}
-        <motion.section
-          initial={reduce ? false : { opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={spring}
-          className="mx-auto max-w-3xl pt-8 pb-24 md:pt-12"
-        >
-          <h1 className="text-center text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
-            Join the{" "}
-            <span className="relative inline-block">
-              Movement
-              <Underline className="-bottom-3 h-5" />
-            </span>{" "}
-            for a Better Food Future
-          </h1>
-          <div className="relative mx-auto mt-8 w-full max-w-2xl md:max-w-4xl" aria-hidden="true">
-            <img src={pancakeSurferBaseImage} alt="" className="h-auto w-full" />
-            <motion.img
-              src={pancakeSurferWaveImage}
-              alt=""
-              className="absolute inset-0 h-full w-full"
-              style={{ transformOrigin: "55.2% 59.1%" }}
-              animate={reduce ? undefined : { scaleX: [1, 1.12, 1], skewY: [0, -2.5, 0, 2.5, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <motion.img
-              src={pancakeSurferHairImage}
-              alt=""
-              className="absolute inset-0 h-full w-full"
-              style={{ transformOrigin: "47.7% 15.9%" }}
-              animate={reduce ? undefined : { skewX: [0, 3, 0, -3, 0] }}
-              transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </div>
-          <p className="mt-10 text-lg leading-relaxed text-footer-muted">
-            foodXchange is built and owned by its members through{" "}
-            <strong className="text-footer-foreground">The Food Investors Society</strong>, a
-            non-profit UK Community Benefit Society. That means:
-          </p>
-          <ul className="mt-6 space-y-3">
-            {[
-              "No profit-driven shareholders",
-              "One member, one vote",
-              "Full accountability and transparency",
-              "A mission-first approach focused on health, fairness, and community benefit",
-            ].map((b) => (
-              <li key={b} className="flex gap-3 text-base font-medium md:text-lg">
-                <Tick />
-                {b}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-8 text-lg leading-relaxed">
-            By joining, you&apos;re not just signing up. You&apos;re becoming a{" "}
-            <span className="relative inline-block font-bold">
-              co-owner
-              <Underline className="-bottom-2 h-3" />
-            </span>{" "}
-            in a shared mission for change.
-          </p>
-        </motion.section>
-
-        {/* Tiers */}
-        <section id="membership" className="pb-28">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
-              Our Membership Options
-            </h2>
-            <p className="mt-5 text-lg leading-relaxed text-footer-muted">
-              Every member has an equal vote and a say in shaping our priorities, and the future
-              direction. Real ownership. Real influence. Collective change.
-            </p>
-          </div>
-          <motion.div
-            variants={container}
-            initial={init}
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="mx-auto mt-16 flex flex-wrap justify-center gap-10"
+      <div className="relative">
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 opacity-70"
+          style={{
+            backgroundImage: `url(${doodlePatternImage})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "100% 100%",
+            backgroundPosition: "center",
+            y: reduce ? 0 : doodleY,
+          }}
+        />
+        <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
+          {/* Intro */}
+          <motion.section
+            initial={reduce ? false : { opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={spring}
+            className="mx-auto max-w-3xl pt-8 pb-24 md:pt-12"
           >
-            {tiers.map(
-              ({ title, Icon, price, prefix, period, subtitle, features, popular, tone }) => {
-                const toneClasses =
-                  tone === "solution"
-                    ? {
-                        card: "bg-solution/50 hover:bg-solution text-solution-foreground",
-                        accent: "text-solution-foreground",
-                        stroke: "stroke-solution-foreground",
-                        muted: "text-solution-foreground/70",
-                      }
-                    : {
-                        card: "bg-problem/45 hover:bg-problem text-problem-foreground",
-                        accent: "text-problem-foreground",
-                        stroke: "stroke-problem-foreground",
-                        muted: "text-problem-foreground/70",
-                      };
-                return (
-                  <motion.article
-                    key={title}
-                    variants={item}
-                    className={`group relative flex w-[22rem] min-h-[28rem] flex-col rounded-3xl p-8 shadow-md transition-all duration-300 hover:-translate-y-4 hover:shadow-xl ${toneClasses.card}`}
-                  >
-                    {popular && (
-                      <span className="absolute -top-2.5 right-6 rounded-full bg-solution px-3 py-1 text-xs font-bold uppercase tracking-wider text-solution-foreground">
-                        Most popular
-                      </span>
-                    )}
-                    <Icon className={`size-8 ${toneClasses.accent}`} aria-hidden="true" />
-                    <h3 className="mt-4 text-2xl font-bold">{title}</h3>
-                    <p className="mt-4 text-lg">
-                      {prefix}
-                      <span className={`text-3xl font-extrabold ${toneClasses.accent}`}>
-                        <Circle strokeClassName={toneClasses.stroke}>{price}</Circle>
-                      </span>
-                      <span className={toneClasses.muted}>{period}</span>
-                    </p>
-                    <p
-                      className={`mt-3 text-sm font-semibold uppercase tracking-wide ${toneClasses.muted}`}
+            <h1 className="text-center text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
+              Join the{" "}
+              <span className="relative inline-block">
+                Movement
+                <Underline className="-bottom-3 h-5" />
+              </span>{" "}
+              for a Better Food Future
+            </h1>
+            <div className="relative mx-auto mt-8 w-full max-w-2xl md:max-w-4xl" aria-hidden="true">
+              <img src={pancakeSurferBaseImage} alt="" className="h-auto w-full" />
+              <motion.img
+                src={pancakeSurferWaveImage}
+                alt=""
+                className="absolute inset-0 h-full w-full"
+                style={{ transformOrigin: "55.2% 59.1%" }}
+                animate={reduce ? undefined : { scaleX: [1, 1.12, 1], skewY: [0, -2.5, 0, 2.5, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <motion.img
+                src={pancakeSurferHairImage}
+                alt=""
+                className="absolute inset-0 h-full w-full"
+                style={{ transformOrigin: "47.7% 15.9%" }}
+                animate={reduce ? undefined : { skewX: [0, 3, 0, -3, 0] }}
+                transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </div>
+            <p className="mt-10 text-lg leading-relaxed text-footer-muted">
+              foodXchange is built and owned by its members through{" "}
+              <strong className="text-footer-foreground">The Food Investors Society</strong>, a
+              non-profit UK Community Benefit Society. That means:
+            </p>
+            <ul className="mt-6 space-y-3">
+              {[
+                "No profit-driven shareholders",
+                "One member, one vote",
+                "Full accountability and transparency",
+                "A mission-first approach focused on health, fairness, and community benefit",
+              ].map((b) => (
+                <li key={b} className="flex gap-3 text-base font-medium md:text-lg">
+                  <Tick />
+                  {b}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-8 text-lg leading-relaxed">
+              By joining, you&apos;re not just signing up. You&apos;re becoming a{" "}
+              <span className="relative inline-block font-bold">
+                co-owner
+                <Underline className="-bottom-2 h-3" />
+              </span>{" "}
+              in a shared mission for change.
+            </p>
+          </motion.section>
+
+          {/* Tiers */}
+          <section id="membership" className="pb-28">
+            <div className="mx-auto max-w-2xl text-center">
+              <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
+                Our Membership Options
+              </h2>
+              <p className="mt-5 text-lg leading-relaxed text-footer-muted">
+                Every member has an equal vote and a say in shaping our priorities, and the future
+                direction. Real ownership. Real influence. Collective change.
+              </p>
+            </div>
+            <motion.div
+              variants={container}
+              initial={init}
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              className="mx-auto mt-16 flex flex-wrap justify-center gap-10"
+            >
+              {tiers.map(
+                ({ title, Icon, price, prefix, period, subtitle, features, popular, tone }) => {
+                  const toneClasses =
+                    tone === "solution"
+                      ? {
+                          card: "bg-solution/50 hover:bg-solution text-solution-foreground",
+                          accent: "text-solution-foreground",
+                          stroke: "stroke-solution-foreground",
+                          muted: "text-solution-foreground/70",
+                        }
+                      : {
+                          card: "bg-problem/45 hover:bg-problem text-problem-foreground",
+                          accent: "text-problem-foreground",
+                          stroke: "stroke-problem-foreground",
+                          muted: "text-problem-foreground/70",
+                        };
+                  return (
+                    <motion.article
+                      key={title}
+                      variants={item}
+                      className={`group relative flex w-[22rem] min-h-[28rem] flex-col rounded-3xl p-8 shadow-md transition-all duration-300 hover:-translate-y-4 hover:shadow-xl ${toneClasses.card}`}
                     >
-                      {subtitle}
-                    </p>
+                      {popular && (
+                        <span className="absolute -top-2.5 right-6 rounded-full bg-solution px-3 py-1 text-xs font-bold uppercase tracking-wider text-solution-foreground">
+                          Most popular
+                        </span>
+                      )}
+                      <Icon className={`size-8 ${toneClasses.accent}`} aria-hidden="true" />
+                      <h3 className="mt-4 text-2xl font-bold">{title}</h3>
+                      <p className="mt-4 text-lg">
+                        {prefix}
+                        <span className={`text-3xl font-extrabold ${toneClasses.accent}`}>
+                          <Circle strokeClassName={toneClasses.stroke}>{price}</Circle>
+                        </span>
+                        <span className={toneClasses.muted}>{period}</span>
+                      </p>
+                      <p
+                        className={`mt-3 text-sm font-semibold uppercase tracking-wide ${toneClasses.muted}`}
+                      >
+                        {subtitle}
+                      </p>
+                      <ul className="mt-6 space-y-3">
+                        {features.map((f) => (
+                          <li key={f} className="flex gap-3 text-sm font-medium md:text-base">
+                            <Tick className={toneClasses.stroke} />
+                            {f}
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.article>
+                  );
+                },
+              )}
+            </motion.div>
+          </section>
+
+          {/* Support */}
+          <section className="relative">
+            <UmbrellaRain />
+            <h2 className="text-center text-3xl font-bold tracking-tight md:text-5xl">
+              Other Ways to Support Us
+            </h2>
+            <motion.div
+              variants={container}
+              initial={init}
+              whileInView="show"
+              viewport={{ once: true, amount: 0.15 }}
+              className="mt-16 flex flex-wrap justify-center gap-8"
+            >
+              {support.map(({ title, description, bullets, body, cta }) => (
+                <motion.article
+                  key={title}
+                  variants={item}
+                  className="group relative flex w-[22rem] min-h-[28rem] flex-col rounded-3xl border border-footer-foreground/10 bg-background/5 p-8 shadow-sm ring-1 ring-transparent transition-all duration-300 hover:-translate-y-4 hover:shadow-xl hover:ring-white hover:backdrop-blur-md"
+                >
+                  <h3 className="text-xl font-bold">{title}</h3>
+                  <p className="mt-3 text-sm text-cta-muted">{description}</p>
+                  {bullets && (
                     <ul className="mt-6 space-y-3">
-                      {features.map((f) => (
-                        <li key={f} className="flex gap-3 text-sm font-medium md:text-base">
-                          <Tick className={toneClasses.stroke} />
-                          {f}
+                      {bullets.map((b) => (
+                        <li key={b} className="flex gap-3 text-sm font-medium">
+                          <Tick />
+                          {b}
                         </li>
                       ))}
                     </ul>
-                  </motion.article>
-                );
-              },
-            )}
-          </motion.div>
-        </section>
-
-        {/* Support */}
-        <section className="relative">
-          <UmbrellaRain />
-          <h2 className="text-center text-3xl font-bold tracking-tight md:text-5xl">
-            Other Ways to Support Us
-          </h2>
-          <motion.div
-            variants={container}
-            initial={init}
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            className="mt-16 flex flex-wrap justify-center gap-8"
-          >
-            {support.map(({ title, description, bullets, body, cta }) => (
-              <motion.article
-                key={title}
-                variants={item}
-                className="group relative flex w-[22rem] min-h-[28rem] flex-col rounded-3xl border border-footer-foreground/10 bg-background/5 p-8 shadow-sm ring-1 ring-transparent transition-all duration-300 hover:-translate-y-4 hover:shadow-xl hover:ring-white hover:backdrop-blur-md"
-              >
-                <h3 className="text-xl font-bold">{title}</h3>
-                <p className="mt-3 text-sm text-cta-muted">{description}</p>
-                {bullets && (
-                  <ul className="mt-6 space-y-3">
-                    {bullets.map((b) => (
-                      <li key={b} className="flex gap-3 text-sm font-medium">
-                        <Tick />
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {body && <p className="mt-6 text-sm font-medium leading-relaxed">{body}</p>}
-                <Button
-                  asChild
-                  size="lg"
-                  className="mt-auto self-center rounded-full bg-solution px-10 font-semibold text-solution-foreground hover:bg-solution/90 [margin-top:max(2rem,auto)]"
-                >
-                  <a href="/about#newsletter">{cta}</a>
-                </Button>
-              </motion.article>
-            ))}
-          </motion.div>
-        </section>
-      </main>
+                  )}
+                  {body && <p className="mt-6 text-sm font-medium leading-relaxed">{body}</p>}
+                  <Button
+                    asChild
+                    size="lg"
+                    className="mt-auto self-center rounded-full bg-solution px-10 font-semibold text-solution-foreground hover:bg-solution/90 [margin-top:max(2rem,auto)]"
+                  >
+                    <a href="/about#newsletter">{cta}</a>
+                  </Button>
+                </motion.article>
+              ))}
+            </motion.div>
+          </section>
+        </main>
+      </div>
       <SiteFooter />
     </div>
   );
