@@ -584,9 +584,9 @@ function AboutPage() {
             src={fisMark}
             alt=""
             aria-hidden="true"
-            className="pointer-events-none absolute right-[-12%] top-[-40px] -z-10 w-[360px] max-w-none object-contain mix-blend-multiply blur-xl sm:top-[-7vh] sm:h-[125vh] sm:w-auto sm:max-w-[62vw]"
+            className="pointer-events-none absolute right-[-12%] top-[0px] -z-10 w-[360px] max-w-none object-contain mix-blend-multiply blur-xl sm:top-[-2vh] sm:h-[125vh] sm:w-auto sm:max-w-[62vw]"
             animate={
-              reduceMotion ? undefined : { x: [0, -40, 30, 0], y: [0, -50, 0], rotate: [0, -5, 0] }
+              reduceMotion ? undefined : { x: [0, 50, 90, 0], y: [0, 45, 90, 0], rotate: [0, 4, 0] }
             }
             transition={
               reduceMotion ? undefined : { duration: 19, repeat: Infinity, ease: "easeInOut" }
