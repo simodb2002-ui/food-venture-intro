@@ -860,6 +860,7 @@ body:has(.about-page) {
   top: auto;
   align-self: stretch;
   border-radius: 0;
+  background: var(--orange);
 }
 .recipe-page-right {
   position: relative;
@@ -869,6 +870,12 @@ body:has(.about-page) {
 .story-intro .eyebrow {
   color: var(--pink);
   font-weight: 900;
+}
+.story-cta {
+  background: var(--pink) !important;
+}
+.story-cta:hover {
+  background: color-mix(in oklab, var(--pink) 90%, black) !important;
 }
 .story-intro h2 {
   font-size: clamp(42px, 4.7vw, 66px);
