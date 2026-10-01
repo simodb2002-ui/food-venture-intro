@@ -91,7 +91,7 @@ body:has(.about-page) {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2;
+  z-index: -1;
   pointer-events: none;
 }
 .floating-mark {
@@ -100,7 +100,6 @@ body:has(.about-page) {
   max-width: none;
   filter: blur(60px);
   opacity: 0.5;
-  mix-blend-mode: multiply;
   pointer-events: none;
 }
 .about-page > main,
@@ -1790,7 +1789,7 @@ body:has(.about-page) {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: var(--card);
+  background: transparent;
 }
 
 .hero-visual {
