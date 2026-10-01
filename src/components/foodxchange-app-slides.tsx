@@ -677,13 +677,38 @@ export function MapSlide({ reduceMotion }: SlideProps) {
 
 /* ---------------- 6. Learn more ---------------- */
 
+function PinkUnderline({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 200 24"
+      fill="none"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      className={`pointer-events-none absolute left-0 w-full stroke-problem ${className}`}
+    >
+      <motion.path
+        d="M4 14c40-8 90-10 190-6M12 20c50-6 110-7 170-3"
+        strokeWidth={5}
+        strokeLinecap="round"
+        initial={{ pathLength: 0 }}
+        whileInView={{ pathLength: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.1, delay: 0.4, ease: "easeInOut" }}
+      />
+    </svg>
+  );
+}
+
 export function LearnMoreSlide(_props: SlideProps) {
   return (
     <div className="mx-auto flex h-full w-full max-w-2xl flex-col items-center justify-center gap-10 text-center">
-      <h3 className="font-display text-5xl font-bold text-solution-foreground sm:text-6xl md:text-7xl">
+      <h3 className="text-5xl font-black uppercase leading-[1.05] tracking-tight text-solution-foreground sm:text-6xl md:text-7xl">
         The App
         <br />
-        Coming Soon
+        <span className="relative inline-block">
+          Coming Soon
+          <PinkUnderline className="-bottom-3 h-5 sm:-bottom-4 sm:h-6" />
+        </span>
       </h3>
       <a
         href="/app"
