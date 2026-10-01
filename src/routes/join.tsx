@@ -268,9 +268,9 @@ function JoinPage() {
           className="pointer-events-none absolute inset-0 z-0 opacity-70"
           style={{
             backgroundImage: `url(${doodlePatternImage})`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "100% 100%",
-            backgroundPosition: "center",
+            backgroundRepeat: "repeat-y",
+            backgroundSize: "100% auto",
+            backgroundPosition: "top center",
             y: reduce ? 0 : doodleY,
           }}
         />
