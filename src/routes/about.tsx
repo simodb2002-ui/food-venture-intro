@@ -10,7 +10,12 @@ import "../about.css";
 import fisMark from "@/assets/fis-mark.png";
 import fisLogo from "@/assets/fis-logo-bridge.png";
 import heroNoodlesImage from "@/assets/about/hero-noodles.webp";
-import heroNoodlesDoodleImage from "@/assets/about/hero-noodles-doodle.svg";
+import heroSlideGroupImage from "@/assets/about/hero-slide-group.webp";
+import heroSlideFamilyImage from "@/assets/about/hero-slide-family.webp";
+import heroSlideCloseupImage from "@/assets/about/hero-slide-closeup.webp";
+import heroSlideTableImage from "@/assets/about/hero-slide-table.webp";
+import heroSlideWomenImage from "@/assets/about/hero-slide-women.webp";
+import heroSlideHeartImage from "@/assets/about/hero-slide-heart.svg";
 import foodxLogo from "@/assets/about/foodx-logo.png.asset.json";
 import fiona from "@/assets/about/fiona.jpg.asset.json";
 import edwina from "@/assets/about/edwina.jpg.asset.json";
@@ -304,6 +309,46 @@ function StackedBowls() {
   );
 }
 
+const HERO_PHOTOS = [
+  heroNoodlesImage,
+  heroSlideGroupImage,
+  heroSlideFamilyImage,
+  heroSlideCloseupImage,
+  heroSlideTableImage,
+  heroSlideWomenImage,
+];
+
+function HeroPhotoCycle() {
+  const reduceMotion = useReducedMotion();
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+    const timer = window.setInterval(() => {
+      setIndex((current) => (current + 1) % HERO_PHOTOS.length);
+    }, 1000);
+    return () => window.clearInterval(timer);
+  }, [reduceMotion]);
+
+  return (
+    <div className="hero-photo-card">
+      <AnimatePresence mode="sync" initial={false}>
+        <motion.img
+          key={index}
+          src={HERO_PHOTOS[index]}
+          alt=""
+          className="hero-slide-photo"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+        />
+      </AnimatePresence>
+      <img src={heroSlideHeartImage} alt="" aria-hidden="true" className="hero-slide-heart" />
+    </div>
+  );
+}
+
 function AboutPage() {
   const storyRef = useRef<HTMLElement>(null);
   const [activeMilestone, setActiveMilestone] = useState<number | null>(null);
@@ -354,7 +399,25 @@ function AboutPage() {
                 }}
               >
                 <span className="headline-line headline-lead">
-                  {headlineWords.slice(0, 3).map((word) => (
+                  {headlineWords.slice(0, 1).map((word) => (
+                    <motion.span
+                      key={word.text}
+                      className={`headline-word ${word.className}`}
+                      variants={{
+                        hidden: { opacity: 0, y: 30 },
+                        visible: {
+                          opacity: 1,
+                          y: 0,
+                          transition: { duration: 0.62, ease: [0.22, 1, 0.36, 1] },
+                        },
+                      }}
+                    >
+                      {word.text}
+                    </motion.span>
+                  ))}
+                </span>
+                <span className="headline-line headline-lead">
+                  {headlineWords.slice(1, 3).map((word) => (
                     <motion.span
                       key={word.text}
                       className={`headline-word ${word.className}`}
@@ -429,19 +492,7 @@ function AboutPage() {
               </Button>
             </div>
             <div className="hero-visual hero-plate-visual">
-              <div className="hero-photo-card">
-                <img
-                  src={heroNoodlesImage}
-                  alt="Hands sharing a plate of noodles together with chopsticks"
-                  className="hero-noodles-photo"
-                />
-                <img
-                  src={heroNoodlesDoodleImage}
-                  alt=""
-                  aria-hidden="true"
-                  className="hero-noodles-doodle"
-                />
-              </div>
+              <HeroPhotoCycle />
             </div>
           </div>
         </section>
