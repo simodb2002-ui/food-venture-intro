@@ -4,7 +4,10 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 
 import communityImage from "@/assets/coming-soon/community.jpg";
+import communityDoodleImage from "@/assets/coming-soon/community-doodle.svg";
 import cookImage from "@/assets/coming-soon/cook.jpg";
+import cookDoodleImage from "@/assets/coming-soon/cook-doodle.svg";
+import foodX100DoodleImage from "@/assets/coming-soon/foodx100-doodle.svg";
 import foodX100Image from "@/assets/coming-soon/foodx100.jpg";
 import launchDoodleImage from "@/assets/coming-soon/launch-doodle.webp";
 import launchFlameImage from "@/assets/coming-soon/launch-flame.png";
@@ -40,6 +43,7 @@ const features = [
     title: "FoodX100",
     Icon: ScanLine,
     image: foodX100Image,
+    doodle: foodX100DoodleImage,
     alt: "Woman checking her phone while picking fresh produce",
     description:
       "A miniature version of the foodXchange app database, designed as a simple trial so users can explore 100 products before the full experience launches.",
@@ -53,6 +57,7 @@ const features = [
     title: "FoodXCommunity",
     Icon: UsersRound,
     image: communityImage,
+    doodle: communityDoodleImage,
     alt: "Outdoor local produce stall",
     reverse: true,
     description:
@@ -67,6 +72,7 @@ const features = [
     title: "Cook",
     Icon: ChefHat,
     image: cookImage,
+    doodle: cookDoodleImage,
     alt: "Cooking a colourful meal in a pan on a stove",
     description:
       "A practical space for recipes, cooking guidance, and kitchen shortcuts aimed at making everyday good food easier, faster, and more affordable.",
@@ -213,7 +219,7 @@ function FeatureCarousel() {
         onScroll={() => updateActiveFromScroll()}
       >
         {features.map((feature, index) => {
-          const { title, Icon, image, alt, description, bullets } = feature;
+          const { title, Icon, image, doodle, alt, description, bullets } = feature;
           const relative = index - activeIndex;
           const active = relative === 0;
 
@@ -254,6 +260,12 @@ function FeatureCarousel() {
                       width={1200}
                       height={900}
                       className="aspect-[4/3] w-full object-cover"
+                    />
+                    <img
+                      src={doodle}
+                      alt=""
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 h-full w-full object-cover"
                     />
                   </div>
                   <p className="mt-5 text-sm leading-relaxed text-cta-muted md:text-base">
