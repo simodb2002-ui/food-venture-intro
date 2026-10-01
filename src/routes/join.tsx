@@ -248,17 +248,18 @@ function JoinPage() {
   const reduce = useReducedMotion();
   const init = reduce ? false : "hidden";
   const { scrollY } = useScroll();
-  const doodleY = useTransform(scrollY, (value: number) => value * -0.35);
+  const doodleY = useTransform(scrollY, [0, 500], [0, -70], { clamp: true });
 
   return (
     <div className="coming-page relative min-h-dvh overflow-x-clip bg-footer text-footer-foreground">
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 opacity-70"
+        className="pointer-events-none absolute -top-20 -bottom-20 left-0 right-0 z-0 opacity-70"
         style={{
           backgroundImage: `url(${doodlePatternImage})`,
-          backgroundRepeat: "repeat",
-          backgroundSize: "520px auto",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100% 100%",
+          backgroundPosition: "center",
           y: reduce ? 0 : doodleY,
         }}
       />
