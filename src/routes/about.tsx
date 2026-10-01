@@ -125,14 +125,7 @@ function BowlShape({ tone }: { tone: BowlTone }) {
           <path d={BOWL_BODY_PATH} />
         </clipPath>
       </defs>
-      <rect
-        className="bowl-fill"
-        x="0"
-        y="0"
-        width="100"
-        height="100"
-        clipPath={`url(#${clipId})`}
-      />
+      <rect className="bowl-fill" x="0" width="100" clipPath={`url(#${clipId})`} />
       <path className="bowl-outline" d={BOWL_BODY_PATH} />
       {/* Equivalent of the former rim: a full ellipse, border-radius: 50% on a 0/0/100%/32% box */}
       <ellipse className="bowl-rim" cx="50" cy="16" rx="50" ry="16" />
@@ -438,16 +431,10 @@ function AboutPage() {
             <div className="hero-visual hero-plate-visual">
               <div className="hero-plate-frame">
                 <img src={heroHandsImage} alt="" className="hero-hands" aria-hidden="true" />
-                <motion.img
+                <img
                   src={heroPlateImage}
                   alt="A plated meal of grains, salmon, and vegetables"
                   className="hero-plate"
-                  animate={reduceMotion ? undefined : { rotate: [50, -20, 50] }}
-                  transition={
-                    reduceMotion
-                      ? undefined
-                      : { duration: 2.2, repeat: Infinity, ease: "easeInOut" }
-                  }
                 />
               </div>
             </div>
