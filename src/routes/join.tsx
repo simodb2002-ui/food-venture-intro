@@ -249,7 +249,7 @@ function JoinPage() {
   const reduce = useReducedMotion();
   const init = reduce ? false : "hidden";
   const { scrollY } = useScroll();
-  const doodleY = useTransform(scrollY, [0, 500], [0, -40], { clamp: true });
+  const doodleY = useTransform(scrollY, (value: number) => value * -0.5);
 
   return (
     <div className="coming-page relative min-h-dvh overflow-x-clip bg-footer text-footer-foreground">
@@ -275,12 +275,11 @@ function JoinPage() {
             y: reduce ? 0 : doodleY,
           }}
         />
-        <motion.img
+        <img
           src={watermelonDoodleImage}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-0 left-0 z-0 w-[min(300px,31vw)] max-w-none opacity-70"
-          style={{ y: reduce ? 0 : doodleY }}
+          className="pointer-events-none absolute bottom-0 left-0 z-0 w-[min(420px,42vw)] max-w-none opacity-70"
         />
         <main className="relative mx-auto w-[min(1160px,calc(100%-40px))] pb-24">
           {/* Intro */}
