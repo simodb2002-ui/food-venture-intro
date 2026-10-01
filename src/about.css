@@ -223,7 +223,11 @@ body:has(.about-page) {
 }
 .about-page h1 {
   margin: 0;
-  font-size: clamp(54px, 6.8vw, 96px);
+  /* Sized off the hero-copy column's own width (cqw), not the viewport
+     (vw), so it can never outgrow the column and overlap the photo
+     beside it, since the column stays well under the viewport width
+     once hero-inner hits its 1180px cap. */
+  font-size: clamp(36px, 13cqw, 96px);
   line-height: 0.91;
   font-weight: 700;
 }
@@ -235,14 +239,15 @@ body:has(.about-page) {
   width: fit-content;
 }
 .headline-lead {
-  font-size: clamp(48px, 6.1vw, 88px);
+  font-size: clamp(32px, 12cqw, 88px);
   line-height: 1;
   white-space: nowrap;
   width: max-content;
-  max-width: none;
+  max-width: 100%;
 }
 .hero-copy {
-  margin-top: -78px;
+  container-type: inline-size;
+  margin-top: 28px;
 }
 .headline-word {
   display: inline-block;
