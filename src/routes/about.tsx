@@ -8,7 +8,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "../about.css";
 import fisMark from "@/assets/fis-mark.png";
-import fisLogo from "@/assets/about/fis-logo.png.asset.json";
+import fisLogo from "@/assets/fis-logo-bridge.png";
 import foodxLogo from "@/assets/about/foodx-logo.png.asset.json";
 import communityMeal from "@/assets/about/pizza-party-hero.jpg.asset.json";
 import fiona from "@/assets/about/fiona.jpg.asset.json";
@@ -451,7 +451,7 @@ function AboutPage() {
         <section id="platform" className="brand-bridge" data-reveal>
           <div className="section-inner bridge-inner">
             <div className="bridge-logo fis">
-              <img src={fisLogo.url} alt="The Food Investors Society" />
+              <img src={fisLogo} alt="The Food Investors Society" />
               <small>Community-owned co-operative</small>
             </div>
             <svg className="bridge-line" viewBox="0 0 400 110" aria-hidden="true">
