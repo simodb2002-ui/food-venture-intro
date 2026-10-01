@@ -17,8 +17,8 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import brandMark from "../assets/fis-mark.png";
 import brandMarkVector from "../assets/fis-mark-vector.svg";
 import fisLockupFull from "../assets/fis-lockup-full.png";
-import marketedBackgroundBase from "../assets/index/marketed-background-base.webp";
-import marketedMegaphoneOverlay from "../assets/index/marketed-megaphone-overlay.webp";
+import marketedBackgroundBase from "../assets/index/marketed-background-base.svg";
+import marketedMegaphoneOverlay from "../assets/index/marketed-megaphone-overlay.svg";
 import { Button } from "../components/ui/button";
 import { FoodXchangeMark } from "../components/foodxchange-mark";
 import { FOODXCHANGE_APP_SLIDES } from "../components/foodxchange-app-slides";
@@ -296,9 +296,13 @@ function Index() {
                     src={marketedBackgroundBase}
                     alt=""
                     className="h-full w-full bg-problem object-contain object-bottom"
-                    initial={{ opacity: 0.1 }}
-                    animate={{ opacity: 0.4 }}
-                    transition={{ duration: reduceMotion ? 0 : 7, ease: "easeOut" }}
+                    initial={{ opacity: 0.2 }}
+                    animate={{ opacity: [0.2, 0.2, 0.4] }}
+                    transition={{
+                      duration: reduceMotion ? 0 : 67,
+                      times: [0, 60 / 67, 1],
+                      ease: ["linear", "easeOut"],
+                    }}
                   />
                   <motion.img
                     src={marketedMegaphoneOverlay}
