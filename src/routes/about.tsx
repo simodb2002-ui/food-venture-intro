@@ -315,6 +315,7 @@ function AboutPage() {
 
   return (
     <div id="top" className="about-page">
+      <img src={fisMark} alt="" className="floating-mark" aria-hidden="true" />
       <SiteHeader active="about" className="sticky top-0" />
       <main>
         <section className="hero-section">
@@ -581,8 +582,7 @@ function AboutPage() {
         <section id="founders" className="founders-section">
           <div className="section-inner">
             <div className="section-heading founders-heading" data-reveal>
-              <div className="founders-heading-copy">
-                <img src={fisMark} alt="" className="founders-heading-mark" aria-hidden="true" />
+              <div>
                 <p className="eyebrow">Meet the founders</p>
                 <h2>
                   Real people.

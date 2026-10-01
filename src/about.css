@@ -86,6 +86,32 @@ body:has(.about-page) {
   background: var(--pink);
   animation: ambient-drift-right 22s ease-in-out infinite alternate;
 }
+.floating-mark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: min(1400px, 140vw);
+  max-width: none;
+  transform: translate(-50%, -50%);
+  filter: blur(60px);
+  opacity: 0.5;
+  z-index: -1;
+  pointer-events: none;
+  animation: floating-mark-drift 32s ease-in-out infinite alternate;
+}
+@keyframes floating-mark-drift {
+  from {
+    transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate(-50%, -50%) translate3d(8vw, -10vh, 0) scale(1.1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-mark {
+    animation: none;
+  }
+}
 .about-page > main,
 .about-page > footer {
   position: relative;
@@ -983,28 +1009,11 @@ body:has(.about-page) {
 .founders-section {
   padding: 120px 0;
   background: transparent;
-  position: relative;
-  overflow: hidden;
 }
 .founders-heading > p {
   max-width: 430px;
   font-size: 17px;
   line-height: 1.6;
-}
-.founders-heading-copy {
-  position: relative;
-}
-.founders-heading-mark {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 1400px;
-  max-width: none;
-  transform: translate(-50%, -50%);
-  filter: blur(60px);
-  opacity: 0.55;
-  z-index: -1;
-  pointer-events: none;
 }
 .founder-grid {
   display: grid;
