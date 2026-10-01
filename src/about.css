@@ -863,7 +863,6 @@ body:has(.about-page) {
 }
 .recipe-page-right {
   position: relative;
-  border-left: 1px solid color-mix(in oklab, var(--ink) 16%, transparent);
   border-radius: 0;
   background: transparent;
 }
