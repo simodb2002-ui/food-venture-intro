@@ -309,6 +309,31 @@ body:has(.about-page) {
   width: calc(100% + max(32px, (100vw - 1180px) / 2));
   padding: 18px max(32px, (100vw - 1180px) / 2) 36px 18px;
 }
+.hero-visual.hero-plate-visual {
+  opacity: 1;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+}
+.hero-plate-frame {
+  position: relative;
+  width: 100%;
+}
+.hero-hands {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.hero-plate {
+  position: absolute;
+  left: 30.47%;
+  top: 20.6%;
+  width: 36.86%;
+  aspect-ratio: 1;
+  height: auto;
+  border-radius: 50%;
+  transform-origin: center center;
+}
 .photo-frame {
   position: relative;
   width: 100%;

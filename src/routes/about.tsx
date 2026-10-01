@@ -9,8 +9,9 @@ import { SiteHeader } from "@/components/site-header";
 import "../about.css";
 import fisMark from "@/assets/fis-mark.png";
 import fisLogo from "@/assets/fis-logo-bridge.png";
+import heroHandsImage from "@/assets/about/hero-hands.png";
+import heroPlateImage from "@/assets/about/hero-plate.png";
 import foodxLogo from "@/assets/about/foodx-logo.png.asset.json";
-import communityMeal from "@/assets/about/pizza-party-hero.jpg.asset.json";
 import fiona from "@/assets/about/fiona.jpg.asset.json";
 import edwina from "@/assets/about/edwina.jpg.asset.json";
 import ruk from "@/assets/about/ruk.png.asset.json";
@@ -97,14 +98,6 @@ const headlineWords = [
   { text: "Food", className: "pink-text" },
   { text: "Future.", className: "" },
 ];
-
-function DrawnSpark({ className = "" }: { className?: string }) {
-  return (
-    <svg aria-hidden="true" className={className} viewBox="0 0 40 40">
-      <path d="M20 2c0 11-5 18-18 18 13 0 18 7 18 18 0-11 5-18 18-18-13 0-18-7-18-18Z" />
-    </svg>
-  );
-}
 
 function DrawnLeaf({ className = "" }: { className?: string }) {
   return (
@@ -412,38 +405,21 @@ function AboutPage() {
                 </a>
               </Button>
             </div>
-            <div className="hero-visual">
-              <div className="photo-frame">
-                <img
-                  src={communityMeal.url}
-                  alt="Friends laughing together over pizza and snacks at a shared table"
-                  width={1920}
-                  height={1080}
+            <div className="hero-visual hero-plate-visual">
+              <div className="hero-plate-frame">
+                <img src={heroHandsImage} alt="" className="hero-hands" aria-hidden="true" />
+                <motion.img
+                  src={heroPlateImage}
+                  alt="A plated meal of grains, salmon, and vegetables"
+                  className="hero-plate"
+                  animate={reduceMotion ? undefined : { rotate: [50, -20, 50] }}
+                  transition={
+                    reduceMotion
+                      ? undefined
+                      : { duration: 2.2, repeat: Infinity, ease: "easeInOut" }
+                  }
                 />
-                <svg
-                  className="organic-outline"
-                  viewBox="0 0 600 720"
-                  preserveAspectRatio="none"
-                  aria-hidden="true"
-                >
-                  <path d="M72 32C188 4 417 13 531 82C594 120 570 235 580 337C591 447 603 607 508 674C419 737 210 716 92 674C11 645 25 497 19 372C13 244-15 81 72 32Z" />
-                  <path d="M88 18C231-5 436 22 548 101C588 169 561 268 590 400C605 525 567 650 475 701" />
-                </svg>
               </div>
-              <svg className="steam-doodle" viewBox="0 0 90 130" aria-hidden="true">
-                <path d="M27 121C3 90 65 83 31 55C4 34 50 20 43 3M62 117C42 88 89 75 61 46" />
-              </svg>
-              <svg className="brand-fruit" viewBox="0 0 84 84" aria-hidden="true">
-                <path
-                  className="brand-fruit-body"
-                  d="M42 20C24 13 9 27 12 48C15 69 29 76 42 76C55 76 69 69 72 48C75 27 60 13 42 20Z"
-                />
-                <path
-                  className="brand-fruit-stem"
-                  d="M42 21C41 11 47 5 55 4M47 11C55 7 63 9 67 15C58 18 51 17 47 11Z"
-                />
-              </svg>
-              <DrawnSpark className="hero-spark" />
             </div>
           </div>
         </section>
