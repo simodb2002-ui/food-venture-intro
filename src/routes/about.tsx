@@ -109,15 +109,17 @@ function DrawnLeaf({ className = "" }: { className?: string }) {
 
 type BowlTone = "coop" | "mission" | "vision";
 
+// Exact SVG equivalent of the former CSS shape:
+// border-radius: 50% 50% 48% 48% / 12% 12% 88% 88% on a 0-100 box,
+// built from cubic beziers (not arcs) so it reproduces the same curve
+// under the non-uniform per-instance stretch below (preserveAspectRatio="none").
 const BOWL_BODY_PATH =
-  "M20 38C16 16 55 6 100 6C148 6 184 18 180 40C192 62 170 96 100 100C28 96 10 60 20 38Z";
-const BOWL_RIM_PATH =
-  "M14 32C14 18 50 10 100 10C150 10 186 18 186 32C186 46 150 54 100 54C50 54 14 46 14 32Z";
+  "M50 0C77.61 0 100 5.37 100 12C100 60.6 78.51 100 52 100L48 100C21.49 100 0 60.6 0 12C0 5.37 22.39 0 50 0Z";
 
 function BowlShape({ tone }: { tone: BowlTone }) {
   const clipId = `bowl-clip-${tone}`;
   return (
-    <svg className="bowl-shape" viewBox="0 0 200 110" preserveAspectRatio="none" aria-hidden="true">
+    <svg className="bowl-shape" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
       <defs>
         <clipPath id={clipId}>
           <path d={BOWL_BODY_PATH} />
@@ -127,12 +129,13 @@ function BowlShape({ tone }: { tone: BowlTone }) {
         className="bowl-fill"
         x="0"
         y="0"
-        width="200"
-        height="110"
+        width="100"
+        height="100"
         clipPath={`url(#${clipId})`}
       />
       <path className="bowl-outline" d={BOWL_BODY_PATH} />
-      <path className="bowl-rim" d={BOWL_RIM_PATH} />
+      {/* Equivalent of the former rim: a full ellipse, border-radius: 50% on a 0/0/100%/32% box */}
+      <ellipse className="bowl-rim" cx="50" cy="16" rx="50" ry="16" />
     </svg>
   );
 }
