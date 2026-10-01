@@ -533,7 +533,7 @@ function AboutPage() {
                   and public health grew into a mission to create a platform for informed choice,
                   community power, and system change.
                 </p>
-                <Button asChild variant="movement" size="lg" className="story-cta">
+                <Button asChild variant="movement" size="lg">
                   <Link to="/">
                     Join the movement <ArrowRight />
                   </Link>
