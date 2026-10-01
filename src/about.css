@@ -86,31 +86,22 @@ body:has(.about-page) {
   background: var(--pink);
   animation: ambient-drift-right 22s ease-in-out infinite alternate;
 }
-.floating-mark {
+.floating-mark-anchor {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: min(1400px, 140vw);
-  max-width: none;
   transform: translate(-50%, -50%);
+  z-index: 2;
+  pointer-events: none;
+}
+.floating-mark {
+  display: block;
+  width: min(1100px, 115vw);
+  max-width: none;
   filter: blur(60px);
   opacity: 0.5;
-  z-index: -1;
+  mix-blend-mode: multiply;
   pointer-events: none;
-  animation: floating-mark-drift 32s ease-in-out infinite alternate;
-}
-@keyframes floating-mark-drift {
-  from {
-    transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(1);
-  }
-  to {
-    transform: translate(-50%, -50%) translate3d(8vw, -10vh, 0) scale(1.1);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .floating-mark {
-    animation: none;
-  }
 }
 .about-page > main,
 .about-page > footer {
