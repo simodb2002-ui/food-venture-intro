@@ -321,10 +321,24 @@ body:has(.about-page) {
   align-items: center;
   justify-content: center;
 }
-.hero-photo-card {
+.hero-photo-stack {
   position: relative;
   width: 100%;
   max-width: 560px;
+}
+.hero-frame-shape {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 116%;
+  aspect-ratio: 684 / 491;
+  object-fit: fill;
+  transform: translate(-2%, 2%) rotate(12deg) translate(-50%, -50%);
+  pointer-events: none;
+}
+.hero-photo-card {
+  position: relative;
+  width: 100%;
   aspect-ratio: 1840 / 1280;
   border-radius: 28px;
   overflow: hidden;

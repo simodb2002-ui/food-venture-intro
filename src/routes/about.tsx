@@ -16,6 +16,7 @@ import heroSlideCloseupImage from "@/assets/about/hero-slide-closeup.webp";
 import heroSlideTableImage from "@/assets/about/hero-slide-table.webp";
 import heroSlideWomenImage from "@/assets/about/hero-slide-women.webp";
 import heroSlideHeartImage from "@/assets/about/hero-slide-heart.svg";
+import heroFrameShapeImage from "@/assets/about/hero-frame-shape.svg";
 import foodxLogo from "@/assets/about/foodx-logo.png.asset.json";
 import fiona from "@/assets/about/fiona.jpg.asset.json";
 import edwina from "@/assets/about/edwina.jpg.asset.json";
@@ -481,7 +482,15 @@ function AboutPage() {
               </Button>
             </div>
             <div className="hero-visual hero-plate-visual">
-              <HeroPhotoCycle />
+              <div className="hero-photo-stack">
+                <img
+                  src={heroFrameShapeImage}
+                  alt=""
+                  aria-hidden="true"
+                  className="hero-frame-shape"
+                />
+                <HeroPhotoCycle />
+              </div>
             </div>
           </div>
         </section>
