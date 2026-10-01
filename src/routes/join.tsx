@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { UserRound, UserRoundCheck } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import type { ReactNode } from "react";
 
+import doodlePatternImage from "@/assets/join/doodle-pattern.png";
 import pancakeSurferBaseImage from "@/assets/join/pancake-surfer-base.png";
 import pancakeSurferHairImage from "@/assets/join/pancake-surfer-hair.png";
 import pancakeSurferWaveImage from "@/assets/join/pancake-surfer-wave.png";
@@ -246,8 +247,21 @@ function UmbrellaRain() {
 function JoinPage() {
   const reduce = useReducedMotion();
   const init = reduce ? false : "hidden";
+  const { scrollY } = useScroll();
+  const doodleY = useTransform(scrollY, (value: number) => value * -0.35);
+
   return (
     <div className="coming-page relative min-h-dvh overflow-x-clip bg-footer text-footer-foreground">
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 opacity-70"
+        style={{
+          backgroundImage: `url(${doodlePatternImage})`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "520px auto",
+          y: reduce ? 0 : doodleY,
+        }}
+      />
       <SiteHeader active="join" className="sticky top-0" />
       <Strapline
         text={
