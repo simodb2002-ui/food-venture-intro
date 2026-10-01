@@ -314,25 +314,13 @@ body:has(.about-page) {
   pointer-events: auto;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
-.hero-plate-frame {
-  position: relative;
-  width: 100%;
-}
-.hero-hands {
+.hero-coffee-heart {
   display: block;
-  width: 100%;
+  width: 72%;
+  max-width: 460px;
   height: auto;
-}
-.hero-plate {
-  position: absolute;
-  left: 30.47%;
-  top: 20.6%;
-  width: 36.86%;
-  aspect-ratio: 1;
-  height: auto;
-  border-radius: 50%;
-  transform-origin: center center;
 }
 .photo-frame {
   position: relative;
