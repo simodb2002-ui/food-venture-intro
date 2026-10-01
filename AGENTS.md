@@ -10,5 +10,5 @@
 <!-- LOVABLE:END -->
 
 - Use the shared fully rounded, shadow-free Button variants for site CTAs and controls so interaction styling stays consistent across routes.
-- Present the About story as an interactive closed book titled “Our Story: The Recipe” that opens to the existing two-page content.
+- Present the About story as an always-open two-page spread titled “Our Story: The Recipe” — not a closed book that needs opening.
 - Mount one site-wide solid cursor at the root; use pink on light areas and yellow only inside explicitly marked dark areas so every route behaves consistently.
