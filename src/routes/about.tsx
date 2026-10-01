@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowDown, ArrowRight, Mail, RotateCcw } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -291,6 +291,7 @@ function StackedBowls() {
 function AboutPage() {
   const storyRef = useRef<HTMLElement>(null);
   const [activeMilestone, setActiveMilestone] = useState<number | null>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -315,7 +316,21 @@ function AboutPage() {
 
   return (
     <div id="top" className="about-page">
-      <img src={fisMark} alt="" className="floating-mark" aria-hidden="true" />
+      <div className="floating-mark-anchor" aria-hidden="true">
+        <motion.img
+          src={fisMark}
+          alt=""
+          className="floating-mark"
+          animate={
+            reduceMotion
+              ? undefined
+              : { x: [0, -60, 40, 0], y: [0, -50, 30, 0], rotate: [0, -4, 3, 0] }
+          }
+          transition={
+            reduceMotion ? undefined : { duration: 19, repeat: Infinity, ease: "easeInOut" }
+          }
+        />
+      </div>
       <SiteHeader active="about" className="sticky top-0" />
       <main>
         <section className="hero-section">
