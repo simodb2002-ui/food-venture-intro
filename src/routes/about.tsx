@@ -109,6 +109,34 @@ function DrawnLeaf({ className = "" }: { className?: string }) {
 
 type BowlTone = "coop" | "mission" | "vision";
 
+const BOWL_BODY_PATH =
+  "M20 38C16 16 55 6 100 6C148 6 184 18 180 40C192 62 170 96 100 100C28 96 10 60 20 38Z";
+const BOWL_RIM_PATH =
+  "M14 32C14 18 50 10 100 10C150 10 186 18 186 32C186 46 150 54 100 54C50 54 14 46 14 32Z";
+
+function BowlShape({ tone }: { tone: BowlTone }) {
+  const clipId = `bowl-clip-${tone}`;
+  return (
+    <svg className="bowl-shape" viewBox="0 0 200 110" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <clipPath id={clipId}>
+          <path d={BOWL_BODY_PATH} />
+        </clipPath>
+      </defs>
+      <rect
+        className="bowl-fill"
+        x="0"
+        y="0"
+        width="200"
+        height="110"
+        clipPath={`url(#${clipId})`}
+      />
+      <path className="bowl-outline" d={BOWL_BODY_PATH} />
+      <path className="bowl-rim" d={BOWL_RIM_PATH} />
+    </svg>
+  );
+}
+
 const bowls = [
   {
     tone: "vision" as BowlTone,
@@ -264,8 +292,7 @@ function StackedBowls() {
                       aria-pressed={false}
                       onClick={(event) => event.stopPropagation()}
                     >
-                      <span className="bowl-fill" />
-                      <span className="bowl-rim" />
+                      <BowlShape tone={bowl.tone} />
 
                       <span className="bowl-face-title">{bowl.shortTitle ?? bowl.title}</span>
                     </Button>
