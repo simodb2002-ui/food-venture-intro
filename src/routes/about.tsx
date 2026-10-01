@@ -332,18 +332,7 @@ function HeroPhotoCycle() {
 
   return (
     <div className="hero-photo-card">
-      <AnimatePresence mode="sync" initial={false}>
-        <motion.img
-          key={index}
-          src={HERO_PHOTOS[index]}
-          alt=""
-          className="hero-slide-photo"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
-        />
-      </AnimatePresence>
+      <img src={HERO_PHOTOS[index]} alt="" className="hero-slide-photo" />
       <img src={heroSlideHeartImage} alt="" aria-hidden="true" className="hero-slide-heart" />
     </div>
   );
