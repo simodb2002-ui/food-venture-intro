@@ -3,6 +3,7 @@ import { UserRound, UserRoundCheck } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import type { ReactNode } from "react";
 
+import appleDoodleImage from "@/assets/join/apple-doodle.svg";
 import doodlePatternImage from "@/assets/join/doodle-pattern.svg";
 import pancakeSurferBaseImage from "@/assets/join/pancake-surfer-base.png";
 import pancakeSurferHairImage from "@/assets/join/pancake-surfer-hair.png";
@@ -272,6 +273,17 @@ function JoinPage() {
             backgroundRepeat: "no-repeat",
             backgroundSize: "100% 100%",
             backgroundPosition: "center",
+            y: reduce ? 0 : doodleY,
+          }}
+        />
+        <motion.img
+          src={appleDoodleImage}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute z-0 w-[min(323px,28vw)] max-w-none opacity-70"
+          style={{
+            top: "62%",
+            left: "-5%",
             y: reduce ? 0 : doodleY,
           }}
         />
