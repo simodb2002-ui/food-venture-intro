@@ -1534,7 +1534,7 @@ body:has(.about-page) {
     min-height: auto;
   }
   .hero-inner {
-    padding-top: 28px;
+    padding-top: 56px;
     min-height: 0;
   }
   .tagline {
