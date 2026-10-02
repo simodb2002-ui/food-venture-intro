@@ -527,7 +527,6 @@ function Index() {
             <div className="mx-auto mt-6 grid max-w-3xl gap-4 text-left sm:mt-10">
               <Button
                 id="membership"
-                onClick={() => setJoined(true)}
                 className="group h-auto min-h-32 items-stretch justify-between gap-4 whitespace-normal rounded-[2rem] border-2 border-solution-foreground bg-solution-foreground p-5 text-left text-solution shadow-none hover:bg-solution-foreground/90 sm:min-h-40 sm:p-6"
               >
                 <span className="grid w-full grid-cols-[9rem_1fr] items-center gap-4">

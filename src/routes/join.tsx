@@ -282,7 +282,7 @@ function JoinPage() {
           aria-hidden="true"
           className="pointer-events-none absolute z-0 w-[min(323px,28vw)] max-w-none opacity-70"
           style={{
-            top: "62%",
+            top: "70%",
             left: "-5%",
             y: reduce ? 0 : doodleY,
           }}
