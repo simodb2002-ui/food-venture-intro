@@ -208,6 +208,17 @@
   -webkit-hyphens: auto;
 }
 
+/* inter-character justification (tuned for CJK scripts) stretches gaps
+   between every letter, not just words - on the narrow line lengths of a
+   phone screen that reads as noticeably uneven. inter-word keeps the
+   stretch confined to word gaps, which looks right for Latin text at
+   any width but matters most where lines are short. */
+@media (max-width: 600px) {
+  .prose-justify {
+    text-justify: inter-word;
+  }
+}
+
 /* One consistent, solid custom cursor across every public page. */
 .cursor-follower {
   display: none;

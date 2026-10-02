@@ -295,7 +295,7 @@ function Index() {
                   <motion.img
                     src={marketedBackgroundBase}
                     alt=""
-                    className="h-full w-full bg-problem object-contain object-bottom"
+                    className="h-full w-full bg-problem object-contain object-bottom max-md:absolute max-md:bottom-0 max-md:left-1/2 max-md:h-auto max-md:w-[150%] max-md:max-w-none max-md:-translate-x-1/2"
                     initial={{ opacity: 0.2 }}
                     animate={{ opacity: [0.2, 0.2, 0.4] }}
                     transition={{
@@ -307,7 +307,7 @@ function Index() {
                   <motion.img
                     src={marketedMegaphoneOverlay}
                     alt=""
-                    className="absolute inset-0 h-full w-full origin-[20%_100%] scale-[0.95] object-contain object-bottom"
+                    className="absolute inset-0 h-full w-full origin-[20%_100%] scale-[0.95] object-contain object-bottom max-md:inset-auto max-md:bottom-0 max-md:left-1/2 max-md:h-auto max-md:w-[150%] max-md:max-w-none max-md:-translate-x-1/2"
                     animate={reduceMotion ? { opacity: 1 } : { opacity: [1, 0.3, 1] }}
                     transition={
                       reduceMotion
