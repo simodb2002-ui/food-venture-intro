@@ -176,8 +176,8 @@ function Index() {
 
       <main
         ref={scrollerRef}
-        className={`h-[100dvh] overflow-y-scroll scroll-smooth bg-background ${
-          freeScroll ? "snap-none" : "snap-y snap-mandatory"
+        className={`h-[100dvh] overflow-y-scroll bg-background md:scroll-smooth ${
+          freeScroll ? "snap-none" : "md:snap-y md:snap-mandatory"
         }`}
       >
         <section
