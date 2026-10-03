@@ -122,32 +122,32 @@ function Tick({ className = "stroke-problem" }: { className?: string }) {
 
 const tiers = [
   {
-    title: "Community Member",
-    Icon: UserRound,
-    price: "£1",
-    prefix: "From ",
-    period: " / year",
-    subtitle: "Annual Community Membership",
-    tone: "solution" as const,
-    features: [
-      "News, updates & early insights on foodXchange",
-      "Invitations to polls, consultations & community events",
-      "One member, one vote",
-    ],
-  },
-  {
     title: "Founder Member",
     Icon: UserRoundCheck,
     price: "£100",
     prefix: "",
     period: " / lifetime",
     subtitle: "Lifetime Community Membership",
-    tone: "problem" as const,
+    tone: "solution" as const,
     popular: true,
     features: [
       "Founders List recognition",
       "New features early access",
       "Invitations to exclusive member feedback sessions",
+      "One member, one vote",
+    ],
+  },
+  {
+    title: "Community Member",
+    Icon: UserRound,
+    price: "£1",
+    prefix: "From ",
+    period: " / year",
+    subtitle: "Annual Community Membership",
+    tone: "problem" as const,
+    features: [
+      "News, updates & early insights on foodXchange",
+      "Invitations to polls, consultations & community events",
       "One member, one vote",
     ],
   },
