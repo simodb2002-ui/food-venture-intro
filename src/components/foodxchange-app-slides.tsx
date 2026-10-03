@@ -110,7 +110,7 @@ function ScanCard({
   reduceMotion,
 }: {
   tone: "bad" | "good";
-  label: string;
+  label?: string;
   reduceMotion: boolean;
 }) {
   const { tint, badgeBg, badgeText, Icon } = SCAN_CARD_TONES[tone];
@@ -181,14 +181,16 @@ function ScanCard({
         </motion.div>
       </div>
 
-      <motion.span
-        animate={reduceMotion ? undefined : { opacity: revealValues, times: revealTimes }}
-        transition={reduceMotion ? undefined : { duration: 3, repeat: Infinity, ease: "linear" }}
-        style={reduceMotion ? { opacity: 1 } : undefined}
-        className={`rounded-full ${badgeBg} px-2 py-1 text-center text-[10px] font-bold ${badgeText} sm:text-[11px]`}
-      >
-        {label}
-      </motion.span>
+      {label && (
+        <motion.span
+          animate={reduceMotion ? undefined : { opacity: revealValues, times: revealTimes }}
+          transition={reduceMotion ? undefined : { duration: 3, repeat: Infinity, ease: "linear" }}
+          style={reduceMotion ? { opacity: 1 } : undefined}
+          className={`rounded-full ${badgeBg} px-2 py-1 text-center text-[10px] font-bold ${badgeText} sm:text-[11px]`}
+        >
+          {label}
+        </motion.span>
+      )}
     </motion.div>
   );
 }
@@ -213,8 +215,8 @@ export function ScanSlide({ reduceMotion }: SlideProps) {
       />
       <ScreenCard>
         <div className="flex items-start justify-center gap-6 sm:gap-8">
-          <ScanCard tone="bad" label="Ultra-processed" reduceMotion={reduceMotion} />
-          <ScanCard tone="good" label="Minimally processed" reduceMotion={reduceMotion} />
+          <ScanCard tone="bad" reduceMotion={reduceMotion} />
+          <ScanCard tone="good" label="Better choice" reduceMotion={reduceMotion} />
         </div>
 
         <div className="mt-5 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
